@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.backend.domain.SysUserMapper">
+
+	<resultMap type="ng.bayue.backend.domain.SysUserDO" id="SysUserDOResultMap">
+		<id column="id" property="id" />
+        <result column="login_name" property="loginName"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="status" property="status"/>
+        <result column="user_detail" property="userDetail"/>
+	</resultMap>
+
+	<sql id="MybatisSysUserDAO_all_column_fields">
+	      id,login_name,user_name,password,salt,email,mobile,create_user_id,create_time,modify_user_id,modify_time,last_login_time,last_login_ip,status,user_detail
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSysUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="loginName != null  and loginName != '' "> AND login_name=#{loginName} </if>
+			<if test="userName != null  and userName != '' "> AND user_name=#{userName} </if>
+			<if test="password != null  and password != '' "> AND password=#{password} </if>
+			<if test="salt != null  and salt != '' "> AND salt=#{salt} </if>
+			<if test="email != null  and email != '' "> AND email=#{email} </if>
+			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+			<if test="lastLoginIp != null  and lastLoginIp != '' "> AND last_login_ip=#{lastLoginIp} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="userDetail != null  and userDetail != '' "> AND user_detail=#{userDetail} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSysUserDAO_selectById" parameterType="long" resultMap="SysUserDOResultMap">
+	SELECT
+		<include refid="MybatisSysUserDAO_all_column_fields" />
+	FROM
+		be_sys_user
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSysUserDAO_insert" parameterType="ng.bayue.backend.domain.SysUserDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO be_sys_user(
+				id,
+				login_name,
+				user_name,
+				password,
+				salt,
+				email,
+				mobile,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time,
+				last_login_time,
+				last_login_ip,
+				status,
+				user_detail
+		)values(
+				#{id},
+				#{loginName},
+				#{userName},
+				#{password},
+				#{salt},
+				#{email},
+				#{mobile},
+				#{createUserId},
+				#{createTime},
+				#{modifyUserId},
+				#{modifyTime},
+				#{lastLoginTime},
+				#{lastLoginIp},
+				#{status},
+				#{userDetail}
+		)
+    </insert>
+
+	<update id="MybatisSysUserDAO_updateById" parameterType="ng.bayue.backend.domain.SysUserDO">
+		UPDATE be_sys_user
+		SET
+					login_name = #{loginName},
+					user_name = #{userName},
+					password = #{password},
+					salt = #{salt},
+					email = #{email},
+					mobile = #{mobile},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId},
+					modify_time = #{modifyTime},
+					last_login_time = #{lastLoginTime},
+					last_login_ip = #{lastLoginIp},
+					status = #{status},
+					user_detail = #{userDetail}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSysUserDAO_deleteById" parameterType="long">
+		DELETE FROM be_sys_user WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSysUserDAO_update_dynamic" parameterType="ng.bayue.backend.domain.SysUserDO">
+		UPDATE be_sys_user
+		<set>
+					<if test="loginName != null  and loginName != '' ">login_name=#{loginName},</if>
+					<if test="userName != null  and userName != '' ">user_name=#{userName},</if>
+					<if test="password != null  and password != '' ">password=#{password},</if>
+					<if test="salt != null  and salt != '' ">salt=#{salt},</if>
+					<if test="email != null  and email != '' ">email=#{email},</if>
+					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+					<if test="lastLoginTime != null ">last_login_time=#{lastLoginTime},</if>
+					<if test="lastLoginIp != null  and lastLoginIp != '' ">last_login_ip=#{lastLoginIp},</if>
+					<if test="status != null ">status=#{status},</if>
+					<if test="userDetail != null  and userDetail != '' ">user_detail=#{userDetail},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSysUserDAO_select_dynamic" resultMap="SysUserDOResultMap" parameterType="ng.bayue.backend.domain.SysUserDO">
+	     SELECT
+	     	<include refid="MybatisSysUserDAO_all_column_fields" />
+		 FROM
+		 	be_sys_user
+			<include refid="MybatisSysUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysUserDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.backend.domain.SysUserDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	be_sys_user
+	 	<include refid="MybatisSysUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysUserDAO_select_dynamic_page_query" resultMap="SysUserDOResultMap" parameterType="ng.bayue.backend.domain.SysUserDO">
+	     SELECT
+	     	<include refid="MybatisSysUserDAO_all_column_fields" />
+		 FROM
+		 	be_sys_user
+	 	<include refid="MybatisSysUserDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

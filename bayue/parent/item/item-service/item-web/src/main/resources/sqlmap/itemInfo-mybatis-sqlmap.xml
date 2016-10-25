@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.item.domain.ItemInfoMapper">
+
+	<resultMap type="ng.bayue.item.domain.ItemInfoDO" id="ItemInfoDOResultMap">
+		<id column="id" property="id" />
+        <result column="spu" property="spu"/>
+        <result column="main_title" property="mainTitle"/>
+        <result column="large_id" property="largeId"/>
+        <result column="small_id" property="smallId"/>
+        <result column="unit_id" property="unitId"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+	</resultMap>
+
+	<sql id="MybatisItemInfoDAO_all_column_fields">
+	      id,spu,main_title,large_id,small_id,unit_id,remark,create_time,create_user_id,modify_time,modify_user_id
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisItemInfoDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="spu != null  and spu != '' "> AND spu=#{spu} </if>
+			<if test="mainTitle != null  and mainTitle != '' "> AND main_title=#{mainTitle} </if>
+			<if test="largeId != null "> AND large_id=#{largeId} </if>
+			<if test="smallId != null "> AND small_id=#{smallId} </if>
+			<if test="unitId != null "> AND unit_id=#{unitId} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisItemInfoDAO_selectById" parameterType="long" resultMap="ItemInfoDOResultMap">
+	SELECT
+		<include refid="MybatisItemInfoDAO_all_column_fields" />
+	FROM
+		item_info
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisItemInfoDAO_insert" parameterType="ng.bayue.item.domain.ItemInfoDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO item_info(
+				id,
+				spu,
+				main_title,
+				large_id,
+				small_id,
+				unit_id,
+				remark,
+				create_time,
+				create_user_id,
+				modify_time,
+				modify_user_id
+		)values(
+				#{id},
+				#{spu},
+				#{mainTitle},
+				#{largeId},
+				#{smallId},
+				#{unitId},
+				#{remark},
+				#{createTime},
+				#{createUserId},
+				#{modifyTime},
+				#{modifyUserId}
+		)
+    </insert>
+
+	<update id="MybatisItemInfoDAO_updateById" parameterType="ng.bayue.item.domain.ItemInfoDO">
+		UPDATE item_info
+		SET
+					spu = #{spu},
+					main_title = #{mainTitle},
+					large_id = #{largeId},
+					small_id = #{smallId},
+					unit_id = #{unitId},
+					remark = #{remark},
+					create_user_id = #{createUserId},
+					modify_time = #{modifyTime},
+					modify_user_id = #{modifyUserId}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisItemInfoDAO_deleteById" parameterType="long">
+		DELETE FROM item_info WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisItemInfoDAO_update_dynamic" parameterType="ng.bayue.item.domain.ItemInfoDO">
+		UPDATE item_info
+		<set>
+					<if test="spu != null  and spu != '' ">spu=#{spu},</if>
+					<if test="mainTitle != null  and mainTitle != '' ">main_title=#{mainTitle},</if>
+					<if test="largeId != null ">large_id=#{largeId},</if>
+					<if test="smallId != null ">small_id=#{smallId},</if>
+					<if test="unitId != null ">unit_id=#{unitId},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisItemInfoDAO_select_dynamic" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.item.domain.ItemInfoDO">
+	     SELECT
+	     	<include refid="MybatisItemInfoDAO_all_column_fields" />
+		 FROM
+		 	item_info
+			<include refid="MybatisItemInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisItemInfoDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.ItemInfoDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	item_info
+	 	<include refid="MybatisItemInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisItemInfoDAO_select_dynamic_page_query" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.item.domain.ItemInfoDO">
+	     SELECT
+	     	<include refid="MybatisItemInfoDAO_all_column_fields" />
+		 FROM
+		 	item_info
+	 	<include refid="MybatisItemInfoDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisItemInfoDAO_select_by_spu" parameterType="string" resultMap="ItemInfoDOResultMap">
+ 		SELECT 
+ 			<include refid="MybatisItemInfoDAO_all_column_fields" />
+ 		FROM 
+ 			item_info
+ 		WHERE spu=#{spu}
+ 	</select>
+
+</mapper>

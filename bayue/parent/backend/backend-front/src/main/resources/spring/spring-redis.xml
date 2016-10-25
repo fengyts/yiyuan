@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xmlns="http://www.springframework.org/schema/beans"
+	 xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 此处bean里的配置 请填写在properties的配置文件中 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.maxTotal}" /><!-- 连接池中最大实例 数-->
+		<property name="maxIdle" value="${redis.maxIdle}" /><!-- 连接池中最大闲置实例数-->
+		<property name="minIdle" value="${redis.minIdle}" /><!-- 连接池中最小闲置实例数-->
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" /><!-- 最长等待时间 默认值为-1 单位：毫秒-->
+	</bean>
+
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" name="host" value="${redis.host}"/>
+	</bean>
+
+	<bean id="redisCacheService" class="ng.bayue.service.impl.RedisCacheServiceImpl">
+		<property name="jedisPool" ref="jedisPool"/>
+	</bean>
+	
+
+</beans>

@@ -1,0 +1,16 @@
+.classpath
+.project
+.class
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+Servers/
+target/
+.settings/
+.svn/
+
+#.external*/
+.externalToolBuilders/
+
+.launch
+bayue/parent/backend/backend-service/backend-web/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator (2).launch

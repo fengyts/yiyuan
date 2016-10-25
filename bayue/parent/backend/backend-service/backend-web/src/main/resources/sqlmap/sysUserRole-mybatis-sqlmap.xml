@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.backend.domain.SysUserRoleMapper">
+
+	<resultMap type="ng.bayue.backend.domain.SysUserRoleDO" id="SysUserRoleDOResultMap">
+		<id column="user_id" property="userId" />
+        <result column="role_id" property="roleId"/>
+	</resultMap>
+
+	<sql id="MybatisSysUserRoleDAO_all_column_fields">
+	      user_id,role_id
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSysUserRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="roleId != null "> AND role_id=#{roleId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSysUserRoleDAO_selectById" parameterType="long" resultMap="SysUserRoleDOResultMap">
+	SELECT
+		<include refid="MybatisSysUserRoleDAO_all_column_fields" />
+	FROM
+		be_sys_user_role
+	WHERE
+		 user_id = #{userId}
+	</select>
+
+    <insert id="MybatisSysUserRoleDAO_insert" parameterType="ng.bayue.backend.domain.SysUserRoleDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="userId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS user_id
+        </selectKey>
+        INSERT INTO be_sys_user_role(
+				user_id,
+				role_id
+		)values(
+				#{userId},
+				#{roleId}
+		)
+    </insert>
+
+	<update id="MybatisSysUserRoleDAO_updateById" parameterType="ng.bayue.backend.domain.SysUserRoleDO">
+		UPDATE be_sys_user_role
+		SET
+					role_id = #{roleId}
+		WHERE
+			user_id = #{userId}
+	</update>
+
+	<delete id="MybatisSysUserRoleDAO_deleteById" parameterType="long">
+		DELETE FROM be_sys_user_role WHERE user_id = #{userId}
+	</delete>
+
+	<update id="MybatisSysUserRoleDAO_update_dynamic" parameterType="ng.bayue.backend.domain.SysUserRoleDO">
+		UPDATE be_sys_user_role
+		<set>
+					<if test="roleId != null ">role_id=#{roleId},</if>
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+
+ 	<select id="MybatisSysUserRoleDAO_select_dynamic" resultMap="SysUserRoleDOResultMap" parameterType="ng.bayue.backend.domain.SysUserRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysUserRoleDAO_all_column_fields" />
+		 FROM
+		 	be_sys_user_role
+			<include refid="MybatisSysUserRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysUserRoleDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.backend.domain.SysUserRoleDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	be_sys_user_role
+	 	<include refid="MybatisSysUserRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysUserRoleDAO_select_dynamic_page_query" resultMap="SysUserRoleDOResultMap" parameterType="ng.bayue.backend.domain.SysUserRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysUserRoleDAO_all_column_fields" />
+		 FROM
+		 	be_sys_user_role
+	 	<include refid="MybatisSysUserRoleDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

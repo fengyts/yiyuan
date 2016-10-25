@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.backend.domain.SysRoleMapper">
+
+	<resultMap type="ng.bayue.backend.domain.SysRoleDO" id="SysRoleDOResultMap">
+		<id column="id" property="id" />
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisSysRoleDAO_all_column_fields">
+	      id,name,code,type,status,remark,create_user_id,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSysRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="name != null  and name != '' "> AND name=#{name} </if>
+			<if test="code != null  and code != '' "> AND code=#{code} </if>
+			<if test="type != null  and type != '' "> AND type=#{type} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSysRoleDAO_selectById" parameterType="long" resultMap="SysRoleDOResultMap">
+	SELECT
+		<include refid="MybatisSysRoleDAO_all_column_fields" />
+	FROM
+		be_sys_role
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSysRoleDAO_insert" parameterType="ng.bayue.backend.domain.SysRoleDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO be_sys_role(
+				id,
+				name,
+				code,
+				type,
+				status,
+				remark,
+				create_user_id,
+				create_time,
+				modify_time
+		)values(
+				#{id},
+				#{name},
+				#{code},
+				#{type},
+				#{status},
+				#{remark},
+				#{createUserId},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisSysRoleDAO_updateById" parameterType="ng.bayue.backend.domain.SysRoleDO">
+		UPDATE be_sys_role
+		SET
+					name = #{name},
+					code = #{code},
+					type = #{type},
+					status = #{status},
+					remark = #{remark},
+					create_user_id = #{createUserId},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSysRoleDAO_deleteById" parameterType="long">
+		DELETE FROM be_sys_role WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSysRoleDAO_update_dynamic" parameterType="ng.bayue.backend.domain.SysRoleDO">
+		UPDATE be_sys_role
+		<set>
+					<if test="name != null  and name != '' ">name=#{name},</if>
+					<if test="code != null  and code != '' ">code=#{code},</if>
+					<if test="type != null  and type != '' ">type=#{type},</if>
+					<if test="status != null ">status=#{status},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic" resultMap="SysRoleDOResultMap" parameterType="ng.bayue.backend.domain.SysRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	be_sys_role
+			<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.backend.domain.SysRoleDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	be_sys_role
+	 	<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic_page_query" resultMap="SysRoleDOResultMap" parameterType="ng.bayue.backend.domain.SysRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	be_sys_role
+	 	<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+.test{
+	content:"(../images/1.png)";
+	/* background: url('../images/1.png') */
+}
