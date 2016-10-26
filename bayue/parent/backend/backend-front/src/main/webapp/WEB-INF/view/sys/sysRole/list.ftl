@@ -47,6 +47,7 @@ js=[
         <div class="box span10 oh">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
+                	  <th widt="10">序号</th>	
                       <th width="50">角色名称</th>	
 	                  <th width="50">编码</th>
 	                  <th width="50">状态</th>
@@ -57,6 +58,7 @@ js=[
             	<#if page.list?default([])?size!=0>
 		            <#list page.getList() as sysRole>
 		                <tr class="tr">
+				              <td class="td_center">${sysRole.id}</td>
 				              <td class="td_center">${sysRole.name}</td>
 		 					  <td class="td_center">${sysRole.code}</td>
 				              <td class="td_center"><#assign sta="${sysRole.status}" /><#if sta=='true'>有效<#else>无效</#if></td>

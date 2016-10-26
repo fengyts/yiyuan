@@ -39,12 +39,14 @@ public class SysRoleController {
 		if (StringUtils.isEmpty(name)) {
 			return ResultMessage.validParameterNull("name");
 		}
-		if (StringUtils.isEmpty(sysRoleDO.getCode())) {
-			String code = HanyuPinyinUtil.hanyuToPinyin(name);
-			if (StringUtils.isEmpty(code)) {
-				return ResultMessage.serverInnerError();
+		String code = sysRoleDO.getCode();
+		if (StringUtils.isEmpty(code)) {
+			String codeHanyu = HanyuPinyinUtil.hanyuToPinyin(name);
+			if (StringUtils.isEmpty(codeHanyu)) {
+//				return ResultMessage.serverInnerError();
+				sysRoleDO.setCode(code);
 			}
-			sysRoleDO.setCode(code);
+			sysRoleDO.setCode(codeHanyu);
 		}
 		sysRoleAO.saveSysRole(sysRoleDO);
 		return new ResultMessage();

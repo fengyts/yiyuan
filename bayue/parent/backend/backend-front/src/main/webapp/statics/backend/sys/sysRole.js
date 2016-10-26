@@ -56,10 +56,10 @@ $(function() {
 			success : function(res) {
 				var data = JSON.parse(res);
 				if (1 == data.result) {// 成功
-					layer.alert(data.message, 1, function() {
+					layer.alert(data.message, {icon: 1}, function() {
+						parent.window.location.reload();
 						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 						parent.layer.close(index); //再执行关闭 
-						parent.window.location.reload();
 					});
 				} else {// 失败
 					layer.alert(data.message, 8);
