@@ -58,12 +58,12 @@
 					<tr>
 						<td>菜单状态:</td>
 						<td>
-							<select class="select" name="state">
-								<option value="1" <#if sysMenuDO.state==true>selected="selected"</#if>>有效</option>
-								<option value="0" <#if sysMenuDO.state==false>selected="selected"</#if>>无效</option>
+							<select class="select" name="status">
+								<option value="1" <#if sysMenuDO.status==true>selected="selected"</#if>>有效</option>
+								<option value="0" <#if sysMenuDO.status==false>selected="selected"</#if>>无效</option>
 								<#-- 效果同上
-								<option value="1" <#if sysMenuDO.state=="1">selected="selected"</#if>>有效</option>
-								<option value="0" <#if sysMenuDO.state=="0">selected="selected"</#if>>无效</option>
+								<option value="1" <#if sysMenuDO.status=="1">selected="selected"</#if>>有效</option>
+								<option value="0" <#if sysMenuDO.status=="0">selected="selected"</#if>>无效</option>
 								-->
 							</select>
 						</td>

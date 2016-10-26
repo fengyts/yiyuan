@@ -3,6 +3,8 @@ package test;
 
 import java.net.MalformedURLException;
 
+import ng.bayue.backend.domain.SysRoleDO;
+import ng.bayue.backend.service.SysRoleService;
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.service.CategoryService;
 
@@ -20,26 +22,18 @@ public class TestHessian {
 	
 	String url = "http://localhost:8082/base-web/categoryService.hessian";
 	String url1 = "http://localhost:8080/backend-web/sysMenuService.hessian";
+	String url2 = "http://localhost:8089/backend-web/sysRoleService.hessian";
 	
 	public void testHessian(){
 		try {
-			CategoryService categoryService = (CategoryService) factory.create(CategoryService.class, url);
-			CategoryDO categoryDO = categoryService.selectById(2L);
-			System.out.println(categoryDO.getName());
-			System.out.println(categoryDO.getCode());
+//			CategoryService categoryService = (CategoryService) factory.create(CategoryService.class, url);
+//			CategoryDO categoryDO = categoryService.selectById(2L);
+//			System.out.println(categoryDO.getName());
+//			System.out.println(categoryDO.getCode());
 			
-//			CategoryDO categoryDO = new CategoryDO();
-////			categoryDO.setId(1L);
-//			categoryDO.setCode("01");
-//			categoryDO.setCreateTime(new Date());
-//			categoryDO.setLevel(1);
-//			categoryDO.setName("test");
-//			categoryDO.setParentId(0L);
-//			categoryDO.setStatus(false);
-//			categoryDO.setCreateUserId(1L);
-//			
-//			Long res = categoryService.insert(categoryDO);
-//			System.out.println(res);
+			SysRoleService sysRoleService = (SysRoleService) factory.create(SysRoleService.class,url2);
+			SysRoleDO sysRoleDO = sysRoleService.selectById(1L);
+			System.out.println(sysRoleDO.getName());
 			
 		} catch (MalformedURLException e) {
 			logger.error("", e);

@@ -2,7 +2,7 @@
 <@backend title="系统用户管理" 
 js=[
 '/statics/plugin/layer/layer.min.js',
-'/statics/backend/sysUser/sysUser.js'
+'/statics/backend/sys/sysUser.js'
 ] css=[
 ]>
 

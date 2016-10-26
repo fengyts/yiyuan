@@ -105,5 +105,16 @@ public class ResultMessage implements Serializable{
 	public static ResultMessage validParameterNull(String... parameters){
 		return new ResultMessage(Failure,Messages.parameterErrMsgs(parameters));
 	}
+	
+	/**
+	 * <pre>
+	 * 服务器内部异常
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public static ResultMessage serverInnerError(){
+		return new ResultMessage(Failure,Messages.ServerInnerError);
+	}
 
 }

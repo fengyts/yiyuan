@@ -2,6 +2,8 @@ package ng.bayue.backend.domain;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
 import ng.bayue.backend.common.BaseDO;
 
 /**

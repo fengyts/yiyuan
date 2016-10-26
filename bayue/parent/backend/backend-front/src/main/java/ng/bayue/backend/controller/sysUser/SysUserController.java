@@ -15,7 +15,7 @@ import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.util.Page;
 
 @Controller
-@RequestMapping({"/sysUser"})
+@RequestMapping({"/sys/sysUser"})
 public class SysUserController {
 	
 	@Autowired
