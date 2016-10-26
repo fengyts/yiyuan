@@ -48,8 +48,7 @@ public class SysRoleController {
 			}
 			sysRoleDO.setCode(codeHanyu);
 		}
-		sysRoleAO.saveSysRole(sysRoleDO);
-		return new ResultMessage();
+		return sysRoleAO.saveSysRole(sysRoleDO);
 	}
 
 	@RequestMapping({ "/edit" })
@@ -71,9 +70,8 @@ public class SysRoleController {
 			}
 			sysRoleDO.setCode(code);
 		}
-		sysRoleAO.updateSysRole(sysRoleDO);
+		return sysRoleAO.updateSysRole(sysRoleDO);
 		
-		return new ResultMessage();
 	}
 
 }
