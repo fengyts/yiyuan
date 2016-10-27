@@ -50,9 +50,9 @@ js=[
         <div class="box span10 oh">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
-                	  <th widt="10">序号</th>	
-                      <th width="50">角色名称</th>	
-	                  <th width="50">编码</th>
+                	  <th width="20">序号</th>	
+                      <th width="100">角色名称</th>	
+	                  <th width="100">编码</th>
 	                  <th width="50">状态</th>
 	                  <th width="200">创建时间</th>
 	                  <th width="200">修改时间</th>

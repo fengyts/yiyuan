@@ -48,9 +48,9 @@ public class SysMenuRoleServiceImpl implements SysMenuRoleService {
 	}
 
 	@Override
-	public int deleteById(Long id) throws ServiceException {
+	public int deleteByRoleId(Long roleId) throws ServiceException {
 		try {
-			return (Integer) sysMenuRoleDAO.deleteById(id);
+			return (Integer) sysMenuRoleDAO.deleteByRoleId(roleId);
 		} catch (DAOException e) {
 			logger.error(e);
 			throw new ServiceException(e);
@@ -58,67 +58,13 @@ public class SysMenuRoleServiceImpl implements SysMenuRoleService {
 	}
 
 	@Override
-	public SysMenuRoleDO selectById(Long id) throws ServiceException {
+	public List<SysMenuRoleDO> selectByRoleId(Long roleId) throws ServiceException {
 		try {
-			return sysMenuRoleDAO.selectById(id);
+			return sysMenuRoleDAO.selectByRoleId(roleId);
 		} catch (DAOException e) {
 			logger.error(e);
 			throw new ServiceException(e);
 		}
-	}
-
-	@Override
-	public Long selectCountDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
-		try {
-			return sysMenuRoleDAO.selectCountDynamic(sysMenuRoleDO);
-		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException(e);
-		}
-	}
-
-	@Override
-	public List<SysMenuRoleDO> selectDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
-		try {
-			return sysMenuRoleDAO.selectDynamic(sysMenuRoleDO);
-		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException(e);
-		}
-	}
-
-	private List<SysMenuRoleDO> selectDynamicPageQuery(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
-		try {
-			return sysMenuRoleDAO.selectDynamicPageQuery(sysMenuRoleDO);
-		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException(e);
-		}
-	}
-
-	public Page<SysMenuRoleDO> queryPageListBySysMenuRoleDO(SysMenuRoleDO sysMenuRoleDO) {
-		if (sysMenuRoleDO != null) {
-			Long totalCount = this.selectCountDynamic(sysMenuRoleDO);
-			List<SysMenuRoleDO> resultList = this.selectDynamicPageQuery(sysMenuRoleDO);
-
-			Page<SysMenuRoleDO> page = new Page<SysMenuRoleDO>();
-			page.setPageNo(sysMenuRoleDO.getStartPage());
-			page.setPageSize(sysMenuRoleDO.getPageSize());
-			page.setTotalCount(totalCount.intValue());
-			page.setList(resultList);
-			return page;
-		}
-		return new Page<SysMenuRoleDO>();
-	}
-
-	public Page<SysMenuRoleDO> queryPageListBySysMenuRoleDOAndStartPageSize(SysMenuRoleDO sysMenuRoleDO, int startPage,
-			int pageSize) {
-		if (sysMenuRoleDO != null && startPage > 0 && pageSize > 0) {
-			sysMenuRoleDO.setStartPage(startPage);
-			sysMenuRoleDO.setPageSize(pageSize);
-			return this.queryPageListBySysMenuRoleDO(sysMenuRoleDO);
-		}
-		return new Page<SysMenuRoleDO>();
 	}
 
 	@Override

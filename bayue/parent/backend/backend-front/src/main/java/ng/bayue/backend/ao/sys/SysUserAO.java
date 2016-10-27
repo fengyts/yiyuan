@@ -1,4 +1,4 @@
-package ng.bayue.backend.ao.sysUser;
+package ng.bayue.backend.ao.sys;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,5 @@
 <#include "/common/common.ftl"/>
-<@backend title="角色增加" 
+<@backend title="角色编辑" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/plugin/ztree/zTree_v3-master/js/jquery.ztree.all.min.js',
@@ -85,6 +85,7 @@ css=[
 	
 	<hr/>
 	<label class="control-label">角色授权</label>
+	<input type="hidden" id="checkedMenuIds" value="${menuIds}"/>
 	<div class="form-group tree">
 		<div class="zTreeDemoBackground left" style="padding-bottom:50px;">
 			<ul id="sysMenuTree" class="ztree"></ul>

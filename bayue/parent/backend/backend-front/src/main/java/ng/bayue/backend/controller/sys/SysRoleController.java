@@ -1,4 +1,4 @@
-package ng.bayue.backend.controller.sysUser;
+package ng.bayue.backend.controller.sys;
 
 import java.util.List;
 
@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ng.bayue.backend.ao.index.SysMenuAO;
-import ng.bayue.backend.ao.sysUser.SysRoleAO;
+import ng.bayue.backend.ao.sys.SysMenuRoleAO;
+import ng.bayue.backend.ao.sys.SysRoleAO;
 import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.util.HanyuPinyinUtil;
@@ -26,6 +27,8 @@ public class SysRoleController {
 	private SysRoleAO sysRoleAO;
 	@Autowired
 	private SysMenuAO sysMenuAO;
+	@Autowired
+	private SysMenuRoleAO sysMenuRoleAO;
 
 	@RequestMapping({ "/list" })
 	public void sysRoleList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
@@ -62,6 +65,7 @@ public class SysRoleController {
 	@RequestMapping({ "/edit" })
 	public void sysRoleEdit(Model model, Long id) {
 		model.addAttribute("sysRole", sysRoleAO.selectById(id));
+		model.addAttribute("menuIds", sysMenuRoleAO.selectMenuIdsByRoleId(id));
 	}
 
 	@RequestMapping({ "/update" })

@@ -134,7 +134,7 @@ function menuTrees() {
 	var setting = {
 		check : {
 			enable : true,
-			nocheckInherit : true
+			nocheckInherit : true,
 		},
 		view : {
 			selectedMulti : false
@@ -147,12 +147,12 @@ function menuTrees() {
 				rootPId : null
 			}
 		},
-	// callback:{
-	// 		beforeClick:function(id, node){
-	// 			tree.checkNode(node, !node.checked, true, true);
-	// 			return false;
-	// 		}
-	// }
+//	 callback:{
+//	 		beforeClick:function(id, node){
+//	 			tree.checkNode(node, !node.checked, true, true);
+//	 			return false;
+//	 		}
+//	 }
 	};
 
 	var zNodes = function() {
@@ -176,7 +176,17 @@ function menuTrees() {
 	tree.expandAll(true);
 
 	var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
-	// var rootNode = {"name":"菜单根节点"};
-	// treeObj.addNodes(null,0,rootNode);
-
+	if($("#checkedMenuIds").length > 0){
+		var checkedMenuIds = $("#checkedMenuIds").val().split(",");
+		console.log(checkedMenuIds);
+		if(checkedMenuIds){
+			$.each(checkedMenuIds,function(i,v){
+				var node = treeObj.getNodesByParam("id", v, null);
+				if(node){
+					treeObj.checkNode(treeObj.getNodesByParam("id", v, null)[0], true, false);
+				}
+			});
+		}
+	}
+	
 }

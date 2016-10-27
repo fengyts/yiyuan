@@ -9,7 +9,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ng.bayue.backend.ao.sysUser.SysUserAO;
+import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysUserDO;
 
 public class SysAuthorizingRealm extends AuthorizingRealm {

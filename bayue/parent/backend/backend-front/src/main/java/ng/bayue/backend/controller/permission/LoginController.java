@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ng.bayue.backend.ao.permission.LoginAO;
-import ng.bayue.backend.ao.sysUser.SysUserAO;
+import ng.bayue.backend.ao.sys.SysUserAO;
 
 @Controller
 public class LoginController {

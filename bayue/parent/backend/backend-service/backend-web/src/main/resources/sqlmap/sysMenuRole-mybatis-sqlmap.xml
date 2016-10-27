@@ -18,7 +18,7 @@
 		</where>
  	</sql>
 
-	<select id="MybatisSysMenuRoleDAO_selectById" parameterType="long" resultMap="SysMenuRoleDOResultMap">
+	<select id="MybatisSysMenuRoleDAO_selectByRoleId" parameterType="long" resultMap="SysMenuRoleDOResultMap">
 	SELECT
 		<include refid="MybatisSysMenuRoleDAO_all_column_fields" />
 	FROM
@@ -40,7 +40,7 @@
 		)
     </insert>
 
-	<update id="MybatisSysMenuRoleDAO_updateById" parameterType="ng.bayue.backend.domain.SysMenuRoleDO">
+	<update id="MybatisSysMenuRoleDAO_updateByRoleId" parameterType="ng.bayue.backend.domain.SysMenuRoleDO">
 		UPDATE be_sys_menu_role
 		SET
 					menu_id = #{menuId}
@@ -48,7 +48,7 @@
 			role_id = #{roleId}
 	</update>
 
-	<delete id="MybatisSysMenuRoleDAO_deleteById" parameterType="long">
+	<delete id="MybatisSysMenuRoleDAO_deleteByRoleId" parameterType="long">
 		DELETE FROM be_sys_menu_role WHERE role_id = #{roleId}
 	</delete>
 
@@ -68,23 +68,6 @@
 			<include refid="MybatisSysMenuRoleDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisSysMenuRoleDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.backend.domain.SysMenuRoleDO">
-	     SELECT
-	     	count(1)
-		 FROM
-		 	be_sys_menu_role
-	 	<include refid="MybatisSysMenuRoleDAO_dynamic_where_fields" />
- 	</select>
-
- 	<select id="MybatisSysMenuRoleDAO_select_dynamic_page_query" resultMap="SysMenuRoleDOResultMap" parameterType="ng.bayue.backend.domain.SysMenuRoleDO">
-	     SELECT
-	     	<include refid="MybatisSysMenuRoleDAO_all_column_fields" />
-		 FROM
-		 	be_sys_menu_role
-	 	<include refid="MybatisSysMenuRoleDAO_dynamic_where_fields" />
-	 	Limit #{start},#{pageSize}
- 	</select>
- 	
  	<insert id="MybatisSysMenuRoleDAO_insert_batch" parameterType="map">
  		INSERT 
  			be_sys_menu_role (role_id, menu_id)

@@ -21,12 +21,12 @@ public class MybatisSysMenuRoleDAO extends MybatisBaseDAO implements SysMenuRole
 
 	@Override
 	public Integer update(SysMenuRoleDO sysMenuRoleDO) throws DAOException {
-		return getSqlSession().update("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_updateById", sysMenuRoleDO);
+		return getSqlSession().update("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_updateByRoleId", sysMenuRoleDO);
 	}
 
 	@Override
-	public Integer deleteById(Long id) throws DAOException {
-		return getSqlSession().delete("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_deleteById", id);
+	public Integer deleteByRoleId(Long roleId) throws DAOException {
+		return getSqlSession().delete("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_deleteByRoleId", roleId);
 	}
 
 	@Override
@@ -35,23 +35,8 @@ public class MybatisSysMenuRoleDAO extends MybatisBaseDAO implements SysMenuRole
 	}
 
 	@Override
-	public SysMenuRoleDO selectById(Long id) throws DAOException {
-		return getSqlSession().selectOne("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_selectById", id);
-	}
-
-	@Override
-	public Long selectCountDynamic(SysMenuRoleDO sysMenuRoleDO) throws DAOException {
-		return getSqlSession().selectOne("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_select_dynamic_count", sysMenuRoleDO);
-	}
-
-	@Override
-	public List<SysMenuRoleDO> selectDynamic(SysMenuRoleDO sysMenuRoleDO) throws DAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_select_dynamic", sysMenuRoleDO);
-	}
-
-	@Override
-	public List<SysMenuRoleDO> selectDynamicPageQuery(SysMenuRoleDO sysMenuRoleDO) throws DAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_select_dynamic_page_query", sysMenuRoleDO);
+	public List<SysMenuRoleDO> selectByRoleId(Long roleId) throws DAOException {
+		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_selectByRoleId", roleId);
 	}
 
 	@Override

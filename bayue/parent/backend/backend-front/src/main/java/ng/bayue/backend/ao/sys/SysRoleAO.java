@@ -1,4 +1,4 @@
-package ng.bayue.backend.ao.sysUser;
+package ng.bayue.backend.ao.sys;
 
 import java.util.ArrayList;
 import java.util.Date;

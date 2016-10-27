@@ -33,59 +33,22 @@ public interface SysMenuRoleService {
 
 	/**
 	 * 根据ID删除 角色菜单关系
-	 * @param id
+	 * @param roleId
 	 * @return 物理删除行
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
-	int deleteById(Long id) throws ServiceException;
+	int deleteByRoleId(Long roleId) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 角色菜单关系
-	 * @param id
+	 * @param roleId
 	 * @return SysMenuRoleDO
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
-	SysMenuRoleDO selectById(Long id) throws ServiceException;
-
-	/**
-	 * 根据  角色菜单关系 动态返回记录数
-	 * @param sysMenuRoleDO
-	 * @return 记录数
-	 * @throws ServiceException
-	 * @author longhaisheng 2016-10-25 13:31:48
-	 */
-	Long selectCountDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException;
-
-	/**
-	 * 动态返回 角色菜单关系 列表
-	 * @param sysMenuRoleDO
-	 * @return List<SysMenuRoleDO>
-	 * @throws ServiceException
-	 * @author longhaisheng 2016-10-25 13:31:48
-	 */
-	List<SysMenuRoleDO> selectDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException;
-
-	/**
-	 * 动态返回 角色菜单关系 分页列表
-	 * @param sysMenuRoleDO
-	 * @return Page<SysMenuRoleDO>
-	 * @throws ServiceException
-	 * @author longhaisheng 2016-10-25 13:31:48
-	 */
-	Page<SysMenuRoleDO> queryPageListBySysMenuRoleDO(SysMenuRoleDO sysMenuRoleDO);
-
-	/**
-	 * 动态返回 角色菜单关系 分页列表
-	 * @param sysMenuRoleDO
-	 * @param startPage 起始页
-	 * @param pageSize 每页记录数
-	 * @return Page<SysMenuRoleDO>
-	 * @throws ServiceException
-	 * @author longhaisheng 2016-10-25 13:31:48
-	 */
-	Page<SysMenuRoleDO> queryPageListBySysMenuRoleDOAndStartPageSize(SysMenuRoleDO sysMenuRoleDO,int startPage,int pageSize);
+	List<SysMenuRoleDO> selectByRoleId(Long roleId) throws ServiceException;
+	
 	
 	void insertBatch(Map<String,Object> map) throws ServiceException;
 

@@ -1,4 +1,4 @@
-package ng.bayue.backend.controller.sysUser;
+package ng.bayue.backend.controller.sys;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ng.bayue.backend.ao.sysUser.SysRoleAO;
-import ng.bayue.backend.ao.sysUser.SysUserAO;
+import ng.bayue.backend.ao.sys.SysRoleAO;
+import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.util.Page;

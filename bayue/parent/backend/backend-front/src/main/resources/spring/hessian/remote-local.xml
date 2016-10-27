@@ -21,5 +21,11 @@
 		<property name="serviceInterface" value="ng.bayue.backend.service.SysRoleService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
+	<bean id="sysMenuRoleService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysMenuRoleService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuRoleService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
 
 </beans>
