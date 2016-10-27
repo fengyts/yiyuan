@@ -97,5 +97,6 @@ public interface SysRoleService {
 	 * @throws ServiceException
 	 */
 	void insertSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO,List<Long> menuIds) throws ServiceException;
-
+	
+	void updateSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO,Long roleId,List<Long> menuIds) throws ServiceException;
 }

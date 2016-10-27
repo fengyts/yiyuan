@@ -83,16 +83,28 @@ public class SysRoleAO {
 		return new ResultMessage();
 	}
 
-	public ResultMessage updateSysRole(SysRoleDO sysRoleDO) {
+	public ResultMessage updateSysRole(SysRoleDO sysRoleDO, String menuIds) {
 		SysRoleDO sysRoleDOValid = new SysRoleDO();
-		sysRoleDOValid.setId(sysRoleDO.getId());
+		Long roleId = sysRoleDO.getId();
+		sysRoleDOValid.setId(roleId);
 		sysRoleDOValid.setName(sysRoleDO.getName());
 		sysRoleDOValid.setCode(sysRoleDO.getCode());
+		
 		if(isExist(sysRoleDOValid)){
 			return ResultMessage.validIsExist();
 		}
 		sysRoleDO.setModifyTime(new Date());
-		sysRoleService.update(sysRoleDO, false);
+		
+		if(StringUtils.isEmpty(menuIds)){
+			sysRoleService.update(sysRoleDO, false);
+		}else{
+			List<Long> ids = new ArrayList<Long>();
+			String[] arr = menuIds.split(",");
+			for(String str : arr){
+				ids.add(Long.valueOf(str));
+			}
+			sysRoleService.updateSysRoleAndRoleMenuRelation(sysRoleDO, roleId, ids);
+		}
 		return new ResultMessage();
 	}
 

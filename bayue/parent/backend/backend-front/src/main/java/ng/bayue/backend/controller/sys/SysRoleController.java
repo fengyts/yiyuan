@@ -70,7 +70,7 @@ public class SysRoleController {
 
 	@RequestMapping({ "/update" })
 	@ResponseBody
-	public ResultMessage sysRoleUpdate(SysRoleDO sysRoleDO) {
+	public ResultMessage sysRoleUpdate(SysRoleDO sysRoleDO, String menuIds) {
 		String name = sysRoleDO.getName();
 		if (StringUtils.isEmpty(name)) {
 			return ResultMessage.validParameterNull("name");
@@ -82,7 +82,7 @@ public class SysRoleController {
 			}
 			sysRoleDO.setCode(code);
 		}
-		return sysRoleAO.updateSysRole(sysRoleDO);
+		return sysRoleAO.updateSysRole(sysRoleDO,menuIds);
 		
 	}
 

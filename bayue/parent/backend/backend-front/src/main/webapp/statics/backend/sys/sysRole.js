@@ -117,14 +117,25 @@ function getData() {
 
 	var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
 	var nodes = treeObj.getCheckedNodes(true);
+	
 	if (nodes && nodes.length > 0) {
 		var ids = "";
 		$.each(nodes, function(i, v) {
 			ids += v.id + ",";
 		});
 		ids = ids.substring(0, ids.length - 1);
+		
+		//获取编辑时菜单id,并判断是否有改动
+		if($("#checkedMenuIds").length > 0){
+			var checkedMenuIds = $("#checkedMenuIds").val();
+			if(ids == checkedMenuIds){//菜单没变
+				return data;
+			}
+		}
+		
 		data += "&menuIds=" + ids;
 	}
+	
 	return data;
 
 }

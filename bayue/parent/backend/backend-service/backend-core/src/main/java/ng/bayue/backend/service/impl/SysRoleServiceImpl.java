@@ -142,6 +142,21 @@ public class SysRoleServiceImpl  implements SysRoleService{
 		
 		sysMenuRoleService.insertBatch(map);
 	}
+
+	@Override
+	public void updateSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO, Long roleId, List<Long> menuIds)
+			throws ServiceException {
+		if(CollectionUtils.isEmpty(menuIds)){
+			update(sysRoleDO, false);
+			return;
+		}
+		sysMenuRoleService.deleteByRoleId(roleId);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("roleId", roleId);
+		map.put("menuIds", menuIds);
+		sysMenuRoleService.insertBatch(map);
+	}
 	
 	
 
