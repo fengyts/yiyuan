@@ -2,7 +2,7 @@ package ng.bayue.backend.enums;
 
 public enum SysMenuTypeEnum {
 	
-	NAVIGATION(0,"导航"),MENUBAR(1,"主菜单"),CHILDMENU(2,"按钮");
+	ROOT(0,"根菜单"),NAVIGATION(1,"导航"),MENUBAR(2,"主菜单"),CHILDMENU(3,"按钮");
 	
 	private Integer code;
 	private String value;

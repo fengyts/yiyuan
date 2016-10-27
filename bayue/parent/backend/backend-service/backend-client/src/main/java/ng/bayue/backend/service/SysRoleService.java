@@ -30,15 +30,6 @@ public interface SysRoleService {
 	 */
 	int update(SysRoleDO sysRoleDO,boolean isAllField) throws ServiceException;
 
-//	/**
-//	 * 根据ID更新 系统用户角色全部字段
-//	 * @param sysRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateById(SysRoleDO sysRoleDO) throws ServiceException;
-
 	/**
 	 * 根据ID删除 系统用户角色
 	 * @param id
@@ -47,15 +38,6 @@ public interface SysRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	int deleteById(Long id) throws ServiceException;
-
-//	/**
-//	 * 动态更新 系统用户角色部分字段
-//	 * @param sysRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateDynamic(SysRoleDO sysRoleDO) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 系统用户角色
@@ -103,5 +85,17 @@ public interface SysRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	Page<SysRoleDO> queryPageListBySysRoleDOAndStartPageSize(SysRoleDO sysRoleDO,int startPage,int pageSize);
+	
+	
+	/**
+	 * <pre>
+	 * 插入用户角色的同时插入角色菜单关联
+	 * </pre>
+	 *
+	 * @param sysRoleDO
+	 * @param menuIds 关联该角色菜单id列表
+	 * @throws ServiceException
+	 */
+	void insertSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO,List<Long> menuIds) throws ServiceException;
 
 }

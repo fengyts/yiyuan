@@ -1,6 +1,7 @@
 package ng.bayue.backend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import ng.bayue.backend.domain.SysMenuRoleDO;
 import ng.bayue.backend.exception.ServiceException;
@@ -30,15 +31,6 @@ public interface SysMenuRoleService {
 	 */
 	int update(SysMenuRoleDO sysMenuRoleDO,boolean isAllField) throws ServiceException;
 
-//	/**
-//	 * 根据ID更新 角色菜单关系全部字段
-//	 * @param sysMenuRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateById(SysMenuRoleDO sysMenuRoleDO) throws ServiceException;
-
 	/**
 	 * 根据ID删除 角色菜单关系
 	 * @param id
@@ -47,15 +39,6 @@ public interface SysMenuRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	int deleteById(Long id) throws ServiceException;
-
-//	/**
-//	 * 动态更新 角色菜单关系部分字段
-//	 * @param sysMenuRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 角色菜单关系
@@ -103,5 +86,7 @@ public interface SysMenuRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	Page<SysMenuRoleDO> queryPageListBySysMenuRoleDOAndStartPageSize(SysMenuRoleDO sysMenuRoleDO,int startPage,int pageSize);
+	
+	void insertBatch(Map<String,Object> map) throws ServiceException;
 
 }

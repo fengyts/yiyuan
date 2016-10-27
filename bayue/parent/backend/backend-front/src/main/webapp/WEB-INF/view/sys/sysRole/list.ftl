@@ -2,11 +2,14 @@
 <@backend title="系统用户管理" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
+'/statics/plugin/ztree/zTree_v3-master/js/jquery.ztree.all.min.js',
 '/statics/backend/sys/sysRole.js'
 ] css=[
-'/statics/plugin/layui-v1.0.2/layui/css/layui.css'
+'/statics/plugin/layui-v1.0.2/layui/css/layui.css',
+'/statics/plugin/ztree/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'
 ]>
 
+<div id="isListForm"></div>
 <form class="jqtransform" method="post" id="sysRoleForm" action="${domain}/sys/sysRole/list.htm">
     <div >
 	   <div>	      

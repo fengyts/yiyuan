@@ -1,5 +1,7 @@
 package ng.bayue.backend.controller.sysUser;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ng.bayue.backend.ao.index.SysMenuAO;
 import ng.bayue.backend.ao.sysUser.SysRoleAO;
+import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.util.HanyuPinyinUtil;
 import ng.bayue.backend.util.ResultMessage;
@@ -20,6 +24,8 @@ public class SysRoleController {
 
 	@Autowired
 	private SysRoleAO sysRoleAO;
+	@Autowired
+	private SysMenuAO sysMenuAO;
 
 	@RequestMapping({ "/list" })
 	public void sysRoleList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
@@ -29,12 +35,14 @@ public class SysRoleController {
 	}
 
 	@RequestMapping({ "/add" })
-	public void sysRoleAdd() {
+	public void sysRoleAdd(Model model) {
+//		List<SysMenuDO> sysMenus = sysMenuAO.listAllMenus();
+//		model.addAttribute("sysMenus", sysMenus);
 	}
 
 	@RequestMapping({ "/save" })
 	@ResponseBody
-	public ResultMessage sysRoleSave(SysRoleDO sysRoleDO) {
+	public ResultMessage sysRoleSave(SysRoleDO sysRoleDO,String menuIds) {
 		String name = sysRoleDO.getName();
 		if (StringUtils.isEmpty(name)) {
 			return ResultMessage.validParameterNull("name");
@@ -48,7 +56,7 @@ public class SysRoleController {
 			}
 			sysRoleDO.setCode(codeHanyu);
 		}
-		return sysRoleAO.saveSysRole(sysRoleDO);
+		return sysRoleAO.saveSysRole(sysRoleDO, menuIds);
 	}
 
 	@RequestMapping({ "/edit" })

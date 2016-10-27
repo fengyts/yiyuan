@@ -1,16 +1,22 @@
 package ng.bayue.backend.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.backend.persist.dao.SysRoleDAO;
 import ng.bayue.backend.persist.exception.DAOException;
+import ng.bayue.backend.service.SysMenuRoleService;
 import ng.bayue.backend.service.SysRoleService;
 import ng.bayue.util.Page;
 
@@ -21,6 +27,9 @@ public class SysRoleServiceImpl  implements SysRoleService{
 
 	@Autowired
 	private SysRoleDAO sysRoleDAO;
+	
+	@Autowired
+	private SysMenuRoleService sysMenuRoleService;
 
 	@Override
 	public Long insert(SysRoleDO sysRoleDO) throws ServiceException {
@@ -31,16 +40,6 @@ public class SysRoleServiceImpl  implements SysRoleService{
             throw new ServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateById(SysRoleDO sysRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysRoleDAO.updateById(sysRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
 
 	@Override
 	public int update(SysRoleDO sysRoleDO,boolean isAllField) throws ServiceException {
@@ -65,16 +64,6 @@ public class SysRoleServiceImpl  implements SysRoleService{
             throw new ServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(SysRoleDO sysRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysRoleDAO.updateDynamic(sysRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
 
 	@Override
 	public SysRoleDO selectById(Long id) throws ServiceException {
@@ -139,5 +128,21 @@ public class SysRoleServiceImpl  implements SysRoleService{
 		}
 		return new Page<SysRoleDO>();
 	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void insertSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO,List<Long> menuIds) throws ServiceException {
+		Long id = this.insert(sysRoleDO);
+		if(CollectionUtils.isEmpty(menuIds)){
+			return ;
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("roleId", id);
+		map.put("menuIds", menuIds);
+		
+		sysMenuRoleService.insertBatch(map);
+	}
+	
+	
 
 }

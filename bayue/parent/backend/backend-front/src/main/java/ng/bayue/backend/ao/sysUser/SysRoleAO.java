@@ -1,8 +1,10 @@
 package ng.bayue.backend.ao.sysUser;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,15 +60,27 @@ public class SysRoleAO {
 		return null == list || 0 == list.size() ? false : true;
 	}
 
-	public ResultMessage saveSysRole(SysRoleDO sysRoleDO) {
+	public ResultMessage saveSysRole(SysRoleDO sysRoleDO, String menuIds) {
 		if(isExist(sysRoleDO)){
 			return ResultMessage.validIsExist();
 		}
 		sysRoleDO.setCreateTime(new Date());
 		sysRoleDO.setModifyTime(new Date());
 		sysRoleDO.setCreateUserId(UserHandler.getUser().getId());
-		Long id = sysRoleService.insert(sysRoleDO);
-		return null == id || 1 > id ? ResultMessage.serverInnerError() : new ResultMessage();
+		
+		if(StringUtils.isEmpty(menuIds)){
+			Long id = sysRoleService.insert(sysRoleDO);
+			return null == id || 1 > id ? ResultMessage.serverInnerError() : new ResultMessage();
+		}
+		
+		List<Long> listMenuIds = new ArrayList<Long>();
+		String[] menuIdsStr = menuIds.split(",");
+		for(String str : menuIdsStr){
+			listMenuIds.add(Long.valueOf(str.trim()));
+		}
+		sysRoleService.insertSysRoleAndRoleMenuRelation(sysRoleDO, listMenuIds);
+		
+		return new ResultMessage();
 	}
 
 	public ResultMessage updateSysRole(SysRoleDO sysRoleDO) {

@@ -1,6 +1,7 @@
 package ng.bayue.backend.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,8 +15,8 @@ import ng.bayue.backend.persist.exception.DAOException;
 import ng.bayue.backend.service.SysMenuRoleService;
 import ng.bayue.util.Page;
 
-@Service(value="sysMenuRoleService")
-public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
+@Service(value = "sysMenuRoleService")
+public class SysMenuRoleServiceImpl implements SysMenuRoleService {
 
 	private Log logger = LogFactory.getLog(this.getClass());
 
@@ -26,33 +27,23 @@ public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
 	public Long insert(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
 		try {
 			return sysMenuRoleDAO.insert(sysMenuRoleDO);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 
-//	@Override
-//	public int updateById(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysMenuRoleDAO.updateById(sysMenuRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
-
 	@Override
-	public int update(SysMenuRoleDO sysMenuRoleDO,boolean isAllField) throws ServiceException {
+	public int update(SysMenuRoleDO sysMenuRoleDO, boolean isAllField) throws ServiceException {
 		try {
-			if(isAllField){
+			if (isAllField) {
 				return (Integer) sysMenuRoleDAO.update(sysMenuRoleDO);
-			}else{
+			} else {
 				return (Integer) sysMenuRoleDAO.updateDynamic(sysMenuRoleDO);
 			}
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -60,29 +51,19 @@ public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
 	public int deleteById(Long id) throws ServiceException {
 		try {
 			return (Integer) sysMenuRoleDAO.deleteById(id);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysMenuRoleDAO.updateDynamic(sysMenuRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
 
 	@Override
 	public SysMenuRoleDO selectById(Long id) throws ServiceException {
 		try {
 			return sysMenuRoleDAO.selectById(id);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -90,9 +71,9 @@ public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
 	public Long selectCountDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
 		try {
 			return sysMenuRoleDAO.selectCountDynamic(sysMenuRoleDO);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -100,19 +81,18 @@ public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
 	public List<SysMenuRoleDO> selectDynamic(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
 		try {
 			return sysMenuRoleDAO.selectDynamic(sysMenuRoleDO);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
-	
 
 	private List<SysMenuRoleDO> selectDynamicPageQuery(SysMenuRoleDO sysMenuRoleDO) throws ServiceException {
 		try {
 			return sysMenuRoleDAO.selectDynamicPageQuery(sysMenuRoleDO);
-		}catch(DAOException e){
+		} catch (DAOException e) {
 			logger.error(e);
-            throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -131,13 +111,23 @@ public class SysMenuRoleServiceImpl  implements SysMenuRoleService{
 		return new Page<SysMenuRoleDO>();
 	}
 
-	public Page<SysMenuRoleDO> queryPageListBySysMenuRoleDOAndStartPageSize(SysMenuRoleDO sysMenuRoleDO,int startPage,int pageSize){
-		if (sysMenuRoleDO != null && startPage>0 && pageSize>0) {
+	public Page<SysMenuRoleDO> queryPageListBySysMenuRoleDOAndStartPageSize(SysMenuRoleDO sysMenuRoleDO, int startPage,
+			int pageSize) {
+		if (sysMenuRoleDO != null && startPage > 0 && pageSize > 0) {
 			sysMenuRoleDO.setStartPage(startPage);
 			sysMenuRoleDO.setPageSize(pageSize);
 			return this.queryPageListBySysMenuRoleDO(sysMenuRoleDO);
 		}
 		return new Page<SysMenuRoleDO>();
+	}
+
+	@Override
+	public void insertBatch(Map<String,Object> map) throws ServiceException {
+		try {
+			sysMenuRoleDAO.insertBatch(map);
+		} catch (DAOException e) {
+			logger.error("批量插入异常", e);
+		}
 	}
 
 }

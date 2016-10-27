@@ -84,5 +84,14 @@
 	 	<include refid="MybatisSysMenuRoleDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<insert id="MybatisSysMenuRoleDAO_insert_batch" parameterType="map">
+ 		INSERT 
+ 			be_sys_menu_role (role_id, menu_id)
+ 		VALUES
+ 			<foreach collection="menuIds" index="index" item="menuId" open="" separator="," close="">
+ 				(#{roleId},#{menuId})
+ 			</foreach>
+ 	</insert>
 
 </mapper>

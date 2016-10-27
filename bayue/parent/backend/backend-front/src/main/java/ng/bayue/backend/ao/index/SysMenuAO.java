@@ -31,10 +31,15 @@ public class SysMenuAO {
 		return page;
 	}
 	
-	public List<SysMenuDO> listMenu(SysMenuDO sysMenuDO){
+	public List<SysMenuDO> selectDynamic(SysMenuDO sysMenuDO){
 		List<SysMenuDO> list = sysMenuService.selectDynamic(sysMenuDO);
 		return list;
 	}
+	
+	public List<SysMenuDO> listAllMenus(){
+		return selectDynamic(new SysMenuDO());
+	}
+	
 	
 	public SysMenuDO selectById(Long id){
 		if(null == id){return null;}
@@ -51,7 +56,7 @@ public class SysMenuAO {
 	public List<SysMenuDO> listBeforeTwoMenu(){
 		SysMenuDO sysMenuDO = new SysMenuDO();
 		sysMenuDO.setMenuType(SysMenuTypeEnum.NAVIGATION.getCode());
-		List<SysMenuDO> plist = listMenu(sysMenuDO);
+		List<SysMenuDO> plist = selectDynamic(sysMenuDO);
 		List<SysMenuDO> list = sysMenuService.findListByParentIds(plist);
 		plist.addAll(list);
 		return plist;

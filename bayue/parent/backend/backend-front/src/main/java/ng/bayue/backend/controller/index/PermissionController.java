@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import ng.bayue.backend.ao.index.SysMenuAO;
 import ng.bayue.backend.controller.common.AbstractBaseController;
 import ng.bayue.backend.domain.SysMenuDO;
+import ng.bayue.backend.enums.SysMenuTypeEnum;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,13 +33,14 @@ public class PermissionController extends AbstractBaseController {
     public JSONArray loadAdminRights(HttpServletResponse resp) {
         JSONArray root = new JSONArray();
 //        List<SysMenuDO> sm = UserHandler.getUser().getSysMenuList();
-        List<SysMenuDO> sm = sysMenuAO.listMenu(new SysMenuDO());
+        List<SysMenuDO> sm = sysMenuAO.selectDynamic(new SysMenuDO());
         
         logger.debug("拥有权限菜单数量:" + (null != sm ? sm.size() : 0));
 
         if (null != sm && !sm.isEmpty()) {
             for (SysMenuDO sysMenuDO : sm) {
-                if (null == sysMenuDO.getParentId()) { // 1级
+            	if(null == sysMenuDO.getParentId()){continue;}//所有菜单的最顶级菜单root
+                if (SysMenuTypeEnum.NAVIGATION.getCode().longValue() == sysMenuDO.getParentId().longValue()) { // 获取导航菜单
                     JSONObject first = new JSONObject();
                     first.put("id", sysMenuDO.getId());
                     first.put("text", sysMenuDO.getName());
@@ -57,7 +59,7 @@ public class PermissionController extends AbstractBaseController {
     
 
     /**
-     * 构建
+     * 构建子菜单
      *
      * @param first
      * @param permission
@@ -67,7 +69,7 @@ public class PermissionController extends AbstractBaseController {
         JSONArray children = new JSONArray();
         po.put("children", children);
         for (SysMenuDO permission : permissions) {
-            if (null != permission.getParentId() && permission.getParentId().equals(parent.getId()) && SysMenuDO.MENU_TYPE_1.equals(permission.getMenuType())) {
+            if (null != permission.getParentId() && permission.getParentId().equals(parent.getId()) && SysMenuDO.MENU_TYPE_2.equals(permission.getMenuType())) {
                 JSONObject node = new JSONObject();
                 node.put("id", permission.getId());
                 node.put("text", permission.getName());

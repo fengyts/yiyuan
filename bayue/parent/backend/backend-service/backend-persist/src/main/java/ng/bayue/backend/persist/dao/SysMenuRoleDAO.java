@@ -1,6 +1,7 @@
 package ng.bayue.backend.persist.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import ng.bayue.backend.domain.SysMenuRoleDO;
 import ng.bayue.backend.persist.exception.DAOException;
@@ -83,4 +84,7 @@ public interface SysMenuRoleDAO {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	List<SysMenuRoleDO> selectDynamicPageQuery(SysMenuRoleDO sysMenuRoleDO) throws DAOException;
+	
+	void insertBatch(Map<String,Object> map) throws DAOException;
+	
 }

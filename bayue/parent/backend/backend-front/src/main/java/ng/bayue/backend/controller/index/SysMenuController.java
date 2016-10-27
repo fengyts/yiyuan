@@ -71,5 +71,11 @@ public class SysMenuController {
 		ResultMessage msg = sysMenuAO.updateSysMenu(sysMenuDO);
 		return msg;
 	}
+	
+	@RequestMapping({"/listAllMenus"})
+	@ResponseBody
+	public List<SysMenuDO> listAlMenus(){
+		return sysMenuAO.listAllMenus();
+	}
 
 }

@@ -1,5 +1,6 @@
 package ng.bayue.backend.persist.mybatis;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -52,5 +53,11 @@ public class MybatisSysMenuRoleDAO extends MybatisBaseDAO implements SysMenuRole
 	public List<SysMenuRoleDO> selectDynamicPageQuery(SysMenuRoleDO sysMenuRoleDO) throws DAOException {
 		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_select_dynamic_page_query", sysMenuRoleDO);
 	}
+
+	@Override
+	public void insertBatch(Map<String,Object> map) throws DAOException {
+		getSqlSession().insert("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_insert_batch", map);
+	}
+	
 
 }

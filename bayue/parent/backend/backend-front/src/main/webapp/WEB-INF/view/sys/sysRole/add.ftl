@@ -2,9 +2,13 @@
 <@backend title="角色增加" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
+'/statics/plugin/ztree/zTree_v3-master/js/jquery.ztree.all.min.js',
 '/statics/backend/sys/sysRole.js'
 ] 
-css=['/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css']>
+css=[
+'/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css',
+'/statics/plugin/ztree/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'
+]>
 
 <style type="text/css">
 		.self_table td{
@@ -19,6 +23,7 @@ css=['/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css']>
 	    .right{
 	    	text-align:right !important;
 	    }
+	    
 	    .box_border{border:1px solid #d3dbde;}
 	    .box {
 		    position:absolute; 
@@ -49,8 +54,10 @@ css=['/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css']>
 		    border: 1px solid #cccccc; */
 		    border-radius: 4px;
     	}
+    	.tree{
+    		padding-left:15px;
+    	}
 </style>
-
 
 
 <div class="container-fluid">
@@ -64,7 +71,7 @@ css=['/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css']>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">编码(如果不填则默认为角色名称)</label>
+		<label for="lastname" class="col-sm-2 control-label">编码(如果不填则默认为角色名称拼音)</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="code" name="code" placeholder="请输入编码">
 		</div>
@@ -78,6 +85,15 @@ css=['/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css']>
 			<input type="radio" name="status" id="status" value="0">无效
 		</label>
 	</div>
+	
+	<hr/>
+	<label class="control-label">角色授权</label>
+	<div class="form-group tree">
+		<div class="zTreeDemoBackground left" style="padding-bottom:50px;">
+			<ul id="sysMenuTree" class="ztree"></ul>
+		</div>
+	</div>
+	<hr/>
     
     <div class="col-sm-6 panel-toolbar dr-slash-text">
 		<input id="btnCancel" class="btn btn-warning" type="button" value="取消"/>
