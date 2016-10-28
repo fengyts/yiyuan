@@ -106,9 +106,6 @@ $(function() {
 		});
 	});
 
-	// $("#btnSubmit").on('click',function(){
-	// getData();
-	// });
 
 });
 
@@ -117,25 +114,25 @@ function getData() {
 
 	var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
 	var nodes = treeObj.getCheckedNodes(true);
-	
+
 	if (nodes && nodes.length > 0) {
 		var ids = "";
 		$.each(nodes, function(i, v) {
 			ids += v.id + ",";
 		});
 		ids = ids.substring(0, ids.length - 1);
-		
-		//获取编辑时菜单id,并判断是否有改动
-		if($("#checkedMenuIds").length > 0){
+
+		// 获取编辑时菜单id,并判断是否有改动
+		if ($("#checkedMenuIds").length > 0) {
 			var checkedMenuIds = $("#checkedMenuIds").val();
-			if(ids == checkedMenuIds){//菜单没变
+			if (ids == checkedMenuIds) {// 菜单没变
 				return data;
 			}
 		}
-		
+
 		data += "&menuIds=" + ids;
 	}
-	
+
 	return data;
 
 }
@@ -158,12 +155,12 @@ function menuTrees() {
 				rootPId : null
 			}
 		},
-//	 callback:{
-//	 		beforeClick:function(id, node){
-//	 			tree.checkNode(node, !node.checked, true, true);
-//	 			return false;
-//	 		}
-//	 }
+	// callback:{
+	// 		beforeClick:function(id, node){
+	// 			tree.checkNode(node, !node.checked, true, true);
+	// 			return false;
+	// 		}
+	// }
 	};
 
 	var zNodes = function() {
@@ -182,22 +179,27 @@ function menuTrees() {
 	};
 
 	// 初始化树结构
-	var tree = $.fn.zTree.init($("#sysMenuTree"), setting, zNodes());
+	var treeObj = $.fn.zTree.init($("#sysMenuTree"), setting, zNodes());
 	// 默认展开全部节点
-	tree.expandAll(true);
+	treeObj.expandAll(true);
 
-	var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
-	if($("#checkedMenuIds").length > 0){
+	// var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
+
+	if ($("#checkedMenuIds").length > 0) {
 		var checkedMenuIds = $("#checkedMenuIds").val().split(",");
-		console.log(checkedMenuIds);
-		if(checkedMenuIds){
-			$.each(checkedMenuIds,function(i,v){
-				var node = treeObj.getNodesByParam("id", v, null);
-				if(node){
-					treeObj.checkNode(treeObj.getNodesByParam("id", v, null)[0], true, false);
+		if (checkedMenuIds) {
+			$.each(checkedMenuIds, function(i, v) {
+				// var node = treeObj.getNodesByParam("id", v, null);
+				// if(node){
+				// 	treeObj.checkNode(treeObj.getNodesByParam("id", v, null)[0],true, false);
+				// }
+				var node = treeObj.getNodeByParam("id", v);
+				try {
+					treeObj.checkNode(node, true, false);
+				} catch (e) {
 				}
 			});
 		}
 	}
-	
+
 }
