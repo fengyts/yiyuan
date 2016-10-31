@@ -11,21 +11,30 @@
 		<!-- <welcome-file>index.jsp</welcome-file> -->
 		<welcome-file>/view/index/index.ftl</welcome-file>
 	</welcome-file-list>
+	
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring/spring-beans.xml</param-value>
+	</context-param>
 
-
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
 	<!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	
-	<filter>
+	<!-- <filter>
 		<filter-name>urlFilter</filter-name>
 		<filter-class>ng.bayue.backend.filter.UrlFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>urlFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 	
 	<!-- springMVC前端控制器配置开始 -->
@@ -35,7 +44,7 @@
 		<init-param>
 			<description>springmvc 配置文件</description>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:spring/spring-web.xml,classpath*:spring/spring-beans.xml</param-value>
+			<param-value>classpath*:spring/spring-web.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

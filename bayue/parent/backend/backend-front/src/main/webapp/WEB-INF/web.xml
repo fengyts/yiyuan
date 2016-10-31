@@ -7,18 +7,26 @@
 >
 
 	<display-name>Archetype Created Web Application</display-name>
+	
 	<welcome-file-list>
 		<!-- <welcome-file>index.jsp</welcome-file> -->
 		<welcome-file>/view/index/index.ftl</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
+        <param-name>appName</param-name>
+        <param-value>backend-front</param-value>
+    </context-param>
+	
+	<!-- <context-param>
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
-    </context-param>
+    </context-param> -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring/spring-beans.xml</param-value>
+		<param-value>
+			classpath*:spring/spring-beans.xml
+		</param-value>
 	</context-param>
 	
 	<listener>

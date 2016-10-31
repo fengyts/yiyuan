@@ -5,8 +5,6 @@
 <configuration>  
     <!-- 增加sqlmapper文件 -->
     <mappers>  
-        <mapper resource="sqlmap/category-mybatis-sqlmap.xml"/>
-        <mapper resource="sqlmap/forbiddenWords-mybatis-sqlmap.xml"/>
 
     </mappers>  
     

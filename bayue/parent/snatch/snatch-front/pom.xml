@@ -19,10 +19,18 @@
 	</build>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>ng.bayue</groupId>
 			<artifactId>common-util</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>ng.bayue</groupId>
+			<artifactId>snatch-web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
+	
 </project>
