@@ -6,7 +6,7 @@ js=[
 ] css=[
 ]>
 
-<form class="jqtransform" method="post" id="sysUserForm" action="${domain}/basedata/sysUser/list.htm">
+<form class="jqtransform" method="post" id="sysUserForm" action="${domain}/sys/sysUser/list.htm">
     <div >
 	   <div>	      
 	       <table class="form_table" border="0" cellpadding="0" cellspacing="0">
