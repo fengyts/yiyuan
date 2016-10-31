@@ -35,6 +35,7 @@ public class SysUserController {
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, SysUserDO sysUserDO) {
 		Page<SysUserDO> page = sysUserAO.queryPage(sysUserDO, pageNo, pageSize);
 		model.addAttribute("page", page);
+		model.addAttribute("sysUserDO", sysUserDO);
 	}
 
 	@RequestMapping({ "/add" })

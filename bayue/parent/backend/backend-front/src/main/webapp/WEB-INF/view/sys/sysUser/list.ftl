@@ -1,9 +1,12 @@
 <#include "/common/common.ftl" />
 <@backend title="系统用户管理" 
 js=[
-'/statics/plugin/layer/layer.min.js',
+'/statics/plugin/layui-v1.0.2/layui/layui.js',
+'/statics/plugin/ztree/zTree_v3-master/js/jquery.ztree.all.min.js',
 '/statics/backend/sys/sysUser.js'
 ] css=[
+'/statics/plugin/layui-v1.0.2/layui/css/layui.css',
+'/statics/plugin/ztree/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'
 ]>
 
 <form class="jqtransform" method="post" id="sysUserForm" action="${domain}/sys/sysUser/list.htm">

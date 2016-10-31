@@ -85,5 +85,12 @@ public class SysRoleController {
 		return sysRoleAO.updateSysRole(sysRoleDO,menuIds);
 		
 	}
+	
+	@RequestMapping({"/rolesAll"})
+	@ResponseBody
+	public List<SysRoleDO> rolesAll(){
+		List<SysRoleDO> list = sysRoleAO.selectAllRole();
+		return list;
+	}
 
 }
