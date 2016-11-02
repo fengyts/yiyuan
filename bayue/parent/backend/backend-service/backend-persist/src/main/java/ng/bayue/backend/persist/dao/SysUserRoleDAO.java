@@ -83,4 +83,17 @@ public interface SysUserRoleDAO {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	List<SysUserRoleDO> selectDynamicPageQuery(SysUserRoleDO sysUserRoleDO) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 批量插入用户角色关系
+	 * </pre>
+	 *
+	 * @param list
+	 * @throws DAOException
+	 */
+	void insertBatch(List<SysUserRoleDO> list) throws DAOException;
+	
+	List<SysUserRoleDO> selectByUserIds(List<Long> userIds);
+	
 }

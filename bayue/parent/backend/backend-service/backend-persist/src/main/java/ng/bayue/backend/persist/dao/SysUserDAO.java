@@ -3,6 +3,7 @@ package ng.bayue.backend.persist.dao;
 import java.util.List;
 
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.persist.exception.DAOException;
 
 
@@ -83,4 +84,16 @@ public interface SysUserDAO {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	List<SysUserDO> selectDynamicPageQuery(SysUserDO sysUserDO) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 结果集包含list的嵌套查询
+	 * </pre>
+	 *
+	 * @param sysUserDO
+	 * @return
+	 */
+	List<SysUserVO> nestedList(SysUserDO sysUserDO);
+	
+	SysUserDO findByLoginNameOrEmailOrMobile(String param);
 }

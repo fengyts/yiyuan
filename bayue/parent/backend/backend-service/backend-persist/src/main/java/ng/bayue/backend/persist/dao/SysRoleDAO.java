@@ -83,4 +83,6 @@ public interface SysRoleDAO {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	List<SysRoleDO> selectDynamicPageQuery(SysRoleDO sysRoleDO) throws DAOException;
+	
+	List<SysRoleDO> selectByIds(List<Long> ids) throws DAOException;
 }

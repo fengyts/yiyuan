@@ -30,15 +30,6 @@ public interface SysUserService {
 	 */
 	int update(SysUserDO sysUserDO,boolean isAllField) throws ServiceException;
 
-//	/**
-//	 * 根据ID更新 后台系统用户全部字段
-//	 * @param sysUserDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateById(SysUserDO sysUserDO) throws ServiceException;
-
 	/**
 	 * 根据ID删除 后台系统用户
 	 * @param id
@@ -47,15 +38,6 @@ public interface SysUserService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	int deleteById(Long id) throws ServiceException;
-
-//	/**
-//	 * 动态更新 后台系统用户部分字段
-//	 * @param sysUserDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateDynamic(SysUserDO sysUserDO) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 后台系统用户
@@ -103,5 +85,21 @@ public interface SysUserService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	Page<SysUserDO> queryPageListBySysUserDOAndStartPageSize(SysUserDO sysUserDO,int startPage,int pageSize);
+	
+	
+	/**
+	 * <pre>
+	 * 插入系统用户同时关联用户和角色关系
+	 * </pre>
+	 *
+	 * @param sysUserDO
+	 * @param roleIds
+	 * @throws ServiceException
+	 */
+	void saveUserAndRelationRoles(SysUserDO sysUserDO,List<Long> roleIds) throws ServiceException;
+	
+	void updateUserAndRelationRoles(SysUserDO sysUser,List<Long> roleIds) throws ServiceException;
+	
+	SysUserDO findByLoginNameOrEmailOrMobile(String param);
 
 }

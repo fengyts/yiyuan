@@ -21,6 +21,10 @@
 		<property name="service" ref="sysMenuRoleService" />
 		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuRoleService" />
 	</bean>
+	<bean name="/sysUserRoleService.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysUserRoleService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysUserRoleService" />
+	</bean>
 
 
 </beans>

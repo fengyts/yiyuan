@@ -1,5 +1,5 @@
 <#include "/common/common.ftl"/>
-<@backend title="角色增加" 
+<@backend title="系统用户增加" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/plugin/ztree/zTree_v3-master/js/jquery.ztree.all.min.js',
@@ -65,15 +65,39 @@ css=[
 <form class="form-horizontal box box_border" role="form" id="sysUserAddForm">
 
 	<div class="form-group">
-		<label for="firstname" class="col-sm-2 control-label">登陆账号(邮箱|手机号|账号)<span class="fo">*</span></label>
+		<label for="firstname" class="col-sm-2 control-label">登陆账号<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="loginName" name="loginName" placeholder="请输入登陆账号">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">姓名</label>
+		<label for="lastname" class="col-sm-2 control-label">姓名<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="userName" name="userName" placeholder="请输入姓名">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">email<span class="fo">*</span></label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control self_input" id="email" name="email" placeholder="请输入email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">手机号<span class="fo">*</span></label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control self_input" id="mobile" name="mobile" placeholder="请输入手机号">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">密码<span class="fo">*</span></label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control self_input" id="password" name="password" placeholder="请输入密码">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">再次输入密码<span class="fo">*</span></label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control self_input" id="password2" name="password2" placeholder="请再次输入密码">
 		</div>
 	</div>
 	<div class="form-group">
@@ -89,7 +113,6 @@ css=[
 	<hr/>
 	<label class="control-label">用户角色</label>
 	<div class="form-group tree">
-		<input type="hidden" id="hiddenRoles" value="${roles}" />
 		<div class="zTreeDemoBackground left" style="padding-bottom:50px;">
 			<ul id="sysRoleTree" class="ztree"></ul>
 		</div>

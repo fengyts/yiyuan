@@ -19,11 +19,11 @@
         </property>
         <property name="filterChainDefinitions">  
 			<value>
-				<!-- /statics/** = anon
+				/statics/** = anon
 				/login = anon
 				/logout=logout
-				/** = authc -->
-				/**=anon
+				/** = authc
+				<!-- /**=anon -->
 			</value>
 		</property>
 		
@@ -35,7 +35,13 @@
 		<property name="realm" ref="systemAuthorizingRealm" />
 	</bean>
 	
-	<bean id="systemAuthorizingRealm" class="ng.bayue.backend.shiro.realm.SysAuthorizingRealm"/>
+	<bean id="systemAuthorizingRealm" class="ng.bayue.backend.shiro.realm.SysAuthorizingRealm">
+		<!-- <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/> -->
+	</bean>
 	
 	<bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"/>
 	

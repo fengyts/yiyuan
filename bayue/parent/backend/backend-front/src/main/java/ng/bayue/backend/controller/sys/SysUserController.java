@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ import ng.bayue.backend.ao.sys.SysRoleAO;
 import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.SysUserRoleDO;
+import ng.bayue.backend.domain.dto.SysUserDTO;
+import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.util.Page;
 
@@ -27,53 +32,81 @@ public class SysUserController {
 
 	@Autowired
 	private SysUserAO sysUserAO;
-	@Autowired
-	private SysRoleAO sysRoleAO;
 
 	@RequestMapping({ "/list" })
 	public void sysUserList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, SysUserDO sysUserDO) {
-		Page<SysUserDO> page = sysUserAO.queryPage(sysUserDO, pageNo, pageSize);
+		Page<SysUserDTO> page = sysUserAO.queryPage(sysUserDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("sysUserDO", sysUserDO);
 	}
 
 	@RequestMapping({ "/add" })
 	public void sysUserAdd(Model model) {
-		List<SysRoleDO> roles = sysRoleAO.selectAllRole();
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
-		for (SysRoleDO sr : roles) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", sr.getId().toString());
-			map.put("name", sr.getName());
-			list.add(map);
-		}
-		String obj = JSONObject.toJSONString(list);
-
-		model.addAttribute("roles", obj);
+		// List<SysRoleDO> roles = sysRoleAO.selectAllRole();
+		// List<Map<String, String>> list = new ArrayList<Map<String,
+		// String>>();
+		// for (SysRoleDO sr : roles) {
+		// Map<String, String> map = new HashMap<String, String>();
+		// map.put("id", sr.getId().toString());
+		// map.put("name", sr.getName());
+		// list.add(map);
+		// }
+		// String obj = JSONObject.toJSONString(list);
+		//
+		// model.addAttribute("roles", obj);
 	}
 
 	@RequestMapping({ "/save" })
 	@ResponseBody
-	public ResultMessage sysUserSave(SysUserDO sysUserDO) {
-
+	public ResultMessage sysUserSave(SysUserDO sysUserDO, String roleIds, String password2) {
+		String loginName = sysUserDO.getLoginName();
+		String userName = sysUserDO.getUserName();
+		String email = sysUserDO.getEmail();
+		String mobile = sysUserDO.getMobile();
+		String passwd = sysUserDO.getPassword();
+		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName) || StringUtils.isEmpty(email)
+				|| StringUtils.isEmpty(mobile) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(password2)) {
+			return ResultMessage.validParameterNull("数据不能为空");
+		}
+		if (!passwd.equals(password2)) {
+			return new ResultMessage(ResultMessage.Failure, "两次输入密码不一样");
+		}
+		sysUserAO.save(sysUserDO, roleIds);
 		return new ResultMessage();
 	}
 
 	@RequestMapping({ "/edit" })
-	public void sysUserEdit(Model model) {
-
+	public void sysUserEdit(Model model, Long userId) {
+		List<SysUserRoleDO> list = sysUserAO.selectRolesByUserId(userId);
+		if(CollectionUtils.isNotEmpty(list)){
+			String roleStr = "";
+			for (SysUserRoleDO sur : list) {
+				roleStr += sur.getRoleId() + ",";
+			}
+			model.addAttribute("roleIds", roleStr.substring(0, roleStr.length() - 1));
+		}
+		SysUserDO sysUser = sysUserAO.selectByUserId(userId);
+		model.addAttribute("sysUser", sysUser);
 	}
 
 	@RequestMapping({ "/update" })
 	@ResponseBody
-	public ResultMessage sysUserUpdate() {
-
+	public ResultMessage sysUserUpdate(SysUserDO sysUserDO,String roleIds) {
+		String loginName = sysUserDO.getLoginName();
+		String userName = sysUserDO.getUserName();
+		String email = sysUserDO.getEmail();
+		String mobile = sysUserDO.getMobile();
+		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName) || StringUtils.isEmpty(email)
+				|| StringUtils.isEmpty(mobile)) {
+			return ResultMessage.validParameterNull(Messages.ParameterNull);
+		}
+		sysUserAO.sysUserUpdate(sysUserDO,roleIds);
 		return new ResultMessage();
 	}
 
 	public static void main(String[] args) {
-		List<Map<Long,String>> list = new ArrayList<Map<Long,String>>();
+		List<Map<Long, String>> list = new ArrayList<Map<Long, String>>();
 		Map<Long, String> map = new HashMap<Long, String>();
 		map.put(1L, "ceshi");
 		list.add(map);

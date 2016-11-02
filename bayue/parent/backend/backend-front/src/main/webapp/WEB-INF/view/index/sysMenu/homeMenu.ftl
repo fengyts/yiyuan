@@ -76,8 +76,10 @@ js=[
 		            		<td width="100">${sysMenuDO.remark}</td>
 		            		<td width="80">${(sysMenuDO.state!true)?string("有效","无效")}</td>
 		            		<td width="100">
-			            		<a href="javascript:void(0)" class="editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
-			            		<a href="javascript:void(0)" class="journalReview" param="${sysMenuDO.id}">[日志]</a>
+		            			<#if sysMenuDO.menuType != '0'>
+				            		<a href="javascript:void(0)" class="editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
+				            		<a href="javascript:void(0)" class="journalReview" param="${sysMenuDO.id}">[日志]</a>
+			            		</#if>
 		            		</td>
 	            		</tr>
 	            		</#list>

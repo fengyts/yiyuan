@@ -14,6 +14,7 @@
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisSysUserRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
+			<if test="userId !=null ">AND user_id=#{userId}</if>
 			<if test="roleId != null "> AND role_id=#{roleId} </if>
 		</where>
  	</sql>
@@ -83,6 +84,26 @@
 		 	be_sys_user_role
 	 	<include refid="MybatisSysUserRoleDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	
+ 	<insert id="MybatisSysUserRoleDAO_insert_batch" parameterType="list">
+ 		INSERT be_sys_user_role(
+ 				user_id,
+				role_id
+		)VALUES
+			<foreach collection="list" index="index" item="item" open="" separator="," close="">
+				(#{item.userId},#{item.roleId})
+			</foreach>
+ 	</insert>
+ 	
+ 	<select id="MybatisSysUserRoleDAO_selectBy_userIds" parameterType="list" resultMap="SysUserRoleDOResultMap">
+ 		SELECT 
+ 			user_id,role_id 
+ 		FROM 
+ 			be_sys_user_role
+ 		WHERE user_id IN
+ 			<foreach collection="list" item="userId" index="index" open="(" separator="," close=")">#{userId}</foreach>
  	</select>
 
 </mapper>

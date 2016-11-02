@@ -30,15 +30,6 @@ public interface SysUserRoleService {
 	 */
 	int update(SysUserRoleDO sysUserRoleDO,boolean isAllField) throws ServiceException;
 
-//	/**
-//	 * 根据ID更新 系统用户角色关系全部字段
-//	 * @param sysUserRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateById(SysUserRoleDO sysUserRoleDO) throws ServiceException;
-
 	/**
 	 * 根据ID删除 系统用户角色关系
 	 * @param id
@@ -47,15 +38,6 @@ public interface SysUserRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	int deleteById(Long id) throws ServiceException;
-
-//	/**
-//	 * 动态更新 系统用户角色关系部分字段
-//	 * @param sysUserRoleDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-10-25 13:31:48
-//	 */
-//	int updateDynamic(SysUserRoleDO sysUserRoleDO) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 系统用户角色关系
@@ -103,5 +85,9 @@ public interface SysUserRoleService {
 	 * @author longhaisheng 2016-10-25 13:31:48
 	 */
 	Page<SysUserRoleDO> queryPageListBySysUserRoleDOAndStartPageSize(SysUserRoleDO sysUserRoleDO,int startPage,int pageSize);
+	
+	void insertBatch(List<SysUserRoleDO> list) throws ServiceException;
+	
+	List<SysUserRoleDO> selectByUserIds(List<Long> userIds);
 
 }

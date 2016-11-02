@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.persist.common.MybatisBaseDAO;
 import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.persist.exception.DAOException;
@@ -52,5 +53,17 @@ public class MybatisSysUserDAO extends MybatisBaseDAO implements SysUserDAO {
 	public List<SysUserDO> selectDynamicPageQuery(SysUserDO sysUserDO) throws DAOException {
 		return getSqlSession().selectList("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_dynamic_page_query", sysUserDO);
 	}
+	
+	@Override
+	public List<SysUserVO> nestedList(SysUserDO sysUserDO){
+		return getSqlSession().selectList("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_sysUser_vo", sysUserDO);
+	}
+
+	@Override
+	public SysUserDO findByLoginNameOrEmailOrMobile(String param) {
+		return getSqlSession().selectOne("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_by_loginNameOrMobileOrEmail", param);
+	}
+	
+	
 
 }

@@ -53,7 +53,7 @@ $(function() {
 		$.ajax({
 			url : 'save',
 			dataType : 'text',
-			data : getData(),
+			data : getData('#sysRoleAddForm'),
 			type : "post",
 			cache : false,
 			error : function(request) {
@@ -83,7 +83,7 @@ $(function() {
 		$.ajax({
 			url : 'update',
 			dataType : 'text',
-			data : $('#sysRoleEditForm').serialize(),
+			data : getData("#sysRoleEditForm"),
 			type : "post",
 			cache : false,
 			error : function(request) {
@@ -109,8 +109,8 @@ $(function() {
 
 });
 
-function getData() {
-	var data = $('#sysRoleAddForm').serialize();
+function getData(formId) {
+	var data = $(formId).serialize();
 
 	var treeObj = $.fn.zTree.getZTreeObj("sysMenuTree");
 	var nodes = treeObj.getCheckedNodes(true);

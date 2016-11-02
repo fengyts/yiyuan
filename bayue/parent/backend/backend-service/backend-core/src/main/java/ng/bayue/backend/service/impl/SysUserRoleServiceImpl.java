@@ -2,6 +2,7 @@ package ng.bayue.backend.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,6 @@ public class SysUserRoleServiceImpl  implements SysUserRoleService{
 		}
 	}
 
-//	@Override
-//	public int updateById(SysUserRoleDO sysUserRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysUserRoleDAO.updateById(sysUserRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
-
 	@Override
 	public int update(SysUserRoleDO sysUserRoleDO,boolean isAllField) throws ServiceException {
 		try {
@@ -65,16 +56,6 @@ public class SysUserRoleServiceImpl  implements SysUserRoleService{
             throw new ServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(SysUserRoleDO sysUserRoleDO) throws ServiceException {
-//		try {
-//			return (Integer) sysUserRoleDAO.updateDynamic(sysUserRoleDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
 
 	@Override
 	public SysUserRoleDO selectById(Long id) throws ServiceException {
@@ -139,5 +120,26 @@ public class SysUserRoleServiceImpl  implements SysUserRoleService{
 		}
 		return new Page<SysUserRoleDO>();
 	}
+
+	@Override
+	public void insertBatch(List<SysUserRoleDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){return;}
+		try {
+			sysUserRoleDAO.insertBatch(list);
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+	}
+
+	@Override
+	public List<SysUserRoleDO> selectByUserIds(List<Long> userIds) {
+		if(CollectionUtils.isEmpty(userIds)){
+			return null;
+		}
+		List<SysUserRoleDO> list = sysUserRoleDAO.selectByUserIds(userIds);
+		return list;
+	}
+	
+	
 
 }

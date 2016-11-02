@@ -20,6 +20,25 @@
         <result column="status" property="status"/>
         <result column="user_detail" property="userDetail"/>
 	</resultMap>
+	
+	<resultMap type="ng.bayue.backend.domain.dto.SysUserVO" id="SysUserVOResultMap">
+		<id column="id" property="id" />
+        <result column="login_name" property="loginName"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="status" property="status"/>
+        <result column="user_detail" property="userDetail"/>
+        <collection property="roles" ofType="string"></collection>
+	</resultMap>
 
 	<sql id="MybatisSysUserDAO_all_column_fields">
 	      id,login_name,user_name,password,salt,email,mobile,create_user_id,create_time,modify_user_id,modify_time,last_login_time,last_login_ip,status,user_detail
@@ -156,6 +175,25 @@
 		 	be_sys_user
 	 	<include refid="MybatisSysUserDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisSysUserDAO_select_sysUser_vo" resultMap="SysUserVOResultMap" parameterType="ng.bayue.backend.domain.SysUserDO">
+ 		select 
+			sr.name as roles,su.*
+		from be_sys_user su 
+		join be_sys_user_role sur on su.id = sur.user_id
+		join be_sys_role sr on sur.role_id = sr.id
+ 	</select>
+ 	
+ 	<select id="MybatisSysUserDAO_select_by_loginNameOrMobileOrEmail" parameterType="string" resultMap="SysUserDOResultMap">
+ 		SELECT
+ 			<include refid="MybatisSysUserDAO_all_column_fields" />
+ 		FROM 
+ 			be_sys_user
+ 		WHERE
+ 			login_name = #{parameter}
+ 			OR email = #{parameter}
+ 			OR mobile = #{parameter}
  	</select>
 
 </mapper>

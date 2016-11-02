@@ -9,6 +9,7 @@ js=[
 '/statics/plugin/ztree/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'
 ]>
 
+<div id="isListForm"></div>
 <form class="jqtransform" method="post" id="sysUserForm" action="${domain}/sys/sysUser/list.htm">
     <div >
 	   <div>	      
@@ -57,6 +58,7 @@ js=[
 	                  <th width="50">姓名</th>
 	                  <th width="100">手机号</th>
 	                  <th width="100">email</th>
+	                  <th width="100">角色</th>
 	                  <th width="50">状态</th>
 	                  <th width="200">创建时间</th>
 	                  <th width="200">更新时间</th>
@@ -69,12 +71,13 @@ js=[
 		 					  <td class="td_center">${sysUser.userName}</td>
 				              <td class="td_center">${sysUser.mobile}</td>		            
 				              <td class="td_center">${sysUser.email}</td>		            
+				              <td class="td_center">${sysUser.roles}</td>		            
 				              <td class="td_center"><#assign sta="${sysUser.status}" /><#if sta=='true'>有效<#else>无效</#if></td>
 				              <td class="td_center">${sysUser.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 		                      <td class="td_center">${sysUser.modifyTime?string("yyyy-MM-dd HH:mm:ss")}</td>  
 				              <td class="td_center">
 				              	<a href="javascript:void(0);" class="editcatabtn sysUserEditbtn" param='${sysUser.id}'>[编辑]</a> &nbsp;
-				              	<a href="javascript:void(0);" class="editcatabtn journalReview" param='${sysUser.id}'>[日志]</a>
+				              	<a href="javascript:void(0);" class="editcatabtn journalReview" param='${sysUser.id}'>[忘记密码]</a>
 				              </td>	
 			             </tr>
 			        </#list>

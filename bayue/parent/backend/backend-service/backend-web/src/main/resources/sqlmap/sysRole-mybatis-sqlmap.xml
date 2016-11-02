@@ -122,5 +122,14 @@
 	 	<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisSysRoleDAO_select_by_ids" parameterType="list" resultMap="SysRoleDOResultMap">
+ 		SELECT
+ 			<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	be_sys_role
+		 WHERE id IN
+		 <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+ 	</select>
 
 </mapper>

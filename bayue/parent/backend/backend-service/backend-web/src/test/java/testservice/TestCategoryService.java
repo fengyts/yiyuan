@@ -3,8 +3,12 @@ package testservice;
 import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.domain.SysMenuRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.SysUserRoleDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.service.SysMenuRoleService;
 import ng.bayue.backend.service.SysMenuService;
+import ng.bayue.backend.service.SysUserRoleService;
 import ng.bayue.backend.service.SysUserService;
 import ng.bayue.backend.service.impl.TestAsync;
 
@@ -34,6 +38,12 @@ public class TestCategoryService {
 	@Autowired
 	private SysMenuRoleService sysMenuRoleService;
 	
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
+	
+	@Autowired
+	private SysUserDAO sysUserDAO;
+	
 	
 	@Test
 	public void test(){
@@ -51,18 +61,8 @@ public class TestCategoryService {
 	
 	@Test
 	public void test1(){
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		
-//		List<Long> menuIds = new ArrayList<Long>();
-//		menuIds.add(1L);
-//		menuIds.add(2L);
-//		menuIds.add(3L);
-//		map.put("roleId", 1L);
-//		map.put("menuIds",menuIds);
-//		sysMenuRoleService.insertBatch(map);
-		
-		List<SysMenuRoleDO> list = sysMenuRoleService.selectByRoleId(1L);
-		System.out.println(list.size());
+		SysUserDO sysUser = sysUserService.findByLoginNameOrEmailOrMobile("superadmin");
+		System.out.println(sysUser.getEmail());
 	}
 
 }

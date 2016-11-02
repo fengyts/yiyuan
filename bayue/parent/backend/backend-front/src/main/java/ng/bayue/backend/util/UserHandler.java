@@ -1,5 +1,7 @@
 package ng.bayue.backend.util;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
 import ng.bayue.backend.domain.SysUserDO;
@@ -8,8 +10,13 @@ import ng.bayue.backend.domain.SysUserDO;
 public class UserHandler {
 
 	public static SysUserDO getUser() {
-		SysUserDO userDO = new SysUserDO();
-		userDO.setId(1L);
+		Subject subject = SecurityUtils.getSubject();
+		SysUserDO userDO = (SysUserDO) subject.getPrincipal();
+		if(null == userDO){
+			userDO = new SysUserDO();
+			userDO.setId(1L);
+//		userDO.setLoginName("superadmin");
+		}
 		return userDO;
 	}
 

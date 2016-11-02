@@ -14,11 +14,11 @@ public final class Messages implements Serializable {
 
 	public static final String ParameterError = "参数错误";
 	
-	public static final String ParameterNull = "参数为空";
+	public static final String ParameterNull = "输入的数据为空";
 
 	public static final String HandleFailure = "操作失败";
 	
-	public static final String IsExist = "记录已经存在";
+	public static final String IsExist = "数据已经存在";
 	
 	/** 冒号 */
 	private static final String Colon = ":";

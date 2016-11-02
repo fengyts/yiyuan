@@ -60,17 +60,18 @@ css=[
 <div class="container-fluid">
 
 <form class="form-horizontal box box_border" role="form" id="sysRoleEditForm">
-
+	
+	<input type="hidden" id="id" name="id" value="${sysRole.id}"/>
 	<div class="form-group">
 		<label for="firstname" class="col-sm-2 control-label">角色名称<span class="fo">*</span></label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control self_input" id="name" name="name" value="${sysRole.name}">
+			<input type="text" class="form-control self_input" id="name" name="name" value="${sysRole.name}"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="lastname" class="col-sm-2 control-label">编码(如果不填则默认为角色名称拼音)</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control self_input" id="code" name="code" value="${sysRole.code}">
+			<input type="text" class="form-control self_input" id="code" name="code" value="${sysRole.code}"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -79,7 +80,7 @@ css=[
 			<input type="radio" name="status" id="status" value="1" <#if sysRole.status=='true'>checked</#if>>有效
 		</label>
 		<label class="checkbox-inline">
-			<input type="radio" name="status" id="status" value="0" <#if sysRole.status=='false'>checked</#if>>无效
+			<input type="radio" name="status" id="status" value="0" <#if sysRole.status!='true'>checked</#if>>无效
 		</label>
 	</div>
 	
