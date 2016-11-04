@@ -10,7 +10,7 @@
        
 	<!-- 启用spring mvc 注解 -->
 	<mvc:annotation-driven/>
-<!-- 	<context:annotation-config /> -->
+	<!-- <context:annotation-config /> -->
 
 	<context:component-scan base-package="ng.bayue.*">
 		<!-- <context:include-filter type="annotation"
