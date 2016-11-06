@@ -17,10 +17,11 @@
 <script type="text/javascript" language="JavaScript">
 
 	function loginSubmit(){
+		checkParam();
 		$("#loginForm").submit();
 	}
 	
-	function mycheck(){
+	function checkParam(){
 	   if($("#username").val()){  
 		   alert("请输入用户名！"); 
 		   return false;
@@ -54,28 +55,13 @@
         <tr>
           <td align="center" valign="top">
              <form name="loginForm" action="${domain}/doLogin" method="post" onSubmit="return mycheck()">
-	             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	             <table width="100%" heigth="100%" border="0" cellspacing="0" cellpadding="0">
 		                <tr>
-		                  <td height="30" colspan="2" align="center" class="STYLE2">
-			                  <span style="color:red;">
-			                  </span>
+		                  <td height="20" colspan="2" align="center" class="STYLE2">
+			                  <span style="color:red;">${message}</span>
 		                  </td>
 		                </tr>
-		                <!-- 
-		                <tr>
-		                  <td height="30" align="right" class="STYLE2">身份：</td>
-		                  <td align="left"><select name="Type" id="Type">
-		                    <option value="">请选择</option>
-		                    <option value="超级管理员">超级管理员</option>
-		                    <option value="管理员">管理员</option>
-		                    <option value="普通">普通</option>
-		                  </select></td>
-		                </tr>
-		                 -->
 		                
-		                <tr>
-		                  <td colspan="2" class="STYLE2 msg">${message}</td>
-		                </tr>
 		                <tr>
 		                  <td width="37%" height="30" align="right" class="STYLE2">用户名：</td>
 		                  <td width="300" align="left"><input type="text" name="username" id="username" class="text1" /></td>
@@ -85,21 +71,14 @@
 		                  <td align="left"><input type="password" name="password" id="password" class="text1" /></td>
 		                </tr>
 		                <tr>
-		                  <td height="30" align="right" class="STYLE2">
-		                  <a href="javascript:void(0);">忘记密码？</a>
-		                  <!--
-			                  <div>
-				                  <span style="padding-left:1px;"><a href="javascript:void(0);">忘记密码？</a></span>
-				                  <span><input type="submit" name="button" id="button" value="登录"></span>
-			                  </div>
-			                  -->
-		                  </td>
-		                  <td align="left" style="padding-left:50px;">
-		              		<input type="submit" name="button" id="button" value="登录" onclick="loginSubmit();">
-		                  </td>
-		                  <td align="left" style="padding-left:50px;">
-		              		<input type="checkbox" name="rememberMe" id="rememberMe" value="记住我">
-		                  </td>
+		                	<td colspan="2">
+			                	<div style="float:left;padding-left:100px;margin-top:10px;">
+			                		<input type="checkbox" name="rememberMe" id="rememberMe">记住我
+			                	</div>
+			                	<div style="padding-left:180px;margin-top:10px;">
+			                		<input type="submit" name="button" id="button" value="登录" onclick="loginSubmit();">
+			                    </div>
+		                    </td>
 		                </tr>
 	              </table>
               </form>
