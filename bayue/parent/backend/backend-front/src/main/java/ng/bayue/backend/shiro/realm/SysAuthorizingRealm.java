@@ -3,7 +3,6 @@ package ng.bayue.backend.shiro.realm;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -20,8 +19,14 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 
     @Autowired
     private SysUserAO sysUserAO;
+    
 
-    /**
+	@Override
+	public String getName() {
+		return super.getName();
+	}
+
+	/**
      * <pre>
      * 身份认证
      * </pre>
@@ -32,16 +37,9 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
      * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
-            throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String principal = (String) token.getPrincipal();
         SysUserDO sysUser = sysUserAO.findByLoginNameOrMobileOrEmail(principal);
-//        SysUserDO sysUser = new SysUserDO();
-//        sysUser.setId(1L);
-//        sysUser.setUserName("superadmin");
-//        sysUser.setLoginName("superadmin");
-//        sysUser.setPassword("123456");
-//        sysUser.setStatus(true);
         
         if(null == sysUser){//用户不存在
             throw new UnknownAccountException("用户不存在");

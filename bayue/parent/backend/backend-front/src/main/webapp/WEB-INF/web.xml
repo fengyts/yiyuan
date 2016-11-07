@@ -54,17 +54,6 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     
-	<!-- url过滤器配置 -->
-	<filter>
-		<filter-name>urlFilter</filter-name>
-		<filter-class>ng.bayue.backend.filter.UrlFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>urlFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	
 	<!-- springMVC前端控制器配置开始 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -91,6 +80,16 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!-- springMVC前端控制器配置结束 -->
+	
+	<!-- url过滤器配置 -->
+	<filter>
+		<filter-name>urlFilter</filter-name>
+		<filter-class>ng.bayue.backend.filter.UrlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>urlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<!-- POST中文乱码过滤器配置开始 -->
 	<filter>

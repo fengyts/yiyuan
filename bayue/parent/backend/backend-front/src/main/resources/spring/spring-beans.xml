@@ -25,13 +25,14 @@
 	<!-- <mvc:annotation-driven/> -->
 	<context:annotation-config />
 	
-	<!-- <aop:aspectj-autoproxy />
-	<context:annotation-config />-->
+	<!-- <aop:aspectj-autoproxy />-->
 
+	<import resource="classpath*:spring/shiro/spring-config-shiro.xml"/>
+	<import resource="classpath*:spring/spring-kaptcha.xml"/>
+	
 	<import resource="classpath*:spring/hessian/remote-*.xml" />
 	<import resource="classpath*:spring/spring-dfs.xml"/>
 	<import resource="classpath*:spring/spring-redis.xml"/>
-	<import resource="classpath*:spring/shiro/spring-config-shiro.xml"/>
 	
 	
 </beans>

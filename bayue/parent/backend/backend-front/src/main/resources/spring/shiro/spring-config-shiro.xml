@@ -20,8 +20,10 @@
         <property name="filterChainDefinitions">  
             <value>
                 /statics/** = anon
-                /login = anon
-                /logout=logout
+                /logout = logout
+                /kaptcha/** = anon
+                /kaptcha.htm = anon
+                /login/** = authc
                 /** = authc
                 <!-- /**=anon -->
             </value>
@@ -43,7 +45,7 @@
         <property name="authorizationCacheName" value="authorizationCache"/> -->
     </bean>
     
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"/>
+    <bean id="formAuthenticationFilter" class="ng.bayue.backend.shiro.LoginFormAuthenticationFilter" />
     
     <bean id="sysUserAO" class="ng.bayue.backend.ao.sys.SysUserAO" />
     
