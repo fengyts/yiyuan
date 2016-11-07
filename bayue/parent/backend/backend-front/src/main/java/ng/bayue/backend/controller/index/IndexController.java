@@ -18,10 +18,14 @@ public class IndexController {
 	@RequestMapping({"/","/index"})
 	public String index(Model model){
 		Subject subject = SecurityUtils.getSubject();
-		SysUserDO sysUserDO = (SysUserDO) subject.getPrincipal();
-		model.addAttribute("user", sysUserDO);
+		SysUserDO sysUser = (SysUserDO) subject.getPrincipal();
+		if(null == sysUser){
+			return "redirect:login";
+		}
+		model.addAttribute("user", sysUser);
 		return "/index/index";
 	}
+	
 	
 	@RequestMapping({"/favrite/list"})
 	public String listMenu(Model model){

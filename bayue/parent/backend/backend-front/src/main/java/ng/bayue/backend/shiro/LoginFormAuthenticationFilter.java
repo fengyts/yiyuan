@@ -40,7 +40,8 @@ public class LoginFormAuthenticationFilter extends FormAuthenticationFilter {
 				return true;
 			}
 		}
-		return super.onAccessDenied(request, response);
+		boolean flag = super.onAccessDenied(request, response);
+		return flag;
 	}
 
 }

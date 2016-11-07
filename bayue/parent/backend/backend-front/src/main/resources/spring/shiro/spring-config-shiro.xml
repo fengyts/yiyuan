@@ -7,12 +7,13 @@
        
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/doLogin" />
         <property name="successUrl" value="/index" />
-        <property name="unauthorizedUrl" value="/index"/>   
+        <property name="loginUrl" value="/doLogin" />
+		<property name="unauthorizedUrl" value="/login" />   
         <!-- <property name="filterChainDefinitions" ref="filterChainDefinitions" /> -->
         <property name="filters">
             <map>
+                <!-- <entry key="authc" value-ref="myShiroFilter"/> -->
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <!-- <entry key="urlAuhc" value-ref="urlAuthcFilter"></entry> -->
             </map>
@@ -20,10 +21,10 @@
         <property name="filterChainDefinitions">  
             <value>
                 /statics/** = anon
-                /logout = logout
+                /login=anon
                 /kaptcha/** = anon
                 /kaptcha.htm = anon
-                /login/** = authc
+                /logout = logout
                 /** = authc
                 <!-- /**=anon -->
             </value>
@@ -46,6 +47,7 @@
     </bean>
     
     <bean id="formAuthenticationFilter" class="ng.bayue.backend.shiro.LoginFormAuthenticationFilter" />
+    <bean id="myShiroFilter" class="ng.bayue.backend.shiro.ShiroFilter" />
     
     <bean id="sysUserAO" class="ng.bayue.backend.ao.sys.SysUserAO" />
     
