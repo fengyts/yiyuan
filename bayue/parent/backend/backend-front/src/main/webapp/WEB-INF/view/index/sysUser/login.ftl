@@ -48,7 +48,7 @@
 		                <tr>
 			                <td colspan="2">
 				                <div style="padding-left:80px;float:left;">
-				                	<input type="text" name="kaptcha" placeholder="请输入验证码" style="width:100px;height:30px;">
+				                	<input type="text" id="kaptchaInput" name="kaptcha" placeholder="请输入验证码" style="width:100px;height:30px;">
 				                </div>
 				                <div>
 									<img id="kaptcha" src="${domain}/kaptcha.htm" style="cursor: pointer; width: 100px; height: 30px;border: 1px solid #cdcdcd;" onclick="changeKaptcha()" alt="图形验证码" title="点击换一张" />
@@ -91,6 +91,13 @@
 	   if(!password || null==password || ""==password){
 		   $("#message").html("请输入密码");
 		   return false;
+	   }
+	   if($("#kaptchaInput").length > 0){
+			var kaptchaInput = $("#kaptchaInput").val();
+			if(!kaptchaInput || null==kaptchaInput || ""==kaptchaInput){
+				$("#message").html("请输入验证码");
+				return false;
+			}
 	   }
 	
 		$("#loginForm").submit();
