@@ -20,6 +20,7 @@ import ng.bayue.backend.persist.dao.SysUserRoleDAO;
 import ng.bayue.backend.persist.exception.DAOException;
 import ng.bayue.backend.service.SysUserService;
 import ng.bayue.util.Page;
+import ng.bayue.util.SecurityUtil;
 
 @Service(value = "sysUserService")
 public class SysUserServiceImpl implements SysUserService {
@@ -35,6 +36,11 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public Long insert(SysUserDO sysUserDO) throws ServiceException {
 		try {
+			String salt = sysUserDO.getSalt();
+			if(StringUtils.isEmpty(salt)){//生成随机盐
+				salt = new String(SecurityUtil.encryptMD5(SecurityUtil.Salt.provideSalt()));
+				sysUserDO.setSalt(salt);
+			}
 			return sysUserDAO.insert(sysUserDO);
 		} catch (DAOException e) {
 			logger.error(e);

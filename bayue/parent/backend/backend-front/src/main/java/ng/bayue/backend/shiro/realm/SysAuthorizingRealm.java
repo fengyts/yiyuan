@@ -10,6 +10,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ng.bayue.backend.ao.sys.SysUserAO;
@@ -17,9 +18,8 @@ import ng.bayue.backend.domain.SysUserDO;
 
 public class SysAuthorizingRealm extends AuthorizingRealm {
 
-    @Autowired
-    private SysUserAO sysUserAO;
-    
+	@Autowired
+	private SysUserAO sysUserAO;
 
 	@Override
 	public String getName() {
@@ -27,46 +27,37 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 	}
 
 	/**
-     * <pre>
-     * 身份认证
-     * </pre>
-     * 
-     * @param token
-     * @return
-     * @throws AuthenticationException
-     * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)
-     */
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String principal = (String) token.getPrincipal();
-        SysUserDO sysUser = sysUserAO.findByLoginNameOrMobileOrEmail(principal);
-        
-        if(null == sysUser){//用户不存在
-            throw new UnknownAccountException("用户不存在");
-        }
-        if(!sysUser.getStatus()){
-            throw new LockedAccountException("该账户已锁定，请联系管理员");
-        }
+	 * <pre>
+	 * 身份认证
+	 * </pre>
+	 * 
+	 * @param token
+	 * @return
+	 * @throws AuthenticationException
+	 * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)
+	 */
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		String principal = (String) token.getPrincipal();
+		SysUserDO sysUser = sysUserAO.findByLoginNameOrMobileOrEmail(principal);
 
-         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-//         Object o = userToken.getCredentials();
-//         String credentials = (String) userToken.getCredentials();
+		if (null == sysUser) {// 用户不存在
+			throw new UnknownAccountException("用户不存在");
+		}
+		if (!sysUser.getStatus()) {
+			throw new LockedAccountException("该账户已锁定，请联系管理员");
+		}
 
-//         if(!sysUser.getPassword().equals(credentials)){
-//             throw new IncorrectCredentialsException("账号或者密码有误");
-//         }
+		AuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(),
+				ByteSource.Util.bytes(sysUser.getSalt()), getName());
+//		 AuthenticationInfo info = new SimpleAuthenticationInfo(sysUser,
+//		 sysUser.getPassword(), getName());
+		return info;
+	}
 
-//        AuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, credentials,
-//                "sysAuthorizingRealm");
-         AuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(), getName());
-        return info;
-    }
-
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
-    }
-    
-    
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		return null;
+	}
 
 }

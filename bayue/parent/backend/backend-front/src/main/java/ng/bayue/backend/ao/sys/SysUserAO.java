@@ -98,7 +98,6 @@ public class SysUserAO {
 		sysUserDO.setModifyTime(new Date());
 		sysUserDO.setCreateUserId(UserHandler.getUser().getId());
 		sysUserDO.setModifyUserId(UserHandler.getUser().getId());
-		sysUserDO.setSalt("salt");
 		if(StringUtils.isEmpty(roleIds)){
 			sysUserService.insert(sysUserDO);
 			return new ResultMessage();

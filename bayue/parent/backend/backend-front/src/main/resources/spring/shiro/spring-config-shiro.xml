@@ -39,17 +39,18 @@
     </bean>
     
     <bean id="systemAuthorizingRealm" class="ng.bayue.backend.shiro.realm.SysAuthorizingRealm">
-        <!-- <property name="cachingEnabled" value="true"/>
-        <property name="authenticationCachingEnabled" value="true"/>
-        <property name="authenticationCacheName" value="authenticationCache"/>
-        <property name="authorizationCachingEnabled" value="true"/>
-        <property name="authorizationCacheName" value="authorizationCache"/> -->
+    	<property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     
     <bean id="formAuthenticationFilter" class="ng.bayue.backend.shiro.LoginFormAuthenticationFilter" />
     <bean id="myShiroFilter" class="ng.bayue.backend.shiro.ShiroFilter" />
     
-    <bean id="sysUserAO" class="ng.bayue.backend.ao.sys.SysUserAO" />
-    
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5"/>
+		<property name="hashIterations" value="2"/>
+		<property name="storedCredentialsHexEncoded" value="true"/>
+	</bean>
+	
+	<bean id="sysUserAO" class="ng.bayue.backend.ao.sys.SysUserAO"/>    
     
 </beans>
