@@ -41,6 +41,9 @@ public class SysUserServiceImpl implements SysUserService {
 				salt = new String(SecurityUtil.encryptMD5(SecurityUtil.Salt.provideSalt()));
 				sysUserDO.setSalt(salt);
 			}
+			String password = sysUserDO.getPassword();
+			String passwdHash = SecurityUtil.hashToStr(password, salt, 2);
+			sysUserDO.setPassword(passwdHash);
 			return sysUserDAO.insert(sysUserDO);
 		} catch (DAOException e) {
 			logger.error(e);

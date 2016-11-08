@@ -51,7 +51,7 @@ public class JavaTest {
 	}
 	
 	public static void main(String[] args) {
-		test();
+//		test();
 		test1();
 		
 		String str = ByteSource.Util.bytes("afc0f8db123621b989c0ae68e8792e62".getBytes()).toString();
