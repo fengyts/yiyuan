@@ -104,20 +104,11 @@ public class SysUserController {
 		sysUserAO.sysUserUpdate(sysUserDO,roleIds);
 		return new ResultMessage();
 	}
-
-	public static void main(String[] args) {
-		List<Map<Long, String>> list = new ArrayList<Map<Long, String>>();
-		Map<Long, String> map = new HashMap<Long, String>();
-		map.put(1L, "ceshi");
-		list.add(map);
-		Map<Long, String> map1 = new HashMap<Long, String>();
-		map1.put(2L, "hha");
-		list.add(map1);
-		Map<Long, String> map2 = new HashMap<Long, String>();
-		map2.put(3L, "菜单");
-		list.add(map2);
-		String str = JSONObject.toJSONString(list);
-		System.out.println(str);
+	
+	@RequestMapping({"/resetpassword"})
+	public void resetPassword(Long userId,String loginName){
+		sysUserAO.resetPassword(userId, loginName);
 	}
+
 
 }

@@ -9,6 +9,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * <pre>
+ * 安全类，包含MD5加密、hash多次散列等
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: SecurityUtil.java, v 0.1 2016年11月9日 上午11:19:53 lenovopc Exp $
+ */
 public final class SecurityUtil {
 
 	public static final Logger logger = LoggerFactory.getLogger(SecurityUtil.class);

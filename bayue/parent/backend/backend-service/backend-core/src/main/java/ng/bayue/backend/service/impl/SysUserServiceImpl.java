@@ -38,7 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
 		try {
 			String salt = sysUserDO.getSalt();
 			if(StringUtils.isEmpty(salt)){//生成随机盐
-				salt = new String(SecurityUtil.encryptMD5(SecurityUtil.Salt.provideSalt()));
+				salt = getSalt();
 				sysUserDO.setSalt(salt);
 			}
 			String password = sysUserDO.getPassword();
@@ -193,6 +193,26 @@ public class SysUserServiceImpl implements SysUserService {
 		if(StringUtils.isEmpty(param)){ return null;}
 		SysUserDO sysUser = sysUserDAO.findByLoginNameOrEmailOrMobile(param);
 		return sysUser;
+	}
+
+	@Override
+	public void updatePassword(Long userId, String password,Long operationUserId) throws ServiceException {
+		if(null == userId || userId.longValue() < 1 || StringUtils.isEmpty(password)){
+			return;
+		}
+		SysUserDO sysUser = new SysUserDO();
+		sysUser.setId(userId);
+		String salt = getSalt();
+		password = SecurityUtil.hashToStr(password, salt, 2);
+		sysUser.setPassword(password);
+		sysUser.setSalt(salt);
+		sysUser.setModifyTime(new java.util.Date());
+		sysUser.setModifyUserId(operationUserId);
+		update(sysUser,false);
+	}
+	
+	private String getSalt(){
+		return SecurityUtil.encryptMD5(SecurityUtil.Salt.provideSalt());
 	}
 	
 	

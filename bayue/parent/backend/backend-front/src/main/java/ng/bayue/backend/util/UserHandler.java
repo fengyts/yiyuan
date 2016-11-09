@@ -1,6 +1,8 @@
 package ng.bayue.backend.util;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +21,14 @@ public class UserHandler {
 		}
 		return userDO;
 	}
+	
+	public static Subject getSubject(){
+		return SecurityUtils.getSubject();
+	}
+	
+	public static Session getSession(){
+		return getSubject().getSession();
+	}
+	
 
 }

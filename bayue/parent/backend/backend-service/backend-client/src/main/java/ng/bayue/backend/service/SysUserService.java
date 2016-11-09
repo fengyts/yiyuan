@@ -101,5 +101,17 @@ public interface SysUserService {
 	void updateUserAndRelationRoles(SysUserDO sysUser,List<Long> roleIds) throws ServiceException;
 	
 	SysUserDO findByLoginNameOrEmailOrMobile(String param);
+	
+	/**
+	 * <pre>
+	 * 修改密码，同时生成新的散列盐值
+	 * </pre>
+	 *
+	 * @param userId 要修改密码的用户id
+	 * @param password
+	 * @param operationUserId 操作人id
+	 * @throws ServiceException
+	 */
+	void updatePassword(Long userId,String password,Long operationUserId) throws ServiceException;
 
 }

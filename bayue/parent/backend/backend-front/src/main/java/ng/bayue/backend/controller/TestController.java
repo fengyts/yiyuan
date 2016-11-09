@@ -1,11 +1,16 @@
 package ng.bayue.backend.controller;
 
+import java.io.Serializable;
+
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import ng.bayue.backend.util.UserHandler;
 
 @Controller
 @RequestMapping({"/test"})
@@ -26,6 +31,7 @@ public class TestController {
 	
 	@RequestMapping({"/mobile"})
 	public String mobile(Model model){
+		Session session = UserHandler.getSession();
 		return "/appfont/home";
 	}
 	

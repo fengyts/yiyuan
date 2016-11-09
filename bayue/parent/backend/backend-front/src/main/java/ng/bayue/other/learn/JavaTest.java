@@ -28,11 +28,11 @@ public class JavaTest {
 	
 	public static void test1(){
 		//原始 密码 
-		String source = "admin";
+		String source = "superadmin";
 		//盐
 		String salt = "afc0f8db123621b989c0ae68e8792e62";
 		//散列次数
-		int hashIterations = 1;
+		int hashIterations = 2;
 		//上边散列1次：f3694f162729b7d0254c6e40260bf15c
 		//上边散列2次：36f2dfa24d0a9fa97276abbe13e596fc
 		
@@ -50,12 +50,15 @@ public class JavaTest {
 		System.out.println(simpleHash.toString());//cad86dfc11166803d1dbd559d8afe1e1
 	}
 	
+	public static void xor(){
+		String str = "abcde";
+		int a = 2;
+		int b = a << 1 + 1;
+		System.out.println(b);
+	}
+	
 	public static void main(String[] args) {
-//		test();
 		test1();
-		
-		String str = ByteSource.Util.bytes("afc0f8db123621b989c0ae68e8792e62".getBytes()).toString();
-		System.out.println(str);
 	}
 	
 	

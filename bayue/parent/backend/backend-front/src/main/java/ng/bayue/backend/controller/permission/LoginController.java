@@ -1,6 +1,7 @@
 package ng.bayue.backend.controller.permission;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -48,6 +49,7 @@ public class LoginController {
 	@RequestMapping(value = "/doLogin")
 	public String doLogin(HttpServletRequest request, Model model) throws Exception {
 //		System.out.println(request.getAttribute("backViewUsername") +"-"+ request.getAttribute("backViewPassword"));
+		HttpSession session = request.getSession();
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
