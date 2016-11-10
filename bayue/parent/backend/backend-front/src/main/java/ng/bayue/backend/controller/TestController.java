@@ -32,6 +32,7 @@ public class TestController {
 	@RequestMapping({"/mobile"})
 	public String mobile(Model model){
 		Session session = UserHandler.getSession();
+		System.out.println(session.getId());
 		return "/appfont/home";
 	}
 	

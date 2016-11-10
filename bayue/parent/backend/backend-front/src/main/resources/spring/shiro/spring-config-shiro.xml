@@ -15,7 +15,7 @@
             <map>
                 <!-- <entry key="authc" value-ref="myShiroFilter"/> -->
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <!-- <entry key="urlAuhc" value-ref="urlAuthcFilter"></entry> -->
+                <entry key="kickout" value-ref="kickoutFilter"/><!-- 是否被踢出验证-->
             </map>
         </property>
         <property name="filterChainDefinitions">  
@@ -25,17 +25,19 @@
                 /kaptcha/** = anon
                 /kaptcha.htm = anon
                 /logout = logout
-                /** = authc
+                /authenticated = authc
+                /** = kickout,authc
                 <!-- /**=anon -->
             </value>
         </property>
-        
-                
     </bean>
     
-    <!-- 定义Shiro安全管理配置 -->
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="systemAuthorizingRealm" />
+    <bean id="kickoutFilter" class="ng.bayue.backend.shiro.KickoutFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="kickoutAfter" value="false"/><!-- 是否踢出后登录的人 -->
+        <property name="maxSession" value="1"/><!-- 一个账户最大同时在线数量 -->
+        <property name="kickoutUrl" value="/login?kickout=1"/><!-- 当被踢出后重定向的URL -->
     </bean>
     
     <bean id="systemAuthorizingRealm" class="ng.bayue.backend.shiro.realm.SysAuthorizingRealm">
@@ -45,10 +47,43 @@
     <bean id="formAuthenticationFilter" class="ng.bayue.backend.shiro.LoginFormAuthenticationFilter" />
     <bean id="myShiroFilter" class="ng.bayue.backend.shiro.ShiroFilter" />
     
+    <!-- 定义Shiro安全管理配置 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="systemAuthorizingRealm" />
+        <!-- 注入缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager"/>
+		<!-- 注入session管理器 -->
+		<property name="sessionManager" ref="sessionManager" />
+    </bean>
+    
+    <!-- 凭证匹配器 -->
 	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
 		<property name="hashAlgorithmName" value="md5"/>
 		<property name="hashIterations" value="2"/>
 		<property name="storedCredentialsHexEncoded" value="true"/>
+	</bean>
+	
+	<!-- 定义授权缓存管理器 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManager" ref="ehcacheManager"/>
+	</bean>
+	
+	<!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    	<property name="sessionDAO" ref="sessionDAO"/>
+        <!-- session的失效时长，单位毫秒 -->
+        <property name="globalSessionTimeout" value="600000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+    
+    <!-- 自定义Session存储容器 -->
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>	
+	
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
 	</bean>
 	
 	<bean id="sysUserAO" class="ng.bayue.backend.ao.sys.SysUserAO"/>    

@@ -23,11 +23,15 @@
 	
 	<!-- 启用spring mvc 注解 -->
 	<!-- <mvc:annotation-driven/> -->
-	<context:annotation-config />
+	<context:annotation-config>
+		<!-- <context:component-scan base-package="ng.bayue.*"/> -->
+	</context:annotation-config>
 	
 	<!-- <aop:aspectj-autoproxy />-->
-
+	
+	<import resource="classpath*:spring/shiro/spring-context-shiro.xml"/>
 	<import resource="classpath*:spring/shiro/spring-config-shiro.xml"/>
+	
 	<import resource="classpath*:spring/spring-kaptcha.xml"/>
 	
 	<import resource="classpath*:spring/hessian/remote-*.xml" />

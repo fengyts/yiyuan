@@ -79,6 +79,10 @@
 </center>
 </body>
 <script type="text/javascript">
+	$(function(){
+		if (window != top) 
+			top.location.href = location.href;
+	});
 
 	function loginSubmit(){
 	

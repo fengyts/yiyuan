@@ -27,6 +27,7 @@
 		<springframework-version>4.0.0.RELEASE</springframework-version>
 		<springframework-old-version>4.0.0.RELEASE</springframework-old-version>
 		<freemarker-version>2.3.20</freemarker-version>
+		<poi-version>3.9</poi-version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +79,16 @@
 			<version>${shiro-version}</version>
 		</dependency>
 		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache</artifactId>
+		    <version>2.10.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache-core</artifactId>
+		    <version>2.6.11</version>
+		</dependency>
+		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>3.6.0</version>
@@ -90,12 +101,12 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.9</version>
+			<version>${poi-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.9</version>
+			<version>${poi-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>

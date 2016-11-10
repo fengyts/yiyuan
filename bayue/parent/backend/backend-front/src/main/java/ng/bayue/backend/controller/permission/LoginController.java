@@ -24,7 +24,7 @@ public class LoginController {
 	
 
 	@RequestMapping({ "/login" })
-	public String login(Model model) {
+	public String login(Model model,HttpServletRequest request) {
 		model.addAttribute("kaptchaFlag", kaptchaFlag);
 		return "/index/sysUser/login";
 	}
@@ -49,7 +49,6 @@ public class LoginController {
 	@RequestMapping(value = "/doLogin")
 	public String doLogin(HttpServletRequest request, Model model) throws Exception {
 //		System.out.println(request.getAttribute("backViewUsername") +"-"+ request.getAttribute("backViewPassword"));
-		HttpSession session = request.getSession();
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
