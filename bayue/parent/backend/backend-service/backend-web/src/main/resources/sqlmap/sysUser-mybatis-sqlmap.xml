@@ -21,7 +21,9 @@
         <result column="user_detail" property="userDetail"/>
 	</resultMap>
 	
-	<resultMap type="ng.bayue.backend.domain.dto.SysUserVO" id="SysUserVOResultMap">
+	<resultMap type="ng.bayue.backend.domain.dto.SysUserVO" id="SysUserVOResultMap" extends="SysUserDOResultMap">
+<!-- 	通过继承来实现下面的映射：extends="SysUserDOResultMap"-->
+<!-- 
 		<id column="id" property="id" />
         <result column="login_name" property="loginName"/>
         <result column="user_name" property="userName"/>
@@ -37,7 +39,33 @@
         <result column="last_login_ip" property="lastLoginIp"/>
         <result column="status" property="status"/>
         <result column="user_detail" property="userDetail"/>
-        <collection property="roles" ofType="string"></collection>
+ -->        
+ 		<collection column="roles" property="sysRoles" javaType="list" ofType="ng.bayue.backend.domain.SysRoleDO">
+ 			<id column="rid" property="id" />
+	        <result column="rname" property="name"/>
+	        <result column="rcode" property="code"/>
+	        <result column="rtype" property="type"/>
+	        <result column="rstatus" property="status"/>
+	        <result column="rremark" property="remark"/>
+	        <result column="rcreate_user_id" property="createUserId"/>
+	        <result column="rcreate_time" property="createTime"/>
+	        <result column="rmodify_time" property="modifyTime"/>
+ 		</collection>
+        <collection column="menus" property="sysMenus" javaType="list" ofType="ng.bayue.backend.domain.SysMenuDO" >
+        	<id column="mid" property="id"/>
+        	<id column="code" property="code" />
+	        <result column="parent_id" property="parentId"/>
+	        <result column="mname" property="name"/>
+	        <result column="murl" property="url"/>
+	        <result column="mcategory" property="category"/>
+	        <result column="mmenu_type" property="menuType"/>
+	        <result column="msort" property="sort"/>
+	        <result column="mcreate_user_id" property="createUserId"/>
+	        <result column="mmodify_user_id" property="modifyUserId"/>
+	        <result column="mcreate_time" property="createTime"/>
+	        <result column="mmodify_time" property="modifyTime"/>
+	        <result column="mstatus" property="status"/>
+        </collection>
 	</resultMap>
 
 	<sql id="MybatisSysUserDAO_all_column_fields">
@@ -177,12 +205,29 @@
 	 	Limit #{start},#{pageSize}
  	</select>
  	
- 	<select id="MybatisSysUserDAO_select_sysUser_vo" resultMap="SysUserVOResultMap" parameterType="ng.bayue.backend.domain.SysUserDO">
- 		select 
-			sr.name as roles,su.*
-		from be_sys_user su 
-		join be_sys_user_role sur on su.id = sur.user_id
-		join be_sys_role sr on sur.role_id = sr.id
+ 	<sql id="allRoles">
+ 		sr.id rid,sr.name rname,sr.code rcode,sr.type rtype,sr.status rstatus,sr.remark rremark,
+ 		sr.create_user_id rcreate_user_id,sr.create_time rcreate_time,sr.modify_time rmodify_time
+ 	</sql>
+ 	<sql id="allMenus">
+ 		sm.id mid,sm.code mcode,sm.parent_id mparent_id,sm.name mname,sm.url murl,sm.category mcategory,sm.menu_type mmenu_type,sm.sort msort,
+ 		sm.create_user_id mcreate_user_id,sm.modify_user_id mmodify_user_id,sm.create_time mcreate_time,sm.modify_time mmodify_time,sm.status mstatus
+ 	</sql>
+ 	<select id="MybatisSysUserDAO_select_sysUser_vo" resultMap="SysUserVOResultMap" parameterType="string">
+ 		SELECT 
+ 			su.*,
+			<include refid="allRoles"/>,
+			<include refid="allMenus"/>
+		FROM be_sys_user su
+		LEFT JOIN be_sys_user_role sur ON sur.user_id = su.id
+		LEFT JOIN be_sys_role sr ON sr.id = sur.role_id
+		LEFT JOIN be_sys_menu_role smr ON smr.role_id = sur.role_id
+		LEFT JOIN be_sys_menu sm ON sm.id = smr.menu_id
+		WHERE
+ 			login_name = #{parameter}
+ 			OR email = #{parameter}
+ 			OR mobile = #{parameter}
+		ORDER BY sort
  	</select>
  	
  	<select id="MybatisSysUserDAO_select_by_loginNameOrMobileOrEmail" parameterType="string" resultMap="SysUserDOResultMap">

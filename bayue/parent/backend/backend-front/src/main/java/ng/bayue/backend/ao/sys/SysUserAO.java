@@ -17,6 +17,7 @@ import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.backend.domain.SysUserRoleDO;
 import ng.bayue.backend.domain.dto.SysUserDTO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.service.SysRoleService;
 import ng.bayue.backend.service.SysUserRoleService;
 import ng.bayue.backend.service.SysUserService;
@@ -160,6 +161,13 @@ public class SysUserAO {
 			return null;
 		}
 		return sysUserService.findByLoginNameOrEmailOrMobile(param);
+	}
+	
+	public SysUserVO findByAccountContainsMenusAndRoles(String param){
+		if (StringUtils.isEmpty(param)) {
+			return null;
+		}
+		return sysUserService.findByAccountContainsMenusAndRoles(param);
 	}
 
 	/**

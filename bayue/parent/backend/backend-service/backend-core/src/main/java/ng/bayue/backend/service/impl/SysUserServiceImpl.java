@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.backend.domain.SysUserRoleDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.persist.dao.SysUserRoleDAO;
@@ -193,6 +194,12 @@ public class SysUserServiceImpl implements SysUserService {
 		if(StringUtils.isEmpty(param)){ return null;}
 		SysUserDO sysUser = sysUserDAO.findByLoginNameOrEmailOrMobile(param);
 		return sysUser;
+	}
+	
+	@Override
+	public SysUserVO findByAccountContainsMenusAndRoles(String param) {
+		if(StringUtils.isEmpty(param)){ return null;}
+		return sysUserDAO.nestedList(param);
 	}
 
 	@Override

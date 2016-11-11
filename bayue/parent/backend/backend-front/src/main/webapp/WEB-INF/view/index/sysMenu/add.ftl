@@ -61,7 +61,10 @@
 							</select>
 						</td>
 					</tr>
-					
+					<tr>
+						<td>排序:</td>
+						<td><input type="text" id="sort" name="sort" class="input-text lh25" size="20" maxlength="50"/></td>
+					</tr>
 					
 					<tr>
 					    <td>

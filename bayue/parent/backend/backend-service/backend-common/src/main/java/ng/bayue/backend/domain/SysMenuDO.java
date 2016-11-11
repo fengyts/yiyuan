@@ -35,6 +35,9 @@ public class SysMenuDO extends BaseDO {
 	
 	/** 菜单类型 1：菜单  2：按钮 */
 	private Integer menuType;
+	
+	/** 菜单排序值 */
+	private Integer sort;
 
 	/** 创建人id */
 	private Long createUserId;
@@ -110,6 +113,14 @@ public class SysMenuDO extends BaseDO {
 		this.menuType = menuType;
 	}
 
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
 	public Long getCreateUserId() {
 		return createUserId;
 	}
@@ -174,7 +185,7 @@ public class SysMenuDO extends BaseDO {
 				.append("createTime", this.createTime)
 				.append("name", this.name)
 				.append("pageSize", this.getPageSize())
-				.append("modifyTime", this.modifyTime).append("id", this.id)
+				.append("modifyTime", this.modifyTime).append("id", this.id).append("sort", this.sort)
 				.toString();
 	}
 

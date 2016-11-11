@@ -93,7 +93,7 @@ public interface SysUserDAO {
 	 * @param sysUserDO
 	 * @return
 	 */
-	List<SysUserVO> nestedList(SysUserDO sysUserDO);
+	SysUserVO nestedList(String param);
 	
 	SysUserDO findByLoginNameOrEmailOrMobile(String param);
 }

@@ -61,8 +61,8 @@ public class TestCategoryService {
 	
 	@Test
 	public void test1(){
-		SysUserDO sysUser = sysUserService.findByLoginNameOrEmailOrMobile("superadmin");
-		System.out.println(sysUser.getEmail());
+		SysUserVO vo = sysUserDAO.nestedList("admin");
+		System.out.println(vo);
 	}
 
 }

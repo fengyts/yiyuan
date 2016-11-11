@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.google.code.kaptcha.Constants;
 
+import ng.bayue.backend.constant.BackendConstant;
+
 /**
  * <pre>
  * 
@@ -33,7 +35,7 @@ public class LoginFormAuthenticationFilter extends FormAuthenticationFilter {
 			String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 			String kaptcha = request.getParameter("kaptcha");
 			if (StringUtils.isNotBlank(kaptcha)&&StringUtils.isNotBlank(code) && !kaptcha.equals(code)) {
-				hsRequest.setAttribute(DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, "kaptchaError");
+				hsRequest.setAttribute(DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, BackendConstant.SysUser.KAPTCHAERROR);
 				hsRequest.setAttribute("backViewUsername", request.getParameter(DEFAULT_USERNAME_PARAM));
 				hsRequest.setAttribute("backViewPassword", request.getParameter(DEFAULT_PASSWORD_PARAM));
 				return true;

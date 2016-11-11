@@ -79,30 +79,27 @@
 </center>
 </body>
 <script type="text/javascript">
-	$(function(){
-		if (window != top) 
-			top.location.href = location.href;
-	});
-
+	if (window != top) {
+		top.location.href = location.href;
+	}
 	function loginSubmit(){
-	
-		var username = $("#username").val();
-		var password=$("#password").val();
-	   if(!username || null==username || ""==username){
+	    var username = $("#username").val();
+	    var password=$("#password").val();
+	    if(!username || null==username || ""==username){
 		   $("#message").html("请输入用户名");
 		   return false;
-	   }
-	   if(!password || null==password || ""==password){
+	    }
+	    if(!password || null==password || ""==password){
 		   $("#message").html("请输入密码");
 		   return false;
-	   }
-	   if($("#kaptchaInput").length > 0){
+	    }
+	    if($("#kaptchaInput").length > 0){
 			var kaptchaInput = $("#kaptchaInput").val();
 			if(!kaptchaInput || null==kaptchaInput || ""==kaptchaInput){
 				$("#message").html("请输入验证码");
 				return false;
 			}
-	   }
+	    }
 	
 		$("#loginForm").submit();
 	}

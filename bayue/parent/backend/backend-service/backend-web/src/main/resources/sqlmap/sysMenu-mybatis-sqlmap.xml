@@ -11,6 +11,7 @@
         <result column="url" property="url"/>
         <result column="category" property="category"/>
         <result column="menu_type" property="menuType"/>
+        <result column="sort" property="sort"/>
         <result column="create_user_id" property="createUserId"/>
         <result column="modify_user_id" property="modifyUserId"/>
         <result column="create_time" property="createTime"/>
@@ -19,7 +20,7 @@
 	</resultMap>
 
 	<sql id="MybatisSysMenuDAO_all_column_fields">
-	      id,code,parent_id,name,url,category,menu_type,create_user_id,modify_user_id,create_time,modify_time,status
+	      id,code,parent_id,name,url,category,menu_type,sort,create_user_id,modify_user_id,create_time,modify_time,status
  	</sql>
 
 	<sql id="MybatisSysMenuDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -29,6 +30,7 @@
 			<if test="name != null  and name != '' "> AND name=#{name} </if>
 			<if test="url != null  and url != '' "> AND url=#{url} </if>
 			<if test="menuType != null"> AND menu_type=#{menuType} </if>
+			<if test="sort != null"> AND sort=#{sort} </if>
 			<if test="category != null  and category != '' "> AND category=#{category} </if>
 			<if test="createUserId != null"> AND create_user_id=#{createUserId} </if>
 			<if test="modifyUserId != null"> AND modify_user_id=#{modifyUserId} </if>
@@ -56,6 +58,7 @@
 				name,
 				url,
 				menu_type,
+				sort,
 				category,
 				create_user_id,
 				modify_user_id,
@@ -69,6 +72,7 @@
 				#{name},
 				#{url},
 				#{menuType},
+				#{sort},
 				#{category},
 				#{createUserId},
 				#{modifyUserId},
@@ -86,6 +90,7 @@
 					name = #{name},
 					url = #{url},
 					menu_type = #{menuType},
+					sort = #{sort},
 					category = #{category},
 					create_user_id = #{createUserId},
 					modify_user_id = #{modifyUserId},
@@ -107,6 +112,7 @@
 			<if test="name != null  and name != '' ">name=#{name},</if>
 			<if test="url != null  and url != '' ">url=#{url},</if>
 			<if test="menuType != null">menu_type=#{menuType},</if>
+			<if test="sort != null">sort=#{sort},</if>
 			<if test="category != null  and category != '' ">category=#{category},</if>
 			<if test="createUserId != null">create_user_id=#{createUserId},</if>
 			<if test="modifyUserId != null">modify_user_id=#{modifyUserId},</if>

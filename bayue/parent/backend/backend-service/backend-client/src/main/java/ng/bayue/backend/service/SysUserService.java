@@ -3,6 +3,7 @@ package ng.bayue.backend.service;
 import java.util.List;
 
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.util.Page;
  /**
@@ -100,7 +101,25 @@ public interface SysUserService {
 	
 	void updateUserAndRelationRoles(SysUserDO sysUser,List<Long> roleIds) throws ServiceException;
 	
+	/**
+	 * <pre>
+	 * 根据账号查找用户，可以是账号名称|手机号|邮箱
+	 * </pre>
+	 *
+	 * @param param
+	 * @return SysUserDO 返回结果中只包含用户信息
+	 */
 	SysUserDO findByLoginNameOrEmailOrMobile(String param);
+	
+	/**
+	 * <pre>
+	 * 根据账号查找用户，可以是账号名称|手机号|邮箱
+	 * </pre>
+	 *
+	 * @param param
+	 * @return SysUserVO 返回结果中包含该用户的角色信息和菜单信息
+	 */
+	SysUserVO findByAccountContainsMenusAndRoles(String param);
 	
 	/**
 	 * <pre>

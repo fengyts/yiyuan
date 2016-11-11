@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import ng.bayue.backend.ao.index.SysMenuAO;
 import ng.bayue.backend.controller.common.AbstractBaseController;
 import ng.bayue.backend.domain.SysMenuDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.enums.SysMenuTypeEnum;
 
+import org.apache.shiro.SecurityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -24,8 +26,8 @@ public class PermissionController extends AbstractBaseController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private SysMenuAO sysMenuAO;
+//    @Autowired
+//    private SysMenuAO sysMenuAO;
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "loadAdminRights")
@@ -33,7 +35,9 @@ public class PermissionController extends AbstractBaseController {
     public JSONArray loadAdminRights(HttpServletResponse resp) {
         JSONArray root = new JSONArray();
 //        List<SysMenuDO> sm = UserHandler.getUser().getSysMenuList();
-        List<SysMenuDO> sm = sysMenuAO.selectDynamic(new SysMenuDO());
+//        List<SysMenuDO> sm = sysMenuAO.selectDynamic(new SysMenuDO());
+        SysUserVO userVO = (SysUserVO) SecurityUtils.getSubject().getPrincipal();
+        List<SysMenuDO> sm = userVO.getSysMenus();
         
         logger.debug("拥有权限菜单数量:" + (null != sm ? sm.size() : 0));
 

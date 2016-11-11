@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysUserDO;
+import ng.bayue.backend.domain.dto.SysUserVO;
 
 public class SysAuthorizingRealm extends AuthorizingRealm {
 
@@ -39,17 +40,18 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String principal = (String) token.getPrincipal();
-		SysUserDO sysUser = sysUserAO.findByLoginNameOrMobileOrEmail(principal);
+//		SysUserDO sysUser = sysUserAO.findByLoginNameOrMobileOrEmail(principal);
+		SysUserVO sysUserVo = sysUserAO.findByAccountContainsMenusAndRoles(principal);
 
-		if (null == sysUser) {// 用户不存在
+		if (null == sysUserVo) {// 用户不存在
 			throw new UnknownAccountException("用户不存在");
 		}
-		if (!sysUser.getStatus()) {
+		if (!sysUserVo.getStatus()) {
 			throw new LockedAccountException("该账户已锁定，请联系管理员");
 		}
 
 		AuthenticationInfo info = new SimpleAuthenticationInfo(
-				sysUser, sysUser.getPassword(),ByteSource.Util.bytes(sysUser.getSalt()), getName());
+				sysUserVo, sysUserVo.getPassword(),ByteSource.Util.bytes(sysUserVo.getSalt()), getName());
 		return info;
 	}
 
