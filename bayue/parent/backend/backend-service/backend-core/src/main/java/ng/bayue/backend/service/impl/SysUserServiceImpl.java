@@ -209,12 +209,14 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 		SysUserDO sysUser = new SysUserDO();
 		sysUser.setId(userId);
-		String salt = getSalt();
-		password = SecurityUtil.hashToStr(password, salt, 2);
+		String salt = getSalt();//生成新的盐
+		password = SecurityUtil.hashToStr(password, salt, 2);//密码加密
 		sysUser.setPassword(password);
 		sysUser.setSalt(salt);
 		sysUser.setModifyTime(new java.util.Date());
-		sysUser.setModifyUserId(operationUserId);
+		if(null != operationUserId){
+			sysUser.setModifyUserId(operationUserId);
+		}
 		update(sysUser,false);
 	}
 	

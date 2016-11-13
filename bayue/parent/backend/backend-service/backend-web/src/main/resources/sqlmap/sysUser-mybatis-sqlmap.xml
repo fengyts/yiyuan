@@ -40,7 +40,7 @@
         <result column="status" property="status"/>
         <result column="user_detail" property="userDetail"/>
  -->        
- 		<collection column="roles" property="sysRoles" javaType="list" ofType="ng.bayue.backend.domain.SysRoleDO">
+ 		<collection property="sysRoles" javaType="list" ofType="ng.bayue.backend.domain.SysRoleDO">
  			<id column="rid" property="id" />
 	        <result column="rname" property="name"/>
 	        <result column="rcode" property="code"/>
@@ -51,10 +51,10 @@
 	        <result column="rcreate_time" property="createTime"/>
 	        <result column="rmodify_time" property="modifyTime"/>
  		</collection>
-        <collection column="menus" property="sysMenus" javaType="list" ofType="ng.bayue.backend.domain.SysMenuDO" >
+        <collection property="sysMenus" javaType="list" ofType="ng.bayue.backend.domain.SysMenuDO" >
         	<id column="mid" property="id"/>
-        	<id column="code" property="code" />
-	        <result column="parent_id" property="parentId"/>
+        	<id column="mcode" property="code" />
+	        <result column="mparent_id" property="parentId"/>
 	        <result column="mname" property="name"/>
 	        <result column="murl" property="url"/>
 	        <result column="mcategory" property="category"/>

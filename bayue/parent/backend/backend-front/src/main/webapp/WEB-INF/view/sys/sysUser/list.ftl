@@ -56,13 +56,13 @@ js=[
                 <tr>
                       <th width="50">登录账号</th>	
 	                  <th width="50">姓名</th>
-	                  <th width="100">手机号</th>
+	                  <th width="50">手机号</th>
 	                  <th width="100">email</th>
 	                  <th width="100">角色</th>
-	                  <th width="50">状态</th>
-	                  <th width="200">创建时间</th>
-	                  <th width="200">更新时间</th>
-					  <th width="50">操作</th>
+	                  <th width="20">状态</th>
+	                  <th width="180">创建时间</th>
+	                  <th width="180">更新时间</th>
+					  <th width="200">操作</th>
                 </tr>
             	<#if page.list?default([])?size!=0>
 		            <#list page.getList() as sysUser>
@@ -76,8 +76,10 @@ js=[
 				              <td class="td_center">${sysUser.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 		                      <td class="td_center">${sysUser.modifyTime?string("yyyy-MM-dd HH:mm:ss")}</td>  
 				              <td class="td_center">
-				              	<a href="javascript:void(0);" class="editcatabtn sysUserEditbtn" param='${sysUser.id}'>[编辑]</a> &nbsp;
-				              	<a href="javascript:void(0);" class="editcatabtn journalReview" param='${sysUser.id}'>[忘记密码]</a>
+				              	<a href="javascript:void(0);" class="editcatabtn sysUserEditbtn" param='${sysUser.id}'>[编辑]</a>
+				              	<#if sysUser.loginName != 'superadmin'>
+				              	<a href="javascript:void(0);" class="resetPasswd" param='${sysUser.id}'>[重置密码]</a>
+				              	</#if>
 				              </td>	
 			             </tr>
 			        </#list>

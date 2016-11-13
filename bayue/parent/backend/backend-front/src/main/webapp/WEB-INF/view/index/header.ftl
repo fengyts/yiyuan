@@ -19,7 +19,7 @@
 			<a href="#"><img class="user-icon" src="${domain}/statics/images/a.png" alt=""></a>
 			&nbsp;&nbsp;当前用户：<@shiro.principal property="userName" />
 			<#--&nbsp;&nbsp;角色： <@shiro.principal property="roleName" />-->
-			[<a class="updatePassword" href="javascript:void(0);">修改密码</a>]
+			[<a id="updatepwdbtn" class="updatePassword" href="javascript:void(0);">修改密码</a>]
 			[<a class="updateUserInfo" href="javascript:void(0);">用户信息</a>]
 			[
 			<a href="${domain}/logout">退出</a>]
@@ -61,11 +61,13 @@
     </ul>
     <span class="tabclose" title="关闭">X</span>
 </div>
+
+
 <script>
 
 function loadUpdatePassword(){
 	$(".updatePass-errorMessage").html("");
-	$.post(domain+"/permission/user/toUpdatePassword.htm",null,function(html){
+	$.post(domain+"/sys/sysUser/modifyPwd.htm",null,function(html){
 		$(".tab-updatePassword").html(html);
 	},"html");
 }
@@ -78,11 +80,9 @@ function loadUpdateUserInfo(){
 }
 
 $(function(){
-	//$('.updatePassword').live('click',function(){
+
 	$('.updatePassword').on('click',function(){
-	
 		loadUpdatePassword();
-		
          tabi = $.layer({
 		        type:1,
 		        offset: ['50px', ''],
@@ -94,14 +94,10 @@ $(function(){
 		        closeBtn: false,
 		        page: {dom: '.updatePassword-tab'}
 		    });    
-        
 	}); 
 	
-	//$('.updateUserInfo').live('click',function(){
 	$('.updateUserInfo').on('click',function(){
-	
 		loadUpdateUserInfo();
-		
          tabi = $.layer({
 		        type:1,
 		        offset: ['50px', ''],
@@ -133,9 +129,17 @@ function bindClick(){
 	
 	
 	//关闭层
+	<!--
 	$(close).on('click', function(){
 	    layer.close(tabi);
 	});
-
+	$("#cancelbtn").click(function(){
+	layer.close(tabi);
+	});
+	
+	$('.tabclose,#cancelbtn').click(function(){
+		layer.close(tabi);
+	});
+-->
 };
 </script>

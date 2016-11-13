@@ -33,5 +33,6 @@ public class IndexController {
 		model.addAttribute("menuDOs", menuDOs);
 		return "/index/favrite_index";
 	}
+	
 
 }

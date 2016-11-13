@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,11 @@ import ng.bayue.backend.domain.dto.SysUserVO;
 import ng.bayue.backend.service.SysRoleService;
 import ng.bayue.backend.service.SysUserRoleService;
 import ng.bayue.backend.service.SysUserService;
+import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
 import ng.bayue.util.Page;
+import ng.bayue.util.SecurityUtil;
 
 @Service
 public class SysUserAO {
@@ -39,7 +43,8 @@ public class SysUserAO {
 
 	public Page<SysUserDTO> queryPage(SysUserDO sysUserDO, Integer pageNo, Integer pageSize) {
 		Page<SysUserDTO> result = new Page<SysUserDTO>();
-		Page<SysUserDO> page = sysUserService.queryPageListBySysUserDOAndStartPageSize(sysUserDO, pageNo, pageSize);
+		Page<SysUserDO> page = sysUserService.queryPageListBySysUserDOAndStartPageSize(sysUserDO,
+				pageNo, pageSize);
 
 		result.setPageNo(page.getPageNo());
 		result.setPageSize(page.getPageSize());
@@ -162,8 +167,8 @@ public class SysUserAO {
 		}
 		return sysUserService.findByLoginNameOrEmailOrMobile(param);
 	}
-	
-	public SysUserVO findByAccountContainsMenusAndRoles(String param){
+
+	public SysUserVO findByAccountContainsMenusAndRoles(String param) {
 		if (StringUtils.isEmpty(param)) {
 			return null;
 		}
@@ -183,6 +188,24 @@ public class SysUserAO {
 			return;
 		}
 		sysUserService.updatePassword(userId, loginName, UserHandler.getUser().getId());
+	}
+
+	public ResultMessage updatePassword(String password, String passwordNew) {
+		if (StringUtils.isEmpty(passwordNew) || StringUtils.isEmpty(password)) {
+			return new ResultMessage(ResultMessage.Failure, Messages.ParameterNull);
+		}
+		Subject subject = SecurityUtils.getSubject();
+		SysUserVO sysUser = (SysUserVO) subject.getPrincipal();
+		String credential = sysUser.getPassword();
+		password = SecurityUtil.hashToStr(password, sysUser.getSalt(), 2);
+		if (!credential.equals(password)) {
+			return new ResultMessage(ResultMessage.Failure, "原始密码错误");
+		}
+		sysUser.setPassword(password);
+		sysUser.setSalt(null);
+		sysUserService.updatePassword(sysUser.getId(), passwordNew, null);
+		subject.logout();//修改成功后需要退出重新登陆
+		return new ResultMessage();
 	}
 
 }

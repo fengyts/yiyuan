@@ -61,7 +61,7 @@ public class TestCategoryService {
 	
 	@Test
 	public void test1(){
-		SysUserVO vo = sysUserDAO.nestedList("admin");
+		SysUserVO vo = sysUserDAO.nestedList("superadmin");
 		System.out.println(vo);
 	}
 

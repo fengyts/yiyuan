@@ -34,8 +34,10 @@ public class SysUserController {
 	private SysUserAO sysUserAO;
 
 	@RequestMapping({ "/list" })
-	public void sysUserList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
-			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, SysUserDO sysUserDO) {
+	public void sysUserList(Model model,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			SysUserDO sysUserDO) {
 		Page<SysUserDTO> page = sysUserAO.queryPage(sysUserDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("sysUserDO", sysUserDO);
@@ -65,8 +67,9 @@ public class SysUserController {
 		String email = sysUserDO.getEmail();
 		String mobile = sysUserDO.getMobile();
 		String passwd = sysUserDO.getPassword();
-		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName) || StringUtils.isEmpty(email)
-				|| StringUtils.isEmpty(mobile) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(password2)) {
+		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName)
+				|| StringUtils.isEmpty(email) || StringUtils.isEmpty(mobile)
+				|| StringUtils.isEmpty(passwd) || StringUtils.isEmpty(password2)) {
 			return ResultMessage.validParameterNull("数据不能为空");
 		}
 		if (!passwd.equals(password2)) {
@@ -79,7 +82,7 @@ public class SysUserController {
 	@RequestMapping({ "/edit" })
 	public void sysUserEdit(Model model, Long userId) {
 		List<SysUserRoleDO> list = sysUserAO.selectRolesByUserId(userId);
-		if(CollectionUtils.isNotEmpty(list)){
+		if (CollectionUtils.isNotEmpty(list)) {
 			String roleStr = "";
 			for (SysUserRoleDO sur : list) {
 				roleStr += sur.getRoleId() + ",";
@@ -92,23 +95,40 @@ public class SysUserController {
 
 	@RequestMapping({ "/update" })
 	@ResponseBody
-	public ResultMessage sysUserUpdate(SysUserDO sysUserDO,String roleIds) {
+	public ResultMessage sysUserUpdate(SysUserDO sysUserDO, String roleIds) {
 		String loginName = sysUserDO.getLoginName();
 		String userName = sysUserDO.getUserName();
 		String email = sysUserDO.getEmail();
 		String mobile = sysUserDO.getMobile();
-		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName) || StringUtils.isEmpty(email)
-				|| StringUtils.isEmpty(mobile)) {
+		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(userName)
+				|| StringUtils.isEmpty(email) || StringUtils.isEmpty(mobile)) {
 			return ResultMessage.validParameterNull(Messages.ParameterNull);
 		}
-		sysUserAO.sysUserUpdate(sysUserDO,roleIds);
+		sysUserAO.sysUserUpdate(sysUserDO, roleIds);
 		return new ResultMessage();
 	}
-	
-	@RequestMapping({"/resetpassword"})
-	public void resetPassword(Long userId,String loginName){
+
+	@RequestMapping({ "/resetpassword" })
+	public void resetPassword(Long userId, String loginName) {
 		sysUserAO.resetPassword(userId, loginName);
 	}
 
+	@RequestMapping({ "/modifyPwd" })
+	public String updatepwd() {
+		return "/index/updatepwd";
+	}
+
+	@RequestMapping({ "/updatePassword" })
+	@ResponseBody
+	public ResultMessage updatepwd(String password, String password1, String password2) {
+		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(password1)
+				|| StringUtils.isEmpty(password2)) {
+			return ResultMessage.validParameterNull("数据为空");
+		}
+		if(!password1.equals(password2)){
+			return new ResultMessage(ResultMessage.Failure,"两次密码不一样");
+		}
+		return sysUserAO.updatePassword(password, password1);
+	}
 
 }

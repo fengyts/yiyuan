@@ -128,7 +128,7 @@ public interface SysUserService {
 	 *
 	 * @param userId 要修改密码的用户id
 	 * @param password
-	 * @param operationUserId 操作人id
+	 * @param operationUserId 操作人id，如果为null则为修改自己的密码
 	 * @throws ServiceException
 	 */
 	void updatePassword(Long userId,String password,Long operationUserId) throws ServiceException;
