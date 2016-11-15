@@ -58,7 +58,7 @@ public class JavaTest {
 	}
 	
 	public static void main(String[] args) {
-		test1();
+//		test1();
 	}
 	
 	

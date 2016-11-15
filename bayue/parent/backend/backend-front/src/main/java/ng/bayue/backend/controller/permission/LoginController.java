@@ -53,8 +53,6 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/doLogin")
 	public String doLogin(HttpServletRequest request, Model model) throws Exception {
-		// System.out.println(request.getAttribute("backViewUsername") +"-"+
-		// request.getAttribute("backViewPassword"));
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request
 				.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);

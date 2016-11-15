@@ -79,6 +79,7 @@ js=[
 				              	<a href="javascript:void(0);" class="editcatabtn sysUserEditbtn" param='${sysUser.id}'>[编辑]</a>
 				              	<#if sysUser.loginName != 'superadmin'>
 				              	<a href="javascript:void(0);" class="resetPasswd" param='${sysUser.id}'>[重置密码]</a>
+				              	<a href="javascript:void(0);" class="freezeSysUser" param='${sysUser.id}'>[冻结]</a>
 				              	</#if>
 				              </td>	
 			             </tr>
