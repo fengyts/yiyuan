@@ -36,8 +36,8 @@ public class UploadController {
 	@Value("#{meta['item.picture.MaxSize']}")
 	private int itemPictureMaxSize;
 	
-//	@Value("${dfs.group1.host}")
-//	private String host;
+	@Value("${dfs.group1.host}")
+	private String host;
 	
 	@Autowired
 	private DfsAO dfsAO;
@@ -48,7 +48,6 @@ public class UploadController {
 	@RequestMapping({"/img/item"})
 	@ResponseBody
 	public String itemImgUpload(HttpServletRequest request){
-//		System.out.println(itemPictureMaxSize1);
 		String savePath = request.getSession().getServletContext().getRealPath(uploadTempPath);
 		if(StringUtils.isEmpty(savePath)){
 			logger.info("图片临时上传到本地时获取路径错误!");
@@ -87,7 +86,7 @@ public class UploadController {
 			}
 			try {
 				mf.transferTo(file);
-				dfsPath =  dfsAO.uploadFile(file);
+				//dfsPath =  dfsAO.uploadFile(file);
 			} catch (IllegalStateException | IOException e1) {
 //				fileName = null;
 				logger.info("文件上传时保存出错:{}",e1);
@@ -102,9 +101,10 @@ public class UploadController {
 			obj.put("errorCode", "uploadError");
 		}else{
 //			String wholePath = "http://"+host.substring(0, host.indexOf(":"))+"/"+dfsPath;
-//			obj.put("path", wholePath);
+			String wholePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg";
+			obj.put("path", wholePath);
 //			obj.put("path", dfsPath);
-			obj.put("path", imageUrlUtil.getFileFullUrl(dfsPath));
+//			obj.put("path", imageUrlUtil.getFileFullUrl(dfsPath));
 			obj.put("key",dfsPath);
 			obj.put("type", "success");
 		}

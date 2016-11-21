@@ -24,7 +24,8 @@ css=[
 '/statics/common/common-css/common.css',
 '/statics/common/common-css/style.css',
 '/statics/plugin/select2/css/select2.css',
-'/statics/plugin/baidu_webuploader/webuploader.css'
+'/statics/plugin/baidu_webuploader/webuploader.css',
+'/statics/backend/item/imgupload.css'
 ] >
 <form id="itemSaveForm" action="save.htm" method="post" enctype="multipart/form-data">
 	<#--

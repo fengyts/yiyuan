@@ -150,9 +150,12 @@
 			<b class="pl15">
 			图片与详情
 			</b>
-			
 		</div>
+		<#--
 		<#include "/backend/item/subpages/add_pictures.ftl">
+		-->
+		
+		<#include "/backend/item/uploadImg.ftl"/>
 		
 		<#--
 		<#include "/backend/item/subpages/add_description.ftl">
