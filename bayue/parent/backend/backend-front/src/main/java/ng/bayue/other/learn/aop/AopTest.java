@@ -1,4 +1,4 @@
-package ng.bayue.other.learn;
+package ng.bayue.other.learn.aop;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

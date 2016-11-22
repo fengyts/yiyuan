@@ -1,7 +1,10 @@
 package ng.bayue.factory;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +29,34 @@ public class GeneralFactory<T> extends AbstratFactory<T> {
 			}
 			return classType.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			logger.error("", e);
+			logger.error("实例化对象异常:{}",classType, e);
+		}
+		return null;
+	}
+
+	@Override
+	public T getInstance(Object... initargs) {
+		List<Class<?>> list = new ArrayList<Class<?>>();
+		for (Object o : initargs) {
+			Class<?> c = o.getClass();
+			list.add(c);
+		}
+		@SuppressWarnings("rawtypes")
+		Class[] parameterTypes = list.toArray(new Class[0]);
+		/*int len = params.length;
+		Class[] parameterTypes = new Class[len];
+		for(int i=0;i<len;i++){
+			Class<?> c = params[i].getClass();
+			parameterTypes[i] = c;
+		}*/
+		
+		Constructor<T> constructor;
+		try {
+			constructor = classType.getConstructor(parameterTypes);
+			return constructor.newInstance(initargs);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			logger.error("实例化对象异常:{}",classType, e);
 		}
 		return null;
 	}
@@ -39,6 +69,5 @@ public class GeneralFactory<T> extends AbstratFactory<T> {
 		}
 		return false;
 	}
-
 
 }

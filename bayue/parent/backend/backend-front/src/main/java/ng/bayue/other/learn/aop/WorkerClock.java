@@ -1,4 +1,4 @@
-package ng.bayue.other.learn;
+package ng.bayue.other.learn.aop;
 
 import java.lang.reflect.Method;
 
