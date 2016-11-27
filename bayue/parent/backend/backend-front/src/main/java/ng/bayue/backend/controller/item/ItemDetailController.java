@@ -21,7 +21,7 @@ public class ItemDetailController {
 			@RequestParam(value="pageSize",defaultValue="10")Integer pageSize){
 		
 		
-		return "/backend/item/list";
+		return "/backend/item/listDetail";
 		
 	}
 	

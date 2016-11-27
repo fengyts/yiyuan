@@ -1,15 +1,10 @@
 package ng.bayue.other.learn;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-
 
 public class ParseJson {
 	
@@ -18,6 +13,13 @@ public class ParseJson {
 			+ "\"抵押物详情\":\"项目涵盖了坝上街A1及A2南北两处地块，总占地面积约为171.52亩（114347.9平方米），规划总建筑面积为130.077万平方米，容积率8.2。其中：地上建筑面积：96.85万平方米，计容面积93.77万平方米；地下建筑面积：33.22万平方米。南块（A2）四证齐全，北块（A1）已有《国有土地使用证》、《建设用地规划许可证》，可以用于抵押。"
 			+ "\n项目总整体投资（含A1地块与A2地块）为98.4亿元，其中，土地拆迁款等13.1亿元，建设投资（含土建、装修；地上、地下；公共基础设施）66亿元，工程建设预备费用3.2亿元，管理费用2.3亿，营销费用4.9亿元，财务费用8.9亿元。目前已投24.2亿，其中，自有资金投入7.7亿元，对外融资16.5亿。项目建设还需投入约75.2亿资金，预计整体实现销售收入132亿元。\",\"备注\":\"测试用数据\"}";
 	
+	/**
+	 * <pre>
+	 * 使用net.sf.json解析json字符串时，字符串中不能包含特殊字符，否则会抛异常，可以使用alibaba的fastjson
+	 * </pre>
+	 *
+	 * @param str
+	 */
 	@SuppressWarnings({ "unused", "rawtypes" })
 	public static void parse(String str){
 		net.sf.json.JSONObject o = net.sf.json.JSONObject.fromObject(str);

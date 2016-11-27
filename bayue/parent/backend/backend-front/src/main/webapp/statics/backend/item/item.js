@@ -38,6 +38,10 @@ $(function(){
 	$("#spu").on('blur',function(){
 		var _this = $(this);
 		var spu = _this.val();
+		if(!spu) {
+			$("#promptMsg").empty(); 
+			return;
+		}
 		var regex = /^\d*$/;
 		if(!regex.test(spu)){
 			$("#promptMsg").text("SPU输入有误,只能包含数字");

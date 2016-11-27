@@ -65,6 +65,11 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 		super.clearCache(principals);
 	}
 	
+	public void onLogout(PrincipalCollection principals)  
+    { 
+		clearCache();
+    }
+	
 	
 
 }

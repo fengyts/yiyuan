@@ -18,14 +18,15 @@ js=[
 '/statics/plugin/swfupload/js/handlers.js',
 '/statics/plugin/baidu_webuploader/webuploader.min.js',
 '/statics/backend/item/item_copy.js',
-'/statics/backend/item/item.js'
+'/statics/backend/item/item.js',
+'/statics/common/imgupload/upload.js'
 ] 
 css=[
 '/statics/common/common-css/common.css',
 '/statics/common/common-css/style.css',
 '/statics/plugin/select2/css/select2.css',
 '/statics/plugin/baidu_webuploader/webuploader.css',
-'/statics/backend/item/imgupload.css'
+'/statics/backend/item/image-upload/style.css'
 ] >
 <form id="itemSaveForm" action="save.htm" method="post" enctype="multipart/form-data">
 	<#--

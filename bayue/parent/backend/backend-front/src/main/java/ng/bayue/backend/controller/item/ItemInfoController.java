@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -30,7 +31,9 @@ public class ItemInfoController {
 	private DictionaryAO dictionaryAO;
 
 	@RequestMapping({ "/list" })
-	public String listItemInfo(Model model) {
+	public String listItemInfo(Model model,ItemInfoDO infoDO,
+			@RequestParam(value="pageNo", defaultValue="1")Integer pageNo,
+			@RequestParam(value="pageSize", defaultValue="10")Integer pageSize) {
 
 		return "/backend/item/iteminfo/list";
 	}

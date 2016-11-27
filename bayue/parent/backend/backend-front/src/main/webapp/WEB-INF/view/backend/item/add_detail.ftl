@@ -128,10 +128,12 @@
 				<td >
 					<input type="text" class="input-text lh30" size="25" name="specifications" id="specifications" maxlength=60 onMouseOver="this.title=this.value" />
 				</td>
+				<#--
 				<td class="td_right">无理由退货天数:</td>
 				<td >
 					<input type="text" class="input-text lh30" size="25" name="returnDays" id="returnDays" maxlength=60 onMouseOver="this.title=this.value" />
 				</td>
+				-->
 				<#--
 				<td class="td_right">箱规:</td>
 				<td>
@@ -154,8 +156,8 @@
 		<#--
 		<#include "/backend/item/subpages/add_pictures.ftl">
 		-->
-		
 		<#include "/backend/item/uploadImg.ftl"/>
+		
 		
 		<#--
 		<#include "/backend/item/subpages/add_description.ftl">
@@ -164,80 +166,5 @@
 		-->
 		
 	</div>
-	
-	
-	<#--
-	<div class="box_border">
-		<div class="box_top">
-			<b class="pl15">供应商信息</b>
-		</div>
-		<div class="box_center">
-		<div class="">
-			如果prdid已经关联了自营（美囤妈妈）的商家，就不能再选择了
-			<input type="button" id="selectSupplierbtn"  value="选择供应商" class="ext_btn ext_btn_submit m10" status="${hasMeitunSeller}">
-		</div>
-		<table class="input tabContent" id="suppListTable">
-			<tr>
-				<th width="60">SKU编号</th>
-				<th width="200">商家名称</th>
-				<th width="100">商家商品码（条形码）</th>
-				<th width="60">市场价</th>
-				<th width="60">试用邮费</th>
-				<th width="60">上下架</th>
-				<th width="60">类型</th>
-				<th width="60" style="text-align:left"><input type="checkbox" id="choosePullFlag">拉取</th>
-				<th width="60" style="text-align:left"><input type="checkbox" id="chooseNoRecommend">推荐</th>
-				<th width="100" style="text-align:left"><input type="checkbox" id="chooseItemStatus">批量上架</th>
-			</tr>
-			<#list detailSkuList as l >
-			<tr class="skuList">
-			<td width="60">${l.sku}</td>
-				<input type="hidden" name="skuId" value="${l.id}" />
-				<input type="hidden" name="supplierId" value="${l.spId}" />
-				<td width="200">${l.spName}</td>
-				<td width="200">${l.barcode}</td>
-				<td width="60"><input type="text" class="input-text lh30 ml20" size="5" value="${l.basicPrice}" maxlength=9 name="basicPrice" /></td>
-				<td width="60">
-				<input type="hidden" class="input-text lh30 ml20" size="5" value="${l.sort}" maxlength=4 name="sort" />
-				<input type="text" class="input-text lh30 ml20" size="5" value="${l.postage}" maxlength=4 name="postage" />
-				</td>
-				<td width="60">
-					<#if "${l.status}"=="0"> 未上架</#if>
-					<#if "${l.status}"=="1"> 已上架</#if>
-				    <#if "${l.status}"=="2"> 作废</#if>
-				</td>
-				<td width="60">
-					<#if "${l.saleType}"=="0">
-						美囤妈妈
-					</#if>
-					<#if "${l.saleType}"=="1">
-						商家
-					</#if>
-					
-				</td>
-				<td width="60"> <input type="checkbox" name="pullFlag" <#if "${l.pullFlag}"=="0"> checked </#if> value="${l.pullFlag}" >拉取</td>
-				<td width="60"> <input type="checkbox" name="noRecommend" <#if "${l.noRecommend}"=="1"> checked </#if> value="${l.noRecommend}" >推荐</td>
-				操作类型 自营的，可以添加供应商
-			    <td width="100">
-			        <#if "${l.status}"=="2"><#else>
-			         <input type="checkbox" name="status" <#if "${l.status}"=="1"> checked </#if> value="${l.status}" >上架
-				    	<a id="${l.id}" href="javascript:void(0);" class="cancelSkuBtn">[作废]</a>
-					   	<#if l.saleType==0 >
-							<a id="${l.id}" href="javascript:void(0);" class="querySkuSupplier">[供应商]</a>
-						<#else>
-					  </#if>
-					  <#if detail.wavesSign==2 > 
-				   	 </br>
-						<a id="${l.id}" href="javascript:void(0);" class="querySkuArtNumber">[备案信息]</a>
-					 </#if> 
-			        </#if>		    
-				</td>
-			</tr>	
-			</#list>
-			
-		</table>
-	 </div>
-	 -->
-	 
 	 
 </div>

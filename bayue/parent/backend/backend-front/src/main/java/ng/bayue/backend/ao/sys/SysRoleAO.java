@@ -90,9 +90,9 @@ public class SysRoleAO {
 		sysRoleDOValid.setName(sysRoleDO.getName());
 		sysRoleDOValid.setCode(sysRoleDO.getCode());
 		
-		if(isExist(sysRoleDOValid)){
-			return ResultMessage.validIsExist();
-		}
+//		if(isExist(sysRoleDOValid)){
+//			return ResultMessage.validIsExist();
+//		}
 		sysRoleDO.setModifyTime(new Date());
 		
 		if(StringUtils.isEmpty(menuIds)){
