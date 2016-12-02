@@ -24,9 +24,9 @@
 						<td>菜单类型:</td>
 						<td>
 							<select name="menuType" class="select">
-								<option value="0" <#if 0==sysMenuDO.menuType>selected = "selected"</#if>>导航菜单</option>
-								<option value="1" <#if 1==sysMenuDO.menuType>selected = "selected"</#if>>(主/子)菜单</option>
-								<option value="2" <#if 2==sysMenuDO.menuType>selected = "selected"</#if>>按钮</option>
+								<option value="0" <#if 1==sysMenuDO.menuType>selected = "selected"</#if>>导航菜单</option>
+								<option value="1" <#if 2==sysMenuDO.menuType>selected = "selected"</#if>>(主/子)菜单</option>
+								<option value="2" <#if 3==sysMenuDO.menuType>selected = "selected"</#if>>按钮</option>
 							</select>
 						</td>
 					</tr>

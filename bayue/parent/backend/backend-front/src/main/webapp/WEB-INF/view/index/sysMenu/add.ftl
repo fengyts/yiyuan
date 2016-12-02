@@ -21,9 +21,9 @@
 						<td>菜单类型:</td>
 						<td>
 							<select name="menuType" class="select">
-								<option value="0">导航菜单</option>
-								<option value="1">(主/子)菜单</option>
-								<option value="2">按钮</option>
+								<option value="1">导航菜单</option>
+								<option value="2">(主/子)菜单</option>
+								<option value="3">按钮</option>
 							</select>
 						</td>
 					</tr>

@@ -19,13 +19,12 @@
 
 		<dependency>
 			<groupId>ng.bayue</groupId>
-			<artifactId>base-client</artifactId>
+			<artifactId>item-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
 		<dependency>
 			<groupId>ng.bayue</groupId>
-			<artifactId>item-client</artifactId>
+			<artifactId>base-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

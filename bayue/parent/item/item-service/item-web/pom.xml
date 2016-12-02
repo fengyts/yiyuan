@@ -16,10 +16,6 @@
 	<name>item-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<build>
-		<finalName>item-web</finalName>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>ng.bayue</groupId>
@@ -27,5 +23,9 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<finalName>item-web</finalName>
+	</build>
 
 </project>

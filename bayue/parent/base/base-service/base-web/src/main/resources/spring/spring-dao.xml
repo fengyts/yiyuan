@@ -10,8 +10,11 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	default-autowire="byName">
 
+	<!-- <context:component-scan base-package="ng.bayue.base.persist.mybatis ng.bayue.base.service.impl" /> -->
+	<context:component-scan base-package="ng.bayue.base.*">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
 	<context:annotation-config />
-	<context:component-scan base-package="ng.bayue.base.persist.mybatis ng.bayue.base.service.impl" />
 
 	<!--创建jdbc数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

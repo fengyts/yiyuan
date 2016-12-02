@@ -3,6 +3,7 @@ package ng.bayue.item.service;
 import java.util.List;
 
 import ng.bayue.item.domain.ItemInfoDO;
+import ng.bayue.item.domain.dto.ItemInfoDTO;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.util.Page;
  /**
@@ -69,22 +70,22 @@ public interface ItemInfoService {
 	/**
 	 * 动态返回 商品基础信息 分页列表
 	 * @param itemInfoDO
-	 * @return Page<ItemInfoDO>
+	 * @return Page<ItemInfoDTO>
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-07-13 13:17:52
 	 */
-	Page<ItemInfoDO> queryPageListByItemInfoDO(ItemInfoDO itemInfoDO);
+	Page<ItemInfoDTO> queryPageListByItemInfoDO(ItemInfoDO itemInfoDO);
 
 	/**
 	 * 动态返回 商品基础信息 分页列表
 	 * @param itemInfoDO
 	 * @param startPage 起始页
 	 * @param pageSize 每页记录数
-	 * @return Page<ItemInfoDO>
+	 * @return Page<ItemInfoDTO>
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-07-13 13:17:52
 	 */
-	Page<ItemInfoDO> queryPageListByItemInfoDOAndStartPageSize(ItemInfoDO itemInfoDO,int startPage,int pageSize);
+	Page<ItemInfoDTO> queryPageListByItemInfoDOAndStartPageSize(ItemInfoDO itemInfoDO,int startPage,int pageSize);
 	
 	/**
 	 * <pre>

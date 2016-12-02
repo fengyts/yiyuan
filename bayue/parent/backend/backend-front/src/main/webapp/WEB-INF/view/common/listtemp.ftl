@@ -42,7 +42,6 @@ css=[
 			    		<th>商品显示名</th>
 			    		<th>大类</th>
 			    		<th>小类</th>
-			    		<th>单位</th>
 			    		<th>操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
@@ -51,9 +50,7 @@ css=[
 			    			<td class="td_center">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
-			    			<td class="td_center">${obj.largeCateName}</td>
-			    			<td class="td_center">${obj.smallCateName}</td>
-			    			<td class="td_center">${obj.unitName}</td>
+			    			<td class="td_center"></td>
 			    			<td class="td_center"></td>
 			    		</tr>
 			    	</#list>

@@ -37,16 +37,6 @@ public class CategoryServiceImpl  implements CategoryService{
 		}
 	}
 
-//	@Override
-//	public int updateById(CategoryDO categoryDO) throws ServiceException {
-//		try {
-//			return (Integer) categoryDAO.updateById(categoryDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
-
 	@Override
 	public int update(CategoryDO categoryDO,boolean isAllField) throws ServiceException {
 		try {
@@ -70,16 +60,6 @@ public class CategoryServiceImpl  implements CategoryService{
             throw new ServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(CategoryDO categoryDO) throws ServiceException {
-//		try {
-//			return (Integer) categoryDAO.updateDynamic(categoryDO);
-//		}catch(DAOException e){
-//			logger.error(e);
-//            throw new ServiceException(e);
-//		}
-//	}
 
 	@Override
 	public CategoryDO selectById(Long id) throws ServiceException {
@@ -195,6 +175,11 @@ public class CategoryServiceImpl  implements CategoryService{
 	public List<CategoryDO> selectByIds(List<Long> ids) {
 		if(CollectionUtils.isEmpty(ids)){
 			return null;
+		}
+		try {
+			return categoryDAO.selectByIds(ids);
+		} catch (DAOException e) {
+			logger.error("", e);
 		}
 		return null;
 	}

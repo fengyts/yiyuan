@@ -10,18 +10,17 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"
-		>
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	
 	
-	<context:annotation-config />
-	<context:component-scan base-package="ng.bayue.backend.persist.mybatis ng.bayue.backend.service.impl" />
+	<!-- <context:annotation-config />
+	<aop:aspectj-autoproxy />
+	<mvc:annotation-driven /> -->
+	
 	<task:annotation-driven/>
 	
-	<aop:aspectj-autoproxy />
-	<mvc:annotation-driven />
+	<context:component-scan base-package="ng.bayue.backend.persist.mybatis ng.bayue.backend.service.impl" />
 	
-
 	<util:properties id="meta"
 		location="classpath:config/metainfo.properties"></util:properties>
 	<context:property-placeholder location="classpath:config/metainfo.properties"

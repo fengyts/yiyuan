@@ -139,7 +139,7 @@
  			base_dictionary
  		WHERE id IN
  		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
- 			#{id}
+ 			#{item}
  		</foreach>
  	</select>
 

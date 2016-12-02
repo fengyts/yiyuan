@@ -185,7 +185,7 @@
 			base_category
 		WHERE id IN
 		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-			#{id}
+			#{item}
 		</foreach>
 	</select>
 

@@ -69,7 +69,13 @@
 	</resultMap>
 
 	<sql id="MybatisSysUserDAO_all_column_fields">
-	      id,login_name,user_name,password,salt,email,mobile,create_user_id,create_time,modify_user_id,modify_time,last_login_time,last_login_ip,status,user_detail
+	      id,login_name,user_name,password,salt,email,mobile,create_user_id,create_time,
+	      modify_user_id,modify_time,last_login_time,last_login_ip,status,user_detail
+ 	</sql>
+ 	<sql id="MybatisSysUserDAO_all_column_fields_alias">
+	      su.id,su.login_name,su.user_name,su.password,su.salt,su.email,su.mobile,
+	      su.create_user_id,su.create_time,su.modify_user_id,su.modify_time,
+	      su.last_login_time,su.last_login_ip,su.status,su.user_detail
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisSysUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -215,7 +221,7 @@
  	</sql>
  	<select id="MybatisSysUserDAO_select_sysUser_vo" resultMap="SysUserVOResultMap" parameterType="string">
  		SELECT 
- 			su.*,
+ 			<include refid="MybatisSysUserDAO_all_column_fields_alias"/>,
 			<include refid="allRoles"/>,
 			<include refid="allMenus"/>
 		FROM be_sys_user su
