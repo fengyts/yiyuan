@@ -1,12 +1,16 @@
 <#include "/common/common.ftl"/>
-<@backend title="商品spu管理" js=[
-'/statics/plugin/layer/layer.min.js'
-] 
+
+<@backend title="商品spu管理"
+js=[
+'/statics/plugin/layui-v1.0.2/layui/layui.js',
+'/statics/backend/item/iteminfo.js'
+]
 css=[
-] >
+'/statics/plugin/layui-v1.0.2/layui/css/layui.css'
+]>
 
 <div class="box">
-<form method="post" action="${domain}/item/itemInfo/list.htm" id="itemInfoForm">
+<form class="jqtransform" method="post" id="itemInfoForm" action="${domain}/item/itemInfo/list.htm">
 		<#-- 搜索表单模块 -->
 		<div id="search_bar" class="box mt10">
 			<div class="box_border">
@@ -47,14 +51,16 @@ css=[
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
-			    		<tr>
+			    		<tr class="tr">
 			    			<td class="td_center">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
 			    			<td class="td_center">${obj.largeCateName}</td>
 			    			<td class="td_center">${obj.smallCateName}</td>
 			    			<td class="td_center">${obj.unitName}</td>
-			    			<td class="td_center"></td>
+			    			<td class="td_center">
+			    				<a href="javascript:void(0);" param="${obj.id}">[编辑]</a>
+			    			</td>
 			    		</tr>
 			    	</#list>
 			    	</#if>

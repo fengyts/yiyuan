@@ -10,7 +10,7 @@ $(document).ready(function(){
 	});
 	
 	//获取类别
-	$("#largeId").change(event.data,function(v){
+	$("#largeId").change(this,function(v){
 		$.post(domain+'/basedata/category/linkageAjaxJson',{"id":v.val},function(result){
 			var _smallIdSelector = $("#smallId");
 			if(!result){

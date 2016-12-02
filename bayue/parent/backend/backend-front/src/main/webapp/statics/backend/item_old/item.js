@@ -1,7 +1,8 @@
 var pageii;
 $(function(){
 	
-	imgUpload();
+	//上传图片
+	//imgUpload();
 	
 	$(".select2").select2();
 	$(".select2").css("margin-left","1px");

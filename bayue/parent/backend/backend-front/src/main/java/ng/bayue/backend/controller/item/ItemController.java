@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <pre>
- * 商品管理
+ * 商品管理通用controller
  * </pre>
  *
  * @author fengyts
