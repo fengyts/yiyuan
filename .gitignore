@@ -11,6 +11,7 @@ target/
 
 #.external*/
 .externalToolBuilders/
+mybatis-generate/
 
 .launch
 bayue/parent/backend/backend-service/backend-web/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator (2).launch
