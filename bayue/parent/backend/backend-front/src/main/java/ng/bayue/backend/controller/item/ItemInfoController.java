@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ng.bayue.backend.ao.basedata.CategoryAO;
 import ng.bayue.backend.ao.basedata.DictionaryAO;
 import ng.bayue.backend.ao.item.ItemInfoAO;
+import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.enums.DictionaryEnums;
@@ -58,6 +59,12 @@ public class ItemInfoController {
 		model.addAttribute("unitList", unitList);
 
 		return VIEW_PATH + "add";
+	}
+	
+	@RequestMapping({"/save"})
+	public @ResponseBody ResultMessage saveItemInfo(ItemInfoDO infoDO){
+		
+		return new ResultMessage();
 	}
 
 	@RequestMapping({ "/itemInfoJson" })
