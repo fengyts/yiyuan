@@ -29,15 +29,15 @@
 					</tr>
 					<tr>
 						<td>菜单名称:</td>
-						<td><input type="text" name="name" class="input-text lh25" size="20" maxlength="50"/></td>
+						<td><input type="text" name="name" class="input-text lh25" size="50" maxlength="50"/></td>
 					</tr>
 					<tr>
 						<td>菜单编码:</td>
-						<td><input type="text" name="code" class="input-text lh25" size="20" maxlength="50"/></td>
+						<td><input type="text" name="code" class="input-text lh25" size="50" maxlength="50"/></td>
 					</tr>
 					<tr>
 						<td>菜单url:</td>
-						<td><input type="text" name="url" class="input-text lh25" size="20" maxlength="50"/></td>
+						<td><input type="text" name="url" class="input-text lh25" size="50" maxlength="50"/></td>
 					</tr>
 					<tr>
 						<td>父级菜单:</td>

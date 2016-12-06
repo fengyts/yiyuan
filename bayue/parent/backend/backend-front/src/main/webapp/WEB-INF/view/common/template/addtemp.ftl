@@ -93,7 +93,7 @@ css=[
 	<hr/>
 	<div>
 		<div class="col-sm-12 panel-toolbar text-left dr-slash-text" id="operateBtn">
-			<a href="javascript:void(0);" onclick="cancel()" class="btn btn-warning">取消</a>
+			<a href="javascript:void(0);" onclick="cancel()" class="btn btn-warning" id="cancelBtn">取消</a>
 			<a href="javascript:void(0);" onclick="save()" class="btn btn-primary">保存</a>
 		</div>
 	</div>

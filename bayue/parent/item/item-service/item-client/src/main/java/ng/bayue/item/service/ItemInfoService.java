@@ -107,5 +107,18 @@ public interface ItemInfoService {
 	 * @throws ServiceException
 	 */
 	List<ItemInfoDO> selectBySpus(List<String> spus) throws ServiceException;
+	
+	/**
+	 * <pre>
+	 * 更新商品spu信息
+	 * </pre>
+	 *
+	 * @param infoDO
+	 * @param isRebuildSpu 修改类别时需要根据小类code重新生成spu编码；true-重新生成spu编码，false-不重新生成
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateRebuildSpu(ItemInfoDO infoDO,boolean isRebuildSpu) throws ServiceException;
+	
 
 }

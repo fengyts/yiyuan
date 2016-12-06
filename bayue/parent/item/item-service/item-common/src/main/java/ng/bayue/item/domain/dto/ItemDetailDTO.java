@@ -6,6 +6,9 @@ public class ItemDetailDTO implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -6914019869680731771L;
+	
+	/** detial主键id */
+	private Long id;
 
 	/** 大类ID */
 	private Long largeId;
@@ -42,6 +45,14 @@ public class ItemDetailDTO implements Serializable {
 
 	/** 状态0-未上架 1-上架 2-作废 默认0 */
 	private Integer status;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Long getLargeId() {
 		return largeId;

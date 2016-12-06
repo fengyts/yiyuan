@@ -21,10 +21,26 @@ $(function() {
 			// shadeClose : true,
 			shade : 0.3,
 			maxmin : true,
-			fix : false,
+			fixed : false,
 			scrollbar : false,
 			area : [ '1000px', '600px' ],
 			content : domain + '/item/itemInfo/addItemInfo.htm',
+		});
+	});
+	
+	$(".editBtn").on('click',function(){
+		var id = $(this).attr("param");
+		pageii = layer.open({
+			type : 2,
+			title : '商品spu编辑',
+			offset: '5%',
+			// shadeClose : true,
+			shade : 0.3,
+			maxmin : true,
+			fix : false,
+			scrollbar : false,
+			area : [ '1000px', '600px' ],
+			content : domain + '/item/itemInfo/edit.htm?id='+id,
 		});
 	});
 	
@@ -53,6 +69,30 @@ $(function() {
 			url : 'save',
 			dataType : 'text',
 			data : $('#itemInfoAddForm').serialize(),
+			type : "post",
+			cache : false,
+			error : function(request){
+				alert("Server Connection Failure...");
+			},
+			success : function(res) {
+				var data = JSON.parse(res);
+				if (1 == data.result) {// 成功
+					layer.alert(data.message, 1, function() {
+						parent.window.location.reload();
+		            	parent.layer.close(parent.pageii);
+					});
+				} else {// 失败
+					layer.alert(data.message, 8);
+				}
+			}
+		});
+	});
+	
+	$("#updateBtn").on('click',function(){
+		$.ajax({
+			url : 'update',
+			dataType : 'text',
+			data : $('#itemInfoEditForm').serialize(),
 			type : "post",
 			cache : false,
 			error : function(request){

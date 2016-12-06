@@ -25,7 +25,7 @@ import ng.bayue.util.Page;
 @RequestMapping({ "/item/itemInfo/" })
 public class ItemInfoController {
 
-	private static final String VIEW_PATH = "/backend/item/iteminfo/";
+	private static final String BASE_VIEW = "/backend/item/iteminfo/";
 
 	@Autowired
 	private ItemInfoAO itemInfoAO;
@@ -44,11 +44,24 @@ public class ItemInfoController {
 		if (CollectionUtils.isEmpty(page.getList())) {
 			model.addAttribute("noRecoders", "暂无数据");
 		}
-		return VIEW_PATH + "list";
+		return BASE_VIEW + "list";
 	}
 
 	@RequestMapping({ "/addItemInfo" })
 	public String addItemInfo(Model model) {
+		initCategoryAndDictionary(model);
+
+		return BASE_VIEW + "add";
+	}
+
+	/**
+	 * <pre>
+	 * 初始化大类和单位
+	 * </pre>
+	 *
+	 * @param model
+	 */
+	private void initCategoryAndDictionary(Model model) {
 		List<CategoryDO> listFir = categoryAO.listFirst();
 		DictionaryDO dictionaryDO = new DictionaryDO();
 
@@ -57,14 +70,12 @@ public class ItemInfoController {
 
 		model.addAttribute("categoryFirList", listFir);
 		model.addAttribute("unitList", unitList);
-
-		return VIEW_PATH + "add";
 	}
-	
-	@RequestMapping({"/save"})
-	public @ResponseBody ResultMessage saveItemInfo(ItemInfoDO infoDO){
-		
-		return new ResultMessage();
+
+	@RequestMapping({ "/save" })
+	public @ResponseBody ResultMessage saveItemInfo(ItemInfoDO infoDO) {
+
+		return itemInfoAO.saveItemInfo(infoDO);
 	}
 
 	@RequestMapping({ "/itemInfoJson" })
@@ -72,6 +83,35 @@ public class ItemInfoController {
 	public ItemInfoDO itemInfoBySpu(String spu) {
 		ItemInfoDO infoDO = itemInfoAO.getInfoBySPU(spu);
 		return infoDO;
+	}
+
+	@RequestMapping("/edit")
+	public String edit(Model model, Long id) {
+		if (null == id) {
+			return null;
+		}
+		ItemInfoDO infoDO = itemInfoAO.selectItemInfoById(id);
+		model.addAttribute("infoDO", infoDO);
+
+		// 初始化大类和单位
+		initCategoryAndDictionary(model);
+
+		// 根据大类初始化二级分类
+		long largeId = infoDO.getLargeId();
+		List<CategoryDO> smalCate = categoryAO.selectByParentId(largeId);
+		model.addAttribute("smallCate", smalCate);
+
+		return BASE_VIEW + "edit";
+	}
+	
+	@RequestMapping("update")
+	@ResponseBody
+	public ResultMessage updateInfoDO(ItemInfoDO infoDO,Long oldSmallId){
+		if(null == oldSmallId){
+			return ResultMessage.serverInnerError();
+		}
+		boolean isRebuildSPU = infoDO.getSmallId().longValue() == oldSmallId.longValue();
+		return itemInfoAO.updateItemInfo(infoDO, isRebuildSPU);
 	}
 
 }

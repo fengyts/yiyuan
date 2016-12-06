@@ -9,32 +9,34 @@
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemInfoService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
-	
 	<bean id="itemDetailService"
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="${item.hessian}/itemDetailService.hessian" />
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemDetailService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
-	
 	<bean id="itemPicturesService"
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="${item.hessian}/itemPicturesService.hessian" />
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemPicturesService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
-	
 	<bean id="detailSpecService"
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="${item.hessian}/detailSpecService.hessian" />
 		<property name="serviceInterface" value="ng.bayue.item.service.DetailSpecService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
-	
 	<bean id="itemService"
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="${item.hessian}/itemService.hessian" />
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="itemManagerService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${item.hessian}/itemManagerService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.item.service.ItemManagerService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
 

@@ -96,6 +96,17 @@ public class ResultMessage implements Serializable{
 	
 	/**
 	 * <pre>
+	 * 校验数据正在使用
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public static ResultMessage validIsUsed(){
+		return new ResultMessage(Failure,Messages.IsUsed);
+	}
+	
+	/**
+	 * <pre>
 	 * 校验必填参数项为空时返回值
 	 * </pre>
 	 *

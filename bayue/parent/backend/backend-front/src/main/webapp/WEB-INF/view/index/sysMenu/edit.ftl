@@ -24,23 +24,23 @@
 						<td>菜单类型:</td>
 						<td>
 							<select name="menuType" class="select">
-								<option value="0" <#if 1==sysMenuDO.menuType>selected = "selected"</#if>>导航菜单</option>
-								<option value="1" <#if 2==sysMenuDO.menuType>selected = "selected"</#if>>(主/子)菜单</option>
-								<option value="2" <#if 3==sysMenuDO.menuType>selected = "selected"</#if>>按钮</option>
+								<option value="1" <#if 1==sysMenuDO.menuType>selected = "selected"</#if>>导航菜单</option>
+								<option value="2" <#if 2==sysMenuDO.menuType>selected = "selected"</#if>>(主/子)菜单</option>
+								<option value="3" <#if 3==sysMenuDO.menuType>selected = "selected"</#if>>按钮</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>菜单名称:</td>
-						<td><input type="text" name="name" class="input-text lh25" size="20" maxlength="50" value="${sysMenuDO.name}"/></td>
+						<td><input type="text" name="name" class="input-text lh25" size="50" maxlength="50" value="${sysMenuDO.name}"/></td>
 					</tr>
 					<tr>
 						<td>菜单编码:</td>
-						<td><input type="text" name="code" class="input-text lh25" size="20" maxlength="50" value="${sysMenuDO.code}"/></td>
+						<td><input type="text" name="code" class="input-text lh25" size="50" maxlength="50" value="${sysMenuDO.code}"/></td>
 					</tr>
 					<tr>
 						<td>菜单url:</td>
-						<td><input type="text" name="url" class="input-text lh25" size="20" maxlength="50" value="${sysMenuDO.url}"/></td>
+						<td><input type="text" name="url" class="input-text lh25" size="50" maxlength="50" value="${sysMenuDO.url}"/></td>
 					</tr>
 					<tr>
 						<td>父级菜单:</td>

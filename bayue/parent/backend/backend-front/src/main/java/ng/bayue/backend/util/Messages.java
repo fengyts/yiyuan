@@ -20,6 +20,8 @@ public final class Messages implements Serializable {
 	
 	public static final String IsExist = "数据已经存在";
 	
+	public static final String IsUsed = "正在使用中";
+	
 	/** 冒号 */
 	private static final String Colon = ":";
 

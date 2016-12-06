@@ -135,6 +135,7 @@ public class ItemDetailAO {
 		return page;
 	}
 
+	@Deprecated
 	public ResultMessage saveItemInfoAndDetail(ItemDTO itemDto) {
 
 		String spu = itemDto.getSpu();
@@ -194,6 +195,11 @@ public class ItemDetailAO {
 			itemService.saveInfoAndDetail(null, detailDO);
 		}
 
+		return new ResultMessage();
+	}
+	
+	public ResultMessage saveItemDetail(ItemDTO itemDto){
+		
 		return new ResultMessage();
 	}
 

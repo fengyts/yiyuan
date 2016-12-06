@@ -38,7 +38,7 @@ public class ItemDTO implements Serializable {
 	// ------------------------------------------------
 
 	/** detail的主键 */
-	private Long detailId;
+	private Long id;
 
 	/** 商品ID */
 	private Long itemId;
@@ -166,12 +166,12 @@ public class ItemDTO implements Serializable {
 		this.spuRemark = spuRemark;
 	}
 
-	public Long getDetailId() {
-		return detailId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDetailId(Long detailId) {
-		this.detailId = detailId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getItemId() {
