@@ -103,15 +103,28 @@ public class ItemInfoController {
 
 		return BASE_VIEW + "edit";
 	}
-	
+
 	@RequestMapping("update")
 	@ResponseBody
-	public ResultMessage updateInfoDO(ItemInfoDO infoDO,Long oldSmallId){
-		if(null == oldSmallId){
+	public ResultMessage updateInfoDO(ItemInfoDO infoDO, Long oldSmallId) {
+		if (null == oldSmallId) {
 			return ResultMessage.serverInnerError();
 		}
 		boolean isRebuildSPU = infoDO.getSmallId().longValue() == oldSmallId.longValue();
 		return itemInfoAO.updateItemInfo(infoDO, isRebuildSPU);
+	}
+
+	@RequestMapping("initSpuList")
+	public String initSpuList(Model model, ItemInfoDO infoDO,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+		Page<ItemInfoDTO> page = itemInfoAO.queryPageList(infoDO, pageNo, pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("infoDO", infoDO);
+		if (CollectionUtils.isEmpty(page.getList())) {
+			model.addAttribute("noRecoders", "暂无数据");
+		}
+		return "/backend/item/itemdetail/initInfo";
 	}
 
 }

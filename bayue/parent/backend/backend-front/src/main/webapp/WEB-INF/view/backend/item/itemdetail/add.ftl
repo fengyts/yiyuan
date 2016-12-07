@@ -1,11 +1,8 @@
 <#include "/common/common.ftl" />
 
-<@backend title="商品新增spu" 
+<@backend title="商品新增" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
-'/statics/plugin/select2/js/select2.js',
-'/statics/plugin/select2/js/select2Util.js',
-'/statics/plugin/select2/js/select2_locale_zh-CN.js',
 '/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js',
 '/statics/plugin/My97DatePicker/WdatePicker.js',
 '/statics/backend/item/itemDetail.js'
@@ -13,17 +10,14 @@ js=[
 css=[
 '/statics/common/common-css/common.css',
 '/statics/common/common-css/style.css',
-'/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css',
-'/statics/plugin/select2/css/select2.css'
+'/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css'
 ]>
 
 
 <div class="panel-body box_border">
 <form id="itemInfoAddForm" action="" class="form-horizontal dr-form-bordered">
 	<div style="display:none;">
-		<#if infoDO.id?exists>
-			<input type="hidden" id="id" name="id" value="${detailDO.id}" />
-		</#if>
+		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
 	</div>
 	<div class="form-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -33,7 +27,13 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">SPU</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="spu" name="spu" value="${detailDO.spu}" placeholder="保存时由系统生成" readonly="readonly"/>
+			<div class="input-group">
+				<input type="text"  class="form-control" readonly="readonly">
+				<span class="btn btn-default btn-sm input-group-addon" id="selectSPU">
+					<span class="glyphicon glyphicon-search"></span>
+					选择SPU
+				</span>
+			</div>
 		</div>
 		<label class="col-md-2 control-label">PRDID</label>
 		<div class="col-md-4">

@@ -1,6 +1,7 @@
 <#include "/common/common.ftl"/>
 <@backend title="商品spu管理" js=[
 '/statics/plugin/layer/layer.min.js',
+'/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/common/common-js/tab.js',
 '/statics/backend/item/itemDetail.js'
 ] 
@@ -43,7 +44,7 @@ css=[
 			<div class="box span10 oh">
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
-			    		<th>ID</th>
+			    		<th width="5%">ID</th>
 			    		<th>SPU</th>
 			    		<th>PRDID</th>
 			    		<th>商品显示名</th>
