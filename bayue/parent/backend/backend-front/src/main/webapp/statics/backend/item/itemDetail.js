@@ -28,6 +28,7 @@ $(function(){
 		parent.window.layer.close(parent.pageii);
 	});
 	
+	/** 弹出spu列表选择spu信息 */
 	$("#selectSPU").on('click',function(){
 		pageii = layer.open({
 			type : 2,
@@ -44,7 +45,18 @@ $(function(){
 	});
 	
 	$("#confirmBtn").on('click',function(){
+		var _radio = $(".selectSpu:checked");
+		if(_radio.length != 1){
+			layer.alert("必须选择spu信息",{icon:8});
+			return;
+		}
+		var _tds = _radio.parent().nextAll();
+		var _itemId = _tds.eq(0).text(), _spu = _tds.eq(1).text(), _mainTitle = _tds.eq(2).text();
 		
+		parent.window.$("#itemId").val(_itemId);
+		parent.window.$("#spu").val(_spu);
+		parent.window.$("#mainTitle").val(_mainTitle);
+		parent.window.layer.close(parent.pageii);
 	});
 	
 	

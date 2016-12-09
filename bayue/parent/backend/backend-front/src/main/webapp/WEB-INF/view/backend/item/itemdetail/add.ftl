@@ -25,27 +25,49 @@ css=[
 	<hr/>
 	
 	<div class="form-group">
-		<label class="col-md-2 control-label">SPU</label>
+		<label class="col-md-2 control-label">SPU<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<div class="input-group">
-				<input type="text"  class="form-control" readonly="readonly">
+				<input type="text"  class="form-control" readonly="readonly" id="spu" name="spu" value="${detailDO.spu}">
+				<input type="hidden" id="itemId" name="itemId" value="${detailDO.itemId}"/>
 				<span class="btn btn-default btn-sm input-group-addon" id="selectSPU">
 					<span class="glyphicon glyphicon-search"></span>
 					选择SPU
 				</span>
 			</div>
 		</div>
-		<label class="col-md-2 control-label">PRDID</label>
+		<label class="col-md-2 control-label">PRDID<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="prdid" name="prdid" value="${detailDO.prdid}" placeholder="保存时由系统生成" readonly="readonly"/>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">SPU名称<span class="dr-asterisk">*</span></label>
+		<label class="col-md-2 control-label">SPU名称<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="mainTitle" name="mainTitle" value="${detailDO.mainTitle}"/>
+			<input type="text" class="form-control" id="mainTitle" name="mainTitle" readonly="readonly" value="${detailDO.mainTitle}"/>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">商品名称<span class="dr-asterisk requiredField">*</span></label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="itemTitle" name="itemTitle" value="${detailDO.itemTitle}"/>
+		</div>
+		<label class="col-md-2 control-label">副标题<span class="dr-asterisk requiredField">*</span></label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="subTitle" name="subTitle" value="${detailDO.subTitle}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">市场价<span class="dr-asterisk requiredField">*</span></label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="basePrice" name="basePrice" value="${detailDO.basePrice}"/>
+		</div>
+		<label class="col-md-2 control-label">状态<span class="dr-asterisk requiredField">*</span></label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="status" name="status" value="${detailDO.status}"/>
+		</div>
+	</div>
+	
 	<div class="form-group">
 		<label class="col-md-2 control-label">备注</label>
 		<div class="col-md-4">

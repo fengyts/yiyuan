@@ -53,7 +53,9 @@ css=[
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td class="td_center"><input type="radio" class="selectSpu"/></td>
+			    			<td class="td_center">
+			    				<input type="radio" class="selectSpu" name="itemId" value="${obj.id}"/>
+			    			</td>
 			    			<td class="td_center">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
