@@ -10,6 +10,7 @@
         <mapper resource="sqlmap/itemPictures-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/detailSpec-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/code-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/itemDesc-mybatis-sqlmap.xml"/>
 
     </mappers>  
     

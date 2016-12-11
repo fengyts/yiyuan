@@ -47,7 +47,7 @@ js=[
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
                       <th width="30">ID</th>
-                      <th width="50">规格编号</th>	
+                      <#--<th width="50">规格编号</th>-->	
 	                  <th width="50">规格</th>
 	                  <th width="50">排序值</th>
 	                  <th width="50">状态</th>
@@ -61,7 +61,7 @@ js=[
 		            <#list page.getList() as spec>
 		                <tr class="tr" >
 				              <td class="td_center">${spec.id}</td>
-				              <td class="td_center">${spec.code}</td>
+				              <#--<td class="td_center">${spec.code}</td>-->
 		 					  <td class="td_center">${spec.spec}</td>
 		 					  <td class="td_center">${spec.sort}</td>
 				              <td class="td_center"><#assign sta="${spec.status}" /><#if sta=='true'>有效<#else>无效</#if></td>

@@ -30,20 +30,20 @@ css=[
 	<hr/>
 	
 	<div class="form-group">
-		<label class="col-md-2 control-label">SPU</label>
-		<div class="col-md-4">
+		<label class="control-label text-center col-xs-3">SPU</label>
+		<div class="col-xs-8">
 			<input type="text" class="form-control" id="spu" name="spu" value="${infoDO.spu}" placeholder="保存时由系统生成" readonly="readonly"/>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">SPU名称<span class="dr-asterisk">*</span></label>
-		<div class="col-md-4">
+		<label class="control-label text-center col-xs-3">SPU名称<span class="dr-asterisk">*</span></label>
+		<div class="col-xs-8">
 			<input type="text" class="form-control" id="mainTitle" name="mainTitle" value="${infoDO.mainTitle}"/>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">一级分类<span class="dr-asterisk">*</span></label>
-		<div class="col-md-4">
+		<label class="control-label text-center col-xs-3">一级分类<span class="dr-asterisk">*</span></label>
+		<div class="col-xs-8">
 			<select name="largeId" class="select2" style="width:275px;" id="largeId">
 				<option value="">--请选择一级分类--</option>
 				<#list categoryFirList as category>
@@ -53,8 +53,8 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">二级分类<span class="dr-asterisk">*</span></label>
-		<div class="col-md-4">
+		<label class="control-label text-center col-xs-3">二级分类<span class="dr-asterisk">*</span></label>
+		<div class="col-xs-8">
 			<select name="smallId" class="select2" style="width:275px;" id="smallId">
 				<option value="">--请选择二级分类--</option>
 				<#list smallCate as smallCate>
@@ -64,8 +64,8 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">单位<span class="dr-asterisk">*</span></label>
-		<div class="col-md-4">
+		<label class="control-label text-center col-xs-3">单位<span class="dr-asterisk">*</span></label>
+		<div class="col-xs-8">
 			<select name="unitId" class="select2" style="width:275px;" id="unitId">
 				<option value="">--请选择单位--</option>
 				<#list unitList as unit>
@@ -75,16 +75,16 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">备注</label>
-		<div class="col-md-4">
-			<textarea class="form-control" rows="3"  id="remark" name="remark">${infoDO.remark}</textarea>
+		<label class="control-label text-center col-xs-3">备注</label>
+		<div class="col-xs-8">
+			<textarea class="form-control" rows="2" id="remark" name="remark">${infoDO.remark}</textarea>
 		</div>
 	</div>
 	
 	<hr/>
 	<div>
 		<div class="col-sm-12 panel-toolbar text-left dr-slash-text" id="operateBtn">
-			<a href="javascript:void(0);" class="btn btn-warning"  onclick="cancel()" id="cancelBtn">取消</a>
+			<a href="javascript:void(0);" class="btn btn-info"  onclick="cancel()" id="cancelBtn">取消</a>
 			<a href="javascript:void(0);" class="btn btn-primary" id="updateBtn">保存</a>
 		</div>
 	</div>

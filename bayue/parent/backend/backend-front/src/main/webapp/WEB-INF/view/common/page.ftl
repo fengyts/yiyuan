@@ -15,7 +15,7 @@
             <#assign lastPageUrl=url+"?pageNo="+(pagination.getTotalPageCount())+"&pageSize="+(pagination.pageSize)> 
             <#assign ss="${formId}"> 
             <div id="pageNodiv"></div>          
-			<ul class="pager">
+			<ul class="mypager">
 				<li class="firstPage">
 					<#if (pagination.pageNo>1)>
 						<a class="vvssso" href="javascript:void(0);" param="1" >首页</a>
@@ -179,19 +179,19 @@
 	<#if isNeedEndMore&&isShowMoreLI><li>...</li></#if>
 	
 	<style type="text/css" mce_bogus="1">
-	.pager{float: right; clear: both; margin-top: 5px;}
-	.pager li{line-height: 18px; display: block; float: left; padding: 0px 5px; margin: 0px 3px; font-size: 12px; border: 1px solid #cccccc;}
-	.pager li:hover{color: #ff9900; border: 1px solid #ff9900;}
-	.pager li:hover a{color: #ff9900;}
-	.pager li a{color: #464646;}
-	.pager li span{color: #cfcfcf;}
-	.pager li.currentPage{border: 1px solid #ff9900; background-color: #ff9900;}
-	.pager li.currentPage span{font-weight: bold; color: #ffffff;}
-	.pager li.pageInfo{color: #464646; border: none; background: none;}
-	.pager li.pageTo{height:20px; color: #464646; border: none; background: none;}
-	.pager li.pageTo input{line-height: 20px;}
-	.pager li.pageTo input.pageToNum{width: 20px; height: 18px; margin-top: 0px; border: 1px solid #cccccc; display:table-cell; vertical-align:top;}
-	.pager li.pageTo input.formButton {width: 40px; background: #F3F3F3;  height: 20px;}
-	.pager li.pageTo input.formButton:hover {background: #ff9900; color: #ffffff;}
+	.mypager {float: right; clear: both; margin-top: 5px;}
+	.mypager li{line-height: 18px; display: block; float: left; padding: 0px 5px; margin: 0px 3px; font-size: 12px; border: 1px solid #cccccc;}
+	.mypager li:hover{color: #ff9900; border: 1px solid #ff9900;}
+	.mypager li:hover a{color: #ff9900;}
+	.mypager li a{color: #464646;}
+	.mypager li span{color: #cfcfcf;}
+	.mypager li.currentPage{border: 1px solid #ff9900; background-color: #ff9900;}
+	.mypager li.currentPage span{font-weight: bold; color: #ffffff;}
+	.mypager li.pageInfo{color: #464646; border: none; background: none;}
+	.mypager li.pageTo{height:20px; color: #464646; border: none; background: none;}
+	.mypager li.pageTo input{line-height: 20px;}
+	.mypager li.pageTo input.pageToNum{width: 20px; height: 18px; margin-top: 0px; border: 1px solid #cccccc; display:table-cell; vertical-align:top;}
+	.mypager li.pageTo input.formButton {width: 40px; background: #F3F3F3;  height: 20px;}
+	.mypager li.pageTo input.formButton:hover {background: #ff9900; color: #ffffff;}
 	</style>
 </#macro>

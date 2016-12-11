@@ -31,16 +31,21 @@ $(function(){
 		addCookie(name, null, options);
 	}
 	var sessionId = $('#sessionId').val();
-	// 编辑器
+	
+	KindEditor.lang({
+        hello : '你好'
+	});
+	// 富文本编辑器
 	KindEditor.ready(function(K) {
 		K.DEBUG=true;
-		editor = K.create("#editor", {
+		editor = K.create("#kindEditor", {
 			height: "300px",
 			items: [
 					"source","|", "justifyleft", "justifycenter", "justifyright",
 					"justifyfull", "insertorderedlist", "insertunorderedlist", 
-					 "fontsize", "forecolor", "hilitecolor", "bold",
-					"italic", "underline", "strikethrough", "|", "image","multiimage","table","|","link","unlink","|", "fullscreen"
+					"fontsize", "forecolor", "hilitecolor", "bold", "italic", 
+					"underline", "strikethrough", "|", "image","multiimage","table",
+					"|","link","unlink","|", "fullscreen", "clearhtml", "hello"
 				],
 			langType: "zh_CN",
 			filterMode: false,
@@ -56,27 +61,7 @@ $(function(){
 				}
 	        }
 		});
-		mobileEditor = K.create("#mobileEditor",{
-			height: "300px",
-			items: [
-					"source","|", "justifyleft", "justifycenter", "justifyright",
-					"justifyfull", "insertorderedlist", "insertunorderedlist", 
-					 "fontsize", "forecolor", "hilitecolor", "bold",
-					"italic", "underline", "strikethrough", "|", "image","multiimage_mobile","table","|","link","unlink","|", "fullscreen"
-				],
-			langType: "zh_CN",
-			filterMode: false,
-			uploadJson : domain + '/item/uploadItemEditor.htm?sid='+sessionId,
-			allowFileManager: false,
-			imageSizeLimit : "300KB",
-			afterChange: function() {
-				this.sync();
-			},
-			afterUpload:function (data) {  alert(data);
-				if(data.message != null && data.message !="undefined"){
-					alert(data.message);
-				}
-	        }
-		});
+		
 	});
+	
 });

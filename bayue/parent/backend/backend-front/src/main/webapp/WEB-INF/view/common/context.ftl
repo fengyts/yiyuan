@@ -14,7 +14,7 @@
 	<!--供应商common css end-->
 	<script src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<#--<script type="text/javascript" src="${domain}/statics/plugin/other/colResizable-1.3.min.js"></script>-->
-	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>	
+	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>
 		
 	<script>var domain = "${domain}";</script>

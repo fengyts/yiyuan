@@ -35,6 +35,11 @@
 		<property name="service" ref="itemManagerService" />
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemManagerService" />
 	</bean>
+	<bean name="/itemDescService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemDescService" />
+		<property name="serviceInterface" value="ng.bayue.item.service.ItemDescService" />
+	</bean>
 
 
 </beans>

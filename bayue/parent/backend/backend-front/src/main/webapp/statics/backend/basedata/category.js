@@ -138,7 +138,9 @@ $(function(){
 		pageii = $.layer({
 			type : 2,
 			title : '类别管理-->新增',
+			border: [3, 0.3, '#000'],
 			shadeClose : true,
+			shade: [0.3, '#000'],
 			maxmin : true,
 			fix : false,
 			area: ['400px', 300],

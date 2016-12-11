@@ -23,7 +23,7 @@ $(function() {
 			maxmin : true,
 			fixed : false,
 			scrollbar : false,
-			area : [ '1000px', '600px' ],
+			area : [ '600px', '500px' ],
 			content : domain + '/item/itemInfo/addItemInfo.htm',
 		});
 	});
@@ -39,7 +39,7 @@ $(function() {
 			maxmin : true,
 			fix : false,
 			scrollbar : false,
-			area : [ '1000px', '600px' ],
+			area : [ '600px', '500px' ],
 			content : domain + '/item/itemInfo/edit.htm?id='+id,
 		});
 	});

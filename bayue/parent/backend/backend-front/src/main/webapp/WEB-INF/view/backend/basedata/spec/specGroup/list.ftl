@@ -47,7 +47,7 @@ js=[
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
                 <tr>
                       <th width="30">ID</th>
-                      <th width="50">编号</th>	
+                      <#--<th width="50">编号</th>-->	
 	                  <th width="100">规格组</th>
 	                  <th width="150">规格组别名</th>
 	                  <th width="50">排序值</th>
@@ -61,7 +61,7 @@ js=[
 		            <#list page.getList() as specGroup>
 		                <tr class="tr">
 				              <td class="td_center">${specGroup.id}</td>
-				              <td class="td_center">${specGroup.code}</td>
+				              <#--<td class="td_center">${specGroup.code}</td>-->
 		 					  <td class="td_center">${specGroup.name}</td>
 		 					  <td class="td_center">${specGroup.alias}</td>
 		 					  <td class="td_center">${specGroup.sort}</td>
