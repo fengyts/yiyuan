@@ -14,7 +14,7 @@ js=[
 css=[
 '/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css',
 '/statics/plugin/baidu_webuploader/webuploader.css',
-'/statics/backend/item_old/image-upload/style.css'
+'/statics/plugin/editor/themes/custom/style.css'
 ]>
 
 

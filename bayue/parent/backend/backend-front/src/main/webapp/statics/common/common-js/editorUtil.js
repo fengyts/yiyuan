@@ -33,7 +33,8 @@ $(function(){
 	var sessionId = $('#sessionId').val();
 	
 	KindEditor.lang({
-        hello : '你好'
+		clearcontent : '清空内容',
+        //empty : '清空',
 	});
 	// 富文本编辑器
 	KindEditor.ready(function(K) {
@@ -45,7 +46,7 @@ $(function(){
 					"justifyfull", "insertorderedlist", "insertunorderedlist", 
 					"fontsize", "forecolor", "hilitecolor", "bold", "italic", 
 					"underline", "strikethrough", "|", "image","multiimage","table",
-					"|","link","unlink","|", "fullscreen", "clearhtml", "hello"
+					"|","link","unlink","|", "fullscreen", "clearhtml", "clearcontent"
 				],
 			langType: "zh_CN",
 			filterMode: false,

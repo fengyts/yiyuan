@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+.ke-icon-clearcontent {
+	background-image: url('./clearcontent.png') !important;
+	width: 16px !important;
+	height: 16px !important;
+}
+

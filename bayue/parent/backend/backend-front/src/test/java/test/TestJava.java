@@ -12,10 +12,14 @@ public class TestJava {
 
 	@Test
 	public void test() {
-		String str = "123.22";
-		BigDecimal decimal = new BigDecimal(str);
-		System.out.println(decimal);
-		
+		int n = 31;
+		long res = 1;
+		for(int i = 0;i<n;i++){
+			res *= 2;
+		}
+		System.out.println(res);
+		System.out.println(res*2);
+		//4294967296
 	}
 
 }
