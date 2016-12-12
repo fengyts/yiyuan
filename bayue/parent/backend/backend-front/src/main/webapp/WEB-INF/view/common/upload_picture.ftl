@@ -1,5 +1,5 @@
 <#--
-<link rel="stylesheet" href="${domain}/statics/backend/item/image-upload/style.css" />
+<link rel="stylesheet" href="${domain}/statics/plugin/baidu_webuploader/image-upload/style.css" />
 -->
 <div id="wrapper">
 	<div id="container">

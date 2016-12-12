@@ -14,8 +14,12 @@ js=[
 css=[
 '/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css',
 '/statics/plugin/baidu_webuploader/webuploader.css',
-'/statics/plugin/editor/themes/custom/style.css'
+'/statics/plugin/editor/themes/custom/style.css',
+'/statics/plugin/baidu_webuploader/image-upload/style.css'
 ]>
+
+<#--
+-->
 
 
 <div class="panel-body box_border">
@@ -116,7 +120,7 @@ css=[
 	</div>
 	<hr/>
 	<div class="form-group">
-		<label class="col-md-2 control-label">
+		<label class="col-md-1 control-label">
 			<button type="button" class="btn btn-primary" style="margin-bottom:10px;" id="associateSpecGroup">关联规格信息</button>
 		</label>
 		<div class="col-md-12">

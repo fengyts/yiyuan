@@ -27,6 +27,19 @@ css=[
 						<td>
 				  			<input type="text" id="prdid" name="prdid" value="${detialDO.prdid}" class="input-text lh25" size="20">
 						</td>
+						<td>商品名称:</td>
+						<td>
+				  			<input type="text" id="mainTitle" name="mainTitle" value="${detialDO.mainTitle}" class="input-text lh25" size="30">
+						</td>
+						<td>商品状态:</td>
+						<td>
+							<select class="select" id="status" name="status" style="width:80px;">
+								<option value="">--全部--</option>
+								<option value="0">未上架</option>
+								<option value="1">已上架</option>
+								<option value="2">作废</option>
+							</select>
+						</td>
 					</tr>
 					</table>
 				</div>
@@ -42,9 +55,9 @@ css=[
 		<#-- 数据显示块 -->
 		<div id="table" class="mt10">
 			<div class="box span10 oh">
-			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
+			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataListDetail">
 			    	<tr>
-			    		<th width="5%">ID</th>
+			    		<th width="5%"><input type='checkbox' id="checkAllDetail"/></th>
 			    		<th>SPU</th>
 			    		<th>PRDID</th>
 			    		<th>商品显示名</th>
@@ -56,7 +69,9 @@ css=[
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td class="td_center">${obj.id}</td>
+			    			<td class="td_center">
+			    				<input type="checkbox" name="detailId" value="${obj.id}" />
+			    			</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.prdid}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>

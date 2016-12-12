@@ -93,6 +93,19 @@ $(function(){
 	});
 	
 	
+	//列表页全选按钮
+	$("#checkAllDetail").on('click', function(){
+		if($(this).is(":checked")){
+			$("#dataListDetail tr").each(function(){
+				$(this).find(":checkbox").prop('checked',true);
+			});
+		}else{
+			$("#dataListDetail tr").each(function(){
+				$(this).find(":checkbox").attr('checked',false);
+			});
+		}
+	});
+	
 });
 
 //获取规格组数据

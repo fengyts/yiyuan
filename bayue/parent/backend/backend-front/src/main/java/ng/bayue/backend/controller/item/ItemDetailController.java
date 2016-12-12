@@ -32,7 +32,7 @@ public class ItemDetailController extends BaseController {
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
 		Page<ItemDTO> page = itemDetailAO.queryPageList(itemDetialDTO, pageNo, pageSize);
 		model.addAttribute("page", page);
-
+		model.addAttribute("detailDO", itemDetialDTO);
 		noRecords(model, page);
 		return BASE_VIEW + "list";
 
