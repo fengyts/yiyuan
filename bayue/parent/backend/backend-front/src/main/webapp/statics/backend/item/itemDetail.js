@@ -90,6 +90,10 @@ $(function(){
 		var specGroupData = getSpecGroupData();
 		var _html = editor.html();
 		console.log(_html);
+		var _mainTitle = $("#itemTitle").val();
+		console.log("itemTitle:"+_mainTitle);
+		console.log(_mainTitle.isEmpty());
+//		$.myajax('save',$("#itemDetailAddForm").serialize());
 	});
 	
 	
@@ -124,5 +128,6 @@ function getSpecGroupData(){
 	});
 	return data;
 }
+
 
 

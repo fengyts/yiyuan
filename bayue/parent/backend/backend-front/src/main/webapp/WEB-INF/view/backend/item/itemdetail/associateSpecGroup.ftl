@@ -30,7 +30,8 @@ css=[
 		<table class="list_table" id="dataList">
 			<thead>
 		    	<tr>
-		    		<th class="text-center"></th>
+		    		<th class="text-center"><input type="checkbox" id="checkSpecGroupAll" /></th>
+		    		<th style="display:none;"></th>
 				    <th class="text-center">规格组名称</th>
 				    <th class="text-center">规格组别名</th>
 				    <th class="text-center  col-md-4">规格组排序</th>
@@ -40,7 +41,8 @@ css=[
 				<#if page.list?default([])?size!=0>
 				<#list page.list as specGroup>
 					<tr class="tr">
-						<td class="text-center"><input type="radio" name="specGroupId" value="${specGroup.id}" /></td>
+						<td class="text-center"><input type="checkbox" name="specGroupId" /></td>
+						<td style="display:none;">${specGroup.id}</td>
 						<td class="text-center">${specGroup.name}</td>
 						<td class="text-center">${specGroup.alias}</td>
 						<td class="text-center">${specGroup.sort}</td>

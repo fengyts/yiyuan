@@ -3,6 +3,7 @@ package ng.bayue.backend.controller.item;
 import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.backend.ao.item.ItemDetailAO;
 import ng.bayue.backend.controller.common.BaseController;
+import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping({ "/item/itemDetail" })
@@ -52,6 +54,14 @@ public class ItemDetailController extends BaseController {
 		model.addAttribute("page", page);
 		noRecords(model, page);
 		return BASE_VIEW + "associateSpecGroup";
+	}
+	
+	@RequestMapping("/save")
+	@ResponseBody
+	public ResultMessage save(ItemDetailDTO itemDetialDTO){
+		
+		
+		return new ResultMessage();
 	}
 
 }

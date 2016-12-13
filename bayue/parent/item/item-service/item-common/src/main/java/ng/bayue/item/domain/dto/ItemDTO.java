@@ -1,6 +1,7 @@
 package ng.bayue.item.domain.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 public class ItemDTO implements Serializable {
@@ -57,6 +58,9 @@ public class ItemDTO implements Serializable {
 
 	/** 商品类型：1-正常商品，2-服务商品，3-二手商品,4-报废商品 默认1 */
 	private Integer itemType;
+	
+	/** 商品类型 -1 未设置(区别于 itemType) 保留字段 */
+	private Boolean productType;
 
 	/** 市场价 */
 	private Double basicPrice;
@@ -88,11 +92,21 @@ public class ItemDTO implements Serializable {
 	/** 状态0-未上架 1-上架 2-作废 默认0 */
 	private Integer status;
 
-	/** 商品类型 -1 未设置(区别于 itemType) */
-	private Boolean productType;
-
 	/** detail信息备注 */
-	private String detailRemark;
+	private String remark;
+	
+	/** 关联规格组id列表 */
+	private String specGroupIds;
+	
+	/** 关联图片id列表 */
+	private String pictureIds;
+	
+	/** 商品详情描述信息 */
+	private String description;
+	
+	private Long createUserId;
+	private Date createTime;
+	private Date modifyTime;
 
 	public String getSpu() {
 		return spu;
@@ -310,12 +324,61 @@ public class ItemDTO implements Serializable {
 		this.productType = productType;
 	}
 
-	public String getDetailRemark() {
-		return detailRemark;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setDetailRemark(String detailRemark) {
-		this.detailRemark = detailRemark;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
+	public Long getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(Long createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
+
+	public String getSpecGroupIds() {
+		return specGroupIds;
+	}
+
+	public void setSpecGroupIds(String specGroupIds) {
+		this.specGroupIds = specGroupIds;
+	}
+
+	public String getPictureIds() {
+		return pictureIds;
+	}
+
+	public void setPictureIds(String pictureIds) {
+		this.pictureIds = pictureIds;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 }

@@ -18,12 +18,9 @@ css=[
 '/statics/plugin/baidu_webuploader/image-upload/style.css'
 ]>
 
-<#--
--->
-
 
 <div class="panel-body box_border">
-<form id="itemInfoAddForm" action="" class="form-horizontal dr-form-bordered">
+<form id="itemDetailAddForm" action="" class="form-horizontal dr-form-bordered">
 	<div style="display:none;">
 		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
 	</div>
@@ -120,13 +117,14 @@ css=[
 	</div>
 	<hr/>
 	<div class="form-group">
-		<label class="col-md-1 control-label">
-			<button type="button" class="btn btn-primary" style="margin-bottom:10px;" id="associateSpecGroup">关联规格信息</button>
+		<label class="control-label">
+			<button type="button" class="btn btn-primary ml15" style="margin-bottom:10px;" id="associateSpecGroup">关联规格信息</button>
 		</label>
 		<div class="col-md-12">
 		<table class="list_table" id="associateSpecGroupDataList">
 			<thead>
 		    	<tr>
+		    		<th class="display"></th>
 				    <th class="text-center">规格组名称</th>
 				    <th class="text-center">规格组别名</th>
 				    <th class="text-center col-md-2">规格组排序</th>
