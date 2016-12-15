@@ -26,47 +26,19 @@ public class TestUpload {
 	
 	private final Logger logger = LoggerFactory.getLogger(TestUpload.class);
 	
-	@RequestMapping("/testdemo")
-	public String testDemo(){
-		return "/upload/upload2demo";
-	}
-	@RequestMapping("/bulk")  
-	@ResponseBody  
-	public String bulk(HttpServletRequest request,HttpServletResponse response) {  
-//	    String path = super.uploadFile(request, "file", true);  
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		System.out.println("你个狗日的终于进来了");
-		
-		JSONObject obj = new JSONObject();
-		obj.put("jsonrpc", "2.0");
-		obj.put("result", "");
-		obj.put("id", "id");
-	    return obj.toJSONString();  
-	}  
-	
-	@RequestMapping({"/mtupload"})
-	public String mtupload(){
-		return "/upload/mtupload";
-	}
-	
 	@RequestMapping({"/upload"})
 	public String upload(){
 		return "/upload/upload";
 	}
 	
-	@RequestMapping({"/upload1"})
-	public String mtupload1(){
-		return "/upload/mtupload1";
-	}
-	
-	@RequestMapping({"/mtupload2"})
-	public String mtupload2(){
-		return "/upload/mtupload2";
-	}
-	
 	@RequestMapping({"/addpicture"})
 	public String addpicture(){
 		return "/upload/add_picture";
+	}
+	
+	@RequestMapping("/picture")
+	public String upup(){
+		return "/upload/picture";
 	}
 	
 	@RequestMapping(value="/uploadItemFiles",method=RequestMethod.POST,produces="text/json")

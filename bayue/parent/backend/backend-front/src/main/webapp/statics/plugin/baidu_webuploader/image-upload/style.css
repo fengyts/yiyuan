@@ -14,6 +14,16 @@ time, mark, audio, video, input  {
     vertical-align: baseline;
 } */
 
+p{
+	margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
 html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
     -webkit-text-size-adjust: none;
 }
@@ -326,6 +336,29 @@ del {
 #uploader .filelist div.file-panel span.cancel:hover {
     background-position: -48px 0;
 }
+
+
+#uploader .filelist div.file-panel span.moveLeft {
+    background-position: 0 -24px;
+}
+#uploader .filelist div.file-panel span.moveLeft:hover {
+    background-position: 0 0;
+}
+
+#uploader .filelist div.file-panel span.moveRight {
+    background-position: -24px -24px;
+}
+#uploader .filelist div.file-panel span.moveRight:hover {
+    background-position: -24px 0;
+}
+
+#uploader .filelist div.file-panel span.delete {
+    background-position: -48px -24px;
+}
+#uploader .filelist div.file-panel span.delete:hover {
+    background-position: -48px 0;
+}
+
 
 #uploader .statusBar {
     height: 63px;
