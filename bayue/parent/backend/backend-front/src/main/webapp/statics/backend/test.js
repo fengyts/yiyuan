@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
-	test();
+	uploadImg();
 	
 	$("#thelist").on('dblclick','.item',function(){
 		$(this).remove();
 	});
-
+	
 });
 
-function test() {
+function uploadImg() {
 	
 	var $_fileSingleSize = 2000 * 1024; //200KB
 	var $_fileNums = 3;//最多3张图片
@@ -18,7 +18,7 @@ function test() {
     var thumbnailWidth = 110 * ratio,
     	thumbnailHeight = 110 * ratio;
     
-    // 所有文件的进度信息，key为file id
+    // 所有文件的进度信息，key为file的id
     var percentages = {};
     // 判断浏览器是否支持图片的base64
     var isSupportBase64 = ( function() {
@@ -51,6 +51,7 @@ function test() {
 		uploader = WebUploader.create({
 			//退拽图片容器
 			dnd :'#uploader',
+			disableGlobalDnd: true,
 			// 不压缩image
 			resize : false,
 			// swf文件路径
@@ -60,12 +61,14 @@ function test() {
 			// 选择文件的按钮。可选。
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
 			pick : {id:'#picker',label:"点击选择图片",multiple:true},
+			//允许文件类型
 			accept: 
 				{
 				    title: 'Images',
 				    extensions: 'gif,jpg,jpeg,bmp,png',
 				    mimeTypes: 'image/*'
 				},
+			//图片压缩配置
 			thumb: 
 				{
 					width: 110,
@@ -87,6 +90,7 @@ function test() {
 		});
 		
 		//console.log(uploader._widgets[4]);//获取Queue
+//		console.log(uploader);
 
 		uploader.on( 'beforeFileQueued', function(file){
 			var _size = file.size;
@@ -103,6 +107,18 @@ function test() {
 		
 		// 当有文件添加进来的时候
 		uploader.on('fileQueued', function(file) {
+//			console.log(this.getFiles());//打印排序前
+			//文件排序用法
+//			this.sort(function( file1, file2 ){
+//				if(file1.name < file2.name){
+//					return -1;
+//				}else{
+//					return 1;
+//				}
+//				return 0;
+//			});
+//			console.log(this.getFiles());//打印排序后
+			
 			var $li = $('<li id="' + file.id + '" class="item">'
 					+ '<p class="title">' + file.name + '</p>'	
 					+ '<p class="imgWrap"></p></li>'),
@@ -129,6 +145,7 @@ function test() {
                      $wrap.empty().append( img );
                  }
 			}, thumbnailWidth, thumbnailHeight);
+			
 			file.rotation = 0;
 			
 			$li.on( 'mouseenter', function() {
@@ -139,9 +156,8 @@ function test() {
             });
             $btns.on( 'click', 'span', function() {
                 var index = $(this).index(), deg;
-
                 switch ( index ) {
-                    case 0:
+                    case 0: //删除
                         uploader.removeFile( file );
                         return;
                     case 1:
@@ -180,53 +196,91 @@ function test() {
 			
 		});
 		
-		
-		
+		//图片退拽时
+		$("#dragsort").dragsort({
+			dragSelector: "li", //容器拖动手柄
+			dragBetween: false,
+			//placeHolderTemplate: "<li class='placeHolder'><div></div></li>",
+			scrollSpeed: 5, //拖动的速度
+			//拖动之后的回调函数:需要重置文件队列
+			dragEnd: function(){
+				var _files = uploader.getFiles();
+				var _newArrays = new Array();
+				$("#dragsort li").each(function(){
+					var _liId = $(this).attr("id");
+					$.each( _files, function(i,v){
+						if(v.id == _liId){
+							_newArrays.push(v);
+						}
+					});
+				});
+				
+				uploader.reset();
+				$("#dragsort").empty();
+				uploader.addFiles(_newArrays);
+			}
+			
+		});
 
 		// 文件上传过程中创建进度条实时显示。
-		uploader.on( 'uploadProgress', function(file, percentage) {
-			var $li = $('#' + file.id), $percent = $li
-					.find('.progress .progress-bar');
-
-			// 避免重复创建
-			if (!$percent.length) {
-				$percent = $( '<div class="progress progress-striped active">'
-							+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
-							+ '</div>' + '</div>').appendTo($li).find('.progress-bar');
+//		uploader.on( 'uploadProgress', function(file, percentage) {
+//			var $li = $('#' + file.id), $percent = $li
+//					.find('.progress .progress-bar');
+//
+//			// 避免重复创建
+//			if (!$percent.length) {
+//				$percent = $( '<div class="progress progress-striped active">'
+//							+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
+//							+ '</div>' + '</div>').appendTo($li).find('.progress-bar');
+//			}
+//
+//			$li.find('p.state').text('上传中');
+//
+//			$percent.css('width', percentage * 100 + '%');
+//		});
+		
+		uploader.on('uploadSuccess', function( file, response ) {
+			var _queue = uploader._widgets[4];
+//			console.log(_queue);
+			if( response.code && response.code === 'F_EXCEED_SIZE_LIMIT' ){
+				var  text = '文件大小超出,最大200KB';
+//				 uploader.removeFile( file, true );
+				_queue.removeFile(file, true);
+				console.log(uploader.getFiles());
+				alert( 'Error: ' + text );
+				return false;
 			}
-
-			$li.find('p.state').text('上传中');
-
-			$percent.css('width', percentage * 100 + '%');
+			//$('#' + file.id).find('.progress').fadeOut();
 		});
-
-		uploader.on('uploadSuccess', function(file) {
-			$('#' + file.id).find('p.state').text('已上传');
-		});
-
-		uploader.on('uploadError', function(file) {
-			$('#' + file.id).find('p.state').text('上传出错');
-		});
-
-		uploader.on('uploadComplete', function(file) {
-			$('#' + file.id).find('.progress').fadeOut();
-		});
-
-		uploader.on('all', function(type) {
-			if (type === 'startUpload') {
-				state = 'uploading';
-			} else if (type === 'stopUpload') {
-				state = 'paused';
-			} else if (type === 'uploadFinished') {
-				state = 'done';
-			}
-
-			if (state === 'uploading') {
-				$btn.text('暂停上传');
-			} else {
-				$btn.text('开始上传');
-			}
-		});
+		
+		
+//		uploader.on('uploadSuccess', function(file) {
+//			$('#' + file.id).find('p.state').text('已上传');
+//		});
+//
+//		uploader.on('uploadError', function(file) {
+//			$('#' + file.id).find('p.state').text('上传出错');
+//		});
+//
+//		uploader.on('uploadComplete', function(file) {
+//			$('#' + file.id).find('.progress').fadeOut();
+//		});
+//
+//		uploader.on('all', function(type) {
+//			if (type === 'startUpload') {
+//				state = 'uploading';
+//			} else if (type === 'stopUpload') {
+//				state = 'paused';
+//			} else if (type === 'uploadFinished') {
+//				state = 'done';
+//			}
+//
+//			if (state === 'uploading') {
+//				$btn.text('暂停上传');
+//			} else {
+//				$btn.text('开始上传');
+//			}
+//		});
 
 		$btn.on('click', function() {
 			if (state === 'uploading') {
@@ -235,6 +289,8 @@ function test() {
 				uploader.upload();
 			}
 		});
+		
+		
 	});
 
 }

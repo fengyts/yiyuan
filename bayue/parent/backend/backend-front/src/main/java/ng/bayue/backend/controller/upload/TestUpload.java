@@ -41,6 +41,11 @@ public class TestUpload {
 		return "/upload/picture";
 	}
 	
+	@RequestMapping("sortable")
+	public String sortable(){
+		return "/upload/sortable";
+	}
+	
 	@RequestMapping(value="/uploadItemFiles",method=RequestMethod.POST,produces="text/json")
 	@ResponseBody
 	public String uploadMultiFiles(HttpServletRequest request) {
