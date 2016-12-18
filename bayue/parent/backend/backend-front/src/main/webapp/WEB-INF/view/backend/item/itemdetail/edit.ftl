@@ -1,6 +1,6 @@
 <#include "/common/common.ftl" />
 
-<@backend title="商品新增" 
+<@backend title="商品编辑" 
 js=[
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js',
@@ -21,7 +21,7 @@ css=[
 
 <div class="panel-body box_border">
 <input type="hidden" id="listIframeName" value="${listIframeName}">
-<form id="itemDetailAddForm" action="" class="form-horizontal dr-form-bordered">
+<form id="itemDetailEditForm" action="" class="form-horizontal dr-form-bordered">
 	<div style="display:none;">
 		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
 	</div>
@@ -53,12 +53,12 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">大类<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="largeName" name="largeName" readonly="readonly" value="${detailDO.largeName}"/>
+			<input type="text" class="form-control" id="largeCateName" name="largeCateName" readonly="readonly" value="${detailDO.largeCateName}"/>
 			<input type="hidden" id="largeId" name="largeId" value="${detailDO.largeId}" />
 		</div>
 		<label class="col-md-2 control-label">小类<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="smallName" name="smallName" readonly="readonly" value="${detailDO.smallName}"/>
+			<input type="text" class="form-control" id="smallCateName" name="smallCateName" readonly="readonly" value="${detailDO.smallCateName}"/>
 			<input type="hidden" id="smallId" name="smallId" value="${detailDO.smallId}" />
 		</div>
 	</div>

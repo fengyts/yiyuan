@@ -32,15 +32,6 @@ public interface CategoryService {
 	 */
 	int update(CategoryDO categoryDO,boolean isAllField) throws ServiceException;
 
-//	/**
-//	 * 根据ID更新 商品类别全部字段
-//	 * @param categoryDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-07-04 10:53:55
-//	 */
-//	int updateById(CategoryDO categoryDO) throws ServiceException;
-
 	/**
 	 * 根据ID删除 商品类别
 	 * @param id
@@ -49,15 +40,6 @@ public interface CategoryService {
 	 * @author longhaisheng 2016-07-04 10:53:55
 	 */
 	int deleteById(Long id) throws ServiceException;
-
-//	/**
-//	 * 动态更新 商品类别部分字段
-//	 * @param categoryDO
-//	 * @return 更新行数
-//	 * @throws ServiceException
-//	 * @author longhaisheng 2016-07-04 10:53:55
-//	 */
-//	int updateDynamic(CategoryDO categoryDO) throws ServiceException;
 
 	/**
 	 * 根据ID查询 一个 商品类别
@@ -127,5 +109,15 @@ public interface CategoryService {
 	void updateBatch(List<CategoryDO> list) throws ServiceException;
 	
 	List<CategoryDO> selectByIds(List<Long> ids);
+	
+	/**
+	 * <pre>
+	 * 根据传递过来的子类id获取他的祖先以及自己,排序依次为 大类,小类
+	 * </pre>
+	 *
+	 * @param cateId 必须是子类的id,否则返回为空
+	 * @return
+	 */
+	List<CategoryDO> selectAncestors(Long cateId);
 	
 }

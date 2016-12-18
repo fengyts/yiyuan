@@ -8,7 +8,17 @@ public final class CategoryConstant {
 	 * 
 	 */
 	public interface LEVEL{
+		/**
+		 * <pre>
+		 * 目前只有2级,SMALL暂未使用,为预留级别
+		 * </pre>
+		 */
 		int SMALL = 3;
+		/**
+		 * <pre>
+		 * 目前只到此节别
+		 * </pre>
+		 */
 		int MIDDLE = 2;
 		int LARGE = 1;
 	}

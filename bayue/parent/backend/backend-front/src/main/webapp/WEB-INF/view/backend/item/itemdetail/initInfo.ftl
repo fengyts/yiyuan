@@ -43,12 +43,15 @@ css=[
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th width="2%"></th>
-			    		<th width="5%">ID</th>
+			    		<th style="display:none;">ID</th>
 			    		<th>SPU</th>
 			    		<th>商品显示名</th>
 			    		<th>大类</th>
+			    		<th style="display:none;">大类ID</th>
 			    		<th>小类</th>
+			    		<th style="display:none;">小类ID</th>
 			    		<th>单位</th>
+			    		<th style="display:none;">单位ID</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
@@ -56,12 +59,15 @@ css=[
 			    			<td class="td_center">
 			    				<input type="radio" class="selectSpu" name="itemId" value="${obj.id}"/>
 			    			</td>
-			    			<td class="td_center">${obj.id}</td>
+			    			<td class="td_center" style="display:none;">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
 			    			<td class="td_center">${obj.largeCateName}</td>
+			    			<td class="td_center" style="display:none;">${obj.largeId}</td>
 			    			<td class="td_center">${obj.smallCateName}</td>
+			    			<td class="td_center" style="display:none;">${obj.smallId}</td>
 			    			<td class="td_center">${obj.unitName}</td>
+			    			<td class="td_center" style="display:none;">${obj.unitId}</td>
 			    		</tr>
 			    	</#list>
 			    	</#if>

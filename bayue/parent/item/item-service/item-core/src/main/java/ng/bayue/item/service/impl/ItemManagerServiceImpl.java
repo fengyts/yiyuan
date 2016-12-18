@@ -1,20 +1,26 @@
 package ng.bayue.item.service.impl;
 
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
-import org.apache.commons.collections.CollectionUtils;
+import ng.bayue.item.constant.CodeConstant;
+import ng.bayue.item.domain.ItemDescDO;
+import ng.bayue.item.domain.ItemDetailDO;
+import ng.bayue.item.domain.dto.ItemDetailDTO;
+import ng.bayue.item.exception.ServiceException;
+import ng.bayue.item.service.CodeService;
+import ng.bayue.item.service.ItemDescService;
+import ng.bayue.item.service.ItemDetailService;
+import ng.bayue.item.service.ItemManagerService;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ng.bayue.item.constant.CodeConstant;
-import ng.bayue.item.domain.CodeDO;
-import ng.bayue.item.exception.DAOException;
-import ng.bayue.item.exception.ServiceException;
-import ng.bayue.item.persist.dao.CodeDAO;
-import ng.bayue.item.service.ItemManagerService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -29,68 +35,60 @@ import ng.bayue.item.service.ItemManagerService;
 public class ItemManagerServiceImpl implements ItemManagerService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ItemManagerServiceImpl.class);
-
+	
 	@Autowired
-	private CodeDAO codeDAO;
-
+	private CodeService codeService;
+	@Autowired
+	private ItemDetailService itemDetailService;
+	@Autowired
+	private ItemDescService itemDescService;
+	
 	@Override
-	public String getUniqueCode(String code, int type) throws ServiceException {
-
-		String errorMsg = "";
-		int bits = 0;// 流水码长度
-		switch (type) {
-		case CodeConstant.CodeType.SPU_CODE:
-			errorMsg = "获取SPU编码出错";
-			bits = CodeConstant.RunningWaterCode.SPU_CODE;
-			break;
-		case CodeConstant.CodeType.PRDID_CODE:
-			errorMsg = "获取prdid编码出错";
-			bits = CodeConstant.RunningWaterCode.PRDID_CODE;
-			break;
-		default:
-			break;
-		}
-
-		if (StringUtils.isAnyEmpty(code)) {
-			throw new ServiceException(errorMsg);
-		}
-		CodeDO codeDO = new CodeDO();
-		codeDO.setCode(code);
-		int value = 0;
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Long saveItemDetail(ItemDetailDTO detailDto) throws ServiceException {
+		ItemDetailDO detailDO = new ItemDetailDO();
 		try {
-			List<CodeDO> list = codeDAO.selectDynamic(codeDO);
-			if (CollectionUtils.isEmpty(list)) {
-				codeDO.setMaxValue(CodeConstant.CODE_INIT_VALUE);
-				codeDAO.insert(codeDO);
-			} else {
-				codeDAO.updateCode(code);
+			String spu = detailDto.getSpu();
+			if(StringUtils.isBlank(spu)){
+				throw new ServiceException("save item detail error: the parameter spu is null");
 			}
-			List<CodeDO> listCode = codeDAO.selectDynamic(codeDO);
-			if (CollectionUtils.isNotEmpty(listCode)) {
-				value = listCode.get(0).getMaxValue();
-			} else {
-				throw new ServiceException("获取商品编码失败");
+			String description = detailDto.getDescription();
+			if(StringUtils.isBlank(description)){
+				throw new ServiceException("save item detail error: the parameter description is null");
 			}
-
-		} catch (DAOException e) {
-			logger.error(e.getMessage(), e);
+			String prdid = codeService.getUniqueCode(spu, CodeConstant.CodeType.PRDID_CODE);
+			BeanUtils.copyProperties(detailDO, detailDto);
+			detailDO.setPrdid(prdid);
+			Long id = itemDetailService.insert(detailDO);
+			if(id < 1){
+				throw new ServiceException("保存商品详情出错");
+			}
+			
+			Date date = detailDto.getCreateTime();
+			Long userId = detailDto.getCreateUserId();
+			//保存详情描述信息
+			ItemDescDO descDO = new ItemDescDO();
+			descDO.setDetailId(id);
+			descDO.setDescription(description);
+			descDO.setItemId(detailDto.getItemId());
+			descDO.setCreateTime(date);
+			descDO.setModifyTime(date);
+			descDO.setCreateUserId(userId);
+			descDO.setModifyUserId(userId);
+			Long descId = itemDescService.insert(descDO);
+			if(descId < 1){
+				throw new ServiceException("save item detail error: save item description error");
+			}
+			//保存规格组信息
+			
+			return id;
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			logger.error("", e);
 		}
-		return getCode(code, value, bits);
+		return null;
 	}
 
-	private String getCode(String code, int value, int bits) {
-		String res = code;
-		int length = (value + "").length();
-		StringBuffer s = new StringBuffer();
-		if (length <= bits) {
-			for (int i = 0; i < bits - length; i++) {
-				s.append(CodeConstant.ZERO_STR);
-			}
-			res += s.toString() + value;
-		} else {
-			res += value;
-		}
-		return res;
-	}
+
+	
 
 }

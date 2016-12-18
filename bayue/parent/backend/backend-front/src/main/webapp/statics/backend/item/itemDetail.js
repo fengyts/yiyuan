@@ -11,7 +11,7 @@ layui.use([ 'layer', 'form' ], function() {
 $(function(){
 	
 	$("#addItemDetail").on('click',function(){
-		addTab("item_detail_add","商品新增","/item/itemDetail/add.htm");
+		addTab("item_detail_add","商品新增","/item/itemDetail/add.htm?iframeName=" + window.name);
 	});
 	
 	/**
@@ -19,6 +19,12 @@ $(function(){
 	 */
 	$("#cancelTabBtn").on('click',function(){
 		parent.window.closeTab("item_detail_add");
+	});
+	
+	$(".editDetail").on('click',function(){
+		var detailId = $(this).attr("param");
+		addTab("item_detail_edit","商品新增","/item/itemDetail/edit.htm?iframeName=" + window.name 
+				+ "&detailId=" + detailId);
 	});
 	
 	/**
@@ -53,15 +59,20 @@ $(function(){
 		}
 		var _tds = _radio.parent().nextAll();
 		var _itemId = _tds.eq(0).text(), _spu = _tds.eq(1).text(), 
-		_mainTitle = _tds.eq(2).text(), _largeName = _tds.eq(3).text(),
-		_smallName = _tds.eq(4).text(), _unitName = _tds.eq(5).text();
+		_mainTitle = _tds.eq(2).text(), 
+		_largeName = _tds.eq(3).text(), _largeId = _tds.eq(4).text(),
+		_smallName = _tds.eq(5).text(), _smallId = _tds.eq(6).text(),
+		_unitName = _tds.eq(7).text(), _unitId = _tds.eq(8).text();
 		
 		parent.window.$("#itemId").val(_itemId);
 		parent.window.$("#spu").val(_spu);
 		parent.window.$("#mainTitle").val(_mainTitle);
 		parent.window.$("#largeName").val(_largeName);
+		parent.window.$("#largeId").val(_largeId);
 		parent.window.$("#smallName").val(_smallName);
+		parent.window.$("#smallId").val(_smallId);
 		parent.window.$("#unitName").val(_unitName);
+		parent.window.$("#unitId").val(_unitId);
 		parent.window.layer.close(parent.pageii);
 	});
 	
@@ -89,11 +100,30 @@ $(function(){
 	$("#saveBtn").on('click',function(){
 		var specGroupData = getSpecGroupData();
 		var _html = editor.html();
-		console.log(_html);
-		var _mainTitle = $("#itemTitle").val();
-		console.log("itemTitle:"+_mainTitle);
-		console.log(_mainTitle.isEmpty());
-//		$.myajax('save',$("#itemDetailAddForm").serialize());
+		
+		$.ajax({
+			url : 'save',
+			dataType : 'text',
+			data : $("#itemDetailAddForm").serialize(),
+			type : "post",
+			cache : false,
+			error : function(request){
+				alert("Server Connection Failure...");
+			},
+			success : function(res) {
+				var data = JSON.parse(res);
+				if (1 == data.result) {// 成功
+					layer.alert(data.message, 1, function() {
+						//'mainIframe_tabli_14'
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						parent.window.closeTab("item_detail_add");
+					});
+				} else {// 失败
+					layer.alert(data.message, 8);
+				}
+			}
+		});
 	});
 	
 	
@@ -128,6 +158,5 @@ function getSpecGroupData(){
 	});
 	return data;
 }
-
 
 

@@ -2,11 +2,14 @@ package ng.bayue.item.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ng.bayue.item.constant.CodeConstant;
 import ng.bayue.item.domain.CodeDO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
@@ -85,7 +88,6 @@ public class CodeServiceImpl  implements CodeService{
             throw new ServiceException(e);
 		}
 	}
-	
 
 	private List<CodeDO> selectDynamicPageQuery(CodeDO codeDO) throws ServiceException {
 		try {
@@ -118,6 +120,66 @@ public class CodeServiceImpl  implements CodeService{
 			return this.queryPageListByCodeDO(codeDO);
 		}
 		return new Page<CodeDO>();
+	}
+	
+	@Override
+	public String getUniqueCode(String code, int type) throws ServiceException {
+
+		String errorMsg = "";
+		int bits = 0;// 流水码长度
+		switch (type) {
+		case CodeConstant.CodeType.SPU_CODE:
+			errorMsg = "获取SPU编码出错";
+			bits = CodeConstant.RunningWaterCode.SPU_CODE;
+			break;
+		case CodeConstant.CodeType.PRDID_CODE:
+			errorMsg = "获取prdid编码出错";
+			bits = CodeConstant.RunningWaterCode.PRDID_CODE;
+			break;
+		default:
+			break;
+		}
+
+		if (StringUtils.isAnyEmpty(code)) {
+			throw new ServiceException(errorMsg);
+		}
+		CodeDO codeDO = new CodeDO();
+		codeDO.setCode(code);
+		int value = 0;
+		try {
+			List<CodeDO> list = selectDynamic(codeDO);
+			if (CollectionUtils.isEmpty(list)) {
+				codeDO.setMaxValue(CodeConstant.CODE_INIT_VALUE);
+				insert(codeDO);
+			} else {
+				codeDAO.updateCode(code);
+			}
+			List<CodeDO> listCode = selectDynamic(codeDO);
+			if (CollectionUtils.isNotEmpty(listCode)) {
+				value = listCode.get(0).getMaxValue();
+			} else {
+				throw new ServiceException("获取商品编码失败");
+			}
+
+		} catch (DAOException e) {
+			logger.error(e.getMessage(), e);
+		}
+		return getCode(code, value, bits);
+	}
+
+	private String getCode(String code, int value, int bits) {
+		String res = code;
+		int length = (value + "").length();
+		StringBuffer s = new StringBuffer();
+		if (length <= bits) {
+			for (int i = 0; i < bits - length; i++) {
+				s.append(CodeConstant.ZERO_STR);
+			}
+			res += s.toString() + value;
+		} else {
+			res += value;
+		}
+		return res;
 	}
 
 }

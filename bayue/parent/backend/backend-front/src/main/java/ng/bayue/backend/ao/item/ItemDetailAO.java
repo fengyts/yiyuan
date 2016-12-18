@@ -11,12 +11,14 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
+import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
+import ng.bayue.item.service.ItemManagerService;
 import ng.bayue.item.service.ItemService;
 import ng.bayue.util.Page;
 
@@ -43,6 +45,8 @@ public class ItemDetailAO {
 	private CategoryService categoryService;
 	@Autowired
 	private DictionaryService dictionaryService;
+	@Autowired
+	private ItemManagerService managerService;
 
 	public Page<ItemDTO> queryPageList(ItemDetailDTO detailDto, Integer pageNo, Integer pageSize) {
 		ItemDetailDO detailDO = new ItemDetailDO();
@@ -198,9 +202,53 @@ public class ItemDetailAO {
 		return new ResultMessage();
 	}
 	
-	public ResultMessage saveItemDetail(ItemDTO itemDto){
-		
+	public ResultMessage saveItemDetail(ItemDetailDTO detailDto){
+		Long userId = UserHandler.getUser().getId();
+		detailDto.setCreateUserId(userId);
+		detailDto.setModifyUserId(userId);
+		Date date = new Date();
+		detailDto.setCreateTime(date);
+		detailDto.setModifyTime(date);
+		Long detailId = managerService.saveItemDetail(detailDto);
+		if(detailId < 1){
+			return ResultMessage.serverInnerError();
+		}
 		return new ResultMessage();
+	}
+	
+	public ItemDetailDTO selectDetailById(Long detailId){
+		ItemDetailDO detailDO = itemDetailService.selectById(detailId);
+		if(null == detailDO){
+			return null;
+		}
+		ItemDetailDTO detailDto = new ItemDetailDTO();
+		try {
+			BeanUtils.copyProperties(detailDto, detailDO);
+			ItemDescDO descDO = itemService.selectDescByDetailId(detailId);
+			if(null != descDO){
+				detailDto.setDescription(descDO.getDescription());
+			}
+			Long smallId = detailDO.getSmallId();
+			List<CategoryDO> listCate = categoryService.selectAncestors(smallId);
+			if(2 == listCate.size()){
+				CategoryDO largeCateDO = listCate.get(0);
+				detailDto.setLargeId(largeCateDO.getId());
+				detailDto.setLargeCateName(largeCateDO.getName());
+				CategoryDO smallCateDO = listCate.get(1);
+				detailDto.setSmallId(smallCateDO.getId());
+				detailDto.setSmallCateName(smallCateDO.getName());
+			}
+			Long unitId = detailDO.getUnitId();
+			DictionaryDO dicDO = dictionaryService.selectById(unitId);
+			if(null != dicDO){
+				detailDto.setUnitId(unitId);
+				detailDto.setUnitName(dicDO.getName());
+			}
+			return detailDto;
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			logger.error("", e);
+		}
+		return null;
 	}
 
 }

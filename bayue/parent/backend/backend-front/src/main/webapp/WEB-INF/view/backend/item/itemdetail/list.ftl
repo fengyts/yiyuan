@@ -57,7 +57,7 @@ css=[
 			<div class="box span10 oh">
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataListDetail">
 			    	<tr>
-			    		<th width="5%"><input type='checkbox' id="checkAllDetail"/></th>
+			    		<th width="5%">全选<input type='checkbox' id="checkAllDetail"/></th>
 			    		<th>SPU</th>
 			    		<th>PRDID</th>
 			    		<th>商品显示名</th>
@@ -79,7 +79,7 @@ css=[
 			    			<td class="td_center">${obj.smallCateName}</td>
 			    			<td class="td_center">${obj.unitName}</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" param="${obj.id}">[编辑]</a>
+			    				<a href="javascript:void(0);" class="editDetail" param='${obj.id}'>[编辑]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>

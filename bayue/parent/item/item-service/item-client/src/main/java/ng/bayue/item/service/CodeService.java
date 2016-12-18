@@ -1,6 +1,7 @@
 package ng.bayue.item.service;
 
 import java.util.List;
+
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.util.Page;
 import ng.bayue.item.domain.CodeDO;
@@ -84,5 +85,18 @@ public interface CodeService {
 	 * @author longhaisheng 2016-12-06 09:07:19
 	 */
 	Page<CodeDO> queryPageListByCodeDOAndStartPageSize(CodeDO codeDO,int startPage,int pageSize);
+	
+	
+	/**
+	 * <pre>
+	 * 获取spu,prdid编码
+	 * </pre>
+	 *
+	 * @param code
+	 *            获取spu编码,code为小类的编码;获取prdid编码,code为spu
+	 * @param type 编码类型，1-spu编码，2-prdid编码，具体参考{@link ng.bayue.item.constant.CodeConstant}类
+	 * @return
+	 */
+	String getUniqueCode(String code, int type);
 
 }

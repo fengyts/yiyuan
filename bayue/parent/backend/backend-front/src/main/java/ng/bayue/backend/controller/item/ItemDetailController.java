@@ -1,5 +1,9 @@
 package ng.bayue.backend.controller.item;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.backend.ao.item.ItemDetailAO;
 import ng.bayue.backend.controller.common.BaseController;
@@ -13,6 +17,8 @@ import ng.bayue.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,8 +47,9 @@ public class ItemDetailController extends BaseController {
 	}
 
 	@RequestMapping({ "/add" })
-	public String add(Model model) {
+	public String add(Model model, String iframeName) {
 		model.addAttribute("itemStatus", ItemStatusEnum.values());
+		model.addAttribute("listIframeName", iframeName);
 		return BASE_VIEW + "add";
 	}
 
@@ -58,10 +65,25 @@ public class ItemDetailController extends BaseController {
 	
 	@RequestMapping("/save")
 	@ResponseBody
-	public ResultMessage save(ItemDetailDTO itemDetialDTO){
+	public ResultMessage save(@Valid ItemDetailDTO itemDetialDTO, Errors error){
+		if(error.hasErrors()){
+			List<ObjectError> list = error.getAllErrors();
+			ObjectError oe = list.get(0);
+			String message = oe.getDefaultMessage();
+			return new ResultMessage(ResultMessage.Failure, message);
+		}
 		
-		
-		return new ResultMessage();
+		return itemDetailAO.saveItemDetail(itemDetialDTO);
+	}
+	
+	@RequestMapping({"/edit"})
+	public String edit(Model model, Long detailId, String iframeName){
+		if(null == detailId){
+			return null;
+		}
+		ItemDetailDTO detailDto = itemDetailAO.selectDetailById(detailId);
+		model.addAttribute("detailDO", detailDto);
+		return BASE_VIEW + "edit";
 	}
 
 }

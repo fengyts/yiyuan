@@ -1,5 +1,6 @@
 package ng.bayue.base.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ng.bayue.base.constant.CategoryConstant;
@@ -182,6 +183,28 @@ public class CategoryServiceImpl  implements CategoryService{
 			logger.error("", e);
 		}
 		return null;
+	}
+
+	@Override
+	public List<CategoryDO> selectAncestors(Long cateId) {
+		if(null == cateId){
+			return null;
+		}
+		CategoryDO cateDO = selectById(cateId);
+		if(null ==cateDO){
+			return null;
+		}
+		List<CategoryDO> result = new ArrayList<CategoryDO>();
+		int level = cateDO.getLevel();
+		if(level == CategoryConstant.LEVEL.MIDDLE){
+			CategoryDO parentCate = selectById(cateDO.getParentId());
+			if(null != parentCate){
+				result.add(parentCate);
+				result.add(cateDO);
+			}
+		}
+		
+		return result;
 	}
 
 }

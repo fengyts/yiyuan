@@ -22,6 +22,7 @@ import ng.bayue.item.domain.dto.ItemInfoDTO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemInfoDAO;
+import ng.bayue.item.service.CodeService;
 import ng.bayue.item.service.ItemInfoService;
 import ng.bayue.item.service.ItemManagerService;
 import ng.bayue.util.Page;
@@ -38,6 +39,8 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 	@Autowired
 	private DictionaryService dictionaryService;
 	@Autowired
+	private CodeService codeService;
+	@Autowired
 	private ItemManagerService itemManagerService;
 
 	@Override
@@ -53,7 +56,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 				logger.info("保存spu时出错,根据小类id-{}获取小类编码出错",smallId);
 				throw new ServiceException("保存spu时出错,根据小类id-" + smallId + "获取小类编码出错");
 			}
-			String spu = itemManagerService.getUniqueCode(cateSmallCode, CodeConstant.CodeType.SPU_CODE);
+			String spu = codeService.getUniqueCode(cateSmallCode, CodeConstant.CodeType.SPU_CODE);
 			itemInfoDO.setSpu(spu);
 			return itemInfoDAO.insert(itemInfoDO);
 		} catch (DAOException e) {
@@ -242,7 +245,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 				throw new ServiceException("更新spu信息异常，根据小类id获取类别异常");
 			}
 			String code = cateDO.getCode();
-			String spu = itemManagerService.getUniqueCode(code, CodeConstant.CodeType.SPU_CODE);
+			String spu = codeService.getUniqueCode(code, CodeConstant.CodeType.SPU_CODE);
 			infoDO.setSpu(spu);
 		}
 		return update(infoDO, false);

@@ -1,8 +1,12 @@
 package ng.bayue.item.service.impl;
 
+import java.util.List;
+
+import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.exception.ServiceException;
+import ng.bayue.item.service.ItemDescService;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
 import ng.bayue.item.service.ItemService;
@@ -24,8 +28,11 @@ public class ItemServiceImpl implements ItemService {
 	private ItemInfoService infoService;
 	@Autowired
 	private ItemDetailService detailService;
+	@Autowired
+	private ItemDescService descService;
 
 	@Override
+	@Deprecated
 	@Transactional(propagation = Propagation.REQUIRED)
 	public int saveInfoAndDetail(ItemInfoDO infoDO, ItemDetailDO detailDO) throws ServiceException {
 		if (null == detailDO) {
@@ -70,4 +77,19 @@ public class ItemServiceImpl implements ItemService {
 		}
 
 	}
+
+	@Override
+	public ItemDescDO selectDescByDetailId(Long detailId) {
+		if(null == detailId){
+			return null;
+		}
+		ItemDescDO descDO = new ItemDescDO();
+		descDO.setDetailId(detailId);
+		List<ItemDescDO> list = descService.selectDynamic(descDO);
+		if(list.size() != 1){
+			return null;
+		}
+		return list.get(0);
+	}
+	
 }
