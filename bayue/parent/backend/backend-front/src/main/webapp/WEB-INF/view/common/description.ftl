@@ -1,3 +1,3 @@
-<textarea id="kindEditor" name="description" class="editor" style="width: 100%;">
-	${detailDO.description}
+<textarea id="kindEditor" id="description" name="description" class="editor" style="width: 100%;">
+	${description}
 </textarea>

@@ -8,7 +8,7 @@ public final class Messages implements Serializable {
 	/**  */
 	private static final long serialVersionUID = -8253156726606395186L;
 	
-	public static final String ServerInnerError = "服务器内部错误";
+	public static final String ServerInnerError = "操作失败,服务器内部错误";
 
 	public static final String HandleSuccess = "操作成功";
 

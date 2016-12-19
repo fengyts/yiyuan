@@ -103,5 +103,16 @@ public interface DetailSpecService {
 	 * @author fengyts 2016-07-26 09:58:30
 	 */
 	Page<DetailSpecDO> queryPageListByDetailSpecDOAndStartPageSize(DetailSpecDO detailSpecDO,int startPage,int pageSize);
+	
+	/**
+	 * <pre>
+	 * 批量插入商品详情规格信息
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws ServiceException
+	 */
+	int insertBatch(List<DetailSpecDO> list) throws ServiceException;
 
 }

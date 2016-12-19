@@ -120,4 +120,17 @@ public class ItemDescServiceImpl  implements ItemDescService{
 		return new Page<ItemDescDO>();
 	}
 
+	@Override
+	public int updateByDetailId(ItemDescDO itemDescDO) throws ServiceException {
+		if(null == itemDescDO || 1 > itemDescDO.getDetailId().longValue()){
+			return -1;
+		}
+		try {
+			return itemDescDAO.updateByDetailId(itemDescDO);
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+		return -1;
+	}
+
 }

@@ -11,6 +11,7 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
+import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
@@ -29,6 +30,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 @Service
 public class ItemDetailAO {
@@ -209,6 +213,13 @@ public class ItemDetailAO {
 		Date date = new Date();
 		detailDto.setCreateTime(date);
 		detailDto.setModifyTime(date);
+		//处理规格组信息
+		String specGroupStrs = detailDto.getSpecGroupStrs();
+		List<DetailSpecDO> listSpecGroups = null;
+		if(StringUtils.isNotBlank(specGroupStrs)){
+			listSpecGroups = JSONArray.parseArray(specGroupStrs, DetailSpecDO.class);
+			detailDto.setListSpecGroups(listSpecGroups);
+		}
 		Long detailId = managerService.saveItemDetail(detailDto);
 		if(detailId < 1){
 			return ResultMessage.serverInnerError();
@@ -249,6 +260,16 @@ public class ItemDetailAO {
 			logger.error("", e);
 		}
 		return null;
+	}
+	
+	public ResultMessage update(ItemDetailDTO detailDto){
+		detailDto.setModifyTime(new Date());
+		detailDto.setModifyUserId(UserHandler.getUser().getId());
+		Long res = managerService.updateItemDetail(detailDto);
+		if(res < 1){
+			return ResultMessage.serverInnerError();
+		}
+		return new ResultMessage();
 	}
 
 }

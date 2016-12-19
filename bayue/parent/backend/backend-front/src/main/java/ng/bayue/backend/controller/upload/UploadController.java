@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -110,6 +111,58 @@ public class UploadController {
 		}
 		return obj.toJSONString();
 		
+	}
+	
+	@RequestMapping(value="/uploadItemEditor",method=RequestMethod.POST, produces ="text/html;charset=UTF-8")
+	@ResponseBody
+	public String uploadItemEditor(HttpServletRequest request){
+		String savePath = request.getSession().getServletContext().getRealPath(uploadTempPath);
+		if(StringUtils.isBlank(savePath)){
+			logger.error("图片上传路径配置错误");
+			return null;
+		}
+		//dfs返回的路径
+		String dfsPath = null;
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+		//上传文件名称
+		String fileName = null;
+		for(Map.Entry<String, MultipartFile> entity : fileMap.entrySet()){
+			MultipartFile mf = entity.getValue();
+			if(mf.getSize() > itemPictureMaxSize ){
+				JSONObject json = new JSONObject();
+				Long size=itemPictureMaxSize/1024L;
+				json.put("message", "上传图片最大:".concat(size.toString().concat("Kb")));
+				return json.toJSONString();
+			}
+			fileName = mf.getOriginalFilename();
+			if (fileName.lastIndexOf(".") >= 0){
+				fileName = UUID.randomUUID().toString() + "." + 
+						fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase();
+			}
+			File file = new File(savePath, fileName);
+			if(!file.exists()){
+				Boolean b = file.mkdirs();
+				if(!b) {
+					logger.error("创建文件失败"+fileName);
+				}
+			}
+			try{
+				mf.transferTo(file);
+//				dfsPath =  dfsAO.uploadPic(file);
+			}catch(IOException e){
+				fileName = null;
+				logger.error("文件上传时保存出错！");
+			}finally{
+				FileUtils.deleteQuietly(file);
+			}
+		}
+		JSONObject json = new JSONObject();
+		json.put("error", 0);
+//		json.put("url",dfsDomainUtil.getFileFullUrl(dfsPath));
+//		json.put("url", "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg");
+		json.put("url", "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg");
+		return json.toJSONString();
 	}
 
 }

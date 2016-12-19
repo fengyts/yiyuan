@@ -82,4 +82,15 @@ public interface ItemDescDAO {
 	 * @author fengyts 2016-12-10 09:24:15
 	 */
 	List<ItemDescDO> selectDynamicPageQuery(ItemDescDO itemDescDO) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 根据detailId更新商品描述信息，需确保detailId的唯一性
+	 * </pre>
+	 *
+	 * @param detailId
+	 * @return
+	 * @throws DAOException
+	 */
+	int updateByDetailId(ItemDescDO itemDescDO) throws DAOException;
 }

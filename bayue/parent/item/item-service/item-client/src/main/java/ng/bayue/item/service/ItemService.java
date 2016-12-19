@@ -5,6 +5,14 @@ import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.exception.ServiceException;
 
+/**
+ * <pre>
+ * 为前端提供开放接口
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: ItemService.java, v 0.1 2016年12月19日 下午1:32:37 lenovopc Exp $
+ */
 public interface ItemService {
 	
 	/**

@@ -52,4 +52,9 @@ public class MybatisItemDescDAO extends MybatisBaseDAO implements ItemDescDAO {
 		return getSqlSession().selectList("ng.bayue.item.domain.ItemDescMapper.MybatisItemDescDAO_select_dynamic_page_query", itemDescDO);
 	}
 
+	@Override
+	public int updateByDetailId(ItemDescDO itemDescDO) throws DAOException {
+		return getSqlSession().update("ng.bayue.item.domain.ItemDescMapper.MybatisItemDescDAO_update_by_detailId", itemDescDO);
+	}
+
 }

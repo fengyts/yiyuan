@@ -97,9 +97,14 @@ css=[
 		<label class="col-md-2 control-label">状态<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="status" name="status">
+				<#--
 				<option value="0">未上架</option>
 				<option value="1">已上架</option>
 				<option value="2">作废</option>
+				-->
+				<#list itemStatus as sta>
+					<option value = '${sta.code}' <#if sta.code==detailDO.status>selected</#if> >${sta.desc}</option>
+				</#list>
 			</select>
 		</div>
 	</div>
@@ -107,9 +112,14 @@ css=[
 		<label class="col-md-2 control-label">商品类型</label>
 		<div class="col-md-4">
 			<select class="form-control" id="itemType" name="itemType">
+				<#--
 				<option value="1">正常商品</option>
 				<option value="2">服务商品</option>
 				<option value="3">二手商品</option>
+				-->
+				<#list itemType as stt>
+					<option value = '${stt.code}' <#if stt.code==detailDO.itemType>selected</#if> >${stt.desc}</option>
+				</#list>
 			</select>
 		</div>
 	</div>
@@ -162,8 +172,8 @@ css=[
 		<div class="col-sm-12 panel-toolbar text-left dr-slash-text" id="operateBtn">
 			<div class="col-md-4"></div>
 			<div>
-				<a href="javascript:void(0);" class="btn btn-info" id="cancelTabBtn">取消</a>
-				<a href="javascript:void(0);" class="btn btn-primary" id="saveBtn">保存</a>
+				<a href="javascript:void(0);" class="btn btn-info" id="cancelTabItemEditBtn">取消</a>
+				<a href="javascript:void(0);" class="btn btn-primary" id="updateItemDetailBtn">保存</a>
 			</div>
 		</div>
 	</div>

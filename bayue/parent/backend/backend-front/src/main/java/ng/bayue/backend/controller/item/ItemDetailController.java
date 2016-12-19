@@ -12,6 +12,7 @@ import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.enums.ItemStatusEnum;
+import ng.bayue.item.enums.ItemTypeEnum;
 import ng.bayue.util.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,22 @@ public class ItemDetailController extends BaseController {
 		}
 		ItemDetailDTO detailDto = itemDetailAO.selectDetailById(detailId);
 		model.addAttribute("detailDO", detailDto);
+		model.addAttribute("listIframeName", iframeName);
+		model.addAttribute("description", detailDto.getDescription());
+		model.addAttribute("itemStatus", ItemStatusEnum.values());
+		model.addAttribute("itemType", ItemTypeEnum.values());
 		return BASE_VIEW + "edit";
+	}
+	
+	@RequestMapping({"/update"})
+	@ResponseBody
+	public ResultMessage update(@Valid ItemDetailDTO itemDetailDTO, Errors error){
+		if(error.hasErrors()){
+			List<ObjectError> list = error.getAllErrors();
+			ObjectError oe = list.get(0);
+			return new ResultMessage(ResultMessage.Failure, oe.getDefaultMessage());
+		}
+		return itemDetailAO.update(itemDetailDTO);
 	}
 
 }

@@ -16,7 +16,7 @@ public final class CategoryConstant {
 		int SMALL = 3;
 		/**
 		 * <pre>
-		 * 目前只到此节别
+		 * 目前只到此级别
 		 * </pre>
 		 */
 		int MIDDLE = 2;

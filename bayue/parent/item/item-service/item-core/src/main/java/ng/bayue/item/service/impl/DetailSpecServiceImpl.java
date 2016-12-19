@@ -9,6 +9,7 @@ import ng.bayue.item.persist.dao.DetailSpecDAO;
 import ng.bayue.item.service.DetailSpecService;
 import ng.bayue.util.Page;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,6 +139,20 @@ public class DetailSpecServiceImpl  implements DetailSpecService{
 			return this.queryPageListByDetailSpecDO(detailSpecDO);
 		}
 		return new Page<DetailSpecDO>();
+	}
+
+	@Override
+	public int insertBatch(List<DetailSpecDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		try {
+			int res = detailSpecDAO.insertBatch(list);
+			return res < 1 ? -1 : res;
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+		return -1;
 	}
 
 }

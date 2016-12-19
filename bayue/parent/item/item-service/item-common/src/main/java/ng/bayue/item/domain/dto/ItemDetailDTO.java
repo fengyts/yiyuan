@@ -2,10 +2,13 @@ package ng.bayue.item.domain.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import ng.bayue.item.domain.DetailSpecDO;
 
 public class ItemDetailDTO implements Serializable {
 
@@ -109,7 +112,9 @@ public class ItemDetailDTO implements Serializable {
 	private String remark;
 	
 	/** 关联规格组id列表 */
-	private String specGroupIds;
+	private String specGroupStrs;
+	
+	List<DetailSpecDO> listSpecGroups;
 	
 	/** 关联图片id列表 */
 	private String pictureIds;
@@ -315,12 +320,12 @@ public class ItemDetailDTO implements Serializable {
 		this.remark = remark;
 	}
 
-	public String getSpecGroupIds() {
-		return specGroupIds;
+	public String getSpecGroupStrs() {
+		return specGroupStrs;
 	}
 
-	public void setSpecGroupIds(String specGroupIds) {
-		this.specGroupIds = specGroupIds;
+	public void setSpecGroupStrs(String specGroupStrs) {
+		this.specGroupStrs = specGroupStrs;
 	}
 
 	public String getPictureIds() {
@@ -393,6 +398,14 @@ public class ItemDetailDTO implements Serializable {
 
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+
+	public List<DetailSpecDO> getListSpecGroups() {
+		return listSpecGroups;
+	}
+
+	public void setListSpecGroups(List<DetailSpecDO> listSpecGroups) {
+		this.listSpecGroups = listSpecGroups;
 	}
 
 }

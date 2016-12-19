@@ -3,6 +3,14 @@ package ng.bayue.item.service;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.exception.ServiceException;
 
+/**
+ * <pre>
+ * 商品管理接口,模块间或者后台使用
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: ItemManagerService.java, v 0.1 2016年12月19日 下午1:32:03 lenovopc Exp $
+ */
 public interface ItemManagerService {
 	
 	/**
@@ -16,6 +24,17 @@ public interface ItemManagerService {
 	 * @throws ServiceException
 	 */
 	Long saveItemDetail(ItemDetailDTO detailDto) throws ServiceException;
+	
+	/**
+	 * <pre>
+	 * 更新商品详情
+	 * </pre>
+	 *
+	 * @param detailDto
+	 * @return
+	 * @throws ServiceException
+	 */
+	Long updateItemDetail(ItemDetailDTO detailDto) throws ServiceException;
 
 
 }

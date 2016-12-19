@@ -92,4 +92,6 @@ public interface DetailSpecDAO {
 	 * @author fengyts 2016-07-26 09:58:30
 	 */
 	List<DetailSpecDO> selectDynamicPageQuery(DetailSpecDO detailSpecDO) throws DAOException;
+	
+	int insertBatch(List<DetailSpecDO> list) throws DAOException;
 }

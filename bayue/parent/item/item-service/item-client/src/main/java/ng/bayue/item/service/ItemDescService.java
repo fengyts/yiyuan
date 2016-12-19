@@ -103,5 +103,16 @@ public interface ItemDescService {
 	 * @author fengyts 2016-12-10 09:24:15
 	 */
 	Page<ItemDescDO> queryPageListByItemDescDOAndStartPageSize(ItemDescDO itemDescDO,int startPage,int pageSize);
+	
+	/**
+	 * <pre>
+	 * 根据detialId更新商品描述内容，需确保detailId的唯一性
+	 * </pre>
+	 *
+	 * @param detailId
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateByDetailId(ItemDescDO itemDescDO) throws ServiceException;
 
 }

@@ -52,4 +52,9 @@ public class MybatisDetailSpecDAO extends MybatisBaseDAO implements DetailSpecDA
 		return getSqlSession().selectList("ng.bayue.item.domain.DetailSpecMapper.MybatisDetailSpecDAO_select_dynamic_page_query", detailSpecDO);
 	}
 
+	@Override
+	public int insertBatch(List<DetailSpecDO> list) throws DAOException {
+		return getSqlSession().insert("ng.bayue.item.domain.DetailSpecMapper.MybatisDetailSpecDAO_insert_batch", list);
+	}
+
 }

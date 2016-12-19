@@ -10,12 +10,15 @@ layui.use([ 'layer', 'form' ], function() {
 
 $(function(){
 	
+	//商品描述信息kindeditor placeholder信息
+	$("#description").attr("placeholder","请输入商品描述信息");
+	
 	$("#addItemDetail").on('click',function(){
 		addTab("item_detail_add","商品新增","/item/itemDetail/add.htm?iframeName=" + window.name);
 	});
 	
 	/**
-	 * 取消按钮 关闭当前tab页
+	 * 新增页面取消按钮 关闭当前tab页
 	 */
 	$("#cancelTabBtn").on('click',function(){
 		parent.window.closeTab("item_detail_add");
@@ -23,8 +26,13 @@ $(function(){
 	
 	$(".editDetail").on('click',function(){
 		var detailId = $(this).attr("param");
-		addTab("item_detail_edit","商品新增","/item/itemDetail/edit.htm?iframeName=" + window.name 
+		addTab("item_detail_edit","商品编辑","/item/itemDetail/edit.htm?iframeName=" + window.name 
 				+ "&detailId=" + detailId);
+	});
+	
+	/** 编辑页面取消按钮  关闭当前tab页*/
+	$("#cancelTabItemEditBtn").on('click',function(){
+		parent.window.closeTab("item_detail_edit");
 	});
 	
 	/**
@@ -99,12 +107,19 @@ $(function(){
 	//商品详情保存按钮
 	$("#saveBtn").on('click',function(){
 		var specGroupData = getSpecGroupData();
-		var _html = editor.html();
+//		var _html = editor.html();
+		var _s = JSON.stringify(specGroupData);
+		
+		var _data = $("#itemDetailAddForm").serialize();
+		_data +="&specGroupIds="+_s;
+		console.log(_data);
+		
+//		return;
 		
 		$.ajax({
 			url : 'save',
 			dataType : 'text',
-			data : $("#itemDetailAddForm").serialize(),
+			data : _data,
 			type : "post",
 			cache : false,
 			error : function(request){
@@ -118,6 +133,36 @@ $(function(){
 						var listIframeName = $("#listIframeName").val();
 						parent.window.frames[listIframeName].location.reload();
 						parent.window.closeTab("item_detail_add");
+					});
+				} else {// 失败
+					layer.alert(data.message, 8);
+				}
+			}
+		});
+	});
+	
+	//商品详情编辑保存按钮
+	$("#updateItemDetailBtn").on('click',function(){
+		var specGroupData = getSpecGroupData();
+		var _html = editor.html();
+		
+		$.ajax({
+			url : 'update',
+			dataType : 'text',
+			data : $("#itemDetailEditForm").serialize(),
+			type : "post",
+			cache : false,
+			error : function(request){
+				alert("Server Connection Failure...");
+			},
+			success : function(res) {
+				var data = JSON.parse(res);
+				if (1 == data.result) {// 成功
+					layer.alert(data.message, 1, function() {
+						//'mainIframe_tabli_14'
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						parent.window.closeTab("item_detail_edit");
 					});
 				} else {// 失败
 					layer.alert(data.message, 8);

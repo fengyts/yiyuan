@@ -2,18 +2,22 @@ package ng.bayue.item.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 
 import ng.bayue.item.constant.CodeConstant;
+import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.service.CodeService;
+import ng.bayue.item.service.DetailSpecService;
 import ng.bayue.item.service.ItemDescService;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemManagerService;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +46,8 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 	private ItemDetailService itemDetailService;
 	@Autowired
 	private ItemDescService itemDescService;
+	@Autowired
+	private DetailSpecService detailSpecService;
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -80,12 +86,70 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 				throw new ServiceException("save item detail error: save item description error");
 			}
 			//保存规格组信息
-			
+			List<DetailSpecDO> listSpecGroups = detailDto.getListSpecGroups();
+			if(CollectionUtils.isNotEmpty(listSpecGroups)){
+				for(DetailSpecDO specDO : listSpecGroups){
+					specDO.setCreateTime(date);
+					specDO.setModifyTime(date);
+					specDO.setDetailId(id);
+				}
+				int res = detailSpecService.insertBatch(listSpecGroups);
+				if(res < 1){
+					throw new ServiceException("save item detail error: save item specGroup error");
+				}
+			}
+			//保存图片信息
 			return id;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);
 		}
 		return null;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Long updateItemDetail(ItemDetailDTO detailDto) throws ServiceException {
+		String spu = detailDto.getSpu();
+		String description = detailDto.getDescription();
+		if(StringUtils.isBlank(spu) || StringUtils.isBlank(description)){
+			throw new ServiceException("update item detail error: the parameter spu or description is null");
+		}
+		ItemDetailDO detailDO = new ItemDetailDO();
+		try {
+			//更新item detail信息
+			BeanUtils.copyProperties(detailDO, detailDto);
+			int id = itemDetailService.update(detailDO, false);
+			if(id < 1){
+				throw new ServiceException("update item detail error: server inner error!");
+			}
+			//更新商品描述信息
+			ItemDescDO descDO = new ItemDescDO();
+			descDO.setDetailId(detailDto.getId());
+			/*
+			List<ItemDescDO> list = itemDescService.selectDynamic(descDO);
+			if(1 != list.size()){
+				throw new ServiceException("update item detail when update description error: the size of description is not unique");
+			}
+			descDO.setId(list.get(0).getId());
+			descDO.setDescription(description);
+			descDO.setModifyUserId(detailDto.getModifyUserId());
+			descDO.setModifyTime(detailDto.getModifyTime());
+			int res = itemDescService.update(descDO, false);
+			*/
+			descDO.setDescription(description);
+			int res = itemDescService.updateByDetailId(descDO);
+			if(res < 1){
+				throw new ServiceException("update item detail error: server inner error!");
+			}
+			//更新商品规格关联信息
+			
+			//更新商品图片信息
+			
+			return 1L;
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			logger.error("", e);
+		}
+		return -1L;
 	}
 
 

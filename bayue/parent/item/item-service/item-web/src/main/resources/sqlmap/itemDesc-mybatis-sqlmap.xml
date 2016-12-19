@@ -116,5 +116,17 @@
 	 	<include refid="MybatisItemDescDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisItemDescDAO_update_by_detailId" parameterType="long">
+ 		UPDATE item_desc
+ 		<set>
+			<if test="itemId != null ">item_id=#{itemId},</if>
+			<if test="description != null  and description != '' ">description=#{description},</if>
+			<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+			<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+			<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE detail_id = #{detailId}
+ 	</select>
 
 </mapper>
