@@ -52,4 +52,9 @@ public class MybatisSpecGroupDAO extends MybatisBaseDAO implements SpecGroupDAO 
 		return getSqlSession().selectList("ng.bayue.base.domain.SpecGroupMapper.MybatisSpecGroupDAO_select_dynamic_page_query", specGroupDO);
 	}
 
+	@Override
+	public List<SpecGroupDO> selectByIds(List<Long> groupIds) {
+		return getSqlSession().selectList("ng.bayue.base.domain.SpecGroupMapper.MybatisSpecGroupDAO_select_by_ids", groupIds);
+	}
+
 }

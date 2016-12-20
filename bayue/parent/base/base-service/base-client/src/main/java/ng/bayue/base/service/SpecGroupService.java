@@ -115,5 +115,7 @@ public interface SpecGroupService {
 	 * @throws ServiceException
 	 */
 	int insertSpecGroupAndLink(SpecGroupDO specGroupDO, List<Long> specIds) throws ServiceException;
+	
+	List<SpecGroupDO> selectByIds(List<Long> groupIds);
 
 }

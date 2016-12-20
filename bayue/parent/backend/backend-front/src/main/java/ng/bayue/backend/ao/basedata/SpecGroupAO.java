@@ -142,5 +142,12 @@ public class SpecGroupAO {
 		}
 		return false;
 	}
+	
+	public List<SpecGroupDO> listByGroupIds(List<Long> groupIds){
+		if(null == groupIds){
+			return null;
+		}
+		return specGroupService.selectByIds(groupIds);
+	}
 
 }

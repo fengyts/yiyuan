@@ -114,9 +114,9 @@
 				modify_time
 		)values
 			<foreach collection="list" index="index" item="item" open="" separator="," close="">
-			(	
-				#{item.detailId},#{item.specGroupId},#{item.sort},#{item.createTime},#{item.modifyTime}
-			)
+				(
+					#{item.detailId},#{item.specGroupId},#{item.sort},#{item.createTime},#{item.modifyTime}
+				)
 			</foreach>
 		
  	</select>

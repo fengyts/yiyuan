@@ -111,11 +111,9 @@ $(function(){
 		var _s = JSON.stringify(specGroupData);
 		
 		var _data = $("#itemDetailAddForm").serialize();
-		_data +="&specGroupIds="+_s;
+		_data += "&specGroupStrs=" + _s;
 		console.log(_data);
-		
-//		return;
-		
+		return;
 		$.ajax({
 			url : 'save',
 			dataType : 'text',
@@ -172,7 +170,7 @@ $(function(){
 	});
 	
 	
-	//列表页全选按钮
+	//商品详情列表页全选按钮
 	$("#checkAllDetail").on('click', function(){
 		if($(this).is(":checked")){
 			$("#dataListDetail tr").each(function(){
@@ -190,9 +188,8 @@ $(function(){
 //获取规格组数据
 function getSpecGroupData(){
 	var data = new Array();
-	var _record = {};
 	$("#associateSpecGroupDataList tbody tr").each(function(){
-		var _children = $(this).children();
+		var _record = {}, _children = $(this).children();
 		_record.specGroupId = _children.eq(0).text();
 		var _sort = _children.eq(3).find(":input").val();
 		if(!_sort){

@@ -82,4 +82,6 @@ public interface SpecGroupDAO {
 	 * @author fengyts 2016-07-26 10:08:29
 	 */
 	List<SpecGroupDO> selectDynamicPageQuery(SpecGroupDO specGroupDO) throws DAOException;
+	
+	List<SpecGroupDO> selectByIds(List<Long> groupIds);
 }

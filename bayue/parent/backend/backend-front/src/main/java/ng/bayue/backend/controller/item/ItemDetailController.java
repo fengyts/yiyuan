@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import ng.bayue.backend.ao.basedata.SpecGroupAO;
+import ng.bayue.backend.ao.item.ItemAO;
 import ng.bayue.backend.ao.item.ItemDetailAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
@@ -34,6 +35,8 @@ public class ItemDetailController extends BaseController {
 	private ItemDetailAO itemDetailAO;
 	@Autowired
 	private SpecGroupAO specGroupAO;
+	@Autowired
+	private ItemAO itemAO;
 
 	@RequestMapping({ "/list" })
 	public String listDetail(Model model, ItemDetailDTO itemDetialDTO,
@@ -84,10 +87,15 @@ public class ItemDetailController extends BaseController {
 		}
 		ItemDetailDTO detailDto = itemDetailAO.selectDetailById(detailId);
 		model.addAttribute("detailDO", detailDto);
+		
 		model.addAttribute("listIframeName", iframeName);
+		
 		model.addAttribute("description", detailDto.getDescription());
+		
 		model.addAttribute("itemStatus", ItemStatusEnum.values());
 		model.addAttribute("itemType", ItemTypeEnum.values());
+		
+		model.addAttribute("detailSpecGroups",itemAO.listSpecGroups(detailId));
 		return BASE_VIEW + "edit";
 	}
 	

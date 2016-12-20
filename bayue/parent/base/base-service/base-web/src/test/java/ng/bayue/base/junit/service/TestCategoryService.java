@@ -6,10 +6,12 @@ import java.util.List;
 
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.ForbiddenWordsDO;
+import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.persist.dao.CategoryDAO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.ForbiddenWordsService;
+import ng.bayue.base.service.SpecGroupService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,17 +34,20 @@ public class TestCategoryService {
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
+	@Autowired
+	private SpecGroupService groupSerivce;
+	
 	@Test
 	public void testBatch(){
+		List<Long> groupIds = new ArrayList<Long>();
+		groupIds.add(1L);
+		groupIds.add(2L);
+		List<SpecGroupDO> l = groupSerivce.selectByIds(groupIds);
+		System.out.println(l.size());
 	}
 	
 	@Test
 	public void testDAO() throws DAOException{
-		CategoryDO cate = new CategoryDO();
-		cate.setLevel(2);
-		cate.setParentId(1L);
-		String code = categoryDAO.selectMaxCodeDynamic(cate);
-		System.out.println(code);
 	}
 	
 	@Test

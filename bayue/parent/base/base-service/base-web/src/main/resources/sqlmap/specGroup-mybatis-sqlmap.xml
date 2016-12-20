@@ -122,5 +122,16 @@
 	 	<include refid="MybatisSpecGroupDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisSpecGroupDAO_select_by_ids" parameterType="list" resultMap="SpecGroupDOResultMap">
+ 		SELECT 
+ 			<include refid="MybatisSpecGroupDAO_all_column_fields" />
+ 		FROM
+		 	base_spec_group
+		 WHERE id IN
+		 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+ 	</select>
 
 </mapper>

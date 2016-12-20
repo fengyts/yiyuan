@@ -146,6 +146,15 @@ css=[
 			    </tr>
 			</thead>
 			<tbody>
+				<#list detailSpecGroups as specs>
+					<tr class="tr">
+						<td style="display:none;">${specs.specGroupId}</td>
+						<td class="text-center">${specs.groupName}</td>
+						<td class="text-center">${specs.groupNameAlias}</td>
+						<td class="text-center">${specs.sort}</td>
+						<td class="text-center"><button type='button' class='btn btn-danger delSpecGroup'>删除</button></td>
+					</tr>
+				</#list>
 			</tbody>
 		</table>
 		</div>

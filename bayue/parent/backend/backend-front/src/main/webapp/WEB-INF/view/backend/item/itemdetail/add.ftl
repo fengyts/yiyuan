@@ -120,6 +120,30 @@ css=[
 		</div>
 	</div>
 	<hr/>
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	        <div class="panel-toolbar text-left dr-slash-text small">
+	        	<button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-plus"></span>关联规格信息</button>
+	        	<button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-remove"></span>移除</button>
+	        </div>
+	    </div>
+	    <div class="table-responsive">
+	        <table id="contentTable" class="table table-bordered dr-table-bordered">
+	            <thead>
+	            	<tr>
+	            		<th width="5%"><input type="checkbox" id="allCheck" /></th>
+		                <th>账号编号(自动生成)</th>
+		                <th>账户名称</th>
+	                	<th>结算账号</th>
+	                	<th>账号开户行</th>
+	                	<th>开户日期</th>
+		            </tr>
+	            </thead>
+	            <tbody>
+	            </tbody>
+	        </table>
+	    </div>
+    </div>
 	<div class="form-group">
 		<label class="control-label">
 			<button type="button" class="btn btn-primary ml15" style="margin-bottom:10px;" id="associateSpecGroup">关联规格信息</button>

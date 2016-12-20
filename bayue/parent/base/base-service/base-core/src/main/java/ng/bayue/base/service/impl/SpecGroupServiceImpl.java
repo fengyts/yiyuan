@@ -188,4 +188,12 @@ public class SpecGroupServiceImpl  implements SpecGroupService{
 		return 1;
 	}
 
+	@Override
+	public List<SpecGroupDO> selectByIds(List<Long> groupIds) {
+		if(CollectionUtils.isEmpty(groupIds)){
+			return null;
+		}
+		return specGroupDAO.selectByIds(groupIds);
+	}
+
 }
