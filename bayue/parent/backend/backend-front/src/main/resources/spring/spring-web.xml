@@ -11,19 +11,18 @@
 	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
        
 	<!-- 启用spring mvc 注解 -->
+	<!-- 
 	<mvc:annotation-driven/>
-	<!-- <context:annotation-config /> -->
+	<context:annotation-config /> 
+	-->
 	
 	<context:property-placeholder location="classpath:config/metainfo.properties" order="2000000"/>
 	<util:properties id="meta" location="classpath:config/metainfo.properties"/>
 
 	<context:component-scan base-package="ng.bayue.*">
-		<!-- <context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-			<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Service" /> -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 	
 	<bean id="imageDownload" class="ng.bayue.service.impl.ImageDownload"/>
