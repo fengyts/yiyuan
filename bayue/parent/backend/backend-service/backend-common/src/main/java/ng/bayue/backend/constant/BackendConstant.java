@@ -36,6 +36,9 @@ public interface BackendConstant {
 		/** 验证码错误 */
 		final String KAPTCHAERROR = "kaptchaError";
 		
+		/** 验证码为空 */
+		final String KAPTCHAEMPTY = "kaptchaEmpty";
+		
 		/** 踢出用户标识 */
 		final String KICKOUT = "kickout";
 		

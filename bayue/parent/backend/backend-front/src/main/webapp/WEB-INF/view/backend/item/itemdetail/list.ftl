@@ -64,6 +64,8 @@ css=[
 			    		<th>大类</th>
 			    		<th>小类</th>
 			    		<th>单位</th>
+			    		<th>商品状态</th>
+			    		<th>商品价格(元)</th>
 			    		<th>操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
@@ -78,6 +80,13 @@ css=[
 			    			<td class="td_center">${obj.largeCateName}</td>
 			    			<td class="td_center">${obj.smallCateName}</td>
 			    			<td class="td_center">${obj.unitName}</td>
+			    			<td class="td_center">
+								<#if 0==obj.status>未上架
+								<#elseif 1==obj.status>已上架
+								<#else>作废
+								</#if>
+							</td>
+							<td class="td_center">${obj.basicPrice?string('0.00')}</td>
 			    			<td class="td_center">
 			    				<a href="javascript:void(0);" class="editDetail" param='${obj.id}'>[编辑]</a>
 			    			</td>

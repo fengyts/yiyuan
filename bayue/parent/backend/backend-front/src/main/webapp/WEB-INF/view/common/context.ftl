@@ -9,9 +9,15 @@
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/msgbox.css">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/common.css">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">
-	
-	<script src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
-	<#--<script type="text/javascript" src="${domain}/statics/plugin/other/colResizable-1.3.min.js"></script>-->
+	<#--
+	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	-->
+
+	<script type="text/javascript" src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<#--
+	<script type="text/javascript" src="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${domain}/statics/plugin/other/colResizable-1.3.min.js"></script>
+	-->
 	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/util.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>
