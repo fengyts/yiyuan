@@ -3,6 +3,7 @@ import java.util.List;
 
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.exception.DAOException;
+import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemDetailDAO;
 
 import org.springframework.stereotype.Component;
@@ -50,6 +51,11 @@ public class MybatisItemDetailDAO extends MybatisBaseDAO implements ItemDetailDA
 	@Override
 	public List<ItemDetailDO> selectDynamicPageQuery(ItemDetailDO itemDetailDO) throws DAOException {
 		return getSqlSession().selectList("ng.bayue.item.domain.ItemDetailMapper.MybatisItemDetailDAO_select_dynamic_page_query", itemDetailDO);
+	}
+
+	@Override
+	public int updateBatch(List<ItemDetailDO> list) throws ServiceException {
+		return getSqlSession().update("ng.bayue.item.domain.ItemDetailMapper.MybatisItemDetailDAO_updateBatch", list);
 	}
 
 }

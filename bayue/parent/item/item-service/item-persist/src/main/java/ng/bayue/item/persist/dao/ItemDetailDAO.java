@@ -3,6 +3,7 @@ package ng.bayue.item.persist.dao;
 import java.util.List;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.exception.DAOException;
+import ng.bayue.item.exception.ServiceException;
 
 /**
  * 商品详情 DAO
@@ -91,4 +92,16 @@ public interface ItemDetailDAO {
 	 * @author longhaisheng 2016-07-13 13:17:52
 	 */
 	List<ItemDetailDO> selectDynamicPageQuery(ItemDetailDO itemDetailDO) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 批量更新商品(批量上架、作废)
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateBatch(List<ItemDetailDO> list) throws ServiceException;
+	
 }

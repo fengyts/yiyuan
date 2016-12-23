@@ -1,5 +1,6 @@
-<#include "/common/common.ftl"/>
-<@backend title="商品spu管理" js=[
+<#include "/common/common.ftl" />
+
+<@backend title="商品管理" js=[
 '/statics/plugin/layer/layer.min.js',
 '/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/common/common-js/tab.js',
@@ -7,6 +8,28 @@
 ] 
 css=[
 ] >
+
+<style>
+	.panel-default {
+	  border-color: #ddd;
+	}
+	.panel-default > .panel-heading {
+	  color: #333;
+	  background-color: #f5f5f5;
+	  border-color: #ddd;
+	  padding:5px;
+	}
+	.panel-default > .panel-heading + .panel-collapse > .panel-body {
+	  border-top-color: #ddd;
+	}
+	.panel-default > .panel-heading .badge {
+	  color: #f5f5f5;
+	  background-color: #333;
+	}
+	.panel-default > .panel-footer + .panel-collapse > .panel-body {
+	  border-bottom-color: #ddd;
+	}
+</style>
 
 <div class="box">
 <form class="jqtransform" method="post" id="itemDetailForm" action="${domain}/item/itemDetail/list.htm">
@@ -43,7 +66,7 @@ css=[
 					</tr>
 					</table>
 				</div>
-				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="border-top:1px solid #dadada;">
+				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="margin-left:5px;border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
 				    	<input class="btn btn82 btn_search" onclick="$('#itemDetailForm').submit();" type="button" value="查询" name="button" />
 				    </a>
@@ -54,45 +77,55 @@ css=[
 		
 		<#-- 数据显示块 -->
 		<div id="table" class="mt10">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量上架" id="batchOnSales" param="1" />
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量作废" id="batchCancellation" param="2" />
+				</div>
+			</div>
 			<div class="box span10 oh">
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataListDetail">
-			    	<tr>
-			    		<th width="5%">全选<input type='checkbox' id="checkAllDetail"/></th>
-			    		<th>SPU</th>
-			    		<th>PRDID</th>
-			    		<th>商品显示名</th>
-			    		<th>大类</th>
-			    		<th>小类</th>
-			    		<th>单位</th>
-			    		<th>商品状态</th>
-			    		<th>商品价格(元)</th>
-			    		<th>操作</th>
-			    	</tr>
-			    	<#if page.list?default([])?size!=0>
-			    	<#list page.list as obj>
-			    		<tr class="tr">
-			    			<td class="td_center">
-			    				<input type="checkbox" name="detailId" value="${obj.id}" />
-			    			</td>
-			    			<td class="td_center">${obj.spu}</td>
-			    			<td class="td_center">${obj.prdid}</td>
-			    			<td class="td_center">${obj.mainTitle}</td>
-			    			<td class="td_center">${obj.largeCateName}</td>
-			    			<td class="td_center">${obj.smallCateName}</td>
-			    			<td class="td_center">${obj.unitName}</td>
-			    			<td class="td_center">
-								<#if 0==obj.status>未上架
-								<#elseif 1==obj.status>已上架
-								<#else>作废
-								</#if>
-							</td>
-							<td class="td_center">${obj.basicPrice?string('0.00')}</td>
-			    			<td class="td_center">
-			    				<a href="javascript:void(0);" class="editDetail" param='${obj.id}'>[编辑]</a>
-			    			</td>
-			    		</tr>
-			    	</#list>
-			    	</#if>
+			    	<thead>
+				    	<tr>
+				    		<th width="5%">全选<input type='checkbox' id="checkAllDetail"/></th>
+				    		<th>SPU</th>
+				    		<th>PRDID</th>
+				    		<th>商品显示名</th>
+				    		<th>大类</th>
+				    		<th>小类</th>
+				    		<th>单位</th>
+				    		<th>商品状态</th>
+				    		<th>商品价格(元)</th>
+				    		<th>操作</th>
+				    	</tr>
+			    	</thead>
+			    	<tbody id="dataBodyList">
+				    	<#if page.list?default([])?size!=0>
+				    	<#list page.list as obj>
+				    		<tr class="tr">
+				    			<td class="td_center">
+				    				<input type="checkbox" name="detailId" param="${obj.id}" />
+				    			</td>
+				    			<td class="td_center">${obj.spu}</td>
+				    			<td class="td_center">${obj.prdid}</td>
+				    			<td class="td_center">${obj.mainTitle}</td>
+				    			<td class="td_center">${obj.largeCateName}</td>
+				    			<td class="td_center">${obj.smallCateName}</td>
+				    			<td class="td_center">${obj.unitName}</td>
+				    			<td class="td_center">
+									<#if 0==obj.status>未上架
+									<#elseif 1==obj.status>已上架
+									<#else>作废
+									</#if>
+								</td>
+								<td class="td_center">${obj.basicPrice?string('0.00')}</td>
+				    			<td class="td_center">
+				    				<a href="javascript:void(0);" class="editDetail" param='${obj.id}'>[编辑]</a>
+				    			</td>
+				    		</tr>
+				    	</#list>
+				    	</#if>
+					</tbody>
 			    </table>
 			</div>
 			
@@ -101,7 +134,6 @@ css=[
 			</div>
 		</div>
 		
-
     <@pager  pagination=page  formId="itemDetailForm" />
  
 </form>

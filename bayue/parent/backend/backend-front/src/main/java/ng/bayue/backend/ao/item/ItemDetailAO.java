@@ -271,5 +271,25 @@ public class ItemDetailAO {
 		}
 		return new ResultMessage();
 	}
+	
+	public ResultMessage batchHandlerItemStatus(String ids,Integer status){
+		List<ItemDetailDO> list = new ArrayList<ItemDetailDO>();
+		String[] detailIds = ids.split(",");
+		Long userId = UserHandler.getUser().getId();
+		Date date = new Date();
+		for(String id : detailIds){
+			ItemDetailDO detailDO = new ItemDetailDO();
+			detailDO.setId(Long.parseLong(id));
+			detailDO.setStatus(status);
+			detailDO.setModifyTime(date);
+			detailDO.setModifyUserId(userId);
+			list.add(detailDO);
+		}
+		int res = itemDetailService.updateBatch(list);
+		if(res < 1){
+			return ResultMessage.serverInnerError();
+		}
+		return new ResultMessage();
+	}
 
 }

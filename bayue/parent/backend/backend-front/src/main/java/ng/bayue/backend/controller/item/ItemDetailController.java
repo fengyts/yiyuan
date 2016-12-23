@@ -16,6 +16,7 @@ import ng.bayue.item.enums.ItemStatusEnum;
 import ng.bayue.item.enums.ItemTypeEnum;
 import ng.bayue.util.Page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,6 +109,24 @@ public class ItemDetailController extends BaseController {
 			return new ResultMessage(ResultMessage.Failure, oe.getDefaultMessage());
 		}
 		return itemDetailAO.update(itemDetailDTO);
+	}
+	
+	/**
+	 * <pre>
+	 * 商品批量上架和作废
+	 * </pre>
+	 *
+	 * @param ids
+	 * @param status 上架：1;作废：2
+	 * @return
+	 */
+	@RequestMapping({"/batchHandleItemStatus"})
+	@ResponseBody
+	public ResultMessage batchHandleItemStatus(String ids,Integer status){
+		if(StringUtils.isBlank(ids) || status.intValue() < 1){
+			return ResultMessage.serverInnerError();
+		}
+		return itemDetailAO.batchHandlerItemStatus(ids, status);
 	}
 
 }

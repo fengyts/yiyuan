@@ -119,24 +119,28 @@ css=[
 			<textarea class="form-control" rows="2"  id="remark" name="remark" value="${detailDO.remark}"></textarea>
 		</div>
 	</div>
+	
 	<hr/>
+	<#-- 关联规格信息 -->
 	<div class="panel panel-default">
 	    <div class="panel-heading">
 	        <div class="panel-toolbar text-left dr-slash-text small">
-	        	<button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-plus"></span>关联规格信息</button>
-	        	<button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-remove"></span>移除</button>
+	        	<button class="btn btn-primary btn-sm" type="button" id="associateSpecGroup">
+	        		<span class="glyphicon glyphicon-plus"></span>
+	        		关联规格信息
+        		</button>
 	        </div>
 	    </div>
 	    <div class="table-responsive">
-	        <table id="contentTable" class="table table-bordered dr-table-bordered">
+	        <table class="table table-bordered dr-table-bordered" id="associateSpecGroupDataList">
 	            <thead>
 	            	<tr>
-	            		<th width="5%"><input type="checkbox" id="allCheck" /></th>
-		                <th>账号编号(自动生成)</th>
-		                <th>账户名称</th>
-	                	<th>结算账号</th>
-	                	<th>账号开户行</th>
-	                	<th>开户日期</th>
+	            		<th class="display"></th><#-- 商品关联规格组表主键id -->
+	            		<th class="display"></th><#-- 规格组id -->
+					    <th class="text-center">规格组名称</th>
+					    <th class="text-center">规格组别名</th>
+					    <th class="text-center col-md-2">规格组排序</th>
+					    <th class="text-center col-xs-1">操作</th>
 		            </tr>
 	            </thead>
 	            <tbody>
@@ -144,26 +148,28 @@ css=[
 	        </table>
 	    </div>
     </div>
+    <#--
 	<div class="form-group">
 		<label class="control-label">
 			<button type="button" class="btn btn-primary ml15" style="margin-bottom:10px;" id="associateSpecGroup">关联规格信息</button>
 		</label>
 		<div class="col-md-12">
-		<table class="list_table" id="associateSpecGroupDataList">
-			<thead>
-		    	<tr>
-		    		<th class="display"></th>
-				    <th class="text-center">规格组名称</th>
-				    <th class="text-center">规格组别名</th>
-				    <th class="text-center col-md-2">规格组排序</th>
-				    <th class="text-center col-xs-1">操作</th>
-			    </tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+			<table class="list_table" id="associateSpecGroupDataList">
+				<thead>
+			    	<tr>
+			    		<th class="display"></th>
+					    <th class="text-center">规格组名称</th>
+					    <th class="text-center">规格组别名</th>
+					    <th class="text-center col-md-2">规格组排序</th>
+					    <th class="text-center col-xs-1">操作</th>
+				    </tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
 		</div>
 	</div>
+	-->
 	
 	<#-- 商品上传图片 -->
 	<div class="form-group">

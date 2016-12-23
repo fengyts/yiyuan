@@ -104,6 +104,15 @@ public interface ItemDetailService {
 	 */
 	Page<ItemDetailDO> queryPageListByItemDetailDOAndStartPageSize(ItemDetailDO itemDetailDO,int startPage,int pageSize);
 
-	
+	/**
+	 * <pre>
+	 * 批量更新商品(批量上架、作废)
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateBatch(List<ItemDetailDO> list) throws ServiceException;
 	
 }

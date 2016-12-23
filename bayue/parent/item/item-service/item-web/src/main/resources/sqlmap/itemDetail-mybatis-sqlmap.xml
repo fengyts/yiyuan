@@ -230,5 +230,39 @@
 	 	<include refid="MybatisItemDetailDAO_dynamic_where_fields" />
 	 	Limit #{start},#{pageSize}
  	</select>
-
+	
+	<update id="MybatisItemDetailDAO_updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" separator=";" close="">
+			UPDATE item_detail 
+			<set>
+					<if test="item.spu != null  and spu != '' ">spu=#{item.spu},</if>
+					<if test="item.itemId != null ">item_id=#{item.itemId},</if>
+					<if test="item.prdid != null  and prdid != '' ">prdid=#{item.prdid},</if>
+					<if test="item.itemTitle != null  and itemTitle != '' ">item_title=#{item.itemTitle},</if>
+					<if test="item.mainTitle != null  and mainTitle != '' ">main_title=#{item.mainTitle},</if>
+					<if test="item.subTitle != null  and subTitle != '' ">sub_title=#{item.subTitle},</if>
+					<if test="item.barcode != null  and barcode != '' ">barcode=#{item.barcode},</if>
+					<if test="item.itemType != null ">item_type=#{item.itemType},</if>
+					<if test="item.basicPrice != null ">basic_price=#{item.basicPrice},</if>
+					<if test="item.returnDays != null ">return_days=#{item.returnDays},</if>
+					<if test="item.status != null ">status=#{item.status},</if>
+					<if test="item.largeId != null ">large_id=#{item.largeId},</if>
+					<if test="item.smallId != null ">small_id=#{item.smallId},</if>
+					<if test="item.unitId != null ">unit_id=#{item.unitId},</if>
+					<if test="item.weight != null ">weight=#{item.weight},</if>
+					<if test="item.weightNet != null ">weight_net=#{item.weightNet},</if>
+					<if test="item.volumeWidth != null ">volume_width=#{item.volumeWidth},</if>
+					<if test="item.volumeLength != null ">volume_length=#{item.volumeLength},</if>
+					<if test="item.volumeHigh != null ">volume_high=#{item.volumeHigh},</if>
+					<if test="item.categoryCode != null  and categoryCode != '' ">category_code=#{item.categoryCode},</if>
+					<if test="item.specifications != null  and specifications != '' ">specifications=#{item.specifications},</if>
+					<if test="item.remark != null  and remark != '' ">remark=#{item.remark},</if>
+					<if test="item.modifyUserId != null ">modify_user_id=#{item.modifyUserId},</if>
+					<if test="item.modifyTime != null ">modify_time=#{item.modifyTime},</if>
+			</set>
+			WHERE id = #{item.id}
+		</foreach>
+		
+	</update>
+	
 </mapper>

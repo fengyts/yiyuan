@@ -2,21 +2,19 @@ package ng.bayue.item.service.impl;
 
 import java.util.List;
 
-import ng.bayue.item.constant.CodeConstant;
-import ng.bayue.item.domain.ItemDetailDO;
-import ng.bayue.item.exception.DAOException;
-import ng.bayue.item.exception.ServiceException;
-import ng.bayue.item.persist.dao.ItemDetailDAO;
-import ng.bayue.item.service.CodeService;
-import ng.bayue.item.service.ItemDetailService;
-import ng.bayue.item.service.ItemService;
-import ng.bayue.util.Page;
-
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ng.bayue.item.domain.ItemDetailDO;
+import ng.bayue.item.exception.DAOException;
+import ng.bayue.item.exception.ServiceException;
+import ng.bayue.item.persist.dao.ItemDetailDAO;
+import ng.bayue.item.service.ItemDetailService;
+import ng.bayue.util.Page;
 
 @Service(value = "itemDetailService")
 public class ItemDetailServiceImpl implements ItemDetailService {
@@ -25,9 +23,6 @@ public class ItemDetailServiceImpl implements ItemDetailService {
 
 	@Autowired
 	private ItemDetailDAO itemDetailDAO;
-
-	@Autowired
-	private CodeService codeService;
 
 	@Override
 	public Long insert(ItemDetailDO itemDetailDO) throws ServiceException {
@@ -127,6 +122,16 @@ public class ItemDetailServiceImpl implements ItemDetailService {
 			return this.queryPageListByItemDetailDO(itemDetailDO);
 		}
 		return new Page<ItemDetailDO>();
+	}
+
+	@Override
+	@Transactional
+	public int updateBatch(List<ItemDetailDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		int res = itemDetailDAO.updateBatch(list);
+		return res < 1 ? -1 : res;
 	}
 
 }

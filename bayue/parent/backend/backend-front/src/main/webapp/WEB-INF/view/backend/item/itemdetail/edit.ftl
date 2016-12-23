@@ -138,7 +138,8 @@ css=[
 		<table class="list_table" id="associateSpecGroupDataList">
 			<thead>
 		    	<tr>
-		    		<th class="display"></th>
+		    		<th class="display"></th><#-- 商品关联规格组表主键id -->
+            		<th class="display"></th><#-- 规格组id -->
 				    <th class="text-center">规格组名称</th>
 				    <th class="text-center">规格组别名</th>
 				    <th class="text-center col-md-2">规格组排序</th>
@@ -148,10 +149,11 @@ css=[
 			<tbody>
 				<#list detailSpecGroups as specs>
 					<tr class="tr">
+						<td class="display">${specs.id}</td>
 						<td style="display:none;">${specs.specGroupId}</td>
 						<td class="text-center">${specs.groupName}</td>
 						<td class="text-center">${specs.groupNameAlias}</td>
-						<td class="text-center">${specs.sort}</td>
+						<td class="text-center"><input class='form-control' type='text' value="${specs.sort}"></td>
 						<td class="text-center"><button type='button' class='btn btn-danger delSpecGroup'>删除</button></td>
 					</tr>
 				</#list>

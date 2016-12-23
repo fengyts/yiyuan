@@ -27,6 +27,8 @@ $(function(){
 		}
 	});
 	
+	
+	//确认选择规格组按钮
 	$("#confirmBtn").on('click',function(){
 		var _checked = $("#dataList tbody :input[type='checkbox']:checked");
 		if(_checked.length < 1){
@@ -40,26 +42,26 @@ $(function(){
 			var _this = $(this).parent(), _groupId = _this.next().text(),
 				_groupName = _this.next().next().text(), _groupAlias = _this.next().next().next().text();
 			
-			_parentSpecs.each(function(){
-				var _pId = $(this).children().eq(0).text();
-				if(_pId == _groupId){
+			_parentSpecs.each(function(){ // 校验是否已经绑定
+				var _pGroupId = $(this).children().eq(1).text();
+				if(_pGroupId == _groupId){
 					_flag = true;
-					return;
+					return false;
 				}
 			});
 			
 			if(_flag){ return ;}
 			
-			_html += "<tr><td style='display:none;'>" + _groupId + "</td><td class='text-center'>"
+			_html += "<tr><td class='display'></td><td style='display:none;'>" + _groupId + "</td><td class='text-center'>"
 					  + _groupName + "</td><td class='text-center'>"
 					  + _groupAlias + "</td><td>"
-					  + "<input class='form-control' type='text'></td><td class='text-center'>"
+					  + "<input class='form-control' type='text' value='0'></td><td class='text-center'>"
 					  + "<button type='button' class='btn btn-danger delSpecGroup'>删除</button>"
 					  + "</td></tr>";
 		});
 		
 		if(_flag){
-			layer.alert("请不要重复绑定", {icon : 8});
+			layer.alert("请不要重复绑定", {icon : 0});
 			return;
 		}
 		

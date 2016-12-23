@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/font-awesome-4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="${domain}/statics/login/style.css" />
+	<link rel="stylesheet" type="text/css" href="${domain}/statics/themes/login_style.css" />
 	<#--
 	-->
 	<script>

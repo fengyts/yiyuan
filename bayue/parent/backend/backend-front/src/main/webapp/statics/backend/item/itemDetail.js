@@ -112,10 +112,9 @@ $(function(){
 		
 		var _data = $("#itemDetailAddForm").serialize();
 		_data += "&specGroupStrs=" + _s;
-		console.log(_data);
-		return;
+		
 		$.ajax({
-			url : 'save',
+			url : 'save.htm',
 			dataType : 'text',
 			data : _data,
 			type : "post",
@@ -142,10 +141,10 @@ $(function(){
 	//商品详情编辑保存按钮
 	$("#updateItemDetailBtn").on('click',function(){
 		var specGroupData = getSpecGroupData();
-		var _html = editor.html();
+//		var _html = editor.html();
 		
 		$.ajax({
-			url : 'update',
+			url : 'update.htm',
 			dataType : 'text',
 			data : $("#itemDetailEditForm").serialize(),
 			type : "post",
@@ -183,6 +182,29 @@ $(function(){
 		}
 	});
 	
+	$("#batchOnSales,#batchCancellation").on('click',function(){
+		var _status = $(this).attr('param');
+		var _checkedData = $("#dataBodyList input:checked");
+		if(_checkedData.length < 1){
+			layer.alert("请至少选择一条记录", 8);
+			return false;
+		}
+		var _ids = "";
+		$.each(_checkedData, function(){
+			_ids += $(this).attr('param')+",";
+		});
+		_ids = _ids.substring(0,_ids.length-1);
+		$.post("batchHandleItemStatus.htm", {"ids" : _ids, "status" : _status}, function(response){
+			if(1 == response.result){
+				layer.alert(response.message, {icon:6}, function(){
+					window.location.reload(this);
+				});
+			}else{
+				layer.alert(response.message, {icon:5});
+			}
+		}, 'json');
+	});
+	
 });
 
 //获取规格组数据
@@ -190,8 +212,9 @@ function getSpecGroupData(){
 	var data = new Array();
 	$("#associateSpecGroupDataList tbody tr").each(function(){
 		var _record = {}, _children = $(this).children();
-		_record.specGroupId = _children.eq(0).text();
-		var _sort = _children.eq(3).find(":input").val();
+		_record.id = _children.eq(0).text();
+		_record.specGroupId = _children.eq(1).text();
+		var _sort = _children.eq(4).find(":input").val();
 		if(!_sort){
 			_sort = 0;
 		}
@@ -200,5 +223,6 @@ function getSpecGroupData(){
 	});
 	return data;
 }
+
 
 
