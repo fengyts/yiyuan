@@ -57,4 +57,9 @@ public class MybatisDetailSpecDAO extends MybatisBaseDAO implements DetailSpecDA
 		return getSqlSession().insert("ng.bayue.item.domain.DetailSpecMapper.MybatisDetailSpecDAO_insert_batch", list);
 	}
 
+	@Override
+	public int deleteByDetailId(Long detailId) throws DAOException {
+		return getSqlSession().delete("ng.bayue.item.domain.DetailSpecMapper.MybatisDetailSpecDAO_delete_byDetailId", detailId);
+	}
+
 }

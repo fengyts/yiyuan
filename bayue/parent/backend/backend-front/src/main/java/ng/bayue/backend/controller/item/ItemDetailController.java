@@ -113,17 +113,17 @@ public class ItemDetailController extends BaseController {
 	
 	/**
 	 * <pre>
-	 * 商品批量上架和作废
+	 * 商品批量上架、下架和作废
 	 * </pre>
 	 *
 	 * @param ids
-	 * @param status 上架：1;作废：2
+	 * @param status 0：下架;上架：1;作废：2
 	 * @return
 	 */
 	@RequestMapping({"/batchHandleItemStatus"})
 	@ResponseBody
 	public ResultMessage batchHandleItemStatus(String ids,Integer status){
-		if(StringUtils.isBlank(ids) || status.intValue() < 1){
+		if(StringUtils.isBlank(ids) || status.intValue() < 0){
 			return ResultMessage.serverInnerError();
 		}
 		return itemDetailAO.batchHandlerItemStatus(ids, status);

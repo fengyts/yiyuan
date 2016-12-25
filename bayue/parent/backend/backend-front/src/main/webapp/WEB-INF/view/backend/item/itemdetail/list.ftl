@@ -44,15 +44,15 @@ css=[
 					<tr>
 						<td>SPU：</td>
 						<td>
-				  			<input type="text" id="spu" name="spu" value="${detialDO.spu}" class="input-text lh25" size="20">
+				  			<input type="text" id="spu" name="spu" value="${detailDO.spu}" class="input-text lh25" size="20">
 						</td>
 						<td>PRDID：</td>
 						<td>
-				  			<input type="text" id="prdid" name="prdid" value="${detialDO.prdid}" class="input-text lh25" size="20">
+				  			<input type="text" id="prdid" name="prdid" value="${detailDO.prdid}" class="input-text lh25" size="20">
 						</td>
 						<td>商品名称:</td>
 						<td>
-				  			<input type="text" id="mainTitle" name="mainTitle" value="${detialDO.mainTitle}" class="input-text lh25" size="30">
+				  			<input type="text" id="mainTitle" name="mainTitle" value="${detailDO.mainTitle}" class="input-text lh25" size="30">
 						</td>
 						<td>商品状态:</td>
 						<td>
@@ -79,6 +79,7 @@ css=[
 		<div id="table" class="mt10">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量下架" id="batchOffSales" param="0" />
 				    <input class="ext_btn ext_btn_submit" type ="button" value="批量上架" id="batchOnSales" param="1" />
 				    <input class="ext_btn ext_btn_submit" type ="button" value="批量作废" id="batchCancellation" param="2" />
 				</div>

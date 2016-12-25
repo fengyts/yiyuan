@@ -1,6 +1,7 @@
 package ng.bayue.item.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -118,13 +119,16 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 		try {
 			//更新item detail信息
 			BeanUtils.copyProperties(detailDO, detailDto);
-			int id = itemDetailService.update(detailDO, false);
-			if(id < 1){
+			int res = itemDetailService.update(detailDO, false);
+			if(res < 1){
 				throw new ServiceException("update item detail error: server inner error!");
 			}
+			
+			Long detailId = detailDto.getId();
+			
 			//更新商品描述信息
 			ItemDescDO descDO = new ItemDescDO();
-			descDO.setDetailId(detailDto.getId());
+			descDO.setDetailId(detailId);
 			/*
 			List<ItemDescDO> list = itemDescService.selectDynamic(descDO);
 			if(1 != list.size()){
@@ -137,11 +141,89 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 			int res = itemDescService.update(descDO, false);
 			*/
 			descDO.setDescription(description);
-			int res = itemDescService.updateByDetailId(descDO);
+			res = itemDescService.updateByDetailId(descDO);
 			if(res < 1){
 				throw new ServiceException("update item detail error: server inner error!");
 			}
+			
 			//更新商品规格关联信息
+			DetailSpecDO detailSpecDO = new DetailSpecDO();
+			detailSpecDO.setDetailId(detailId);
+			List<DetailSpecDO> listDbSpecGroups = detailSpecService.selectDynamic(detailSpecDO);
+			List<DetailSpecDO> listFront = detailDto.getListSpecGroups();
+			if(CollectionUtils.isEmpty(listFront) 
+					&& CollectionUtils.isNotEmpty(listDbSpecGroups)){
+				res = detailSpecService.deleteByDetailId(detailId);
+				if(res < 1){
+					throw new ServiceException("delete item associate spec groups error:{}");
+				}
+			}else{
+				List<DetailSpecDO> listNewAdd = new ArrayList<DetailSpecDO>();
+				List<DetailSpecDO> listUpdate = new ArrayList<DetailSpecDO>();
+				List<DetailSpecDO> listDelete = new ArrayList<DetailSpecDO>();
+				
+				Date modifyTime = detailDto.getModifyTime();
+				for(DetailSpecDO specDO : listFront){
+					Long id = specDO.getId();
+					specDO.setModifyTime(modifyTime);
+					if(null == id){ // 新增
+						specDO.setDetailId(detailId);
+						specDO.setCreateTime(modifyTime);
+						listNewAdd.add(specDO);
+						//listFront.remove(specDO);
+						continue;
+					}
+					
+					for(int i=0;i<listDbSpecGroups.size();i++){ //删除和更新
+						DetailSpecDO specDb = listDbSpecGroups.get(i);
+						long idDb = specDb.getId();
+						if(id.longValue() == idDb){
+							//存在sort修改
+							if(specDO.getSort().intValue() != specDb.getSort().intValue()){
+								res = detailSpecService.update(specDO, false);
+								if(res < 1){
+									throw new ServiceException("update item associate spec groups error:{delete exists}"); 
+								}
+							}
+							listDbSpecGroups.remove(i);
+						}
+						
+					}
+					
+					/*if(flag){ // 删除
+						res = res = detailSpecService.deleteById(specDO.getId());
+						if(res < 1){
+							throw new ServiceException("delete item associate spec groups error:{}");
+						}
+					}*/
+					
+				}
+				
+				if(CollectionUtils.isNotEmpty(listNewAdd)){
+					res = detailSpecService.insertBatch(listNewAdd);
+					if(res < 1){
+						throw new ServiceException("delete item associate spec groups error:{}");
+					}
+				}
+				/*if(CollectionUtils.isNotEmpty(listUpdate)){
+					for(DetailSpecDO specDO : listUpdate){
+						res = detailSpecService.update(specDO, false);
+						if(res < 1){
+							throw new ServiceException("delete item associate spec groups error:{}");
+						}
+					}
+				}*/
+				if(CollectionUtils.isNotEmpty(listDbSpecGroups)){
+					for(DetailSpecDO specDO : listDbSpecGroups){
+						res = detailSpecService.deleteById(specDO.getId());
+						if(res < 1){
+							throw new ServiceException("delete item associate spec groups error:{}");
+						}
+					}
+				}
+				
+			}
+			
 			
 			//更新商品图片信息
 			

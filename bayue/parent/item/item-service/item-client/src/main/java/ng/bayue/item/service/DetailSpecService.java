@@ -114,5 +114,16 @@ public interface DetailSpecService {
 	 * @throws ServiceException
 	 */
 	int insertBatch(List<DetailSpecDO> list) throws ServiceException;
+	
+	/**
+	 * <pre>
+	 * 根据商品detailId删除关联的规格组信息
+	 * </pre>
+	 *
+	 * @param detailId
+	 * @return
+	 * @throws ServiceException
+	 */
+	int deleteByDetailId(Long detailId) throws ServiceException;
 
 }

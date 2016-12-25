@@ -112,13 +112,19 @@
 				sort,
 				create_time,
 				modify_time
-		)values
+		)VALUES
 			<foreach collection="list" index="index" item="item" open="" separator="," close="">
 				(
 					#{item.detailId},#{item.specGroupId},#{item.sort},#{item.createTime},#{item.modifyTime}
 				)
 			</foreach>
-		
  	</select>
+ 	
+ 	<delete id="MybatisDetailSpecDAO_delete_byDetailId">
+ 		DELETE FROM 
+ 			item_detail_spec 
+		WHERE 
+			detail_id = #{detailId}
+ 	</delete>
 
 </mapper>

@@ -174,17 +174,17 @@ public class SpecGroupServiceImpl  implements SpecGroupService{
 		
 		specGroupLinkService.insertBatch(links);
 		
-		Integer sort = specGroupDO.getSort();
-		String code = specGroupDO.getCode();
-		SpecGroupDO updateSort = new SpecGroupDO();
-		updateSort.setId(id);
-		if(null == sort){
-			updateSort.setSort(id.intValue());
-		}
-		if(StringUtils.isEmpty(code)){
-			updateSort.setCode(String.valueOf(id));
-		}
-		update(updateSort,false);
+//		Integer sort = specGroupDO.getSort();
+//		String code = specGroupDO.getCode();
+//		SpecGroupDO updateSort = new SpecGroupDO();
+//		updateSort.setId(id);
+//		if(null == sort){
+//			updateSort.setSort(id.intValue());
+//		}
+//		if(StringUtils.isEmpty(code)){
+//			updateSort.setCode(String.valueOf(id));
+//		}
+//		update(updateSort,false);
 		return 1;
 	}
 

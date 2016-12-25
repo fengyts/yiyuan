@@ -10,6 +10,8 @@ $(document).ready(function(){
 		pageii = $.layer({
 			type : 2,
 			title : '规格管理-->新增',
+			border: [3, 0.3, '#000'],
+			shade: [0.3, '#000'],
 			shadeClose : true,
 			maxmin : true,
 			fix : false,

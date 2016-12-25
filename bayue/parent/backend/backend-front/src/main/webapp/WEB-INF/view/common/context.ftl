@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/common.css">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">
 	<#--
+	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	-->
 
@@ -40,7 +41,7 @@
 	</#list>
 </head>
 <body>
-	<div class="container">
+	<div class="container_custom">
 		<#nested/>
 	</div>
 </body>

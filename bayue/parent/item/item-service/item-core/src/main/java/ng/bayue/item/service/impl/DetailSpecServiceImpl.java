@@ -150,7 +150,20 @@ public class DetailSpecServiceImpl  implements DetailSpecService{
 			int res = detailSpecDAO.insertBatch(list);
 			return res < 1 ? -1 : res;
 		} catch (DAOException e) {
-			logger.error("", e);
+			logger.error("批量插入商品关联规格组信息异常", e);
+		}
+		return -1;
+	}
+
+	@Override
+	public int deleteByDetailId(Long detailId) throws ServiceException {
+		if(null == detailId){
+			return -1;
+		}
+		try {
+			return detailSpecDAO.deleteByDetailId(detailId);
+		} catch (DAOException e) {
+			logger.error("删除商品关联规格组信息异常", e);
 		}
 		return -1;
 	}

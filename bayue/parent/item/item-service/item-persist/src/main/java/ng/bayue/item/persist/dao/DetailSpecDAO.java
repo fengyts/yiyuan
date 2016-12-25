@@ -4,6 +4,7 @@ import java.util.List;
 
 import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.exception.DAOException;
+import ng.bayue.item.exception.ServiceException;
 
 /**
  * 商品规格信息 DAO
@@ -94,4 +95,15 @@ public interface DetailSpecDAO {
 	List<DetailSpecDO> selectDynamicPageQuery(DetailSpecDO detailSpecDO) throws DAOException;
 	
 	int insertBatch(List<DetailSpecDO> list) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 根据商品detailId删除关联的规格组信息
+	 * </pre>
+	 *
+	 * @param detailId
+	 * @return
+	 * @throws ServiceException
+	 */
+	int deleteByDetailId(Long detailId) throws DAOException;
 }

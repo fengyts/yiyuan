@@ -142,11 +142,15 @@ $(function(){
 	$("#updateItemDetailBtn").on('click',function(){
 		var specGroupData = getSpecGroupData();
 //		var _html = editor.html();
+		var _s = JSON.stringify(specGroupData);
+		
+		var _data = $("#itemDetailEditForm").serialize();
+		_data += "&specGroupStrs=" + _s;
 		
 		$.ajax({
 			url : 'update.htm',
 			dataType : 'text',
-			data : $("#itemDetailEditForm").serialize(),
+			data : _data,
 			type : "post",
 			cache : false,
 			error : function(request){
@@ -182,7 +186,7 @@ $(function(){
 		}
 	});
 	
-	$("#batchOnSales,#batchCancellation").on('click',function(){
+	$("#batchOffSales, #batchOnSales, #batchCancellation").on('click', function(){
 		var _status = $(this).attr('param');
 		var _checkedData = $("#dataBodyList input:checked");
 		if(_checkedData.length < 1){

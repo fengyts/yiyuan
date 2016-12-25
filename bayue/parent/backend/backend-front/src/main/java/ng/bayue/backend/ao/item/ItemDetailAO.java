@@ -136,7 +136,7 @@ public class ItemDetailAO {
 		}
 		
 		page.setList(listRes);
-		page.setTotalCount(page.getTotalCount());
+		page.setTotalCount(page1.getTotalCount());
 		page.setPageNo(page1.getPageNo());
 		page.setPageSize(page1.getPageSize());
 		
@@ -265,6 +265,13 @@ public class ItemDetailAO {
 	public ResultMessage update(ItemDetailDTO detailDto){
 		detailDto.setModifyTime(new Date());
 		detailDto.setModifyUserId(UserHandler.getUser().getId());
+		//处理规格组信息
+		String specGroupStrs = detailDto.getSpecGroupStrs();
+		List<DetailSpecDO> listSpecGroups = null;
+		if(StringUtils.isNotBlank(specGroupStrs)){
+			listSpecGroups = JSONArray.parseArray(specGroupStrs, DetailSpecDO.class);
+			detailDto.setListSpecGroups(listSpecGroups);
+		}
 		Long res = managerService.updateItemDetail(detailDto);
 		if(res < 1){
 			return ResultMessage.serverInnerError();

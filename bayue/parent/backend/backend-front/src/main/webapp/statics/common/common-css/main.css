@@ -3,6 +3,10 @@
 	padding: 0px 10px 30px 10px;
 	margin-bottom: 60px;
 }
+.container_custom{
+	padding: 0px 10px 30px 10px;
+	margin-bottom: 60px;
+}
 /*iframe*/
 /*box*/
 .box{}
@@ -170,6 +174,7 @@ line-height: 1;
 	border-bottom: 1px solid #d3dbde;
     border-left: 1px solid #d3dbde;
     padding: 5px;
+    text-align: center;
 }
 
 
