@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>ng.bayue</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1.RELEASE</version>
+	</parent>
+
+	<artifactId>promotion</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>promotion</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<modules>
+		<module>promotion-common</module>
+		<module>promotion-client</module>
+		<module>promotion-core</module>
+		<module>promotion-web</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>ng.bayue</groupId>
+			<artifactId>common-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>
