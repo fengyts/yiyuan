@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="topicService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${promotion.hessian}/topicService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.promotion.service.TopicService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="topicItemService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${promotion.hessian}/topicItemService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.promotion.service.TopicItemService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+
+</beans>

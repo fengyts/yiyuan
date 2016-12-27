@@ -19,11 +19,23 @@
 	<script type="text/javascript" src="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${domain}/statics/plugin/other/colResizable-1.3.min.js"></script>
 	-->
+	
+	<script type="text/javascript" src="${domain}/statics/plugin/layui-v1.0.2/layui/layui.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/util.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>
 		
-	<script>var domain = "${domain}";</script>
+	<script>
+		var domain = "${domain}";
+		
+		/** 使用新版layui,定义layer和form模块 */
+		//var layer = layui.layer, form = layui.form;
+		var layer, form;
+		layui.use([ 'layer', 'form' ], function() {
+			layer = layui.layer;
+			form = layui.form();
+		});
+	</script>
 	
 	<#list css as file>   
 		<#if file?lower_case?starts_with('http://')>

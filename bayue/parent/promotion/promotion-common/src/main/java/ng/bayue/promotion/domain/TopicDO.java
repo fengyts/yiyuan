@@ -24,7 +24,7 @@ public class TopicDO extends BaseDO {
 	/** 是否测试专场：0-否;1-是 */
 	private Boolean isTest;
 
-	/** 专题类型:0-全部;1-单品团;2-主题团;3-品牌团 */
+	/** 专题类型:1-单品团;2-主题团;3-品牌团 */
 	private Integer type;
 
 	/** 参与活动所需积分 */

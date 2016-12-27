@@ -230,9 +230,12 @@
 		LEFT JOIN be_sys_menu_role smr ON smr.role_id = sur.role_id
 		LEFT JOIN be_sys_menu sm ON sm.id = smr.menu_id
 		WHERE
+			sm.status = '1' 
+		AND (
  			login_name = #{parameter}
  			OR email = #{parameter}
  			OR mobile = #{parameter}
+ 			)
 		ORDER BY sort
  	</select>
  	

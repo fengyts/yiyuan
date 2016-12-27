@@ -20,6 +20,7 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>ng.bayue</groupId>
 			<artifactId>promotion-client</artifactId>
@@ -27,8 +28,15 @@
 		</dependency>
 		<dependency>
 			<groupId>ng.bayue</groupId>
+			<artifactId>base-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ng.bayue</groupId>
 			<artifactId>item-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 	</dependencies>
+
 </project>

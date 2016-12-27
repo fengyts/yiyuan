@@ -55,7 +55,7 @@
 					<tr>
 						<td>菜单状态:</td>
 						<td>
-							<select class="select" name="state">
+							<select class="select" name="status">
 								<option value="1" selected="selected">有效</option>
 								<option value="0">无效</option>
 							</select>

@@ -27,8 +27,8 @@ js=[
 		              	<td><input class="input-text lh25" type="text" id="name" name="name" value="${sysMenuDO.name}"/></td>
 		              	<td>是否有效：</td>
 		              	<td>
-		              		<#assign statusTemp=sysMenuDO.state/>
-		              		<select name="state" class="select">
+		              		<#assign statusTemp=sysMenuDO.status/>
+		              		<select name="status" class="select">
 		              			<option value="" <#if statusTemp==null>selected="selected"</#if>>全部</option>
 		              			<option value="1" <#if statusTemp??&&statusTemp?string=="true">selected="selected"</#if>>有效</option>
 		              			<option value="0" <#if statusTemp??&&statusTemp?string=="false">selected="selected"</#if>>无效</option>
@@ -74,7 +74,7 @@ js=[
 		            		</#list>
 		            		<td width="150">${sysMenuDO.url}</td>
 		            		<td width="100">${sysMenuDO.remark}</td>
-		            		<td width="80">${(sysMenuDO.state!true)?string("有效","无效")}</td>
+		            		<td width="80">${(sysMenuDO.status!true)?string("有效","无效")}</td>
 		            		<td width="100">
 		            			<#if sysMenuDO.menuType != '0'>
 				            		<a href="javascript:void(0)" class="editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
