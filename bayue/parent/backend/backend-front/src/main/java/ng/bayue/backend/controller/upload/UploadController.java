@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
-@RequestMapping({"/upload"})
+//@RequestMapping({"/upload"}) // 这里使用requestmapping 会出现405错误
 public class UploadController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);

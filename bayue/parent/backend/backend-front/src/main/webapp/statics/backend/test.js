@@ -57,7 +57,7 @@ function uploadImg() {
 			// swf文件路径
 			swf : './expressInstall.swf',
 			// 文件接收服务端。
-			server:domain+'/upload/img/item.htm',
+			server:domain+'/img/item.htm',
 			// 选择文件的按钮。可选。
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
 			pick : {id:'#picker',label:"点击选择图片",multiple:true},

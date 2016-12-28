@@ -22,7 +22,7 @@ public class LoginController {
 
 	// private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Value("#{meta['kaptchaFlag']}")
+	@Value("#{meta['login.kaptchaFlag']}")
 	private Boolean kaptchaFlag;
 
 	@RequestMapping({ "/login" })
@@ -76,7 +76,9 @@ public class LoginController {
 				model.addAttribute("username", request.getAttribute("backViewUsername"));
 				model.addAttribute("password", request.getAttribute("backViewPassword"));
 				prompt = "验证码错误";
-			} else {
+			} else if(BackendConstant.SysUser.KAPTCHAEMPTY.equals(exceptionClassName)){
+				prompt = "验证码为空";
+			}else{
 				// 最终在异常处理器生成未知错误
 				// throw new Exception();
 				prompt = "服务器异常";

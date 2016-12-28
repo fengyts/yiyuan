@@ -1,8 +1,9 @@
 <#include "/common/common.ftl" />
 
-<@backend title="商品新增" 
+<@backend title="专题新增" 
 js=[
 '/statics/plugin/My97DatePicker/WdatePicker.js',
+'/statics/common/common-js/ajaxfileupload.js',
 '/statics/backend/promotion/topic.js'
 ]
 css=[
@@ -12,7 +13,7 @@ css=[
 
 <div class="panel-body box_border">
 <input type="hidden" id="listIframeName" value="${listIframeName}">
-<form id="itemDetailAddForm" action="" class="form-horizontal dr-form-bordered">
+<form id="topicAddForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	<div style="display:none;">
 		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
 	</div>

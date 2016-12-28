@@ -34,7 +34,7 @@ public class LoginFormAuthenticationFilter extends FormAuthenticationFilter {
 			HttpSession session = hsRequest.getSession();
 			String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 			String kaptcha = request.getParameter("kaptcha");
-			if(StringUtils.isBlank(kaptcha) || StringUtils.isNotBlank(code)){
+			if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code)){
 				hsRequest.setAttribute(DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, BackendConstant.SysUser.KAPTCHAEMPTY);
 				return true;
 			}
