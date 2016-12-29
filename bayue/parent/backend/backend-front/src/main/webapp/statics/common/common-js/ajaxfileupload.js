@@ -40,8 +40,6 @@ jQuery.extend({
 
         //�����ı�������֧��  
         if (data) {
-        	console.log("datadatadatadata:");
-        	console.log(data);
             for (var i in data) {
                 $('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
             }

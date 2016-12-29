@@ -21,6 +21,8 @@
 	-->
 	
 	<script type="text/javascript" src="${domain}/statics/plugin/layui-v1.0.2/layui/layui.js"></script>
+	
+	<script type="text/javascript" src="${domain}/statics/common/common-js/jquery.custom.extends.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/util.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>

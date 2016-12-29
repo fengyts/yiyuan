@@ -101,7 +101,7 @@ css=[]
 							</td>
 							<td class="td_center"></td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" param="${obj.id}">[编辑]</a>
+			    				<a href="javascript:void(0);" class="editBtn" param="${obj.id}">[编辑]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>

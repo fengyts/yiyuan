@@ -4,6 +4,7 @@
 js=[
 '/statics/plugin/My97DatePicker/WdatePicker.js',
 '/statics/common/common-js/ajaxfileupload.js',
+'/statics/plugin/other/jquery.form.js',
 '/statics/backend/promotion/topic.js'
 ]
 css=[
@@ -64,7 +65,7 @@ css=[
 		</div>
 		<label class="col-md-2 control-label">专题进度<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<select class="form-control" id="type" name="type">
+			<select class="form-control" id="progress" name="progress">
 				<#list topicProgress as progress>
 					<option value='${progress.code}'>${progress.desc}</option>
 				</#list>

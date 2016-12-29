@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ng.bayue.backend.constant.BackendConstant;
+import ng.bayue.backend.util.UserHandler;
 
 @Controller
 public class LoginController {
@@ -27,6 +28,12 @@ public class LoginController {
 
 	@RequestMapping({ "/login" })
 	public String login(Model model, HttpServletRequest request, String kickout) {
+		//已经登录，跳转首页
+		Object principal = UserHandler.getSubject().getPrincipal();
+		if(principal != null){
+			return "redirect:/index";
+		}
+		
 		model.addAttribute("kaptchaFlag", kaptchaFlag);
 		if (StringUtils.isNotEmpty(kickout) && "1".equals(kickout)) {
 			model.addAttribute("message", "被踢出登录");
@@ -53,6 +60,12 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/doLogin")
 	public String doLogin(HttpServletRequest request, Model model) throws Exception {
+		//已经登录，跳转首页
+		Object principal = UserHandler.getSubject().getPrincipal();
+		if(principal != null){
+			return "redirect:/index";
+		}
+		
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request
 				.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);

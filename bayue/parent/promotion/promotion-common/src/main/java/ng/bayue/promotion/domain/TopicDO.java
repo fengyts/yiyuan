@@ -1,8 +1,12 @@
 package ng.bayue.promotion.domain;
 
+import ng.bayue.annotation.GenerValidate;
 import ng.bayue.util.BaseDO;
 
 import java.util.Date;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 
 /**
  * 活动专题
@@ -19,6 +23,8 @@ public class TopicDO extends BaseDO {
 	private Long id;
 
 	/** 专题名称 */
+	@NotBlank(message="专题名称不能为空")
+	@GenerValidate(message="专题名称不能为空")
 	private String name;
 
 	/** 是否测试专场：0-否;1-是 */

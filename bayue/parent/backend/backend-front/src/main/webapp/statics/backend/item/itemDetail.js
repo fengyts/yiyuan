@@ -125,7 +125,7 @@ $(function(){
 			success : function(res) {
 				var data = JSON.parse(res);
 				if (1 == data.result) {// 成功
-					layer.alert(data.message, 1, function() {
+					layer.alert(data.message, {icon:1}, function() {
 						//'mainIframe_tabli_14'
 						var listIframeName = $("#listIframeName").val();
 						parent.window.frames[listIframeName].location.reload();
@@ -159,7 +159,7 @@ $(function(){
 			success : function(res) {
 				var data = JSON.parse(res);
 				if (1 == data.result) {// 成功
-					layer.alert(data.message, 1, function() {
+					layer.alert(data.message, {icon:1}, function() {
 						//'mainIframe_tabli_14'
 						var listIframeName = $("#listIframeName").val();
 						parent.window.frames[listIframeName].location.reload();

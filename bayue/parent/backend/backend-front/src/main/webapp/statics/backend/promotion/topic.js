@@ -5,10 +5,22 @@ $(function(){
 		addTab("topic_add","新增专题活动","/topic/add.htm?iframeName=" + window.name);
 	});
 	
+	// 取消按钮
 	$("#cancelTabBtn").on('click',function(){
-		parent.window.closeTab("topic_add");
+		var type = $(this).attr("param");
+		if(type){
+			parent.window.closeTab("topic_edit"); // 关闭编辑tab页
+		}else{
+			parent.window.closeTab("topic_add"); // 关闭新增tab页
+		}
 	});
 	
+	$(".editBtn").on('click', function(){
+		var topicId = $(this).attr("param");
+		addTab("topic_edit","编辑专题活动","/topic/edit.htm?topicId=" + topicId + "&iframeName=" + window.name);
+	});
+	
+	// 选择图片时生成缩略图预览
 	$("#image").change(function(e) {
         var file = e.target.files[0];
         imgview(file);
@@ -17,59 +29,35 @@ $(function(){
 	
 	$("#saveBtn").on('click',function(){
 		var _data = $("#topicAddForm").serializeArray();
-		console.log(_data);
-		var _d = $("#topicAddForm").serialize();
-//		console.log($("#topicAddForm").serialize());
-		_d = _d.replace(new RegExp("&","g"),",");
-		var _arr = _d.split("&");
-//		console.log(_arr);
-		_d = "{"+_d+"}";
-		console.log(_r);
-//		return ;
 		
+		var _o = $.formDataJson("#topicAddForm");
 		
 		$.ajaxFileUpload({
-//			url: 'save.htm',
+			url: 'save.htm',
 			type: 'POST',
 			secureuri: false,
 			fileElementId: 'image',
 			dataType: "json",
-			data: {"name":"abc","id":1},
-			success: function(data) {
-				layer.close(_loading);
-				clearFile();
-				if (data.code == 0) {
-					layer.msg("上传成功", 1, 1);
-					window.location.reload();
+			data: { "data" : _o },
+			success: function(response) {
+				console.log(response);
+//				layer.close(_loading);
+				if (response.result == 1) {
+					layer.alert(response.message, {icon:1}, function(){
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						parent.window.closeTab("topic_add");
+					});
 				} else {
-					layer.msg(data.message);
+					layer.msg(response.message, {icon:0});
 				}
 			},
 			error: function() {
-				layer.close(_loading);
-				clearFile();
+//				layer.close(_loading);
 				layer.msg("请求失败", 1);
 			}
 		});
-//		$.ajax({
-//			url : 'save.htm',
-//			dataType : 'text',
-//			data : $("#topicAddForm").serialize(),
-//			type : "post",
-//			cache : false,
-//			error : function(request){
-//				alert("Server Connection Failure...");
-//			},
-//			success : function(res) {
-//				var data = JSON.parse(res);
-//				if (1 == data.result) {// 成功
-//					layer.alert(data.message, 1, function() {
-//					});
-//				} else {// 失败
-//					layer.alert(data.message, 8);
-//				}
-//			}
-//		});
+		
 	});
 	
 });
@@ -99,4 +87,5 @@ function imgview(file) {
     }
     reader.readAsDataURL(file);
 }
- 
+
+function getFormData(){}
