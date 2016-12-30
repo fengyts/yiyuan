@@ -22,6 +22,7 @@ $(function(){
 	
 	// 选择图片时生成缩略图预览
 	$("#image").change(function(e) {
+		$("#imgChanged").val('1');
         var file = e.target.files[0];
         imgview(file);
     });
@@ -29,7 +30,6 @@ $(function(){
 	
 	$("#saveBtn").on('click',function(){
 		var _data = $("#topicAddForm").serializeArray();
-		
 		var _o = $.formDataJson("#topicAddForm");
 		
 		$.ajaxFileUpload({
@@ -40,7 +40,6 @@ $(function(){
 			dataType: "json",
 			data: { "data" : _o },
 			success: function(response) {
-				console.log(response);
 //				layer.close(_loading);
 				if (response.result == 1) {
 					layer.alert(response.message, {icon:1}, function(){
@@ -60,10 +59,41 @@ $(function(){
 		
 	});
 	
+	
+	$("#updateTopicBtn").on('click', function(){
+		var _data = $("#topicEditForm").serializeArray();
+		var _o = $.formDataJson("#topicEditForm");
+		var _imgChanged = $("#imgChanged").val();  // 是否修改了图片
+		
+		$.ajaxFileUpload({
+			url: 'update.htm',
+			type: 'POST',
+			secureuri: false,
+			fileElementId: 'image',
+			dataType: "json",
+			data: { "data" : _o , "imgChanged" : _imgChanged },
+			success: function(response) {
+				if (response.result == 1) {
+					layer.alert(response.message, {icon:1}, function(){
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						parent.window.closeTab("topic_edit");
+					});
+				} else {
+					layer.msg(response.message, {icon:0});
+				}
+			},
+			error: function() {
+				layer.msg("请求失败", {icon:5});
+			}
+		});
+		
+	});
+	
 });
 
 
-function preview1(file) {
+function imgview1(file) {
     var img = new Image(), url = img.src = URL.createObjectURL(file);
     var $img = $(img);
     img.onload = function() {

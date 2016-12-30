@@ -21,47 +21,70 @@ import ng.bayue.util.Page;
 public class TopicAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(TopicAO.class);
-	
+
 	@Autowired
 	private TopicService topicService;
-	
-	public Page<TopicDO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize){
+
+	public Page<TopicDO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize) {
 		Page<TopicDO> page = topicService.queryPageListByTopicDOAndStartPageSize(topicDO, pageNo, pageSize);
 		return page;
 	}
-	
-	public TopicDO selectById(Long topicId){
-		if(null == topicId){
+
+	public TopicDO selectById(Long topicId) {
+		if (null == topicId) {
 			return null;
 		}
 		return topicService.selectById(topicId);
 	}
-	
-	public ResultMessage save(TopicDO topicDO, Map<String, MultipartFile> map){
+
+	public ResultMessage save(TopicDO topicDO, Map<String, MultipartFile> map) {
 		Long userId = UserHandler.getUser().getId();
 		Date date = new Date();
 		topicDO.setCreateTime(date);
 		topicDO.setCreateUserId(userId);
 		topicDO.setModifyTime(date);
 		topicDO.setModifyUserId(userId);
-		if(null != map && !map.isEmpty()){
+		
+		// 上传图片
+		if (null != map && !map.isEmpty()) {
 			String image = uploadTopicImage(map);
-			if(StringUtils.isEmpty(image)){
+			if (StringUtils.isEmpty(image)) {
 				return new ResultMessage(ResultMessage.Failure, "上传图片失败");
 			}
+			image = "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg";
 			topicDO.setImage(image);
 		}
+		
 		Long id = topicService.insert(topicDO);
-		if(id < 1){
+		if (id < 1) {
 			return ResultMessage.serverInnerError();
 		}
 		return new ResultMessage();
 	}
-	
-	private String uploadTopicImage (Map<String, MultipartFile> map){
+
+	public ResultMessage update(TopicDO topicDO, Map<String, MultipartFile> map) {
+		topicDO.setModifyTime(new Date());
+		topicDO.setModifyUserId(UserHandler.getUser().getId());
+
+		if (null != map && !map.isEmpty()) {
+			String image = uploadTopicImage(map);
+			if (StringUtils.isEmpty(image)) {
+				return new ResultMessage(ResultMessage.Failure, "上传图片失败");
+			}
+			topicDO.setImage(image);
+		}
+
+		int res = topicService.update(topicDO, false);
+		if (res < 1) {
+			return ResultMessage.serverInnerError();
+		}
+		return new ResultMessage();
+	}
+
+	private String uploadTopicImage(Map<String, MultipartFile> map) {
 		Map.Entry<String, MultipartFile> entry = (Entry<String, MultipartFile>) map.entrySet();
 		MultipartFile file = entry.getValue();
 		return null;
 	}
-	
+
 }

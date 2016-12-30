@@ -75,12 +75,12 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">专题开始时间<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="startTime" name="startTime" value="${topicDO.startTime}" 
+			<input type="text" class="form-control Wdate" id="startTime" name="startTime" value="${(topicDO.startTime?string('yyyy-MM-dd'))!}" 
         		onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
 		</div>
 		<label class="col-md-2 control-label">专题结束时间<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="endTime" name="endTime" value="${topicDO.endTime}" 
+			<input type="text" class="form-control Wdate" id="endTime" name="endTime" value="${(topicDO.endTime?string('yyyy-MM-dd'))!}" 
     			onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
 		</div>
 	</div>
@@ -124,9 +124,10 @@ css=[
 	<#-- 商品上传图片 -->
 	<div class="form-group">
 		<label class="col-md-2 control-label">选择专题图片</label>
+		<input type="text" id="imgChanged" name="imgChanged" value="0">
 		<div class="col-md-4">
 			<input type="file" value="浏览" id="image" name="image">
-			<div id="preview"></div>
+			<div id="preview"><img width="100px" heigth="100px" src="${topicDO.image}"></div>
 		</div>
 	</div>
 	
@@ -137,7 +138,7 @@ css=[
 			<div class="col-md-4"></div>
 			<div>
 				<a href="javascript:void(0);" class="btn btn-info" param="edit" id="cancelTabBtn">取消</a>
-				<a href="javascript:void(0);" class="btn btn-primary" id="saveBtn">保存</a>
+				<a href="javascript:void(0);" class="btn btn-primary" id="updateTopicBtn">保存</a>
 			</div>
 		</div>
 	</div>

@@ -91,5 +91,25 @@ public class TopicController extends BaseController{
 		model.addAttribute("listIframeName", iframeName);
 		return BASE_VIEW_PATH + "edit";
 	} 
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public ResultMessage update(String data, boolean imgChanged, HttpServletRequest request){
+		if(StringUtils.isEmpty(data)){
+			return ResultMessage.serverInnerError();
+		}
+		TopicDO topicDO = JSONObject.parseObject(data, TopicDO.class);
+		ErrorMessage validMsg = GenerateValidator.validate(topicDO);
+		if(validMsg.hasError){
+			return new ResultMessage(ResultMessage.Failure,validMsg.message);
+		}
+		Map<String, MultipartFile> map = null;
+//		boolean flag = imgChanged != null && (1 == imgChanged) ? true : false; 
+		if(imgChanged){ // 图片是否有改动
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			map = multiRequest.getFileMap();
+		}
+		return topicAO.update(topicDO, map);
+	}
 
 }

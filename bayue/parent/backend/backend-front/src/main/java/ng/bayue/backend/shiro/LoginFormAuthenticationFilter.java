@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.google.code.kaptcha.Constants;
@@ -47,6 +48,18 @@ public class LoginFormAuthenticationFilter extends FormAuthenticationFilter {
 		}
 		boolean flag = super.onAccessDenied(request, response);
 		return flag;
+	}
+	
+	/** 
+	 * 重写登录成功后跳转页面，防止当访问的url是iframe的页面的时候，session又过期了，跳转到登陆页，完成登陆操作后，返回了只有iframe的页面
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 * @see org.apache.shiro.web.filter.authc.AuthenticationFilter#issueSuccessRedirect(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
+	 */
+	@Override
+	protected void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
+        WebUtils.issueRedirect(request, response, getSuccessUrl());
 	}
 
 }
