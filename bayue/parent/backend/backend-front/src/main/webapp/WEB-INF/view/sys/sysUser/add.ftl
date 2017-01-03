@@ -59,45 +59,44 @@ css=[
     	}
 </style>
 
+<div class="container-fluid panel-body box_border">
 
-<div class="container-fluid">
-
-<form class="form-horizontal box box_border" role="form" id="sysUserAddForm">
+<form class="form-horizontal dr-form-bordered" role="form" id="sysUserAddForm">
 
 	<div class="form-group">
-		<label for="firstname" class="col-sm-2 control-label">登陆账号<span class="fo">*</span></label>
+		<label for="firstname" class="col-xs-2 control-label" style="text-align:right;">登陆账号<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="loginName" name="loginName" placeholder="请输入登陆账号">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">姓名<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">姓名<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="userName" name="userName" placeholder="请输入姓名">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">email<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">email<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="email" name="email" placeholder="请输入email">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">手机号<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">手机号<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="mobile" name="mobile" placeholder="请输入手机号">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">密码<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">密码<span class="fo">*</span></label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control self_input" id="password" name="password" placeholder="请输入密码">
+			<input type="password" class="form-control self_input" id="password" name="password" placeholder="请输入密码">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">再次输入密码<span class="fo">*</span></label>
+		<label for="lastname" style="float:left;">再次输入密码<span class="fo">*</span></label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control self_input" id="password2" name="password2" placeholder="请再次输入密码">
+			<input type="password" class="form-control self_input" id="password2" name="password2" placeholder="请再次输入密码">
 		</div>
 	</div>
 	<div class="form-group">
@@ -126,7 +125,6 @@ css=[
 	
 	
 </form>
-
 
 </div>
 

@@ -37,7 +37,7 @@ $(function() {
 			maxmin : true,
 			fix : false,
 			scrollbar : false,
-			area : [ '600px', '600px' ],
+			area : [ '600px', '450px' ],
 			content : domain + '/sys/sysUser/add.htm',
 		});
 	});
@@ -52,7 +52,7 @@ $(function() {
 			maxmin : true,
 			fix : false,
 			scrollbar : false,
-			area : [ '600px', '600px' ],
+			area : [ '600px', '450px' ],
 			content : domain + '/sys/sysUser/edit.htm?userId=' + id,
 		});
 	});

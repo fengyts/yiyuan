@@ -60,32 +60,32 @@ css=[
 </style>
 
 
-<div class="container-fluid">
+<div class="container-fluid panel-body box_border">
 
-<form class="form-horizontal box box_border" role="form" id="sysUserUpdateForm">
+<form class="form-horizontal dr-form-bordered" role="form" id="sysUserUpdateForm">
 	
 	<input type="hidden" id="id" name="id" value="${sysUser.id}">
 
 	<div class="form-group">
-		<label for="firstname" class="col-sm-2 control-label">登陆账号<span class="fo">*</span></label>
+		<label for="firstname" class="col-xs-2 control-label" style="text-align:right;">登陆账号<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="loginName" name="loginName" value="${sysUser.loginName}">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">姓名<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">姓名<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="userName" name="userName" value="${sysUser.userName}">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">email<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">email<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="email" name="email" value="${sysUser.email}">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="lastname" class="col-sm-2 control-label">手机号<span class="fo">*</span></label>
+		<label for="lastname" class="col-xs-2 control-label" style="text-align:right;">手机号<span class="fo">*</span></label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control self_input" id="mobile" name="mobile" value="${sysUser.mobile}">
 		</div>
