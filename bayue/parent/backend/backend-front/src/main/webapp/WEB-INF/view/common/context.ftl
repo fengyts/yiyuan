@@ -32,11 +32,13 @@
 		
 		/** 使用新版layui,定义layer和form模块 */
 		//var layer = layui.layer, form = layui.form;
+		<#--
 		var layer, form;
 		layui.use([ 'layer', 'form' ], function() {
 			layer = layui.layer;
 			form = layui.form();
 		});
+		-->
 	</script>
 	
 	<#list css as file>   
