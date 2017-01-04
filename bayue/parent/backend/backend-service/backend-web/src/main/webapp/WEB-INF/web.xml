@@ -26,15 +26,27 @@
         <init-param>  
 	        <param-name>exclusions</param-name>  
 	        <param-value>/statics/*,weburi.json,.html,.js,.gif,.jpg,.png,.css,.ico,/druid/*</param-value>  
-        </init-param>  
+        </init-param>
+        <init-param>
+	        <param-name>sessionStatEnable</param-name>
+	        <param-value>true</param-value>
+	    </init-param>  
         <init-param>  
 	        <param-name>sessionStatMaxCount</param-name>  
 	        <param-value>1000</param-value>  
         </init-param>  
-        <init-param>  
-	        <param-name>principalSessionName</param-name>  
-	        <param-value>panshe.sessionId</param-value>
-        </init-param>
+        <init-param>
+	    	<param-name>profileEnable</param-name>
+	    	<param-value>true</param-value>
+		</init-param>
+		<init-param>
+	        <param-name>principalCookieName</param-name>
+	        <param-value>USER_COOKIE</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>principalSessionName</param-name>
+	        <param-value>USER_SESSION</param-value>
+	    </init-param>
     </filter>  
   
     <filter-mapping>  
@@ -54,16 +66,15 @@
 	        <param-name>resetEnable</param-name>  
 	        <param-value>true</param-value>  
 	    </init-param>  
-	    <init-param>  
-	        <!-- 用户名 -->  
+        <!-- 用户名 和 密码 -->  
+	    <!-- <init-param>  
 	        <param-name>loginUsername</param-name>  
 	        <param-value>druid</param-value>  
 	    </init-param>  
 	    <init-param>  
-	        <!-- 密码 -->  
 	        <param-name>loginPassword</param-name>  
 	        <param-value>druid</param-value>  
-	    </init-param>  
+	    </init-param>  --> 
 	</servlet>
   	<servlet-mapping>
       	<servlet-name>DruidStatView</servlet-name>

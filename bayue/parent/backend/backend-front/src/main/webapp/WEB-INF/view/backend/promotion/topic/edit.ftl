@@ -16,7 +16,7 @@ css=[
 <input type="hidden" id="listIframeName" value="${listIframeName}">
 <form id="topicEditForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	<div style="display:none;">
-		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
+		<input type="hidden" id="id" name="id" value="${topicDO.id}" />
 	</div>
 	<div class="form-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -124,7 +124,7 @@ css=[
 	<#-- 商品上传图片 -->
 	<div class="form-group">
 		<label class="col-md-2 control-label">选择专题图片</label>
-		<input type="text" id="imgChanged" name="imgChanged" value="0">
+		<input type="hidden" id="imgChanged" name="imgChanged" value="0">
 		<div class="col-md-4">
 			<input type="file" value="浏览" id="image" name="image">
 			<div id="preview"><img width="100px" heigth="100px" src="${topicDO.image}"></div>

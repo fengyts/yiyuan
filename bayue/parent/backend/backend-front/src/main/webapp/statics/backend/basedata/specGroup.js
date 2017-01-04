@@ -27,6 +27,8 @@ $(document).ready(function(){
 		pageii = $.layer({
 			type : 2,
 			title : '规格管理-->编辑',
+			border: [3, 0.3, '#000'],
+			shade: [0.3, '#000'],
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
@@ -41,6 +43,8 @@ $(document).ready(function(){
 		pageii = $.layer({
 			type : 2,
 			title : '规格组新增-->选择规格',
+			border: [3, 0.3, '#000'],
+			shade: [0.3, '#000'],
 			shadeClose : true,
 			maxmin : true,
 			fix : false,

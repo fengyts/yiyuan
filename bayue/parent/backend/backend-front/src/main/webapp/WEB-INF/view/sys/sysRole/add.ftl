@@ -60,9 +60,9 @@ css=[
 </style>
 
 
-<div class="container-fluid">
+<div class="container-fluid panel-body box_border">
 
-<form class="form-horizontal box box_border" role="form" id="sysRoleAddForm">
+<form class="form-horizontal dr-form-bordered" role="form" id="sysRoleAddForm">
 
 	<div class="form-group">
 		<label for="firstname" class="col-sm-2 control-label">角色名称<span class="fo">*</span></label>

@@ -47,13 +47,14 @@
 			  </table>
 			  
 			  <#-- 水平分割线 -->
-		  	  <div>
-			  	  <hr style="color:#d3dbde"/>
-			  </div>
-			  
+			  <#--
+			  	  <div>
+				  	  <hr style="color:#d3dbde"/>
+				  </div>
+			  -->
 			  <table id="specList" width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
 			  	  <tr>
-					  <td colspan="5">
+					  <td colspan="5" style="text-align:left;">
 						  <input type="button" class="ext_btn ext_btn_submit m10" id="selectSpec" value="添加规格" />
 					  </td>
 				  </tr>
@@ -67,9 +68,11 @@
 			  </table>
 				
 			  <#-- 水平分割线 -->
-			  <div>
-			  	  <hr style="color:#d3dbde"/>
-			  </div>
+			  <#--
+			  	  <div>
+				  	  <hr style="color:#d3dbde"/>
+				  </div>
+			  -->
 				
 		  </form>
 		  

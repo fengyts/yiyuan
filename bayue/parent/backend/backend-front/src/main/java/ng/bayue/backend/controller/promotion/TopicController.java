@@ -1,30 +1,30 @@
 package ng.bayue.backend.controller.promotion;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.alibaba.fastjson.JSONObject;
 
+import ng.bayue.backend.ao.item.ItemDetailAO;
 import ng.bayue.backend.ao.promotion.TopicAO;
+import ng.bayue.backend.ao.promotion.TopicItemAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.item.domain.dto.ItemDTO;
+import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.enums.TopicProgressEnum;
 import ng.bayue.promotion.enums.TopicTypeEnum;
 import ng.bayue.util.ErrorMessage;
@@ -39,6 +39,10 @@ public class TopicController extends BaseController{
 	
 	@Autowired
 	private TopicAO topicAO;
+	@Autowired
+	private TopicItemAO topicItemAO;
+	@Autowired
+	private ItemDetailAO itemDetailAO;
 	
 	
 	@RequestMapping("/list")
@@ -110,6 +114,28 @@ public class TopicController extends BaseController{
 			map = multiRequest.getFileMap();
 		}
 		return topicAO.update(topicDO, map);
+	}
+	
+	@RequestMapping("/topicItemList")
+	public String topicItemList(Model model,TopicItemDO topicItemDO,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
+		Page<TopicItemDO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("topicItemDO", topicItemDO);
+		noRecords(model, page);
+		return BASE_VIEW_PATH + "topicItemList";
+	}
+	
+	@RequestMapping("/initItemDetailList")
+	public String initItemDetail(Model model, ItemDetailDTO itemDetialDTO,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
+		Page<ItemDTO> page = itemDetailAO.queryPageList(itemDetialDTO, pageNo, pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("detailDO", itemDetialDTO);
+		noRecords(model, page);
+		return BASE_VIEW_PATH + "itemDetailList";
 	}
 
 }

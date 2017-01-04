@@ -27,6 +27,11 @@ $(function(){
         imgview(file);
     });
 	
+	$(".associateItemBtn").on('click', function(){
+		var topicId = $(this).attr("param");
+		addTab("topic_associateItem", "专题关联商品" , "/topic/topicItemList?topicId=" + topicId + "&iframeName=" + window.name);
+	});
+	
 	
 	$("#saveBtn").on('click',function(){
 		var _data = $("#topicAddForm").serializeArray();

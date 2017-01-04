@@ -279,7 +279,8 @@ font-size:12px;
 height:30px; 
 *margin:-1px; 
 border-radius: 2px;
-box-shadow: 2px 2px 2px  #e7f1f7 inset; 
+box-shadow: 2px 2px 2px  #e7f1f7 inset;
+width:60px; 
 } 
 .select_border{ 
 height:29px; 

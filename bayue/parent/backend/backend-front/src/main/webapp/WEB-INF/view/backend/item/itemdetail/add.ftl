@@ -2,7 +2,6 @@
 
 <@backend title="商品新增" 
 js=[
-'/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js',
 '/statics/plugin/My97DatePicker/WdatePicker.js',
 '/statics/plugin/editor/kindeditor-all-min.js',

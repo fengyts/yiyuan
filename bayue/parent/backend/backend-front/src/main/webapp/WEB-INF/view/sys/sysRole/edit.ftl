@@ -57,9 +57,9 @@ css=[
 
 
 
-<div class="container-fluid">
+<div class="container-fluid panel-body box_border">
 
-<form class="form-horizontal box box_border" role="form" id="sysRoleEditForm">
+<form class="form-horizontal dr-form-bordered" role="form" id="sysRoleEditForm">
 	
 	<input type="hidden" id="id" name="id" value="${sysRole.id}"/>
 	<div class="form-group">

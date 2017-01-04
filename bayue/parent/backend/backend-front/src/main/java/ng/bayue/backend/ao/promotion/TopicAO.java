@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.service.TopicService;
 import ng.bayue.util.Page;
 
@@ -51,7 +52,6 @@ public class TopicAO {
 			if (StringUtils.isEmpty(image)) {
 				return new ResultMessage(ResultMessage.Failure, "上传图片失败");
 			}
-			image = "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg";
 			topicDO.setImage(image);
 		}
 		
@@ -82,9 +82,14 @@ public class TopicAO {
 	}
 
 	private String uploadTopicImage(Map<String, MultipartFile> map) {
-		Map.Entry<String, MultipartFile> entry = (Entry<String, MultipartFile>) map.entrySet();
-		MultipartFile file = entry.getValue();
-		return null;
+		MultipartFile multipartFile = null;
+		for(Map.Entry<String, MultipartFile> entry : map.entrySet()){
+			multipartFile = entry.getValue();
+		}
+		String image = "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg";
+		return image;
 	}
+	
+	
 
 }
