@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.exception.DAOException;
 import ng.bayue.promotion.persist.dao.TopicDAO;
 
@@ -36,7 +37,7 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 	}
 
 	@Override
-	public TopicDO selectById(Long id) throws DAOException {
+	public TopicDTO selectById(Long id) throws DAOException {
 		return getSqlSession().selectOne(NAMESPACE + "selectById", id);
 	}
 
@@ -46,12 +47,12 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 	}
 
 	@Override
-	public List<TopicDO> selectDynamic(TopicDO topicDO) throws DAOException {
+	public List<TopicDTO> selectDynamic(TopicDO topicDO) throws DAOException {
 		return getSqlSession().selectList(NAMESPACE + "select_dynamic", topicDO);
 	}
 
 	@Override
-	public List<TopicDO> selectDynamicPageQuery(TopicDO topicDO) throws DAOException {
+	public List<TopicDTO> selectDynamicPageQuery(TopicDO topicDO) throws DAOException {
 		return getSqlSession().selectList(NAMESPACE + "select_dynamic_page_query", topicDO);
 	}
 

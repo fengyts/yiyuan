@@ -4,6 +4,7 @@ import java.util.List;
 import ng.bayue.util.Page;
 import ng.bayue.promotion.exception.ServiceException;
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.dto.TopicDTO;
  /**
  * 活动专题 Service
  * @author haisheng.long 2016-12-26 16:28:48
@@ -63,7 +64,7 @@ public interface TopicService {
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	TopicDO selectById(Long id) throws ServiceException;
+	TopicDTO selectById(Long id) throws ServiceException;
 
 	/**
 	 * 根据  活动专题 动态返回记录数
@@ -81,7 +82,7 @@ public interface TopicService {
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	List<TopicDO> selectDynamic(TopicDO topicDO) throws ServiceException;
+	List<TopicDTO> selectDynamic(TopicDO topicDO) throws ServiceException;
 
 	/**
 	 * 动态返回 活动专题 分页列表
@@ -90,17 +91,17 @@ public interface TopicService {
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	Page<TopicDO> queryPageListByTopicDO(TopicDO topicDO);
+	Page<TopicDTO> queryPageListByTopicDO(TopicDO topicDO);
 
 	/**
 	 * 动态返回 活动专题 分页列表
-	 * @param topicDO
+	 * @param topicDTO
 	 * @param startPage 起始页
 	 * @param pageSize 每页记录数
 	 * @return Page<TopicDO>
 	 * @throws ServiceException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	Page<TopicDO> queryPageListByTopicDOAndStartPageSize(TopicDO topicDO,int startPage,int pageSize);
+	Page<TopicDTO> queryPageListByTopicDOAndStartPageSize(TopicDO topicDTO,int startPage,int pageSize);
 
 }

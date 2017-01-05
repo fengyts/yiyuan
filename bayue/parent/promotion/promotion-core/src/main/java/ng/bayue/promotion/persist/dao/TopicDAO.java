@@ -3,6 +3,7 @@ package ng.bayue.promotion.persist.dao;
 import java.util.List;
 
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.exception.DAOException;
 
 
@@ -55,7 +56,7 @@ public interface TopicDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	TopicDO selectById(Long id) throws DAOException;
+	TopicDTO selectById(Long id) throws DAOException;
 
 	/**
 	 * 根据  活动专题 动态返回记录数
@@ -73,7 +74,7 @@ public interface TopicDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	List<TopicDO> selectDynamic(TopicDO topicDO) throws DAOException;
+	List<TopicDTO> selectDynamic(TopicDO topicDO) throws DAOException;
 
 	/**
 	 * 根据  活动专题 动态返回 活动专题 Limit 列表
@@ -82,5 +83,5 @@ public interface TopicDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	List<TopicDO> selectDynamicPageQuery(TopicDO topicDO) throws DAOException;
+	List<TopicDTO> selectDynamicPageQuery(TopicDO topicDO) throws DAOException;
 }

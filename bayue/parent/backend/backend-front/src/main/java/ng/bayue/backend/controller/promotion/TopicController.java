@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,7 @@ import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.promotion.domain.TopicDO;
 import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.enums.TopicProgressEnum;
 import ng.bayue.promotion.enums.TopicTypeEnum;
 import ng.bayue.util.ErrorMessage;
@@ -49,7 +51,7 @@ public class TopicController extends BaseController{
 	public String list(Model model,TopicDO topicDO,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
-		Page<TopicDO> page = topicAO.queryPageList(topicDO, pageNo, pageSize);
+		Page<TopicDTO> page = topicAO.queryPageList(topicDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("topicDO", topicDO);
 		model.addAttribute("topicProgress", TopicProgressEnum.values());
@@ -116,24 +118,26 @@ public class TopicController extends BaseController{
 		return topicAO.update(topicDO, map);
 	}
 	
-	@RequestMapping("/topicItemList")
+	@RequestMapping(value = "/topicItemList", method={RequestMethod.GET,RequestMethod.POST})
 	public String topicItemList(Model model,TopicItemDO topicItemDO,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
 		Page<TopicItemDO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("topicItemDO", topicItemDO);
+		model.addAttribute("topicId", topicItemDO.getTopicId());
 		noRecords(model, page);
 		return BASE_VIEW_PATH + "topicItemList";
 	}
 	
 	@RequestMapping("/initItemDetailList")
-	public String initItemDetail(Model model, ItemDetailDTO itemDetialDTO,
+	public String initItemDetail(Model model, ItemDetailDTO itemDetialDTO, Long topicId,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
 		Page<ItemDTO> page = itemDetailAO.queryPageList(itemDetialDTO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("detailDO", itemDetialDTO);
+		model.addAttribute("topicId", topicId);
 		noRecords(model, page);
 		return BASE_VIEW_PATH + "itemDetailList";
 	}

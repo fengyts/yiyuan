@@ -3,7 +3,7 @@ package ng.bayue.promotion.enums;
 public enum TopicTypeEnum {
 
 	// 1-单品团;2-主题团;3-品牌团
-	Single(0, "单品团"), Theme(1, "主题团"), Brand(2, "品牌团");
+	Single(1, "单品团"), Theme(2, "主题团"), Brand(3, "品牌团");
 
 	private Integer code;
 

@@ -1,4 +1,4 @@
-<#include "/common/common.ftl" />
+<#include "/common/common2.ftl" />
 <@backend title="专题商品列表"
 js=[
 '/statics/common/common-js/tab.js',
@@ -9,7 +9,8 @@ css=[
 >
 
 <div class="box">
-<form class="jqtransform" method="post" id="topicForm" action="${domain}/topic/topicItemList.htm">
+<form class="jqtransform" method="get" id="topicItemListForm" action="${domain}/topic/topicItemList?topicId=${topicId}">
+		<input type="hidden" id="topicId" name="topicId" value="${topicId}">
 		<#-- 搜索表单模块 -->
 		<div id="search_bar" class="box mt10">
 			<div class="box_border">
@@ -54,7 +55,7 @@ css=[
 				</div>
 				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="padding-left:5px;border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
-				    	<input class="ext_btn ext_btn_success" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
+				    	<input class="ext_btn ext_btn_success" type="button" value="查询" onclick="$('#topicItemListForm').submit();" name="button" id="queryTopicItemListBtn" />
 				    </a>
 				    <input class="ext_btn ext_btn_submit" type ="button" value="关联商品" id="associateTopicItem" />
 				</div>
@@ -119,7 +120,7 @@ css=[
 		</div>
 		
 
-    <@pager  pagination=page  formId="topicForm" />
+    <@pager  pagination=page  formId="topicItemListForm" />
  
 </form>
 </div>

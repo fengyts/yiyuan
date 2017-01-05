@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ng.bayue.promotion.domain.TopicDO;
+import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.exception.DAOException;
 import ng.bayue.promotion.exception.ServiceException;
 import ng.bayue.promotion.persist.dao.TopicDAO;
@@ -77,7 +78,7 @@ public class TopicServiceImpl  implements TopicService{
 //	}
 
 	@Override
-	public TopicDO selectById(Long id) throws ServiceException {
+	public TopicDTO selectById(Long id) throws ServiceException {
 		try {
 			return topicDAO.selectById(id);
 		}catch(DAOException e){
@@ -97,7 +98,7 @@ public class TopicServiceImpl  implements TopicService{
 	}
 
 	@Override
-	public List<TopicDO> selectDynamic(TopicDO topicDO) throws ServiceException {
+	public List<TopicDTO> selectDynamic(TopicDO topicDO) throws ServiceException {
 		try {
 			return topicDAO.selectDynamic(topicDO);
 		}catch(DAOException e){
@@ -107,7 +108,7 @@ public class TopicServiceImpl  implements TopicService{
 	}
 	
 
-	private List<TopicDO> selectDynamicPageQuery(TopicDO topicDO) throws ServiceException {
+	private List<TopicDTO> selectDynamicPageQuery(TopicDO topicDO) throws ServiceException {
 		try {
 			return topicDAO.selectDynamicPageQuery(topicDO);
 		}catch(DAOException e){
@@ -116,28 +117,28 @@ public class TopicServiceImpl  implements TopicService{
 		}
 	}
 
-	public Page<TopicDO> queryPageListByTopicDO(TopicDO topicDO) {
+	public Page<TopicDTO> queryPageListByTopicDO(TopicDO topicDO) {
 		if (topicDO != null) {
 			Long totalCount = this.selectCountDynamic(topicDO);
-			List<TopicDO> resultList = this.selectDynamicPageQuery(topicDO);
+			List<TopicDTO> resultList = this.selectDynamicPageQuery(topicDO);
 
-			Page<TopicDO> page = new Page<TopicDO>();
+			Page<TopicDTO> page = new Page<TopicDTO>();
 			page.setPageNo(topicDO.getStartPage());
 			page.setPageSize(topicDO.getPageSize());
 			page.setTotalCount(totalCount.intValue());
 			page.setList(resultList);
 			return page;
 		}
-		return new Page<TopicDO>();
+		return new Page<TopicDTO>();
 	}
 
-	public Page<TopicDO> queryPageListByTopicDOAndStartPageSize(TopicDO topicDO,int startPage,int pageSize){
+	public Page<TopicDTO> queryPageListByTopicDOAndStartPageSize(TopicDO topicDO,int startPage,int pageSize){
 		if (topicDO != null && startPage>0 && pageSize>0) {
 			topicDO.setStartPage(startPage);
 			topicDO.setPageSize(pageSize);
 			return this.queryPageListByTopicDO(topicDO);
 		}
-		return new Page<TopicDO>();
+		return new Page<TopicDTO>();
 	}
 
 }

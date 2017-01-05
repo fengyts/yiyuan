@@ -1,4 +1,4 @@
-<#include "/common/common.ftl" />
+<#include "/common/common2.ftl" />
 
 <@backend title="商品管理" js=[
 '/statics/backend/promotion/topicItem.js'
@@ -29,7 +29,8 @@ css=[
 </style>
 
 <div class="box">
-<form class="jqtransform" method="post" id="initItemDetailForm" action="${domain}/topic/initItemDetailList.htm">
+<form class="jqtransform" method="get" id="initItemDetailForm" action="${domain}/topic/initItemDetailList.htm?topicId=${topicId}">
+		<input type="hidden" id="topicId" name="topicId" value="${topicId}">
 		<#-- 搜索表单模块 -->
 		<div id="search_bar" class="box mt10">
 			<div class="box_border">
@@ -67,7 +68,7 @@ css=[
 				</div>
 				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="margin-left:5px;border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
-				    	<input class="btn btn82 btn_search" onclick="$('#itemDetailForm').submit();" type="button" value="查询" name="button" />
+				    	<input class="btn btn82 btn_search" onclick="$('#initItemDetailForm').submit();" type="button" value="查询" name="button" />
 				    </a>
 				    <input class="btn btn82 btn_save2" type ="button" value="确定" id="associateTopicItemConfirm" />
 				    <input class="btn btn82 btn_res" type ="button" value="取消" id="cancelAssociateTopicItemBtn" />
@@ -79,7 +80,8 @@ css=[
 		<div id="table" class="mt10">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<input class="ext_btn ext_btn_submit" type="checkbox" id="statusValid" param="0" />关联之后是否设置商品有效
+					<input class="ext_btn ext_btn_submit" type="checkbox" id="itemStatus" name="itemStatus" />关联之后是否设置商品有效 &nbsp;&nbsp;&nbsp;
+					<input class="ext_btn ext_btn_submit" type="checkbox" id="isTestItem" name="isTestItem" />是否测试商品
 				</div>
 			</div>
 			<div class="box span10 oh">
@@ -87,14 +89,19 @@ css=[
 			    	<thead>
 				    	<tr>
 				    		<th width="6%">全选<input type='checkbox' id="checkAllDetail"/></th>
+				    		<th style="display:none;"></th>
+				    		<th style="display:none;"></th>
 				    		<th>SPU</th>
 				    		<th>PRDID</th>
 				    		<th>商品显示名</th>
 				    		<th>大类</th>
+				    		<th style="display:none;"></th>
 				    		<th>小类</th>
 				    		<th>单位</th>
 				    		<th>商品状态</th>
-				    		<th>商品价格(元)</th>
+				    		<th>市场价(元)</th>
+				    		<th>活动价(元)</th>
+				    		<th>参与人数</th>
 				    	</tr>
 			    	</thead>
 			    	<tbody id="dataBodyList">
@@ -104,10 +111,13 @@ css=[
 				    			<td class="td_center">
 				    				<input type="checkbox" name="detailId" param="${obj.id}" />
 				    			</td>
+				    			<td style="display:none;">${obj.itemId}</td>
+				    			<td style="display:none;">${obj.detailId}</td>
 				    			<td class="td_center">${obj.spu}</td>
 				    			<td class="td_center">${obj.prdid}</td>
 				    			<td class="td_center">${obj.mainTitle}</td>
 				    			<td class="td_center">${obj.largeCateName}</td>
+				    			<td style="display:none;">${obj.smallId}</td>
 				    			<td class="td_center">${obj.smallCateName}</td>
 				    			<td class="td_center">${obj.unitName}</td>
 				    			<td class="td_center">
@@ -115,8 +125,11 @@ css=[
 									<#elseif 1==obj.status>已上架
 									<#else>作废
 									</#if>
+									<input type="hidden" value="${obj.status}">
 								</td>
 								<td class="td_center">${obj.basicPrice?string('0.00')}</td>
+								<td class="td_center"><input type="text" class="input-text" size="15" value="${obj.topicPrice!obj.basicPrice?string('#.00')}"></td>
+								<td class="td_center"><input type="text" class="input-text" size="15" value="${(obj.snatchNumber!obj.basicPrice?ceiling)!obj.topicPrice?ceiling}"></td>
 				    		</tr>
 				    	</#list>
 				    	</#if>

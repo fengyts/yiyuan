@@ -2,7 +2,6 @@ package ng.bayue.backend.ao.promotion;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
 import ng.bayue.promotion.domain.TopicDO;
-import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.service.TopicService;
 import ng.bayue.util.Page;
 
@@ -26,8 +25,8 @@ public class TopicAO {
 	@Autowired
 	private TopicService topicService;
 
-	public Page<TopicDO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize) {
-		Page<TopicDO> page = topicService.queryPageListByTopicDOAndStartPageSize(topicDO, pageNo, pageSize);
+	public Page<TopicDTO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize) {
+		Page<TopicDTO> page = topicService.queryPageListByTopicDOAndStartPageSize(topicDO, pageNo, pageSize);
 		return page;
 	}
 
