@@ -1,11 +1,16 @@
 package ng.bayue.backend.controller.promotion;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
 
 import ng.bayue.backend.ao.promotion.TopicItemAO;
 import ng.bayue.backend.controller.common.BaseController;
@@ -34,9 +39,12 @@ public class TopicItemController extends BaseController{
 	
 	@RequestMapping("save")
 	@ResponseBody
-	public ResultMessage save(String itemList,Long topicId,Boolean itemStatus){
-		
-		return new ResultMessage();
+	public ResultMessage save(String itemList){
+		if(StringUtils.isBlank(itemList)){
+			return ResultMessage.validParameterNull("itemList");
+		}
+		List<TopicItemDO> list = (List<TopicItemDO>) JSONObject.parseArray(itemList, TopicItemDO.class);
+		return topicItemAO.save(list);
 	}
 
 }

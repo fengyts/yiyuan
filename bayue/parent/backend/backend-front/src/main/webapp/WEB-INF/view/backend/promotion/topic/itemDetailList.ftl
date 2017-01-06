@@ -112,7 +112,7 @@ css=[
 				    				<input type="checkbox" name="detailId" param="${obj.id}" />
 				    			</td>
 				    			<td style="display:none;">${obj.itemId}</td>
-				    			<td style="display:none;">${obj.detailId}</td>
+				    			<td style="display:none;">${obj.id}</td>
 				    			<td class="td_center">${obj.spu}</td>
 				    			<td class="td_center">${obj.prdid}</td>
 				    			<td class="td_center">${obj.mainTitle}</td>
