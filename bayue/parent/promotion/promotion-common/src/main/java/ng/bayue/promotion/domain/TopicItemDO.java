@@ -44,6 +44,9 @@ public class TopicItemDO extends BaseDO {
 
 	/** 商品详情id */
 	private Long detailId;
+	
+	/** 商品prdid,冗余字段*/
+	private String prdid;
 
 	/** 商品spu名称，冗余商品表字段 */
 	private String mainTitle;
@@ -455,5 +458,15 @@ public class TopicItemDO extends BaseDO {
 	public Long getModifyUserId() {
 		return modifyUserId;
 	}
+
+	public String getPrdid() {
+		return prdid;
+	}
+
+	public void setPrdid(String prdid) {
+		this.prdid = prdid;
+	}
+	
+	
 
 }

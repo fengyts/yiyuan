@@ -14,6 +14,7 @@
         <result column="snatch_number" property="snatchNumber"/>
         <result column="spu" property="spu"/>
         <result column="detail_id" property="detailId"/>
+        <result column="prdid" property="prdid"/>
         <result column="main_title" property="mainTitle"/>
         <result column="small_id" property="smallId"/>
         <result column="is_hot" property="isHot"/>
@@ -26,9 +27,13 @@
         <result column="modify_time" property="modifyTime"/>
         <result column="modify_user_id" property="modifyUserId"/>
 	</resultMap>
+	
+	<resultMap type="ng.bayue.promotion.dto.TopicItemDTO" id="TopicItemDTOResultMap" extends="TopicItemDOResultMap">
+		<result column="name" property="name"/>
+	</resultMap>
 
 	<sql id="MybatisTopicItemDAO_all_column_fields">
-	      id,topic_id,item_id,is_test,sort,basic_price,topic_price,snatch_number,spu,detail_id,main_title,small_id,is_hot,saled_amount,has_inventory,status,remark,create_time,create_user_id,modify_time,modify_user_id
+	      id,topic_id,item_id,is_test,sort,basic_price,topic_price,snatch_number,spu,detail_id,prdid,main_title,small_id,is_hot,saled_amount,has_inventory,status,remark,create_time,create_user_id,modify_time,modify_user_id
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -42,6 +47,7 @@
 			<if test="snatchNumber != null "> AND snatch_number=#{snatchNumber} </if>
 			<if test="spu != null  and spu != '' "> AND spu=#{spu} </if>
 			<if test="detailId != null "> AND detail_id=#{detailId} </if>
+			<if test="prdid != null and prdid != '' "> AND prdid=#{prdid} </if>
 			<if test="mainTitle != null  and mainTitle != '' "> AND main_title=#{mainTitle} </if>
 			<if test="smallId != null "> AND small_id=#{smallId} </if>
 			<if test="isHot != null "> AND is_hot=#{isHot} </if>
@@ -54,13 +60,14 @@
 		</where>
  	</sql>
 
-	<select id="MybatisTopicItemDAO_selectById" parameterType="long" resultMap="TopicItemDOResultMap">
+	<select id="MybatisTopicItemDAO_selectById" parameterType="long" resultMap="TopicItemDTOResultMap">
 	SELECT
-		<include refid="MybatisTopicItemDAO_all_column_fields" />
+		<include refid="MybatisTopicItemDAO_all_column_fields" />,
+		(SELECT t.name from pr_topic t WHERE t.id = ti.topic_id) name
 	FROM
-		pr_topic_item
+		pr_topic_item ti
 	WHERE
-		 id = #{id}
+		 ti.id = #{id}
 	</select>
 
     <insert id="MybatisTopicItemDAO_insert" parameterType="ng.bayue.promotion.domain.TopicItemDO" useGeneratedKeys="true">
@@ -78,6 +85,7 @@
 				snatch_number,
 				spu,
 				detail_id,
+				prdid,
 				main_title,
 				small_id,
 				is_hot,
@@ -100,6 +108,7 @@
 				#{snatchNumber},
 				#{spu},
 				#{detailId},
+				#{prdid},
 				#{mainTitle},
 				#{smallId},
 				#{isHot},
@@ -126,6 +135,7 @@
 					snatch_number = #{snatchNumber},
 					spu = #{spu},
 					detail_id = #{detailId},
+					prdid = #{prdid},
 					main_title = #{mainTitle},
 					small_id = #{smallId},
 					is_hot = #{isHot},
@@ -156,6 +166,7 @@
 					<if test="snatchNumber != null ">snatch_number=#{snatchNumber},</if>
 					<if test="spu != null  and spu != '' ">spu=#{spu},</if>
 					<if test="detailId != null ">detail_id=#{detailId},</if>
+					<if test="prdid != null and prdid != '' ">prdid=#{prdid},</if>
 					<if test="mainTitle != null  and mainTitle != '' ">main_title=#{mainTitle},</if>
 					<if test="smallId != null ">small_id=#{smallId},</if>
 					<if test="isHot != null ">is_hot=#{isHot},</if>
@@ -170,11 +181,12 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisTopicItemDAO_select_dynamic" resultMap="TopicItemDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+ 	<select id="MybatisTopicItemDAO_select_dynamic" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
 	     SELECT
-	     	<include refid="MybatisTopicItemDAO_all_column_fields" />
+	     	<include refid="MybatisTopicItemDAO_all_column_fields" />,
+	     	(SELECT t.name from pr_topic t WHERE t.id = ti.topic_id) name
 		 FROM
-		 	pr_topic_item
+		 	pr_topic_item ti
 			<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
  	</select>
 
@@ -186,14 +198,63 @@
 	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisTopicItemDAO_select_dynamic_page_query" resultMap="TopicItemDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+ 	<select id="MybatisTopicItemDAO_select_dynamic_page_query" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
 	     SELECT
+	     	<include refid="MybatisTopicItemDAO_all_column_fields" />,
+	     	(SELECT t.name from pr_topic t WHERE t.id = ti.topic_id) name
+		 FROM
+		 	pr_topic_item ti
+	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
+	 	ORDER BY ti.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<insert id="MybatisTopicItemDAO_insert_batch" parameterType="list">
+ 		INSERT INTO pr_topic_item(
+				id,topic_id,item_id,is_test,sort,basic_price,topic_price,
+				snatch_number,spu,detail_id,prdid,main_title,small_id,
+				is_hot,saled_amount,has_inventory,status,remark,
+				create_time,create_user_id,modify_time,modify_user_id
+		)values
+			<foreach collection="list" item="item" index="index" open="" separator="," close="">
+			    (
+				#{item.id},
+				#{item.topicId},
+				#{item.itemId},
+				#{item.isTest},
+				#{item.sort},
+				#{item.basicPrice},
+				#{item.topicPrice},
+				#{item.snatchNumber},
+				#{item.spu},
+				#{item.detailId},
+				#{item.prdid},
+				#{item.mainTitle},
+				#{item.smallId},
+				#{item.isHot},
+				#{item.saledAmount},
+				#{item.hasInventory},
+				#{item.status},
+				#{item.remark},
+				#{item.createTime},
+				#{item.createUserId},
+				#{item.modifyTime},
+				#{item.modifyUserId}
+				)
+			</foreach>
+ 	</insert>
+ 	
+ 	<select id="MybatisTopicItemDAO_exist_topic_item" parameterType="map" resultMap="TopicItemDOResultMap">
+ 		 SELECT
 	     	<include refid="MybatisTopicItemDAO_all_column_fields" />
 		 FROM
-		 	pr_topic_item
-	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
-	 	ORDER BY pr_topic_item.id DESC
-	 	Limit #{start},#{pageSize}
+		 	pr_topic_item item
+		 WHERE 
+		 	item.topic_id = #{topicId}
+		 	AND item.detail_id IN
+		 	<foreach collection="detailIds" item="detailId" open="(" separator="," close=")">
+		 		#{detailId}
+		 	</foreach>
  	</select>
 
 </mapper>

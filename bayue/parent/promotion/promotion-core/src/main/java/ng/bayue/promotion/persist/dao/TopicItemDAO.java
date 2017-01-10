@@ -1,8 +1,10 @@
 package ng.bayue.promotion.persist.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.exception.DAOException;
 
 
@@ -55,7 +57,7 @@ public interface TopicItemDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	TopicItemDO selectById(Long id) throws DAOException;
+	TopicItemDTO selectById(Long id) throws DAOException;
 
 	/**
 	 * 根据  专题商品关联 动态返回记录数
@@ -73,7 +75,7 @@ public interface TopicItemDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	List<TopicItemDO> selectDynamic(TopicItemDO topicItemDO) throws DAOException;
+	List<TopicItemDTO> selectDynamic(TopicItemDO topicItemDO) throws DAOException;
 
 	/**
 	 * 根据  专题商品关联 动态返回 专题商品关联 Limit 列表
@@ -82,5 +84,9 @@ public interface TopicItemDAO {
 	 * @throws DAOException
 	 * @author longhaisheng 2016-12-26 16:28:48
 	 */
-	List<TopicItemDO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws DAOException;
+	List<TopicItemDTO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws DAOException;
+	
+	int insertBatch(List<TopicItemDO> list) throws DAOException;
+	
+	List<TopicItemDO> existTopicItem(Map<String,Object> param) throws DAOException;
 }

@@ -16,6 +16,7 @@ import ng.bayue.backend.ao.promotion.TopicItemAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.util.Page;
 
 @Controller
@@ -31,8 +32,9 @@ public class TopicItemController extends BaseController{
 	public String list(Model model,TopicItemDO topicItemDO,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
-		Page<TopicItemDO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
+		Page<TopicItemDTO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
 		model.addAttribute("page", page);
+		model.addAttribute("topicItemDO", topicItemDO);
 		noRecords(model, page);
 		return BASE_VIEW_PATH + "list";
 	}

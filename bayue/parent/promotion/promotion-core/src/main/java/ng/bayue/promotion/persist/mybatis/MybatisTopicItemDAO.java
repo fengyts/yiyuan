@@ -1,9 +1,11 @@
 package ng.bayue.promotion.persist.mybatis;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.exception.DAOException;
 import ng.bayue.promotion.persist.dao.TopicItemDAO;
 
@@ -36,7 +38,7 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	}
 
 	@Override
-	public TopicItemDO selectById(Long id) throws DAOException {
+	public TopicItemDTO selectById(Long id) throws DAOException {
 		return getSqlSession().selectOne(NAMESPACE + "selectById", id);
 	}
 
@@ -46,13 +48,23 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	}
 
 	@Override
-	public List<TopicItemDO> selectDynamic(TopicItemDO topicItemDO) throws DAOException {
+	public List<TopicItemDTO> selectDynamic(TopicItemDO topicItemDO) throws DAOException {
 		return getSqlSession().selectList(NAMESPACE + "select_dynamic", topicItemDO);
 	}
 
 	@Override
-	public List<TopicItemDO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws DAOException {
+	public List<TopicItemDTO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws DAOException {
 		return getSqlSession().selectList(NAMESPACE + "select_dynamic_page_query", topicItemDO);
+	}
+	
+	@Override
+	public int insertBatch(List<TopicItemDO> list) throws DAOException {
+		return getSqlSession().insert(NAMESPACE + "insert_batch",  list);
+	}
+
+	@Override
+	public List<TopicItemDO> existTopicItem(Map<String,Object> param) throws DAOException {
+		return getSqlSession().selectList(NAMESPACE + "exist_topic_item", param);
 	}
 
 }

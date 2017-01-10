@@ -199,11 +199,11 @@
  	<select id="MybatisTopicDAO_select_dynamic_page_query" resultMap="TopicDTOResultMap" parameterType="ng.bayue.promotion.domain.TopicDO">
 	     SELECT
 	     	<include refid="MybatisTopicDAO_all_column_fields" />,
-	     	(SELECT COUNT(1) FROM pr_topic_item ti WHERE ti.topic_id = #{id}) countItems
+	     	(SELECT COUNT(1) FROM pr_topic_item ti WHERE ti.topic_id = t.id) countItems
 		 FROM
-		 	pr_topic
+		 	pr_topic t
 	 	<include refid="MybatisTopicDAO_dynamic_where_fields" />
-	 	ORDER BY pr_topic.id DESC
+	 	ORDER BY t.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
 

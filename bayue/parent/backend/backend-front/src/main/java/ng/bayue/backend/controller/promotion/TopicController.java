@@ -27,6 +27,7 @@ import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.promotion.domain.TopicDO;
 import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.dto.TopicDTO;
+import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.enums.TopicProgressEnum;
 import ng.bayue.promotion.enums.TopicTypeEnum;
 import ng.bayue.util.ErrorMessage;
@@ -119,13 +120,14 @@ public class TopicController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/topicItemList", method={RequestMethod.GET,RequestMethod.POST})
-	public String topicItemList(Model model,TopicItemDO topicItemDO,
+	public String topicItemList(Model model,TopicItemDO topicItemDO,String name,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
-		Page<TopicItemDO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
+		Page<TopicItemDTO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("topicItemDO", topicItemDO);
 		model.addAttribute("topicId", topicItemDO.getTopicId());
+		model.addAttribute("name", name);
 		noRecords(model, page);
 		return BASE_VIEW_PATH + "topicItemList";
 	}

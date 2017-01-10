@@ -87,7 +87,6 @@ css=[]
 			    		<th>市场价</th>
 			    		<th>活动价格</th>
 			    		<th>活动参与人数</th>
-			    		<th>商品参与总人数</th>
 			    		<th>销售数量</th>
 			    		<th>商品状态</th>
 			    		<th>操作</th>
@@ -96,12 +95,11 @@ css=[]
 			    	<#list page.list as obj>
 			    		<tr class="tr">
 			    			<td class="td_center">${obj.topicId}</td>
-			    			<td class="td_center">${obj.topicName}</td>
+			    			<td class="td_center">${obj.name}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.prdid}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
 			    			<td class="td_center">${obj.basicPrice}</td>
-			    			<td class="td_center">${obj.topicPrice}</td>
 			    			<td class="td_center">${obj.topicPrice}</td>
 			    			<td class="td_center">${obj.snatchNumber}</td>
 			    			<td class="td_center">${obj.saledAmount}</td>

@@ -29,8 +29,10 @@ $(function(){
 	
 	//查看关联商品
 	$(".associateItemBtn").on('click', function(){
-		var topicId = $(this).attr("param");
-		addTab("topic_associateItem", "专题关联商品" , "/topic/topicItemList?topicId=" + topicId + "&iframeName=" + window.name);
+		var topicId = $(this).attr("param"), 
+		    name = $(this).attr("param1");
+		addTab("topic_associateItem", "专题关联商品" , "/topic/topicItemList?topicId=" + topicId 
+				+ "&name=" + name + "&iframeName=" + window.name);
 	});
 	
 	

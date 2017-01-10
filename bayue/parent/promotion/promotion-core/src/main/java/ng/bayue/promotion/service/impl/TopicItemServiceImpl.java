@@ -1,13 +1,17 @@
 package ng.bayue.promotion.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ng.bayue.promotion.domain.TopicItemDO;
+import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.exception.DAOException;
 import ng.bayue.promotion.exception.ServiceException;
 import ng.bayue.promotion.persist.dao.TopicItemDAO;
@@ -77,7 +81,7 @@ public class TopicItemServiceImpl  implements TopicItemService{
 //	}
 
 	@Override
-	public TopicItemDO selectById(Long id) throws ServiceException {
+	public TopicItemDTO selectById(Long id) throws ServiceException {
 		try {
 			return topicItemDAO.selectById(id);
 		}catch(DAOException e){
@@ -97,7 +101,7 @@ public class TopicItemServiceImpl  implements TopicItemService{
 	}
 
 	@Override
-	public List<TopicItemDO> selectDynamic(TopicItemDO topicItemDO) throws ServiceException {
+	public List<TopicItemDTO> selectDynamic(TopicItemDO topicItemDO) throws ServiceException {
 		try {
 			return topicItemDAO.selectDynamic(topicItemDO);
 		}catch(DAOException e){
@@ -107,7 +111,7 @@ public class TopicItemServiceImpl  implements TopicItemService{
 	}
 	
 
-	private List<TopicItemDO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws ServiceException {
+	private List<TopicItemDTO> selectDynamicPageQuery(TopicItemDO topicItemDO) throws ServiceException {
 		try {
 			return topicItemDAO.selectDynamicPageQuery(topicItemDO);
 		}catch(DAOException e){
@@ -116,28 +120,57 @@ public class TopicItemServiceImpl  implements TopicItemService{
 		}
 	}
 
-	public Page<TopicItemDO> queryPageListByTopicItemDO(TopicItemDO topicItemDO) {
+	public Page<TopicItemDTO> queryPageListByTopicItemDO(TopicItemDO topicItemDO) {
 		if (topicItemDO != null) {
 			Long totalCount = this.selectCountDynamic(topicItemDO);
-			List<TopicItemDO> resultList = this.selectDynamicPageQuery(topicItemDO);
+			List<TopicItemDTO> resultList = this.selectDynamicPageQuery(topicItemDO);
 
-			Page<TopicItemDO> page = new Page<TopicItemDO>();
+			Page<TopicItemDTO> page = new Page<TopicItemDTO>();
 			page.setPageNo(topicItemDO.getStartPage());
 			page.setPageSize(topicItemDO.getPageSize());
 			page.setTotalCount(totalCount.intValue());
 			page.setList(resultList);
 			return page;
 		}
-		return new Page<TopicItemDO>();
+		return new Page<TopicItemDTO>();
 	}
 
-	public Page<TopicItemDO> queryPageListByTopicItemDOAndStartPageSize(TopicItemDO topicItemDO,int startPage,int pageSize){
+	public Page<TopicItemDTO> queryPageListByTopicItemDOAndStartPageSize(TopicItemDO topicItemDO,int startPage,int pageSize){
 		if (topicItemDO != null && startPage>0 && pageSize>0) {
 			topicItemDO.setStartPage(startPage);
 			topicItemDO.setPageSize(pageSize);
 			return this.queryPageListByTopicItemDO(topicItemDO);
 		}
-		return new Page<TopicItemDO>();
+		return new Page<TopicItemDTO>();
+	}
+
+	@Override
+	public int insertBatch(List<TopicItemDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		try {
+			return topicItemDAO.insertBatch(list);
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+		return -1;
+	}
+
+	@Override
+	public List<TopicItemDO> existTopicItem(Long topicId, List<Long> detailIds) throws ServiceException {
+		if(null == topicId || CollectionUtils.isEmpty(detailIds)){
+			return null;
+		}
+		try {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("topicId", topicId);
+			param.put("detailIds", detailIds);
+			return topicItemDAO.existTopicItem(param);
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+		return null;
 	}
 
 }

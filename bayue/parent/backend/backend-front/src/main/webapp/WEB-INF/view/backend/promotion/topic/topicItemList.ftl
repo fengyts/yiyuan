@@ -9,13 +9,14 @@ css=[
 >
 
 <div class="box">
-<form class="jqtransform" method="get" id="topicItemListForm" action="${domain}/topic/topicItemList?topicId=${topicId}">
+<form class="jqtransform" method="get" id="topicItemListForm" action="${domain}/topic/topicItemList?topicId=${topicId}&name=${name}">
 		<input type="hidden" id="topicId" name="topicId" value="${topicId}">
+		<input type="hidden" id="name" name="name" value="${name}">
 		<#-- 搜索表单模块 -->
 		<div id="search_bar" class="box mt10">
 			<div class="box_border">
 				<div class="box_top">
-					<b class="pl15">专题商品列表页面</b>
+					<b class="pl15">专题-[${topicId}-${name}]-商品列表页面</b>
 				</div>
 				<div class="box_center pt10 pb10">
 					<table class="form_table" border="0" cellpadding="0" cellspacing="0">
@@ -68,13 +69,14 @@ css=[
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<thead>
 			    	<tr>
-			    		<th width="3%">全选<input type="checkbox" id="checkAllTopicItem"></th>
-			    		<th width="4%">ID</th>
-			    		<th>专题名称</th>
-			    		<th>专题类型</th>
-			    		<th>专题状态</th>
-			    		<th>专题进度</th>
-			    		<th>专题商品数量</th>
+			    		<th>spu</th>
+			    		<th>prdid</th>
+			    		<th>商品名称</th>
+			    		<th>市场价</th>
+			    		<th>活动价格</th>
+			    		<th>活动参与人数</th>
+			    		<th>销售数量</th>
+			    		<th>商品状态</th>
 			    		<th>操作</th>
 			    	</tr>
 			    	<thead>
@@ -82,30 +84,21 @@ css=[
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td><input type="checkbox" class="assTopicItem"></td>
-			    			<td class="td_center">${obj.id}</td>
-			    			<td class="td_center">${obj.name}</td>
-			    			<td class="td_center">
-			    				<#if obj.type == 1>单品团
-			    				<#elseif obj.type == 2>主题团
-			    				<#else>品牌团
-			    				</#if>
-			    			</td>
-			    			<td class="td_center">
-			    				<#if obj.status==0>无效
+			    			<td class="td_center">${obj.spu}</td>
+			    			<td class="td_center">${obj.prdid}</td>
+			    			<td class="td_center">${obj.mainTitle}</td>
+			    			<td class="td_center">${obj.basicPrice}</td>
+			    			<td class="td_center">${obj.topicPrice}</td>
+			    			<td class="td_center">${obj.snatchNumber}</td>
+			    			<td class="td_center">${obj.saledAmount}</td>
+							<td class="td_center">
+								<#if obj.status==0>无效
 								<#else>有效
 								</#if>
-			    			</td>
-			    			<td class="td_center">
-								<#if obj.progress == 0>未开始
-								<#elseif obj.progress == 1>进行中
-								<#else>已结束
-								</#if>
 							</td>
-							<td class="td_center"></td>
 			    			<td class="td_center">
 			    				<a href="javascript:void(0);" class="editBtn" param="${obj.id}">[编辑]</a>
-			    				<a href="javascript:void(0);" class="associateItemBtn" param="${obj.id}">[关联商品]</a>
+			    				<a href="javascript:void(0);" class="associateItemBtn" param="${obj.id}">[查看关联商品]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>

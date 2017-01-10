@@ -95,7 +95,8 @@ $(function() {
 					type : "post",
 					cache : false,
 					error : function(request){
-						alert("Server Connection Failure...");
+						layer.close(index);
+						layer.alert("Server Connection Failure...",{icon:0});
 					},
 					success : function(res) {
 						var data = JSON.parse(res);
@@ -105,7 +106,8 @@ $(function() {
 								parent.layer.close(parent.pageii);
 							});
 						} else {// 失败
-							layer.alert(data.message, 8);
+							layer.close(index);
+							layer.alert(data.message, { icon : 0 });
 						}
 					}
 				});
