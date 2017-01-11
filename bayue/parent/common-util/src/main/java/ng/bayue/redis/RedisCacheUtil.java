@@ -9,6 +9,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+@Deprecated
 public class RedisCacheUtil {
 
 	private static Logger logger = LoggerFactory.getLogger(RedisCacheUtil.class);

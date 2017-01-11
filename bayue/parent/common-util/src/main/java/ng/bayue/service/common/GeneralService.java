@@ -1,5 +1,7 @@
 package ng.bayue.service.common;
 
+import java.util.List;
+
 import ng.bayue.exception.ServiceException;
 import ng.bayue.util.Page;
 
@@ -48,7 +50,7 @@ public interface GeneralService<T> {
 	 */
 	T selectById(Long id) throws ServiceException;
 
-	T selectDynamic(T t) throws ServiceException;
+	List<T> selectDynamic(T t) throws ServiceException;
 
 	/**
 	 * <pre>

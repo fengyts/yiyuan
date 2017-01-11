@@ -20,6 +20,14 @@ import ng.bayue.annotation.ValidateType;
 import ng.bayue.test.TestModel;
 import ng.bayue.util.ErrorMessage;
 
+/**
+ * <pre>
+ * controller 入参实体类有效性校验
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: GenerateValidator.java, v 0.1 2017年1月11日 下午5:20:38 lenovopc Exp $
+ */
 @SuppressWarnings({ "unused" })
 public class GenerateValidator {
 

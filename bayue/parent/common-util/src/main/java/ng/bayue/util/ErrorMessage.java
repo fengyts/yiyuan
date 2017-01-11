@@ -1,5 +1,13 @@
 package ng.bayue.util;
 
+/**
+ * <pre>
+ * controller 通用入参校验错误信息类
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: ErrorMessage.java, v 0.1 2017年1月11日 下午5:19:26 lenovopc Exp $
+ */
 public class ErrorMessage {
 
 	public static final boolean DEFAULT_HAS_ERROR = false;
