@@ -9,7 +9,7 @@
 	default-autowire="byName">
 
 	<!-- <context:annotation-config /> -->
-	<context:component-scan base-package="ng.bayue.backend.persist.mybatis ng.bayue.backend.service.impl" />
+	<!-- <context:component-scan base-package="ng.bayue.backend.persist.mybatis ng.bayue.backend.service.impl" /> -->
 	
 	<!--创建jdbc数据源 -->
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
