@@ -119,4 +119,15 @@ public interface TopicItemService {
 	 */
 	List<TopicItemDO> existTopicItem(Long topicId, List<Long> detailIds) throws ServiceException;
 	
+	/**
+	 * <pre>
+	 * 校验商品是否有效状态,用于商品下架和作废时校验用
+	 * </pre>
+	 *
+	 * @param detailIds 商品detailId列表
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<TopicItemDO> validItemStatus(List<Long> detailIds) throws ServiceException;
+	
 }

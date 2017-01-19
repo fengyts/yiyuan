@@ -67,4 +67,9 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 		return getSqlSession().selectList(NAMESPACE + "exist_topic_item", param);
 	}
 
+	@Override
+	public List<TopicItemDO> validItemStatus(List<Long> detailIds) throws DAOException {
+		return getSqlSession().selectList(NAMESPACE + "validItemStatus", detailIds);
+	}
+
 }

@@ -88,5 +88,25 @@ public interface TopicItemDAO {
 	
 	int insertBatch(List<TopicItemDO> list) throws DAOException;
 	
+	/**
+	 * <pre>
+	 * 获取某专题下的一些商品
+	 * </pre>
+	 *
+	 * @param param
+	 * @return
+	 * @throws DAOException
+	 */
 	List<TopicItemDO> existTopicItem(Map<String,Object> param) throws DAOException;
+	
+	/**
+	 * <pre>
+	 * 校验商品是否有效状态,用于商品下架和作废时校验用
+	 * </pre>
+	 *
+	 * @param detailIds
+	 * @return
+	 * @throws DAOException
+	 */
+	List<TopicItemDO> validItemStatus(List<Long> detailIds) throws DAOException;
 }

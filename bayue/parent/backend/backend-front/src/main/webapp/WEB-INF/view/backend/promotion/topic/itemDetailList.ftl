@@ -1,6 +1,6 @@
 <#include "/common/common2.ftl" />
 
-<@backend title="商品管理" js=[
+<@backend title="商品详情列表" js=[
 '/statics/backend/promotion/topicItem.js'
 ] 
 css=[

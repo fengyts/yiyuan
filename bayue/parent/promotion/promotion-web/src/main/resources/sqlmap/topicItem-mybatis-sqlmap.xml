@@ -256,5 +256,16 @@
 		 		#{detailId}
 		 	</foreach>
  	</select>
+ 	
+ 	<select id="MybatisTopicItemDAO_validItemStatus" parameterType="list" resultMap="TopicItemDOResultMap">
+ 		SELECT
+	     	<include refid="MybatisTopicItemDAO_all_column_fields" />
+		 FROM
+		 	pr_topic_item item 
+		 WHERE 
+		 	item.status = '1'
+		 AND detail_id IN
+		 	<foreach collection="list" item="detailId" open="(" separator="," close=")">#{detailId}</foreach>
+ 	</select>
 
 </mapper>

@@ -92,12 +92,12 @@ css=[
 			    			<td class="td_center">${obj.snatchNumber}</td>
 			    			<td class="td_center">${obj.saledAmount}</td>
 							<td class="td_center">
-								<#if obj.status==0>无效
+								<#if obj.status != 'true'>无效
 								<#else>有效
 								</#if>
 							</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" class="editBtn" param="${obj.id}">[编辑]</a>
+			    				<a href="javascript:void(0);" class="editTopicItemBtn" param="${obj.id}">[编辑]</a>
 			    				<a href="javascript:void(0);" class="associateItemBtn" param="${obj.id}">[查看关联商品]</a>
 			    			</td>
 			    		</tr>

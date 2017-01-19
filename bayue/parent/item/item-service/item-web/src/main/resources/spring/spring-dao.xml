@@ -87,7 +87,7 @@
             <property name="poolPreparedStatements" value="true" />  
             <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
             <!-- 配置druid web监控 -->  
-            <property name="filters" value="stat,log4j,wall" />
+            <property name="filters" value="stat,log4j" />
     </bean>
 
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->

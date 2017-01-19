@@ -104,7 +104,7 @@ css=[]
 			    			<td class="td_center">${obj.snatchNumber}</td>
 			    			<td class="td_center">${obj.saledAmount}</td>
 							<td class="td_center">
-								<#if obj.status==0>无效
+								<#if obj.status != 'true'>无效
 								<#else>有效
 								</#if>
 							</td>
