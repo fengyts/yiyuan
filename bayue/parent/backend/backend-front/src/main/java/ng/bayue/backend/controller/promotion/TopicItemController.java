@@ -48,5 +48,11 @@ public class TopicItemController extends BaseController{
 		List<TopicItemDO> list = (List<TopicItemDO>) JSONObject.parseArray(itemList, TopicItemDO.class);
 		return topicItemAO.save(list);
 	}
+	
+	@RequestMapping("edit")
+	public String edit(Model model, Long id){
+		model.addAttribute("topicItemDO", topicItemAO.selectTopicItemById(id));
+		return BASE_VIEW_PATH + "edit";
+	}
 
 }

@@ -1,6 +1,6 @@
 <#assign domain="${requestContextPath.contextPath}" />
 
-<#include "/common/context2.ftl" />
+<#include "/common/context1.ftl" />
 <#include "/common/page.ftl"/>
 
 <#-- 版本号 -->

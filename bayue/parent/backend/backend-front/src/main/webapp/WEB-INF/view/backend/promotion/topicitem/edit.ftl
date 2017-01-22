@@ -1,4 +1,4 @@
-<#include "/common/common.ftl" />
+<#include "/common/common1.ftl" />
 
 <@backend title="编辑专题商品" 
 js=[
@@ -13,10 +13,9 @@ css=[
 
 
 <div class="panel-body box_border">
-<input type="hidden" id="listIframeName" value="${listIframeName}">
-<form id="topicEditForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
+<form id="topicEditForm" action="" class="form-horizontal dr-form-bordered" method="post">
 	<div style="display:none;">
-		<input type="hidden" id="id" name="id" value="${topicDO.id}" />
+		<input type="hidden" id="id" name="id" value="${topicItemDO.id}" />
 	</div>
 	<div class="form-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>

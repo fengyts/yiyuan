@@ -1,4 +1,4 @@
-<#include "/common/common2.ftl" />
+<#include "/common/common1.ftl" />
 <@backend title="专题商品列表"
 js=[
 '/statics/common/common-js/tab.js',
@@ -59,6 +59,7 @@ css=[
 				    	<input class="ext_btn ext_btn_success" type="button" value="查询" onclick="$('#topicItemListForm').submit();" name="button" id="queryTopicItemListBtn" />
 				    </a>
 				    <input class="ext_btn ext_btn_submit" type ="button" value="关联商品" id="associateTopicItem" />
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量修改" id="batchUpdateTopicItem" />
 				</div>
 			</div>
 		</div>
@@ -69,37 +70,41 @@ css=[
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<thead>
 			    	<tr>
+			    		<th width="5%"><input type='checkbox' id="checkAllTopicItem">全选</th>
 			    		<th>spu</th>
 			    		<th>prdid</th>
 			    		<th>商品名称</th>
+			    		<th>销售数量</th>
 			    		<th>市场价</th>
 			    		<th>活动价格</th>
 			    		<th>活动参与人数</th>
-			    		<th>销售数量</th>
 			    		<th>商品状态</th>
-			    		<th>操作</th>
 			    	</tr>
 			    	<thead>
 			    	<tbody id="topicItemList">
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
+			    			<td><input type='checkbox'></td>
+			    			<td class="display">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.prdid}</td>
 			    			<td class="td_center">${obj.mainTitle}</td>
+			    			<td class="td_center">${obj.saledAmount!0}</td>
 			    			<td class="td_center">${obj.basicPrice}</td>
-			    			<td class="td_center">${obj.topicPrice}</td>
-			    			<td class="td_center">${obj.snatchNumber}</td>
-			    			<td class="td_center">${obj.saledAmount}</td>
+			    			<td class="td_center"><input type="text" class="input-text lh25" value="${obj.topicPrice}"></td>
+			    			<td class="td_center"><input type="text" class="input-text lh25" value="${obj.snatchNumber}"></td>
 							<td class="td_center">
-								<#if obj.status != 'true'>无效
-								<#else>有效
-								</#if>
+								<select class="select">
+									<option value="0" <#if obj.status != 'true'>selected</#if>>无效</option>
+									<option value="1" <#if obj.status == 'true'>selected</#if>>有效</option>
+								</select>
 							</td>
+		    				<#--
 			    			<td class="td_center">
 			    				<a href="javascript:void(0);" class="editTopicItemBtn" param="${obj.id}">[编辑]</a>
-			    				<a href="javascript:void(0);" class="associateItemBtn" param="${obj.id}">[查看关联商品]</a>
 			    			</td>
+		    				-->
 			    		</tr>
 			    	</#list>
 			    	</#if>

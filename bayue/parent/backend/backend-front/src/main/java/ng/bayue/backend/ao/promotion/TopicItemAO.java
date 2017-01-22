@@ -65,5 +65,11 @@ public class TopicItemAO {
 		}
 		return new ResultMessage();
 	}
+	
+	public TopicItemDTO selectTopicItemById(Long id){
+		if(null == id){return null;}
+		TopicItemDTO topicItemDO = topicItemService.selectById(id);
+		return topicItemDO;
+	}
 
 }

@@ -1,4 +1,4 @@
-<#include "/common/common2.ftl" />
+<#include "/common/common1.ftl" />
 
 <@backend title="商品详情列表" js=[
 '/statics/backend/promotion/topicItem.js'

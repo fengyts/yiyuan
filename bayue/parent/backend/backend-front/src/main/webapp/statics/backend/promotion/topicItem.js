@@ -22,9 +22,24 @@ $(function() {
 
 	});
 
-	$("#cancelAssociateTopicItemBtn").on('click', function() {
+	$("#cancelTabBtn,#cancelAssociateTopicItemBtn").on('click', function() {
 		parent.layer.close(parent.pageii);
 	});
+	
+//	$(".editTopicItemBtn").on('click', function(){
+//		var id = $(this).attr('param');
+//		pageii = layer.open({
+//			type : 2,
+//			title : '专题编辑商品',
+//			// shadeClose : true,
+//			shade : 0.3,
+//			maxmin : true,
+//			fix : false,
+//			scrollbar : false,
+//			area : [ '1000px', '550px' ],
+//			content : domain + '/topicItem/edit.htm?id=' + id,
+//		});
+//	});
 
 	// 全选商品
 	$("#checkAllDetail").on('click', function() {
@@ -32,6 +47,13 @@ $(function() {
 			$("#dataBodyList :checkbox").prop('checked', true);
 		} else {
 			$("#dataBodyList :checkbox").prop('checked', false);
+		}
+	});
+	$("#checkAllTopicItem").on('click', function() {
+		if ($(this).is(":checked")) {
+			$("#topicItemList :checkbox").prop('checked', true);
+		} else {
+			$("#topicItemList :checkbox").prop('checked', false);
 		}
 	});
 
