@@ -59,7 +59,7 @@ css=[
 				    	<input class="ext_btn ext_btn_success" type="button" value="查询" onclick="$('#topicItemListForm').submit();" name="button" id="queryTopicItemListBtn" />
 				    </a>
 				    <input class="ext_btn ext_btn_submit" type ="button" value="关联商品" id="associateTopicItem" />
-				    <input class="ext_btn ext_btn_submit" type ="button" value="批量修改" id="batchUpdateTopicItem" />
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量修改" id="batchUpdateTopicItem" param="singleTopic" />
 				</div>
 			</div>
 		</div>
@@ -85,7 +85,7 @@ css=[
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td><input type='checkbox'></td>
+			    			<td><input type='checkbox' class='checkedTopicItem'></td>
 			    			<td class="display">${obj.id}</td>
 			    			<td class="td_center">${obj.spu}</td>
 			    			<td class="td_center">${obj.prdid}</td>

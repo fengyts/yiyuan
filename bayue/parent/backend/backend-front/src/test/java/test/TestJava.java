@@ -26,5 +26,7 @@ public class TestJava {
 		TopicDO topicDO = JSONObject.parseObject(str1, TopicDO.class);
 		System.out.println(topicDO.toString());
 	}
+	
+		
 
 }

@@ -187,4 +187,18 @@ public class TopicItemServiceImpl implements TopicItemService {
 		return null;
 	}
 
+	@Override
+	public int updateBatch(List<TopicItemDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		int res = -1;
+		try {
+			res = topicItemDAO.updateBatch(list);
+		} catch (DAOException e) {
+			logger.error("", e);
+		}
+		return res;
+	}
+
 }

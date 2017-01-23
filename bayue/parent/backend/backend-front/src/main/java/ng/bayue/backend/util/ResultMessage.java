@@ -114,6 +114,9 @@ public class ResultMessage implements Serializable{
 	 * @return
 	 */
 	public static ResultMessage validParameterNull(String... parameters){
+		if(null == parameters){
+			return new ResultMessage(Failure, Messages.ParameterNull);
+		}
 		return new ResultMessage(Failure,Messages.parameterErrMsgs(parameters));
 	}
 	

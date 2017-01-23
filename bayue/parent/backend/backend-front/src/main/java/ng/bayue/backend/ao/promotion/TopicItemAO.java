@@ -71,5 +71,22 @@ public class TopicItemAO {
 		TopicItemDTO topicItemDO = topicItemService.selectById(id);
 		return topicItemDO;
 	}
+	
+	public ResultMessage update(List<TopicItemDO> list){
+		if(CollectionUtils.isEmpty(list)){
+			return ResultMessage.validParameterNull("");
+		}
+		Date date = new Date();
+		Long userId = UserHandler.getUser().getId();
+		for(TopicItemDO item : list){
+			item.setModifyTime(date);
+			item.setModifyUserId(userId);
+		}
+		int res = topicItemService.updateBatch(list);
+		if(res < 1){
+			return ResultMessage.serverInnerError();
+		}
+		return new ResultMessage();
+	}
 
 }

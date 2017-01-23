@@ -120,14 +120,14 @@ public class TopicController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/topicItemList", method={RequestMethod.GET,RequestMethod.POST})
-	public String topicItemList(Model model,TopicItemDO topicItemDO,String name,
+	public String topicItemList(Model model,TopicItemDTO topicItemDO,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
 		Page<TopicItemDTO> page = topicItemAO.queryTopicItemList(topicItemDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("topicItemDO", topicItemDO);
 		model.addAttribute("topicId", topicItemDO.getTopicId());
-		model.addAttribute("name", name);
+		model.addAttribute("name", topicItemDO.getName());
 		noRecords(model, page);
 		return BASE_VIEW_PATH + "topicItemList";
 	}

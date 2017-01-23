@@ -2,6 +2,7 @@ package ng.bayue.backend.controller;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ng.bayue.backend.util.ApplicationContextUtil;
 import ng.bayue.backend.util.UserHandler;
+import ng.bayue.entity.LearnAcceptEntity;
 import ng.bayue.service.EmailService;
 
 @Controller
@@ -67,6 +69,12 @@ public class TestController {
 		emailService.emailManage(builder.toString());
 		System.out.println(123232);
 		return "success";
+	}
+	
+	@RequestMapping("/acceptListParam")
+	public void acceptListParam(LearnAcceptEntity entity,@RequestParam("list[]")List<String> list){
+		System.out.println();
+		System.out.println();
 	}
 	
 	

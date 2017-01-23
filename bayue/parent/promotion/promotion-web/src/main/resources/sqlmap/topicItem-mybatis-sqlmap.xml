@@ -267,5 +267,35 @@
 		 AND detail_id IN
 		 	<foreach collection="list" item="detailId" open="(" separator="," close=")">#{detailId}</foreach>
  	</select>
+ 	
+ 	<update id="MybatisTopicItemDAO_update_batch" parameterType="list">
+ 		<foreach collection="list" item="item" open="" separator=";" close="">
+ 			UPDATE 
+ 				pr_topic_item
+ 			<set>
+				<if test="item.topicId != null ">topic_id=#{item.topicId},</if>
+				<if test="item.itemId != null ">item_id=#{item.itemId},</if>
+				<if test="item.isTest != null ">is_test=#{item.isTest},</if>
+				<if test="item.sort != null ">sort=#{item.sort},</if>
+				<if test="item.basicPrice != null ">basic_price=#{item.basicPrice},</if>
+				<if test="item.topicPrice != null ">topic_price=#{item.topicPrice},</if>
+				<if test="item.snatchNumber != null ">snatch_number=#{item.snatchNumber},</if>
+				<if test="item.spu != null  and spu != '' ">spu=#{item.spu},</if>
+				<if test="item.detailId != null ">detail_id=#{item.detailId},</if>
+				<if test="item.prdid != null and prdid != '' ">prdid=#{item.prdid},</if>
+				<if test="item.mainTitle != null  and mainTitle != '' ">main_title=#{item.mainTitle},</if>
+				<if test="item.smallId != null ">small_id=#{item.smallId},</if>
+				<if test="item.isHot != null ">is_hot=#{item.isHot},</if>
+				<if test="item.saledAmount != null ">saled_amount=#{item.saledAmount},</if>
+				<if test="item.hasInventory != null ">has_inventory=#{item.hasInventory},</if>
+				<if test="item.status != null ">status=#{item.status},</if>
+				<if test="item.remark != null  and remark != '' ">remark=#{item.remark},</if>
+				<if test="item.createUserId != null ">create_user_id=#{item.createUserId},</if>
+				<if test="item.modifyTime != null ">modify_time=#{item.modifyTime},</if>
+				<if test="item.modifyUserId != null ">modify_user_id=#{item.modifyUserId},</if>
+			</set>
+ 			WHERE id = #{item.id}
+ 		</foreach>
+ 	</update>
 
 </mapper>

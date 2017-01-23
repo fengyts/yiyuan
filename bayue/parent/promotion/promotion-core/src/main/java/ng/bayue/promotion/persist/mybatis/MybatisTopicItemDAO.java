@@ -72,4 +72,9 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 		return getSqlSession().selectList(NAMESPACE + "validItemStatus", detailIds);
 	}
 
+	@Override
+	public int updateBatch(List<TopicItemDO> list) throws DAOException {
+		return getSqlSession().update(NAMESPACE + "update_batch", list);
+	}
+
 }

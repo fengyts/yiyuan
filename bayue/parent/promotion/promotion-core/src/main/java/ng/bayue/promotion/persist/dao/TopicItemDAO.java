@@ -109,4 +109,6 @@ public interface TopicItemDAO {
 	 * @throws DAOException
 	 */
 	List<TopicItemDO> validItemStatus(List<Long> detailIds) throws DAOException;
+	
+	int updateBatch(List<TopicItemDO> list) throws DAOException;
 }

@@ -130,4 +130,15 @@ public interface TopicItemService {
 	 */
 	List<TopicItemDO> validItemStatus(List<Long> detailIds) throws ServiceException;
 	
+	/**
+	 * <pre>
+	 * 批量更新
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateBatch(List<TopicItemDO> list) throws ServiceException;
+	
 }

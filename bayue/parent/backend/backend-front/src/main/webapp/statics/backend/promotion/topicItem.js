@@ -56,6 +56,56 @@ $(function() {
 			$("#topicItemList :checkbox").prop('checked', false);
 		}
 	});
+	
+	
+	//批量修改商品
+	$("#batchUpdateTopicItem").on('click', function(){
+//		var _checked = $("#topicItemList tr :checked :eq(0)");
+		var _checked = $(".checkedTopicItem:checked");
+		if(_checked.length < 1){
+			layer.alert("请选择商品", {icon:5});
+			return ;
+		}
+		var _paramSingleTopic = $(this).attr('param'), _data = new Array(), _item = {};
+		_checked.each(function(i, v){
+			var _tds = $(v).parent().nextAll();
+			_item.id = _tds.eq(0).text();
+			if(_paramSingleTopic){ // 如果是具体专题的商品列表页
+				_item.topicPrice = _tds.eq(6).find(":input").val();
+				_item.snatchNumber = _tds.eq(7).find(":input").val();
+				_item.status = _tds.eq(8).find(":selected").val();
+			}else{ // 所有专题所有商品
+				_item.topicPrice = _tds.eq(8).find(":input").val();
+				_item.snatchNumber = _tds.eq(9).find(":input").val();
+				_item.status = _tds.eq(10).find(":selected").val();
+			}
+			_data.push(_item);
+		});
+		
+		$.ajax({
+			url : domain + '/topicItem/update.htm',
+			dataType : 'text',
+//			data : { "itemList" : _d, "itemStatus" : _itemStatus, "topicId" : _topicId, "isTest" : _isTestItem },
+			data : { "data" : JSON.stringify(_data)},
+			type : "post",
+			cache : false,
+			error : function(request){
+				layer.close(index);
+				layer.alert("Server Connection Failure...",{icon:0});
+			},
+			success : function(res) {
+				var data = JSON.parse(res);
+				if (1 == data.result) {// 成功
+					layer.alert(data.message, {icon:1}, function() {
+						window.location.reload();
+					});
+				} else {// 失败
+					layer.alert(data.message, { icon : 0 });
+				}
+			}
+		});
+		
+	});
 
 	// 确定添加按钮
 	$("#associateTopicItemConfirm").on('click', function() {

@@ -54,5 +54,20 @@ public class TopicItemController extends BaseController{
 		model.addAttribute("topicItemDO", topicItemAO.selectTopicItemById(id));
 		return BASE_VIEW_PATH + "edit";
 	}
+	
+	@RequestMapping("update")
+	@ResponseBody
+	public ResultMessage update(String data){
+		if(StringUtils.isEmpty(data)){
+			return ResultMessage.serverInnerError();
+		}
+		try{
+			List<TopicItemDO> list = JSONObject.parseArray(data, TopicItemDO.class);
+			return topicItemAO.update(list);
+		}catch(Exception e){
+			
+		}
+		return ResultMessage.serverInnerError();
+	}
 
 }

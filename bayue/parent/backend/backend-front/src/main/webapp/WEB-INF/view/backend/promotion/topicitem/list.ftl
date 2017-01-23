@@ -70,6 +70,7 @@ css=[]
 				    	<input class="btn btn82 btn_search" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
 				    </a>
 				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addTopic" />
+				    <input class="ext_btn ext_btn_submit" type ="button" value="批量修改" id="batchUpdateTopicItem" />
 				</div>
 			</div>
 		</div>
@@ -97,7 +98,7 @@ css=[]
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td><input type='checkbox'></td>
+			    			<td><input type='checkbox' class='checkedTopicItem'></td>
 			    			<td class="display">${obj.id}</td>
 			    			<td class="td_center">${obj.topicId}</td>
 			    			<td class="td_center">${obj.name}</td>
