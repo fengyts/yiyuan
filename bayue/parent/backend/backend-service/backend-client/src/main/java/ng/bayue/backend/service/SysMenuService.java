@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
  /**
  * 菜单 Service

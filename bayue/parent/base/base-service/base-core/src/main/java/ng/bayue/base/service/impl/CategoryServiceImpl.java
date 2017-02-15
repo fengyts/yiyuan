@@ -9,7 +9,7 @@ import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.CategoryDAO;
 import ng.bayue.base.service.CategoryService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;

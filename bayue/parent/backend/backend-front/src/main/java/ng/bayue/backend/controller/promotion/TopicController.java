@@ -22,6 +22,8 @@ import ng.bayue.backend.ao.promotion.TopicAO;
 import ng.bayue.backend.ao.promotion.TopicItemAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.common.ErrorMessage;
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.promotion.domain.TopicDO;
@@ -30,8 +32,6 @@ import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.enums.TopicProgressEnum;
 import ng.bayue.promotion.enums.TopicTypeEnum;
-import ng.bayue.util.ErrorMessage;
-import ng.bayue.util.Page;
 import ng.bayue.validate.GenerateValidator;
 
 @Controller

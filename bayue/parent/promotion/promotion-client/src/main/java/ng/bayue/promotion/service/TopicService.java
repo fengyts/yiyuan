@@ -1,8 +1,9 @@
 package ng.bayue.promotion.service;
 
 import java.util.List;
-import ng.bayue.util.Page;
+
 import ng.bayue.promotion.exception.ServiceException;
+import ng.bayue.common.Page;
 import ng.bayue.promotion.domain.TopicDO;
 import ng.bayue.promotion.dto.TopicDTO;
  /**

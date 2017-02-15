@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.ForbiddenWordsDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 违禁词 Service
  * @author haisheng.long 2014-12-24 13:11:20

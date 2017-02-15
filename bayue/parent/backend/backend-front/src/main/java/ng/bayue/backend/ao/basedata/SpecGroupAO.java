@@ -12,7 +12,7 @@ import ng.bayue.base.domain.SpecGroupLinkDO;
 import ng.bayue.base.service.SpecGroupLinkService;
 import ng.bayue.base.service.SpecGroupService;
 import ng.bayue.base.service.SpecService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

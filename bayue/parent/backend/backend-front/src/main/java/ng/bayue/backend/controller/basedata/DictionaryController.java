@@ -5,7 +5,7 @@ import java.util.List;
 import ng.bayue.backend.ao.basedata.DictionaryAO;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.DictionaryDO;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

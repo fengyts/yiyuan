@@ -16,6 +16,7 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
+import ng.bayue.common.Page;
 import ng.bayue.item.constant.CodeConstant;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.domain.dto.ItemInfoDTO;
@@ -25,7 +26,6 @@ import ng.bayue.item.persist.dao.ItemInfoDAO;
 import ng.bayue.item.service.CodeService;
 import ng.bayue.item.service.ItemInfoService;
 import ng.bayue.item.service.ItemManagerService;
-import ng.bayue.util.Page;
 
 @Service(value = "itemInfoService")
 public class ItemInfoServiceImpl implements ItemInfoService {

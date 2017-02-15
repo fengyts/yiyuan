@@ -16,12 +16,12 @@ import ng.bayue.backend.util.UserHandler;
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.domain.dto.ItemInfoDTO;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
-import ng.bayue.util.Page;
 
 @Service
 public class ItemInfoAO {

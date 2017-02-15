@@ -17,8 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import ng.bayue.annotation.GenerValidate;
 import ng.bayue.annotation.ValidateType;
+import ng.bayue.common.ErrorMessage;
 import ng.bayue.test.TestModel;
-import ng.bayue.util.ErrorMessage;
 
 /**
  * <pre>

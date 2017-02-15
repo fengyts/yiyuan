@@ -15,9 +15,9 @@ import com.alibaba.fastjson.JSONObject;
 import ng.bayue.backend.ao.promotion.TopicItemAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.common.Page;
 import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.dto.TopicItemDTO;
-import ng.bayue.util.Page;
 
 @Controller
 @RequestMapping("/topicItem/")

@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 
  /**

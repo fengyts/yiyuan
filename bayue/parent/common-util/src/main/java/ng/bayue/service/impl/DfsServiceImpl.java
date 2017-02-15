@@ -17,10 +17,10 @@ import org.csource.fastdfs.TrackerServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ng.bayue.common.ResultMessage;
 import ng.bayue.factory.TrackerServerPool;
 import ng.bayue.service.DfsService;
 import ng.bayue.util.FileUtils;
-import ng.bayue.util.ResultMessage;
 
 public class DfsServiceImpl implements DfsService {
 

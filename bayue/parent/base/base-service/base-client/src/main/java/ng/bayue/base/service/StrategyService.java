@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.StrategyDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 攻略 Service
  * @author haisheng.long 2016-07-12 13:50:40

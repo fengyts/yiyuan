@@ -3,7 +3,7 @@ package ng.bayue.backend.controller.basedata;
 import ng.bayue.backend.ao.basedata.ForbiddenWordsAO;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.ForbiddenWordsDO;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package ng.bayue.promotion.domain;
 
 import ng.bayue.annotation.GenerValidate;
-import ng.bayue.util.BaseDO;
+import ng.bayue.common.BaseDO;
 
 import java.util.Date;
 

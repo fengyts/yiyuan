@@ -1,8 +1,8 @@
 package ng.bayue.promotion.domain;
 
-import ng.bayue.util.BaseDO;
-
 import java.util.Date;
+
+import ng.bayue.common.BaseDO;
 
 /**
  * 专题商品关联

@@ -13,7 +13,7 @@ import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.backend.persist.dao.SysMenuRoleDAO;
 import ng.bayue.backend.persist.exception.DAOException;
 import ng.bayue.backend.service.SysMenuRoleService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 @Service(value = "sysMenuRoleService")
 public class SysMenuRoleServiceImpl implements SysMenuRoleService {

@@ -15,7 +15,7 @@ import ng.bayue.backend.service.SysMenuService;
 import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 @Service
 public class SysMenuAO {

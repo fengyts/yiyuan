@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
 import ng.bayue.promotion.domain.TopicDO;
 import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.service.TopicService;
-import ng.bayue.util.Page;
 
 @Service
 public class TopicAO {

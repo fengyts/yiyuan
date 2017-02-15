@@ -2,12 +2,12 @@ package ng.bayue.item.service.impl;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemDescDAO;
 import ng.bayue.item.service.ItemDescService;
-import ng.bayue.util.Page;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

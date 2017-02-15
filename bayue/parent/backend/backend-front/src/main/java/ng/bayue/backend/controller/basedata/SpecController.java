@@ -3,7 +3,7 @@ package ng.bayue.backend.controller.basedata;
 import ng.bayue.backend.ao.basedata.SpecAO;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecDO;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

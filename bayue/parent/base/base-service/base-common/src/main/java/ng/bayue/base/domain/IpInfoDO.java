@@ -1,6 +1,6 @@
 package ng.bayue.base.domain;
 
-import ng.bayue.util.BaseDO;
+import ng.bayue.common.BaseDO;
 
 /**
  * 

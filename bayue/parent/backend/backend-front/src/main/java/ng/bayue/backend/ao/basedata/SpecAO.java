@@ -7,7 +7,7 @@ import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecDO;
 import ng.bayue.base.service.SpecService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

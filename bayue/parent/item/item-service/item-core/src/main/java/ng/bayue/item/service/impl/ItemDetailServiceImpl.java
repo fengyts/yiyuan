@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemDetailDAO;
 import ng.bayue.item.service.ItemDetailService;
-import ng.bayue.util.Page;
 
 @Service(value = "itemDetailService")
 public class ItemDetailServiceImpl implements ItemDetailService {

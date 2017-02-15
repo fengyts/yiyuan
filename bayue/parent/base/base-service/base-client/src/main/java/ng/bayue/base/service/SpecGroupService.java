@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 规格组 Service
  * @author fengyts 2016-07-26 10:08:29

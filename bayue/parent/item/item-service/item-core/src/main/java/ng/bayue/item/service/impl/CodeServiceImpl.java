@@ -9,13 +9,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.constant.CodeConstant;
 import ng.bayue.item.domain.CodeDO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.CodeDAO;
 import ng.bayue.item.service.CodeService;
-import ng.bayue.util.Page;
 
 @Service(value="codeService")
 public class CodeServiceImpl  implements CodeService{

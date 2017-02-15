@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
 import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.service.TopicItemService;
-import ng.bayue.util.Page;
 
 @Service
 public class TopicItemAO {

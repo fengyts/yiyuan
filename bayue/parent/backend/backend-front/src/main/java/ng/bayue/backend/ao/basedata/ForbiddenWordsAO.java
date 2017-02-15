@@ -8,7 +8,7 @@ import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
 import ng.bayue.base.domain.ForbiddenWordsDO;
 import ng.bayue.base.service.ForbiddenWordsService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

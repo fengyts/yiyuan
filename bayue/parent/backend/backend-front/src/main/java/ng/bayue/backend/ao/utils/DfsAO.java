@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import ng.bayue.common.ResultMessage;
 import ng.bayue.constant.CommonConstant;
 import ng.bayue.service.DfsService;
-import ng.bayue.util.ResultMessage;
 
 import org.apache.commons.lang3.StringUtils;
 import org.csource.common.NameValuePair;

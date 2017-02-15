@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 系统用户角色 Service
  * @author haisheng.long 2016-10-25 13:31:48

@@ -17,7 +17,7 @@ import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.util.HanyuPinyinUtil;
 import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 @Controller
 @RequestMapping({ "/sys/sysRole" })

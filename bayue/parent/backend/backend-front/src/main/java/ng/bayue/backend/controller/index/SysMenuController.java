@@ -6,7 +6,7 @@ import ng.bayue.backend.ao.index.SysMenuAO;
 import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.enums.SysMenuTypeEnum;
 import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

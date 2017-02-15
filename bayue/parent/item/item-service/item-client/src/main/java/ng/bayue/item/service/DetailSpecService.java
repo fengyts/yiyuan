@@ -2,9 +2,9 @@ package ng.bayue.item.service;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.exception.ServiceException;
-import ng.bayue.util.Page;
  /**
  * 商品规格信息 Service
  * @author fengyts 2016-07-26 09:58:30

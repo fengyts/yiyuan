@@ -24,7 +24,7 @@ import ng.bayue.backend.domain.SysUserRoleDO;
 import ng.bayue.backend.domain.dto.SysUserDTO;
 import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 @Controller
 @RequestMapping({ "/sys/sysUser" })

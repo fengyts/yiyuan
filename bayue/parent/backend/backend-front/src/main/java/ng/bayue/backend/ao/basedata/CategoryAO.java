@@ -12,7 +12,7 @@ import ng.bayue.backend.util.UserHandler;
 import ng.bayue.base.constant.CategoryConstant;
 import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.service.CategoryService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;

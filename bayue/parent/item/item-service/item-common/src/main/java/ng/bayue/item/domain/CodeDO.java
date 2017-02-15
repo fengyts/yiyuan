@@ -1,6 +1,6 @@
 package ng.bayue.item.domain;
 
-import ng.bayue.util.BaseDO;
+import ng.bayue.common.BaseDO;
 
 /**
  * spu,prdid编码生成

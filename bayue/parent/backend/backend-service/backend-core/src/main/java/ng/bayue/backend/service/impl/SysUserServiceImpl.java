@@ -20,7 +20,7 @@ import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.persist.dao.SysUserRoleDAO;
 import ng.bayue.backend.persist.exception.DAOException;
 import ng.bayue.backend.service.SysUserService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 import ng.bayue.util.SecurityUtil;
 
 @Service(value = "sysUserService")

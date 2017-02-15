@@ -2,10 +2,10 @@ package ng.bayue.service;
 
 import java.io.File;
 
-import ng.bayue.util.ResultMessage;
-
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.FileInfo;
+
+import ng.bayue.common.ResultMessage;
 
 public interface DfsService {
 	

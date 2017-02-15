@@ -7,7 +7,7 @@ import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.DistrictInfoDAO;
 import ng.bayue.base.service.DistrictInfoService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

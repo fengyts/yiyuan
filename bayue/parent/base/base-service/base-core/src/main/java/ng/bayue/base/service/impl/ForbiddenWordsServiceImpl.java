@@ -9,9 +9,9 @@ import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.ForbiddenWordsDAO;
 import ng.bayue.base.service.ForbiddenWordsService;
+import ng.bayue.common.Page;
 import ng.bayue.constant.RedisCacheTimeConstant;
 import ng.bayue.redis.RedisCacheUtil;
-import ng.bayue.util.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

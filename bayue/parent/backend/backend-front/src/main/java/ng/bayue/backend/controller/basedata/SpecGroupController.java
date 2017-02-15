@@ -7,7 +7,7 @@ import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecDO;
 import ng.bayue.base.domain.SpecGroupDO;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

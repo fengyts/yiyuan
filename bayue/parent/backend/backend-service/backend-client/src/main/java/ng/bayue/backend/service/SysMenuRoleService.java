@@ -5,7 +5,7 @@ import java.util.Map;
 
 import ng.bayue.backend.domain.SysMenuRoleDO;
 import ng.bayue.backend.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 角色菜单关系 Service
  * @author haisheng.long 2016-10-25 13:31:48

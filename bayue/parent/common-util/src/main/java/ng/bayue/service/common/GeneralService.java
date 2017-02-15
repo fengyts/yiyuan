@@ -2,8 +2,8 @@ package ng.bayue.service.common;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.exception.ServiceException;
-import ng.bayue.util.Page;
 
 public interface GeneralService<T> {
 

@@ -1,4 +1,4 @@
-package ng.bayue.util;
+package ng.bayue.common;
 
 /**
  * <pre>

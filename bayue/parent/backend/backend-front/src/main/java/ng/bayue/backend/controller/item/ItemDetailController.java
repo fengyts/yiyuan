@@ -10,11 +10,11 @@ import ng.bayue.backend.ao.item.ItemDetailAO;
 import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecGroupDO;
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.dto.ItemDTO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.enums.ItemStatusEnum;
 import ng.bayue.item.enums.ItemTypeEnum;
-import ng.bayue.util.Page;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

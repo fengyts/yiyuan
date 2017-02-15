@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 数据字典：信息 Service
  * @author fengyts 2016-07-15 22:53:11

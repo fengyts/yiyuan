@@ -26,7 +26,7 @@ import ng.bayue.backend.service.SysUserService;
 import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.backend.util.UserHandler;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 import ng.bayue.util.SecurityUtil;
 
 @Service

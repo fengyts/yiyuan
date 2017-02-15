@@ -2,9 +2,9 @@ package ng.bayue.item.service;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemPicturesDO;
 import ng.bayue.item.exception.ServiceException;
-import ng.bayue.util.Page;
  /**
  * 商品图片信息 Service
  * @author haisheng.long 2016-07-13 13:17:51

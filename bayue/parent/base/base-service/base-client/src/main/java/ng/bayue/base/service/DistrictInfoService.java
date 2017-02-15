@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.base.domain.DistrictInfoDO;
 import ng.bayue.base.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
  /**
  * 地区信息 Service
  * @author fengyts 2016-07-12 20:29:58

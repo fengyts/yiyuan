@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 
 public class BaseController {

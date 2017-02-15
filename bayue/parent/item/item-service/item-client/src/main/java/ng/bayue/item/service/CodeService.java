@@ -3,7 +3,7 @@ package ng.bayue.item.service;
 import java.util.List;
 
 import ng.bayue.item.exception.ServiceException;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.CodeDO;
  /**
  * spu,prdid编码生成 Service

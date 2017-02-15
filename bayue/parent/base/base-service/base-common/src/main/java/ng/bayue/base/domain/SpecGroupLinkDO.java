@@ -2,7 +2,7 @@ package ng.bayue.base.domain;
 
 import java.util.Date;
 
-import ng.bayue.util.BaseDO;
+import ng.bayue.common.BaseDO;
 
 /**
  * 规格与规格组关系

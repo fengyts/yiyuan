@@ -7,7 +7,7 @@ import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.StrategyDAO;
 import ng.bayue.base.service.StrategyService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

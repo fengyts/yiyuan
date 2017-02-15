@@ -2,10 +2,10 @@ package ng.bayue.item.service;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.domain.dto.ItemInfoDTO;
 import ng.bayue.item.exception.ServiceException;
-import ng.bayue.util.Page;
  /**
  * 商品基础信息 Service
  * @author haisheng.long 2016-07-13 13:17:52

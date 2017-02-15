@@ -7,13 +7,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ng.bayue.common.Page;
 import ng.bayue.promotion.domain.TopicDO;
 import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.exception.DAOException;
 import ng.bayue.promotion.exception.ServiceException;
 import ng.bayue.promotion.persist.dao.TopicDAO;
 import ng.bayue.promotion.service.TopicService;
-import ng.bayue.util.Page;
 
 @Service(value="topicService")
 public class TopicServiceImpl  implements TopicService{

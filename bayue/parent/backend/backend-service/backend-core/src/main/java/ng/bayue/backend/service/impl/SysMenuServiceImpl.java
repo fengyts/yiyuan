@@ -8,7 +8,7 @@ import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.backend.persist.dao.SysMenuDAO;
 import ng.bayue.backend.persist.exception.DAOException;
 import ng.bayue.backend.service.SysMenuService;
-import ng.bayue.util.Page;
+import ng.bayue.common.Page;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
