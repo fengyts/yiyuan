@@ -63,12 +63,11 @@ public class EmailServiceImpl implements EmailService{
         sendEmail(mail);
     }
 
-	/**
-     * 发送邮件
+    /** 
+     * 发送邮件,异步发送
      * 
-     * @author chenyq
-     * @date 2016-5-9 上午11:18:21
-     * @throws Exception
+     * @param mail
+     * @see ng.bayue.service.EmailService#sendEmail(ng.bayue.entity.EmailEntity)
      */
     @Override
     @Async

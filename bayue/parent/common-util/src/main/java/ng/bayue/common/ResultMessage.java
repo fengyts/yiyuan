@@ -2,7 +2,6 @@ package ng.bayue.common;
 
 import java.io.Serializable;
 
-@SuppressWarnings({ "unused" })
 public class ResultMessage implements Serializable {
 
 	private static final long serialVersionUID = -6241835606147031976L;

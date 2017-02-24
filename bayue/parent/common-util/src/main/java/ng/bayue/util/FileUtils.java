@@ -33,9 +33,9 @@ public class FileUtils {
 		}
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
-
+	
 	public static String getFileExtension(File file) {
-		if (!file.exists()) {
+		if (null == file || !file.exists()) {
 			logger.info("file is not exists!");
 			return null;
 		}
@@ -140,6 +140,9 @@ public class FileUtils {
 		case 0x6874:
 			code = "GBK";
 			break;
+		case 0xa1b6:
+			code = "GB2312";
+			break;
 		case 0x5c75:
 			code = "ASCII";
 			break;
@@ -156,7 +159,9 @@ public class FileUtils {
 	 *
 	 * @param file
 	 * @param startNum
+	 *            开始读取的行号
 	 * @param countLineNum
+	 *            需要读取的行数
 	 * @param encoding
 	 *            指定读取文件的编码方式,如果不指定，默认为UTF-8
 	 * @return
@@ -181,12 +186,24 @@ public class FileUtils {
 		String line = null;
 		long currentNum = 0; // 当前行号
 		long end = startNum + countLineNum;
+		boolean blankFlag = true; // 是否连续空白行
 		while (null != (line = br.readLine())) {
 			if (currentNum >= end) {
 				break;
 			}
 			if (currentNum >= startNum) {
-				sb.append(line).append("\r\n");
+				if (line == null || "".equals(line) && blankFlag) { // 去掉空白行
+					sb.append("\n");
+					blankFlag = false;
+				} else {
+					if(line.length() > 113){ // 长度超过113时换行
+						StringBuffer is = new StringBuffer(line);
+						is.insert(113, "\n");
+						line = is.toString();
+					}
+					sb.append(line);
+					blankFlag = true;
+				}
 			}
 			currentNum++;
 		}
@@ -207,13 +224,14 @@ public class FileUtils {
 		// System.out.println(str);
 
 		String filePath = "E:/test/测试用的文档.txt";
-		String filePath1 = "E:/test/测试用的文档 utf-8.txt";
-		File file = new File(filePath);
+		String filePath1 = "E:/test/绝世武神.txt";
+		File file = new File(filePath1);
 		try {
-			String encoding = getEncoding(file);
-			System.out.println(encoding);
+			// String encoding = getEncoding(file);
+			// System.out.println(encoding);
 
-			String content = textFileReaderByLineNumber(file, 4, 5, "gbk");
+			String content = textFileReaderByLineNumber(file, 222155, 100, "GBK");
+//			String content = textFileReaderByLineNumber(file, 0, 8, "GBK");
 			System.out.println(content);
 		} catch (IOException e) {
 			logger.error("", e);
