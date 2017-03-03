@@ -22,10 +22,14 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
- * @author lichunxi
- * 
+ * <pre>
+ * 带内嵌图片的二维码生成类
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: BarcodeFactory.java, v 0.1 2017年3月3日 下午1:53:06 lenovopc Exp $
  */
-public class BarcodeFactory {
+public class BarcodeProductor {
 	// 图片宽度的一般
 	private static final int IMAGE_WIDTH = 80;
 	private static final int IMAGE_HEIGHT = 80;
@@ -35,11 +39,22 @@ public class BarcodeFactory {
 	// 二维码写码器
 	private static MultiFormatWriter mutiWriter = new MultiFormatWriter();
 
+	/**
+	 * <pre>
+	 * 二维码生成
+	 * </pre>
+	 *
+	 * @param content 二维码中的文字内容，比如链接网址等
+	 * @param width 二维码的宽度
+	 * @param height 二维码的高度
+	 * @param srcImagePath 需要内嵌的图片地址
+	 * @param destImagePath 二维码生成后保存的地址
+	 */
 	public static void encode(String content, int width, int height,
 			String srcImagePath, String destImagePath) {
 		try {
-			ImageIO.write(genBarcode(content, width, height, srcImagePath),
-					"jpg", new File(destImagePath));
+			BufferedImage genBarcode = genBarcode(content, width, height, srcImagePath);
+			ImageIO.write(genBarcode, "jpg", new File(destImagePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (WriterException e) {
@@ -169,8 +184,9 @@ public class BarcodeFactory {
 		}
 		return (BufferedImage) destImage;
 	}
-
+	
+	
 	public static void main(String[] args) {
-		BarcodeFactory.encode("http://baike.baidu.com", 275, 275, "desc.png", "src.png");
+		BarcodeProductor.encode("http://www.baidu.com", 275, 275, "E://test//ab1.jpg", "E://test//eeee.jpg");
 	}
 }

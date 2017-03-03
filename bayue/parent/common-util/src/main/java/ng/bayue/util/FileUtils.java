@@ -6,12 +6,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ng.bayue.constant.CharsetConstant;
 
 public class FileUtils {
 
@@ -33,7 +39,7 @@ public class FileUtils {
 		}
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
-	
+
 	public static String getFileExtension(File file) {
 		if (null == file || !file.exists()) {
 			logger.info("file is not exists!");
@@ -196,7 +202,7 @@ public class FileUtils {
 					sb.append("\n");
 					blankFlag = false;
 				} else {
-					if(line.length() > 113){ // 长度超过113时换行
+					if (line.length() > 113) { // 长度超过113时换行
 						StringBuffer is = new StringBuffer(line);
 						is.insert(113, "\n");
 						line = is.toString();
@@ -216,12 +222,42 @@ public class FileUtils {
 		return sb.toString();
 	}
 
+	public static String inputStreamToString(InputStream is, String charset) {
+		if (StringUtils.isBlank(charset)) {
+			charset = CharsetConstant.UTF8;
+		}
+		try {
+			final Reader reader = new InputStreamReader(is, charset);
+			StringBuilder result = new StringBuilder();
+			int len = 0;
+			final char[] cbuf = new char[1024];
+			while (-1 != (len = reader.read(cbuf))) {
+				result.append(cbuf, 0, len);
+			}
+			return result.toString();
+		} catch (UnsupportedEncodingException e) {
+			logger.error("", e);
+		} catch (IOException e) {
+			logger.error("", e);
+		}
+		return null;
+	}
+
+	public static String inputStreamToString(InputStream is, Charset charset) {
+		if (null == charset) {
+			charset = CharsetConstant.Charset_UTF8;
+		}
+		return inputStreamToString(is, charset);
+	}
+
 	public static void main(String[] args) {
 		// String str =
 		// FileUtils.copyFileNameAndCreateBySuffixOne("E:/test/a.jpg");
 		// String filePath = "E:/test/a.jpg";
 		// String str = prefixFileName(new File(filePath));
 		// System.out.println(str);
+		Integer a = null;
+		int b = a;
 
 		String filePath = "E:/test/测试用的文档.txt";
 		String filePath1 = "E:/test/绝世武神.txt";
@@ -231,7 +267,7 @@ public class FileUtils {
 			// System.out.println(encoding);
 
 			String content = textFileReaderByLineNumber(file, 222155, 100, "GBK");
-//			String content = textFileReaderByLineNumber(file, 0, 8, "GBK");
+			// String content = textFileReaderByLineNumber(file, 0, 8, "GBK");
 			System.out.println(content);
 		} catch (IOException e) {
 			logger.error("", e);

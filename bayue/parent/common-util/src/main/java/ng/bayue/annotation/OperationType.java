@@ -26,4 +26,12 @@ public enum OperationType {
 		return null;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
 }
