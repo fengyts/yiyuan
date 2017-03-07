@@ -40,6 +40,11 @@
 		<property name="service" ref="itemDescService" />
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemDescService" />
 	</bean>
+	<bean name="/carouselService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="carouselService" />
+		<property name="serviceInterface" value="ng.bayue.item.service.CarouselService" />
+	</bean>
 
 
 </beans>

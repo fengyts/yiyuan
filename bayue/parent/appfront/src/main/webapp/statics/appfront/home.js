@@ -1,28 +1,9 @@
 $(function() {
 	
-	$.init();
-	$("#more").on('click',function(){
-		
-		alert(123);
-	});
+	var mySwiper = new Swiper('.swiper-container', {
+		autoplay: 2000,//可选选项，自动滑动
+		autoplayDisableOnInteraction : false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。如果设置为false，用户操作swiper之后自动切换不会停止，每次都会重新启动autoplay。
+		loop:true
+	})
 	
-	$(document).on('click','.alert-text',function () {
-        $.alert('Here goes alert text');
-     });
-
-    $(document).on('click','.alert-text-title', function () {
-        $.alert('Here goes alert text', 'Custom Title!');
-    });
-
-    $(document).on('click', '.alert-text-title-callback',function () {
-        $.alert('Here goes alert text', 'Custom Title!', function () {
-            $.alert('Button clicked!')
-        });
-    });
-
-    $(document).on('click', '.alert-text-callback',function () {
-        $.alert('Here goes alert text', function () {
-            $.alert('Button clicked!')
-        });
-    });
 });

@@ -39,5 +39,11 @@
 		<property name="serviceInterface" value="ng.bayue.item.service.ItemManagerService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
+	<bean id="carouselService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${item.hessian}/carouselService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.item.service.CarouselService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
 
 </beans>
