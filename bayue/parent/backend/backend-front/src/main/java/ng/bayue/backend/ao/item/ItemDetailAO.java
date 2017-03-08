@@ -200,12 +200,12 @@ public class ItemDetailAO {
 			infoDO.setCreateUserId(userId);
 			infoDO.setModifyUserId(userId);
 
-			itemService.saveInfoAndDetail(infoDO, detailDO);
+			managerService.saveInfoAndDetail(infoDO, detailDO);
 		} else {
 			detailDO.setItemId(infoDO.getId());
 			detailDO.setSpu(infoDO.getSpu());
 
-			itemService.saveInfoAndDetail(null, detailDO);
+			managerService.saveInfoAndDetail(null, detailDO);
 		}
 
 		return new ResultMessage();

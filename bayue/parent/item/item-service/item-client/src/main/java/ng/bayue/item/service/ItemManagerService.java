@@ -1,5 +1,7 @@
 package ng.bayue.item.service;
 
+import ng.bayue.item.domain.ItemDetailDO;
+import ng.bayue.item.domain.ItemInfoDO;
 import ng.bayue.item.domain.dto.ItemDetailDTO;
 import ng.bayue.item.exception.ServiceException;
 
@@ -12,6 +14,17 @@ import ng.bayue.item.exception.ServiceException;
  * @version $Id: ItemManagerService.java, v 0.1 2016年12月19日 下午1:32:03 lenovopc Exp $
  */
 public interface ItemManagerService {
+	
+	/**
+	 * <pre>
+	 * 插入itemInfo和itemDetail信息
+	 * </pre>
+	 *
+	 * @return
+	 * @throws ServiceException
+	 */
+	@Deprecated
+	int saveInfoAndDetail(ItemInfoDO infoDO,ItemDetailDO detailDO) throws ServiceException;
 	
 	/**
 	 * <pre>

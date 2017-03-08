@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ng.bayue.backend.ao.item.CarouselAO;
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.CarouselDO;
 
 @Controller
 @RequestMapping({ "/item/carousel/" })
 public class CarouselController {
+	
+	private static final String BASE_VIEW_PATH = "/backend/item/carousel/";
 
 	@Autowired
 	private CarouselAO carouselAO;
@@ -21,12 +24,14 @@ public class CarouselController {
 	public String list(Model model, CarouselDO carouselDO,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-
-		return "";
+		Page<CarouselDO> page = carouselAO.queryPage(carouselDO, pageNo, pageSize);
+		model.addAttribute("page", page);
+		return BASE_VIEW_PATH + "list";
 	}
 
 	@RequestMapping("add")
-	public void add() {
+	public String add() {
+		return BASE_VIEW_PATH + "add";
 	}
 
 	@RequestMapping("save")
@@ -36,9 +41,10 @@ public class CarouselController {
 	}
 
 	@RequestMapping("edit")
-	public void edit(Model model, Long id) {
+	public String edit(Model model, Long id) {
 		CarouselDO carouselDO = carouselAO.selectById(id);
 		model.addAttribute("carouselDO", carouselDO);
+		return BASE_VIEW_PATH + "edit";
 	}
 
 	@RequestMapping("update")

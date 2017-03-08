@@ -1,9 +1,9 @@
 package ng.bayue.item.service;
 
+import java.util.List;
+
+import ng.bayue.item.domain.CarouselDO;
 import ng.bayue.item.domain.ItemDescDO;
-import ng.bayue.item.domain.ItemDetailDO;
-import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.exception.ServiceException;
 
 /**
  * <pre>
@@ -15,17 +15,16 @@ import ng.bayue.item.exception.ServiceException;
  */
 public interface ItemService {
 	
+	
+	ItemDescDO selectDescByDetailId(Long detailId);
+	
 	/**
 	 * <pre>
-	 * 插入itemInfo和itemDetail信息
+	 * 获取app首页轮播幻灯片列表
 	 * </pre>
 	 *
 	 * @return
-	 * @throws ServiceException
 	 */
-	@Deprecated
-	int saveInfoAndDetail(ItemInfoDO infoDO,ItemDetailDO detailDO) throws ServiceException;
-	
-	ItemDescDO selectDescByDetailId(Long detailId);
+	List<CarouselDO> listCarousel();
 
 }

@@ -13,6 +13,10 @@
 		<property name="service" ref="topicItemService" />
 		<property name="serviceInterface" value="ng.bayue.promotion.service.TopicItemService" />
 	</bean>
+	<bean name="/topicExportService.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="topicExportService" />
+		<property name="serviceInterface" value="ng.bayue.promotion.service.TopicExportService" />
+	</bean>
 
 
 </beans>
