@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ng.bayue.backend.ao.item.CarouselAO;
+import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.common.Page;
 import ng.bayue.item.domain.CarouselDO;
 
@@ -36,8 +37,8 @@ public class CarouselController {
 
 	@RequestMapping("save")
 	@ResponseBody
-	public String save(CarouselDO carouselDO) {
-		return "";
+	public ResultMessage save(CarouselDO carouselDO) {
+		return carouselAO.save(carouselDO);
 	}
 
 	@RequestMapping("edit")
@@ -49,8 +50,8 @@ public class CarouselController {
 
 	@RequestMapping("update")
 	@ResponseBody
-	public String update(CarouselDO carouselDO) {
-		return "";
+	public ResultMessage update(CarouselDO carouselDO) {
+		return carouselAO.update(carouselDO);
 	}
 
 }

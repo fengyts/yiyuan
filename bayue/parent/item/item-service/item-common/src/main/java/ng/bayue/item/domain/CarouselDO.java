@@ -7,12 +7,12 @@ import java.util.Date;
 /**
  * 首页幻灯片轮播
  * 
- * @author fengyts Tue Mar 07 11:55:22 CST 2017
+ * @author fengyts Thu Mar 09 13:36:07 CST 2017
  */
 
 public class CarouselDO extends BaseDO {
 
-	private static final long serialVersionUID = 1444863184691482818L;
+	private static final long serialVersionUID = -622659290138631483L;
 
 	/** 主键 */
 	private Long id;
@@ -28,6 +28,9 @@ public class CarouselDO extends BaseDO {
 
 	/** 图片状态，0-作废；1-有效 */
 	private Boolean status;
+
+	/** 备注 */
+	private String remark;
 
 	/** 创建人 */
 	private Long createUserId;
@@ -84,6 +87,15 @@ public class CarouselDO extends BaseDO {
 	 */
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	/**
+	 * 设置 备注
+	 * 
+	 * @param remark
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	/**
@@ -165,6 +177,15 @@ public class CarouselDO extends BaseDO {
 	 */
 	public Boolean getStatus() {
 		return status;
+	}
+
+	/**
+	 * 获取 备注
+	 * 
+	 * @return remark
+	 */
+	public String getRemark() {
+		return remark;
 	}
 
 	/**

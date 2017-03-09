@@ -153,7 +153,7 @@ public class ImageShapeUtils {
 			BufferedImage srcImage = ImageIO.read(file);
 			BufferedImage bi = setRadius(srcImage);
 			// BufferedImage bi = setClip(srcImage,1000);
-			String destImagePath = "E://test/abcd.png";
+			String destImagePath = "E://test/abcd.jpg";
 			ImageIO.write(bi, "PNG", new File(destImagePath));
 		} catch (IOException e) {
 			e.printStackTrace();

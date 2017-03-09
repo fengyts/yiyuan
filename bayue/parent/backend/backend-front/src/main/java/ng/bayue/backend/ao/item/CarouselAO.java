@@ -27,9 +27,9 @@ public class CarouselAO {
 
 	public CarouselDO selectById(Long id) {
 		if (null == id) {
-			return carouselService.selectById(id);
+			return null;
 		}
-		return null;
+		return carouselService.selectById(id);
 	}
 	
 	public ResultMessage save(CarouselDO carouselDO){

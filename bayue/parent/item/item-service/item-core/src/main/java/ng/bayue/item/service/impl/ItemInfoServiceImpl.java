@@ -25,7 +25,6 @@ import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemInfoDAO;
 import ng.bayue.item.service.CodeService;
 import ng.bayue.item.service.ItemInfoService;
-import ng.bayue.item.service.ItemManagerService;
 
 @Service(value = "itemInfoService")
 public class ItemInfoServiceImpl implements ItemInfoService {
@@ -40,8 +39,6 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 	private DictionaryService dictionaryService;
 	@Autowired
 	private CodeService codeService;
-	@Autowired
-	private ItemManagerService itemManagerService;
 
 	@Override
 	public Long insert(ItemInfoDO itemInfoDO) throws ServiceException {

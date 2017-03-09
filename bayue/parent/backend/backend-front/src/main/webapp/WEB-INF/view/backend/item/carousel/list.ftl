@@ -2,11 +2,19 @@
 
 <@backend title="轮播图列表"
 js=[
-'/statics/plugin/layui-v1.0.2/layui/layui.js'
+'/statics/backend/item/carousel.js'
 ]
 css=[
-'/statics/plugin/layui-v1.0.2/layui/css/layui.css'
 ]>
+
+<style>
+table{
+	table-layout:fixed;
+}
+.tdcontent{
+	overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+</style>
 
 <div class="box">
 <form class="jqtransform" method="post" id="carouselForm" action="${domain}/item/carousel/list.htm">
@@ -17,7 +25,7 @@ css=[
                  <input class="btn btn82 btn_search" type="submit" value="查询"/ >
                  <input class="btn btn82 btn_res " type="button" value="重置"  onclick="dataReset('carouselForm')" />
                  -->
-                 <input id="specAddbtn" class="btn btn82 btn_add addcatabtn" type="button" value="新增" />
+                 <input id="carouselAddbtn" class="btn btn82 btn_add addcatabtn" type="button" value="新增" />
               </div>
         </div>
     </div>
@@ -40,15 +48,15 @@ css=[
 		            <#list page.getList() as carousel>
 		                <tr class="tr" >
 				              <td class="td_center">${carousel.id}</td>
-		 					  <td class="td_center">${carousel.picture}</td>
+		 					  <td class="td_center tdcontent" title="${carousel.picture}">${carousel.picture}</td>
 		 					  <td class="td_center">${carousel.sort}</td>
-				              <td class="td_center">${carousel.linkUrl}</td>		            
+				              <td class="td_center tdcontent" title="${carousel.linkUrl}">${carousel.linkUrl}</td>		            
 				              <td class="td_center"><#assign sta="${carousel.status}" /><#if sta=='true'>有效<#else>无效</#if></td>
 		                      <td class="td_center">${carousel.remark}</td>					  
 				              <td class="td_center">${carousel.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 				              <td class="td_center">
-				              	<a href="javascript:void(0);" class="editcatabtn carouselEditbtn" param='${carousel.id}'>[编辑]</a> &nbsp;
-				              	<a href="javascript:void(0);" class="editcatabtn journalReview" param='${carousel.id}'>[日志]</a>
+					              <a href="javascript:void(0);" style="color:blue;" class="carouselEditbtn" param='${carousel.id}'>[编辑]</a> &nbsp;
+					              <a href="javascript:void(0);" style="color:blue;" class="journalReview" param='${carousel.id}'>[日志]</a>
 				              </td>	
 			             </tr>
 			        </#list>
