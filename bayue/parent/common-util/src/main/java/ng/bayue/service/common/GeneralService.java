@@ -5,13 +5,14 @@ import java.util.List;
 import ng.bayue.common.Page;
 import ng.bayue.exception.ServiceException;
 
-public interface GeneralService<T> {
+public interface  GeneralService<T, U> {
 
 	/**
 	 * <pre>
 	 * 
 	 * </pre>
 	 *
+	 * @param t
 	 * @return 主键
 	 * @throws ServiceException
 	 */
@@ -63,8 +64,8 @@ public interface GeneralService<T> {
 	 */
 	Long selectCountDynamic(T t) throws ServiceException;
 
-	Page<T> queryPageListDynamic(T t) throws ServiceException;
+	Page<U> queryPageListDynamic(T t) throws ServiceException;
 
-	Page<T> queryPageListDynamicAndStartPageSize(T t, Integer pageNo, Integer pageSize) throws ServiceException;
+	Page<U> queryPageListDynamicAndStartPageSize(T t, Integer pageNo, Integer pageSize) throws ServiceException;
 
 }

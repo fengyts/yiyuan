@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.user.domain.BlackUserMapper">
+
+	<resultMap type="ng.bayue.user.domain.BlackUserDO" id="BlackUserDOResultMap">
+		<id column="id" property="id" />
+        <result column="user_id" property="userId"/>
+        <result column="freeze_type" property="freezeType"/>
+        <result column="black_type" property="blackType"/>
+        <result column="reason" property="reason"/>
+        <result column="begin_time" property="beginTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisBlackUserDAO_all_column_fields">
+	      id,user_id,freeze_type,black_type,reason,begin_time,end_time,create_user_id,modify_user_id,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisBlackUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="userId != null "> AND user_id=#{userId} </if>
+			<if test="freezeType != null "> AND freeze_type=#{freezeType} </if>
+			<if test="blackType != null "> AND black_type=#{blackType} </if>
+			<if test="reason != null  and reason != '' "> AND reason=#{reason} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisBlackUserDAO_selectById" parameterType="long" resultMap="BlackUserDOResultMap">
+	SELECT
+		<include refid="MybatisBlackUserDAO_all_column_fields" />
+	FROM
+		u_black_user
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisBlackUserDAO_insert" parameterType="ng.bayue.user.domain.BlackUserDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO u_black_user(
+				id,
+				user_id,
+				freeze_type,
+				black_type,
+				reason,
+				begin_time,
+				end_time,
+				create_user_id,
+				modify_user_id,
+				create_time,
+				modify_time
+		)values(
+				#{id},
+				#{userId},
+				#{freezeType},
+				#{blackType},
+				#{reason},
+				#{beginTime},
+				#{endTime},
+				#{createUserId},
+				#{modifyUserId},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisBlackUserDAO_updateById" parameterType="ng.bayue.user.domain.BlackUserDO">
+		UPDATE u_black_user
+		SET
+					user_id = #{userId},
+					freeze_type = #{freezeType},
+					black_type = #{blackType},
+					reason = #{reason},
+					begin_time = #{beginTime},
+					end_time = #{endTime},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisBlackUserDAO_deleteById" parameterType="long">
+		DELETE FROM u_black_user WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisBlackUserDAO_update_dynamic" parameterType="ng.bayue.user.domain.BlackUserDO">
+		UPDATE u_black_user
+		<set>
+					<if test="userId != null ">user_id=#{userId},</if>
+					<if test="freezeType != null ">freeze_type=#{freezeType},</if>
+					<if test="blackType != null ">black_type=#{blackType},</if>
+					<if test="reason != null  and reason != '' ">reason=#{reason},</if>
+					<if test="beginTime != null ">begin_time=#{beginTime},</if>
+					<if test="endTime != null ">end_time=#{endTime},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisBlackUserDAO_select_dynamic" resultMap="BlackUserDOResultMap" parameterType="ng.bayue.user.domain.BlackUserDO">
+	     SELECT
+	     	<include refid="MybatisBlackUserDAO_all_column_fields" />
+		 FROM
+		 	u_black_user
+			<include refid="MybatisBlackUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisBlackUserDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.user.domain.BlackUserDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	u_black_user
+	 	<include refid="MybatisBlackUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisBlackUserDAO_select_dynamic_page_query" resultMap="BlackUserDOResultMap" parameterType="ng.bayue.user.domain.BlackUserDO">
+	     SELECT
+	     	<include refid="MybatisBlackUserDAO_all_column_fields" />
+		 FROM
+		 	u_black_user
+	 	<include refid="MybatisBlackUserDAO_dynamic_where_fields" />
+	 	ORDER BY u_black_user.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

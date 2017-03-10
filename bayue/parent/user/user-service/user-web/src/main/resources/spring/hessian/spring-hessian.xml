@@ -4,20 +4,12 @@
  					 http://www.springframework.org/schema/beans/spring-beans.xsd
  					 http://www.springframework.org/schema/context
  					 http://www.springframework.org/schema/context/spring-context.xsd">
-	
-	<bean name="/categoryService.hessian"
+
+	<bean name="/userService.hessian"
 		class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="categoryService" />
-		<property name="serviceInterface"
-			value="ng.bayue.base.service.CategoryService" />
+		<property name="service" ref="userService" />
+		<property name="serviceInterface" value="ng.bayue.user.service.UserService" />
 	</bean>
-	
-	<bean name="/forbiddenWordsService.hessian"
-		class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="forbiddenWordsService" />
-		<property name="serviceInterface"
-			value="ng.bayue.base.service.ForbiddenWordsService" />
-	</bean>
-	
+
 
 </beans>

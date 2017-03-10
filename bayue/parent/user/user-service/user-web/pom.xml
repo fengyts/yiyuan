@@ -13,6 +13,7 @@
 
 	<artifactId>user-web</artifactId>
 	<packaging>war</packaging>
+
 	<name>user-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -27,5 +28,4 @@
 	<build>
 		<finalName>user-web</finalName>
 	</build>
-
 </project>

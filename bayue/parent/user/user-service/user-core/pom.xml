@@ -12,16 +12,23 @@
 	</parent>
 
 	<artifactId>user-core</artifactId>
+
 	<name>user-core</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>ng.bayue</groupId>
-			<artifactId>user-client</artifactId>
+			<artifactId>common-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ng.bayue</groupId>
+			<artifactId>base-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -29,6 +36,10 @@
 			<artifactId>user-persist</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>ng.bayue</groupId>
+			<artifactId>user-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
-
 </project>
