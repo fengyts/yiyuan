@@ -1,18 +1,25 @@
 package ng.bayue.item.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ng.bayue.common.Page;
+import ng.bayue.constant.CommonConstant;
+import ng.bayue.constant.RedisCacheTimeConstant;
+import ng.bayue.item.constant.ItemCommonConstant.RedisCacheKeyConstant;
 import ng.bayue.item.domain.CarouselDO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.CarouselDAO;
 import ng.bayue.item.service.CarouselService;
+import ng.bayue.service.RedisCacheService;
 
 @Service(value="carouselService")
 public class CarouselServiceImpl  implements CarouselService{
@@ -21,11 +28,15 @@ public class CarouselServiceImpl  implements CarouselService{
 
 	@Autowired
 	private CarouselDAO carouselDAO;
-
+	@Autowired
+	private RedisCacheService cacheService;
+	
 	@Override
 	public Long insert(CarouselDO carouselDO) throws ServiceException {
 		try {
-			return carouselDAO.insert(carouselDO);
+			Long id = carouselDAO.insert(carouselDO);
+			cacheService.deleteRedisCache(RedisCacheKeyConstant.ITEM_CAROUSEL_REDIS_LIST_ALL_KEY);
+			return id;
 		}catch(DAOException e){
 			logger.error(e);
             throw new ServiceException(e);
@@ -45,11 +56,14 @@ public class CarouselServiceImpl  implements CarouselService{
 	@Override
 	public int update(CarouselDO carouselDO,boolean isAllField) throws ServiceException {
 		try {
+			int res = -1;
 			if(isAllField){
-				return (Integer) carouselDAO.update(carouselDO);
+				res = carouselDAO.update(carouselDO);
 			}else{
-				return (Integer) carouselDAO.updateDynamic(carouselDO);
+				res = carouselDAO.updateDynamic(carouselDO);
 			}
+			cacheService.deleteRedisCache(RedisCacheKeyConstant.ITEM_CAROUSEL_REDIS_LIST_ALL_KEY);
+			return res ;
 		}catch(DAOException e){
 			logger.error(e);
             throw new ServiceException(e);
@@ -138,6 +152,27 @@ public class CarouselServiceImpl  implements CarouselService{
 			return this.queryPageListByCarouselDO(carouselDO);
 		}
 		return new Page<CarouselDO>();
+	}
+
+	@Override
+	public List<CarouselDO> getAllCarousel() {
+		try{
+			@SuppressWarnings("unchecked")
+			List<CarouselDO> list = (List<CarouselDO>) cacheService.getRedisCache(RedisCacheKeyConstant.ITEM_CAROUSEL_REDIS_LIST_ALL_KEY);
+			if(CollectionUtils.isNotEmpty(list)){
+				return list;
+			}
+			CarouselDO carouselDO = new CarouselDO();
+			carouselDO.setStatus(CommonConstant.STATUS.TRUE);
+			list = selectDynamic(carouselDO);
+			if(CollectionUtils.isNotEmpty(list)){
+				cacheService.setRedisCache(RedisCacheKeyConstant.ITEM_CAROUSEL_REDIS_LIST_ALL_KEY, list, RedisCacheTimeConstant.WEEK);
+			}
+			return list;
+		}catch(Exception e){
+			logger.info("获取轮播图异常");
+		}
+		return Collections.emptyList();
 	}
 
 }

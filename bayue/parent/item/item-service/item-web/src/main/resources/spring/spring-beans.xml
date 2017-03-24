@@ -21,6 +21,7 @@
 		order="2000000" />
 	
 	<import resource="classpath*:spring/spring-dao.xml" />
+	<import resource="classpath*:spring/spring-redis.xml"/>
 	<import resource="classpath*:spring/hessian/spring-hessian.xml" />
 	<import resource="classpath*:spring/hessian/remote-base.xml"/>
 	

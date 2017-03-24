@@ -108,7 +108,7 @@ public class RequestUtil {
 		return null;
 	}
 
-	public void test() {
+	private void test() {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		try {
 			HttpGet httpget = new HttpGet("https://portal.sun.com/portal/dt");
@@ -167,7 +167,7 @@ public class RequestUtil {
 
 	public static void main(String[] args) {
 		String str1 = "https://www.kuaidi100.com/all/";
-		 doRequest(str1, null, null);
+		doRequest(str1, null, null);
 	}
 
 }

@@ -2,12 +2,18 @@ package ng.bayue.redis;
 
 import ng.bayue.util.SerializeUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedisPipeline;
 
 @Deprecated
 public class RedisCacheUtil {
@@ -16,7 +22,10 @@ public class RedisCacheUtil {
 
 	private final static String SET_CACHE_RESULT = "OK";
 	
-	private final static String ADDRESS = "192.168.235.128";
+//	private final static String ADDRESS = "192.168.235.128";
+	private final static String ADDRESS = "192.168.58.129";
+	
+	private static final int DEFAULT_PORT = 6379;
 	
 	/** redis 的key最大值：50k */
 	private final static int MAX_KEY = 1024 * 50;
@@ -25,6 +34,7 @@ public class RedisCacheUtil {
 
 //	static Jedis jedis = null;
 	static JedisPool jedisPool = null;
+	static CacheShardedJedisPool shardedJedisPool = null;
 
 	static {
 //		jedis = new Jedis("192.168.18.128", 6379);
@@ -43,7 +53,6 @@ public class RedisCacheUtil {
 			String result = jedis.get(key);
 			return result;
 		} catch (Exception e) {
-			// TODO: handle exception
 			isSuccess = false;
 			logger.info("get redis string data exception:{}", e);
 		}finally{
@@ -66,7 +75,7 @@ public class RedisCacheUtil {
 	 * @param expires 缓存时间,单位：秒 
 	 * @return
 	 */
-	public static boolean setRedisCacheString(String key,String value,Integer expires){
+	public static boolean setRedisCacheString(String key, String value, Integer expires){
 		if(null == key || "".equals(key.trim())){
 			logger.info("set redis data error:the paramter key is not allowed null");
 			return false;
@@ -78,14 +87,8 @@ public class RedisCacheUtil {
 		Jedis jedis = null;
 		boolean isSuccess = false;
 		try {
-			if (MAX_KEY < key.getBytes().length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
-			if (MAX_VALUE < value.getBytes().length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
+			validKeyAndValue(key, value.getBytes());
+			
 			jedis = jedisPool.getResource();
 			String result = jedis.set(key, value);
 			if(SET_CACHE_RESULT.equals(result)){
@@ -95,7 +98,6 @@ public class RedisCacheUtil {
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.info("set redis string data exception:{}", e);
 		}finally{
 			if(null != jedis && isSuccess){
@@ -144,18 +146,15 @@ public class RedisCacheUtil {
 		Jedis jedis = null;
 		boolean isSuccess = false;
 		try {
-			if (MAX_KEY < bytesKey.length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
-			
-			 if(MAX_VALUE < values.length){// value最大值1M
-			 	logger.info("redis data is to long:{}",key); 
-			 	throw new Exception("redis data is to long:" + key); 
-			 }
+			validKeyAndValue(key, values);
 			 
 			jedis = jedisPool.getResource();
-			String res = jedis.set(bytesKey, values);
+			String res = "";
+			if(o instanceof String){
+				jedis.set(key, (String) o);
+			}else{
+				res = jedis.set(bytesKey, values);
+			}
 			if (SET_CACHE_RESULT.equalsIgnoreCase(res)) {
 				logger.info("key:{} redis cache is success!", key);
 				isSuccess = true;
@@ -177,6 +176,18 @@ public class RedisCacheUtil {
 		}
 		return isSuccess;
 	}
+
+	private static void validKeyAndValue(String key, byte[] values) throws Exception {
+		if (MAX_KEY < key.getBytes().length) { // key最大50k
+			logger.info("redis key is to long:{}", key);
+			throw new Exception("redis key is to long:" + key);
+		}
+		
+		 if(MAX_VALUE < values.length){ // value最大值1M
+		 	logger.info("redis data is to long:{}",key); 
+		 	throw new Exception("redis data is to long:" + key); 
+		 }
+	}
 	
 	public static void deleteRedisCache(String key){
 		if(null == key || "".equals(key)){return ;}
@@ -185,12 +196,11 @@ public class RedisCacheUtil {
 		try {
 			jedis =  jedisPool.getResource();
 			Long res = jedis.del(key);
-			isSuccess = 1 == res ? true : false;
+			isSuccess = 1 == res.intValue() ? true : false;
 		} catch (Exception e) {
 			isSuccess = false;
 			logger.info("delete redis cache failure: {}",e);
 			throw e;
-			// TODO: handle exception
 		}finally{
 			if(null != jedis && isSuccess){
 				jedisPool.returnResource(jedis);
@@ -199,8 +209,22 @@ public class RedisCacheUtil {
 			}
 		}
 	}
+	
+	public static void testRedis() throws UnsupportedEncodingException{
+		RedisCacheUtil.setRedisCache("test", "haha", 500);
+		String str = RedisCacheUtil.getRedisCacheString("test");
+		System.out.println(str);
+		Thread thread = new Thread();
+		try {
+			thread.sleep(5000);
+			deleteRedisCache("test");
+		} catch (InterruptedException e) {
+			logger.error("", e);
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
+		testRedis();
 		
 		// Jedis jedis = new Jedis("192.168.18.128",6379);
 

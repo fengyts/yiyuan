@@ -29,6 +29,18 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	public static void setJedisPool(JedisPool jedisPool) {
 		RedisCacheServiceImpl.jedisPool = jedisPool;
 	}
+	
+	private static void validKeyAndValue(String key, byte[] values) throws Exception {
+		if (MAX_KEY < key.getBytes().length) { // key最大50k
+			logger.info("redis key is to long:{}", key);
+			throw new Exception("redis key is to long:" + key);
+		}
+		
+		 if(MAX_VALUE < values.length){ // value最大值1M
+		 	logger.info("redis data is to long:{}",key); 
+		 	throw new Exception("redis data is to long:" + key); 
+		 }
+	}
 
 	@Override
 	public boolean setRedisCacheString(String key, String value, Integer expires) {
@@ -43,14 +55,8 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		Jedis jedis = null;
 		boolean isSuccess = false;
 		try {
-			if (MAX_KEY < key.getBytes().length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
-			if (MAX_VALUE < value.getBytes().length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
+			validKeyAndValue(key, value.getBytes());
+			
 			jedis = jedisPool.getResource();
 			String result = jedis.set(key, value);
 			if(SET_CACHE_RESULT.equals(result)){
@@ -60,14 +66,9 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.info("set redis string data exception:{}", e);
 		}finally{
-			if(null != jedis && isSuccess){
-				jedisPool.returnResource(jedis);
-			}else{
-				jedisPool.returnBrokenResource(jedis);
-			}
+			closeJedis(jedis, isSuccess);
 		}
 		return isSuccess;
 	}
@@ -85,15 +86,10 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 			String result = jedis.get(key);
 			return result;
 		} catch (Exception e) {
-			// TODO: handle exception
 			isSuccess = false;
 			logger.info("get redis string data exception:{}", e);
 		}finally{
-			if(null != jedis && isSuccess){
-				jedisPool.returnResource(jedis);
-			}else{
-				jedisPool.returnBrokenResource(jedis);
-			}
+			closeJedis(jedis, isSuccess);
 		}
 		return null;
 	}
@@ -115,18 +111,15 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		Jedis jedis = null;
 		boolean isSuccess = false;
 		try {
-			if (MAX_KEY < bytesKey.length) {// key最大50k
-				logger.info("redis key is to long:{}", key);
-				throw new Exception("redis key is to long:" + key);
-			}
-			
-			 if(MAX_VALUE < values.length){// value最大值1M
-			 	logger.info("redis data is to long:{}",key); 
-			 	throw new Exception("redis data is to long:" + key); 
-			 }
+			validKeyAndValue(key, values);
 			 
 			jedis = jedisPool.getResource();
-			String res = jedis.set(bytesKey, values);
+			String res = "";
+			if(o instanceof String){
+				res = jedis.set(key, (String) o);
+			}else{
+				res = jedis.set(bytesKey, values);
+			}
 			if (SET_CACHE_RESULT.equalsIgnoreCase(res)) {
 				logger.info("key:{} redis cache is success!", key);
 				isSuccess = true;
@@ -140,11 +133,7 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		} catch (Exception e) {
 			logger.error("", e);
 		}finally{
-			if(null != jedis && isSuccess){
-				jedisPool.returnResource(jedis);
-			}else{
-				jedisPool.returnBrokenResource(jedis);
-			}
+			closeJedis(jedis, isSuccess);
 		}
 		return isSuccess;
 	}
@@ -162,11 +151,7 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 			isSuccess = false;
 			logger.info("redis get data exception:{}",e);
 		}finally{
-			if(null != jedis && isSuccess){
-				jedisPool.returnResource(jedis);
-			}else{
-				jedisPool.returnBrokenResource(jedis);
-			}
+			closeJedis(jedis, isSuccess);
 		}
 		return null;
 	}
@@ -179,18 +164,21 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		try {
 			jedis =  jedisPool.getResource();
 			Long res = jedis.del(key);
-			isSuccess = 1 == res ? true : false;
+			isSuccess = 1 == res.intValue() ? true : false;
 		} catch (Exception e) {
 			isSuccess = false;
 			logger.info("delete redis cache failure: {}",e);
 			throw e;
-			// TODO: handle exception
 		}finally{
-			if(null != jedis && isSuccess){
-				jedisPool.returnResource(jedis);
-			}else{
-				jedisPool.returnBrokenResource(jedis);
-			}
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	private void closeJedis(Jedis jedis, boolean isSuccess) {
+		if(null != jedis && isSuccess){
+			jedisPool.returnResource(jedis);
+		}else{
+			jedisPool.returnBrokenResource(jedis);
 		}
 	}
 

@@ -102,5 +102,14 @@ public interface CarouselService {
 	 * @author longhaisheng 2017-03-07 11:29:32
 	 */
 	Page<CarouselDO> queryPageListByCarouselDOAndStartPageSize(CarouselDO carouselDO,int startPage,int pageSize);
+	
+	/**
+	 * <pre>
+	 * 获取所有轮播图信息
+	 * </pre>
+	 *
+	 * @return
+	 */
+	List<CarouselDO> getAllCarousel();
 
 }
