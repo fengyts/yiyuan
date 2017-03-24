@@ -45,7 +45,7 @@
     </bean>
     
     <bean id="formAuthenticationFilter" class="ng.bayue.backend.shiro.LoginFormAuthenticationFilter" />
-    <bean id="myShiroFilter" class="ng.bayue.backend.shiro.ShiroFilter" />
+    <!-- <bean id="myShiroFilter" class="ng.bayue.backend.shiro.ShiroFilter" /> -->
     
     <!-- 定义Shiro安全管理配置 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
