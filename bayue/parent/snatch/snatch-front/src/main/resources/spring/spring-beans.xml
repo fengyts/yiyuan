@@ -12,7 +12,8 @@
 
 	<!-- <util:properties id="meta"
 		location="classpath:config/metainfo.properties"></util:properties> -->
-		<context:property-placeholder location="classpath:config/metainfo.properties" order="2000000"/>
+	<context:property-placeholder location="classpath:config/metainfo.properties" order="2000000"/>
+	<util:properties id="meta" location="classpath:config/metainfo.properties"/>
 
 	<aop:aspectj-autoproxy />
 	<context:annotation-config />

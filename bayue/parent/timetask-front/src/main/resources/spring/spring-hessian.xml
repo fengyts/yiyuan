@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<bean id="orderCancelRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/orderCancelRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.OrderCancelRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="orderAuditRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/orderAuditRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.OrderAuditRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<!-- 支付回调补偿 -->
+	<bean id="exceptionBusinessLogLocalService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['salesorder.host']}/exceptionBusinessLogLocalService.hessian" />
+		<property name="serviceInterface"
+			value="com.meitun.salesorder.service.local.ExceptionBusinessLogLocalService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<!-- 支付MQ BUG修复 -->
+	<bean id="salesOrderPaidCallback"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['salesorder.host']}/salesOrderPaidCallback.hessian" />
+		<property name="serviceInterface"
+			value="com.meitun.salesorder.service.local.PaymentMQBug" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="salesOrderRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['salesorder.host']}/salesOrderRemoteService.hessian" />
+		<property name="serviceInterface"
+			value="com.meitun.salesorder.service.remote.SalesOrderRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<!-- 积分 -->
+	<bean id="salesPointRemoteService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/salesPointRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.SalesPointRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<!-- 快递100平台本地服务 -->
+	<bean id="kuaidi100LocalService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/kuaidi100LocalService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.local.Kuaidi100LocalService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>	
+	
+	<bean id="wwdBackService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/wwdBackService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.wwd.WwdBackService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>	
+	
+	<bean id="userService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['passport.host']}/userService.hessian" />
+		<property name="serviceInterface" value="com.meitun.user.service.UserService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="inputOrderService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/inputOrderService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.InputOrderService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="outputOrderService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/outputOrderService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.OutputOrderService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="outputOrderSendService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/outputOrderSendService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.OutputOrderSendService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="inventoryOperService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/inventoryOperService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.InventoryOperService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="inventoryQueryService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/inventoryQueryService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.InventoryQueryService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="snapshotService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['storage.host']}/snapshotService.hessian" />   
+		<property name="serviceInterface" value="com.meitun.storage.service.SnapshotService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+		
+	<bean id="sendSmsService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['passport.host']}/sendSmsService.hessian" />
+		<property name="serviceInterface" value="com.meitun.user.service.SendSmsService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="paymentService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['payment.host']}/paymentService.hessian" />
+		<property name="serviceInterface" value="com.meitun.payment.service.PaymentService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="hitaoOrderService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['hitaoorder.host']}/hitaoOrderService.hessian" />
+        <property name="serviceInterface" value="com.meitun.hitaoorder.service.HitaoOrderService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    <bean id="jumeiOrderService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['hitaoorder.host']}/jumeiOrderService.hessian" />
+        <property name="serviceInterface" value="com.meitun.hitaoorder.service.jumei.JumeiOrderService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <bean id="clearanceChannelsService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['base.host']}/clearanceChannelsService.hessian" />
+        <property name="serviceInterface" value="com.meitun.base.service.ClearanceChannelsService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+     <bean id="remoteItemReviewService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['comment.host']}/remoteItemReviewService.hessian" />
+        <property name="serviceInterface" value="com.meitun.comment.service.remote.RemoteItemReviewService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    <bean id="detailService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['item.host']}/detailService.hessian" />
+        <property name="serviceInterface" value="com.meitun.item.service.DetailService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    <!-- 
+    <bean id="settleOrderItemService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['finance.host']}/settleOrderItemService.hessian" />
+        <property name="serviceInterface" value="com.meitun.finance.service.settle.SettleOrderItemService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+     -->
+    
+    <bean id="purchasingManagementService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['supplier.host']}/purchasingManagement.hessian" />
+		<property name="serviceInterface" value="com.meitun.supplier.service.PurchasingManagementService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="trialOrderCancelRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/trialOrderCancelRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.TrialOrderCancelRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="trialOrderRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/trialOrderRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.TrialOrderRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="babytreeTrialOrderCancelRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/babytreeTrialOrderCancelRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.BabytreeTrialOrderCancelRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="pampersRestService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/pampersRestService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.rest.PampersRestService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="trialOrderDeliverRemoteService"
+		class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['salesorder.host']}/trialOrderDeliverRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.salesorder.service.remote.TrialOrderDeliverRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="fisherECMService" class="com.meitun.hessian.spring.extend.MeitunHessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['hitaoorder.host']}/fisherECMService.hessian" />
+        <property name="serviceInterface" value="com.meitun.hitaoorder.service.fisher.FisherECMService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+	<bean id="jumeiEspOrderService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['hitaoorder.host']}//jumeiEspOrderService.hessian" />
+		<property name="serviceInterface" value="com.meitun.hitaoorder.service.jumei.JumeiEspOrderService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="comExperReportService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['comment.host']}/comExperReportService.hessian" />
+		<property name="serviceInterface" value="com.meitun.comment.service.ComExperReportService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<!-- 财务相关接口 -->
+	<!-- 
+	<bean id="commissionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['finance.host']}/commissionService.hessian" />
+		<property name="serviceInterface" value="com.meitun.finance.service.CommissionService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	 -->
+	
+	<bean id="orderLineCommissionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['finance.host']}/orderLineCommissionService.hessian" />
+		<property name="serviceInterface" value="com.meitun.finance.service.OrderLineCommissionService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="refundService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['finance.host']}/refundService.hessian" />
+		<property name="serviceInterface" value="com.meitun.finance.service.RefundService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="offsetService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['finance.host']}/offsetService.hessian" />
+		<property name="serviceInterface" value="com.meitun.finance.service.OffsetService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+   
+	
+	<bean id="commissionGatherService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['finance.host']}/commissionGatherService.hessian" />
+		<property name="serviceInterface" value="com.meitun.finance.service.CommissionGatherService" />
+		<property name="overloadEnabled" value="true" />
+	</bean>
+   
+    <bean id="rejectInfoService"
+        class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['salesorder.host']}/rejectInfoService.hessian" />
+        <property name="serviceInterface" value="com.meitun.salesorder.service.RejectInfoService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <!-- 生成对账单 -->
+     <bean id="generateBillService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['finance.host']}/generateBillService.hessian" />
+        <property name="serviceInterface" value="com.meitun.finance.service.GenerateBillService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+     <bean id="retryGenerateBillService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['finance.host']}/retryGenerateBillService.hessian" />
+        <property name="serviceInterface" value="com.meitun.finance.service.RetryGenerateBillService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <!-- 保单取消 -->
+	 <bean id="insuranceOrderCancelRemoteService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['finplat.host']}/insuranceOrderCancelRemoteService.hessian" />
+		<property name="serviceInterface"
+			value="com.meitun.finplat.service.remote.InsuranceOrderCancelRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="insuranceOrderRemoteService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="#{config['finplat.host']}/insuranceOrderRemoteService.hessian" />
+		<property name="serviceInterface"
+			value="com.meitun.finplat.service.remote.InsuranceOrderRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+	<bean id="kaolaService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['hitaoorder.host']}/kaolaService.hessian" />
+        <property name="serviceInterface" value="com.meitun.hitaoorder.service.kaola.KaolaService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <bean id="wwdPushOrderService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['hitaoorder.host']}/wwdPushOrderService.hessian" />
+        <property name="serviceInterface" value="com.meitun.hitaoorder.service.order.wwd.WwdPushOrderService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <bean id="topicService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['promotion.host']}/topicService.hessian" />
+        <property name="serviceInterface" value="com.meitun.promotion.service.TopicService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <bean id="inventoryDistributeService"  class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="#{config['storage.host']}/inventoryDistributeService.hessian" />
+        <property name="serviceInterface" value="com.meitun.storage.service.InventoryDistributeService" />
+        <property name="overloadEnabled" value="false" />
+    </bean>
+    
+    <!-- 千人千面同步北京tagtopicList -->
+    <bean id="topicRemoteService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="#{config['tptf.host']}/topicRemoteService.hessian" />
+		<property name="serviceInterface" value="com.meitun.tptf.service.remote.TopicRemoteService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	
+</beans>

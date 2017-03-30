@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<bean id="cancelInsuranceOrderJobFactory"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelInsuranceOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="cancelInsuranceOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelInsuranceOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['cancelinsuranceorder.cron']}]]></value> 
+		</property>
+	</bean> 
+	
+	<bean id="insuranceStartQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cancelInsuranceOrderJobTimes" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

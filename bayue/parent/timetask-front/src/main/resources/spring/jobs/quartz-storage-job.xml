@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="sendOutputOrderService" class="com.meitun.scheduler.storage.SendOutputOrderJob" destroy-method="close" />
+	<bean id="sendInputOrderService" class="com.meitun.scheduler.storage.SendInputOrderJob" destroy-method="close" />
+	<bean id="releaseInventoryJob" class="com.meitun.scheduler.storage.ReleaseInventoryJob" destroy-method="close" />
+	<bean id="releaseDistInventoryJob" class="com.meitun.scheduler.storage.ReleaseDistInventoryJob" destroy-method="close" />
+	
+	<!-- 定义触发时间 -->
+	<bean id="sendOutputOrderServiceTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="sendOutputOrderService" />
+		<property name="targetMethod" value="sendOutputOrderService" />
+	</bean>
+	<bean id="sendOutputOrderServiceCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sendOutputOrderServiceTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.sendOutputOrderJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="releaseInventoryJobTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="releaseInventoryJob" />
+		<property name="targetMethod" value="releaseInventory" />
+	</bean>
+	<bean id="releaseInventoryJobCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="releaseInventoryJobTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.releaseInventoryJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="sendInputOrderServiceTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="sendInputOrderService" />
+		<property name="targetMethod" value="sendInputOrderService" />
+	</bean>
+ <!-- 定义触发时间 -->
+	<bean id="sendInputOrderServiceCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sendInputOrderServiceTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.sendInputOrderJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="releaseDistInventoryServiceTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="releaseDistInventoryJob" />
+		<property name="targetMethod" value="releaseDistInventory" />
+	</bean>
+ 	<!-- 定义触发时间 -->
+	<bean id="releaseDistInventoryServiceCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="releaseDistInventoryServiceTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.releaseDistInventoryJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="sendOutputOrderServiceCron"/>
+				<ref bean="sendInputOrderServiceCron"/>
+				<ref bean="releaseInventoryJobCron"/>
+				<ref bean="releaseDistInventoryServiceCron"/>
+			</list>
+		</property>
+	</bean>
+</beans>

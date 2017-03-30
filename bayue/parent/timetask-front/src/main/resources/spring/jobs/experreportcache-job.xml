@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<bean id="experReportCacheJob" class="com.meitun.scheduler.experreport.ExperReporCacheJob"  />
+ 	
+ 	<bean id="experReportCacheTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="experReportCacheJob" />
+		<property name="targetMethod" value="doSetReporCache" />
+	</bean>
+ 	<bean id="experReportSyncTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="experReportCacheJob" />
+		<property name="targetMethod" value="doSyncExportReport" />
+	</bean>
+ 	
+ 	<!-- 定义触发时间 -->
+	<bean id="experReportCacheCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="experReportCacheTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['experreport.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="experReportSyncCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="experReportSyncTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['experreportsync.cron']}]]></value>
+		</property>
+	</bean>
+	
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="experReportCacheCron"/>
+				<ref bean="experReportSyncCron"/>
+			</list>
+		</property>
+	</bean>
+</beans>

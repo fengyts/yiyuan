@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<bean id="itemCommentFromBabyTreeJob" class="com.meitun.scheduler.item.ItemCommentFromBabyTreeJob" destroy-method="close" />
+ 	
+ 	
+ 	<bean id="itemCommentFromBabyTreeTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="itemCommentFromBabyTreeJob" />
+		<property name="targetMethod" value="itemCommentFromBabyTreeService" />
+	</bean>
+ 	
+ 	<!-- 定义触发时间 -->
+	<bean id="itemCommentFromBabyTreeCron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="itemCommentFromBabyTreeTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.itemCommentFromBabyTreeJob.cron']}]]></value>
+		</property>
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="itemCommentFromBabyTreeCron"/>
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -20,11 +20,12 @@ public interface ItemService {
 	
 	/**
 	 * <pre>
-	 * 获取app首页轮播幻灯片列表
+	 * 获取app首页轮播幻灯片列表,弃用，请用<link>ng.bayue.item.service.CarouselService</link>接口的 getAllCarousel()方法
 	 * </pre>
 	 *
 	 * @return
 	 */
+	@Deprecated
 	List<CarouselDO> listCarousel();
 
 }

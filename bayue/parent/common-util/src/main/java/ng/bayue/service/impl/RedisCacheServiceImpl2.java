@@ -1,24 +1,19 @@
 package ng.bayue.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ng.bayue.service.RedisCacheService;
 import ng.bayue.util.SerializeUtil;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPipeline;
+import redis.clients.jedis.ShardedJedisPool;
 
-/**
- * <pre>
- * 请使用RedisCacheServiceImpl2,该接口实现使用JedisPool,而RedisCacheServiceImpl2使用的是ShardedJedisPool
- * </pre>
- *
- * @author lenovopc
- * @version $Id: RedisCacheServiceImpl.java, v 0.1 2017年3月29日 上午11:35:58 lenovopc Exp $
- */
-public class RedisCacheServiceImpl implements RedisCacheService{
+public class RedisCacheServiceImpl2 implements RedisCacheService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(RedisCacheServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(RedisCacheServiceImpl2.class);
 	
 	/** redis 的key最大值：50k */
 	private final static int MAX_KEY = 1024 * 50;
@@ -31,15 +26,14 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	/** redis缓存操作的返回值 */
 	private final static String SET_CACHE_RESULT = "OK";
 	
-	private JedisPool jedisPool = null;
-	
+	private ShardedJedisPool shardedJedisPool = null;
 
-	public JedisPool getJedisPool() {
-		return this.jedisPool;
+	public ShardedJedisPool getShardedJedisPool(){
+		return this.shardedJedisPool;
 	}
 	
-	public void setJedisPool(JedisPool jedisPool) {
-		this.jedisPool = jedisPool;
+	public void setShardedJedisPool(ShardedJedisPool shardedJedisPool){
+		this.shardedJedisPool = shardedJedisPool;
 	}
 	
 	private static void validKeyAndValue(String key, byte[] values) throws Exception {
@@ -70,11 +64,11 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		return false;
 	}
 	
-	private void closeJedis(Jedis jedis, boolean isSuccess) {
+	private void closeJedis(ShardedJedis jedis, boolean isSuccess) {
 		if(null != jedis && isSuccess){
-			jedisPool.returnResource(jedis);
+			shardedJedisPool.returnResource(jedis);
 		}else{
-			jedisPool.returnBrokenResource(jedis);
+			shardedJedisPool.returnBrokenResource(jedis);
 		}
 	}
 	
@@ -88,12 +82,12 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 			logger.info("set redis data error:the paramter value is not allowed null");
 			return false;
 		}
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = false;
 		try {
 			validKeyAndValue(key, value.getBytes());
 			
-			jedis = jedisPool.getResource();
+			jedis = shardedJedisPool.getResource();
 			String result = jedis.set(key, value);
 			if(SET_CACHE_RESULT.equals(result)){
 				isSuccess = true;
@@ -115,10 +109,10 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 			logger.info("get redis data error:the paramter key is not allowed null");
 			return null;
 		}
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = true;
 		try {
-			jedis = jedisPool.getResource();
+			jedis = shardedJedisPool.getResource();
 			String result = jedis.get(key);
 			return result;
 		} catch (Exception e) {
@@ -144,12 +138,12 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		}*/
 		byte[] values = SerializeUtil.serialize(o);
 		byte[] bytesKey = key.getBytes();
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = false;
 		try {
 			validKeyAndValue(key, values);
 			 
-			jedis = jedisPool.getResource();
+			jedis = shardedJedisPool.getResource();
 			String res = "";
 			if(o instanceof String){
 				res = jedis.set(key, (String) o);
@@ -179,10 +173,10 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		if(keyIsBlank(key)){
 			return null;
 		}
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = true;
 		try {
-			jedis = jedisPool.getResource();
+			jedis = shardedJedisPool.getResource();
 			byte[] bytes = jedis.get(key.getBytes());
 			Object o = SerializeUtil.unSerialize(bytes);
 			return o;
@@ -198,10 +192,10 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	@Override
 	public void deleteRedisCache(String key) {
 		if(null == key || "".equals(key)){return ;}
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = true;
 		try {
-			jedis =  jedisPool.getResource();
+			jedis =  shardedJedisPool.getResource();
 			Long res = jedis.del(key);
 			isSuccess = 1 == res.intValue() ? true : false;
 		} catch (Exception e) {
@@ -221,13 +215,17 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		if(0 == expires || null == expires){
 			expires = LOCK_EXPIRE_SECONDS;
 		}
-		Jedis jedis = null;
+		ShardedJedis jedis = null;
 		boolean isSuccess = true;
 		try {
-			jedis = jedisPool.getResource();
-			jedis.setnx(key, System.currentTimeMillis() + "");
-			Long res = jedis.expire(key, expires);
-			isSuccess = 1L == res ? true : false;
+			jedis = shardedJedisPool.getResource();
+			ShardedJedisPipeline pipelined = jedis.pipelined();
+			pipelined.setnx(key, System.currentTimeMillis() + "");
+			pipelined.expire(key, expires);
+			List<Object> syncAndReturnAll = pipelined.syncAndReturnAll();
+			if (!syncAndReturnAll.isEmpty() && null != syncAndReturnAll.get(0)) {
+				return "1".equalsIgnoreCase(syncAndReturnAll.get(0).toString());
+			}
 		} catch (Exception e) {
 			isSuccess = false;
 			logger.error(e.getMessage(), e);

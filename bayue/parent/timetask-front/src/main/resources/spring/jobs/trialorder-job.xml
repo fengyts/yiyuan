@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean id="cancelNoSendTrialOrderJobFactory"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelNoSendTrialOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="cancelNoSendTrialOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelNoSendTrialOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['cancelnosendtrialorderjob.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="sendTrialOrderJobFactory"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sendTrialOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="sendTrialOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sendTrialOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['sendtrialorderjob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="trialOrderPushFailHandleJobFactory"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="trialOrderPushFailHandleJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="trialOrderPushFailHandleJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="trialOrderPushFailHandleJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['trialOrderPushFailHandleJob.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="trialStartQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cancelNoSendTrialOrderJobTimes" />
+				<ref bean="sendTrialOrderJobTimes" />
+				<ref bean="trialOrderPushFailHandleJobTimes" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

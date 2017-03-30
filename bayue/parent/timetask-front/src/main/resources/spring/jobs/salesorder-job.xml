@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="cancelOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="cancelOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['cancelorder.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="auditOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="auditOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="auditOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="auditOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['auditOrder.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="cancelTrialOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelTrialOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="cancelTrialOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelTrialOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['canceltrialorder.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="pushExpressToKuaidi100JobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushToKuaidi100Job" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="pushExpressToKuaidi100JobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushExpressToKuaidi100JobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushExpressToKuaidi100.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="pushJumeiOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushJumeiOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="pushJumeiOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushJumeiOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushJumeiOrder.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="pushJumeiEspOrderJob" class="com.meitun.scheduler.salesorder.PushJumeiEspOrderJob" />
+	<bean id="pushJumeiEspOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushJumeiEspOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="pushJumeiEspOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushJumeiEspOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushJumeiEspOrder.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- <bean id="deliveryJumeiOrderJobFactory"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="deliveryJumeiOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="deliveryJumeiOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="deliveryJumeiOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['deliveryJumeiOrder.cron']}]]></value>
+		</property>
+	</bean> -->
+
+	<bean id="mobileMessageRemindJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="mobileMessageRemindJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="mobileMessageRemindJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="mobileMessageRemindJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['sendmobilemessage.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="receivedGoodsJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="receivedGoodsJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="receivedGoodsJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="receivedGoodsJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['receivedgoods.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="seaWashesDeliveryJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="seaWashesDeliveryJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="seaWashesDeliveryJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="seaWashesDeliveryJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['seawashesdelivery.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="putPayedUnPutSubOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="putPayedUnPutSubOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="putPayedUnPutSubOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="putPayedUnPutSubOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['putpayedunputsuborderjob.cron']}]]></value>
+		</property>
+	</bean>
+
+	<!-- <bean id="orderItemSettleJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderItemSettleJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="orderItemSettleJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="orderItemSettleJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['orderitemsettle.cron']}]]></value>
+		</property>
+	</bean> -->
+
+	<!-- 订单支付补偿机制 -->
+	<bean id="orderPaymentJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderPaymentCompensation" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="orderPaymentJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="orderPaymentJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['orderPayment.cron']}]]></value>
+		</property>
+	</bean>
+
+	<!-- 订单支付MQ BUG -->
+	<bean id="paymentMQBugJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="paymentMQBugJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="paymentMQBugJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="paymentMQBugJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['paymentMQBug.cron']}]]></value>
+		</property>
+	</bean>
+
+	<bean id="deliveryGoodRemindJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="deliveryGoodRemindJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="deliveryGoodRemindJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="deliveryGoodRemindJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['deliveryGoodRemindJob.cron']}]]></value>
+		</property>
+	</bean>
+
+	<!-- 推送费舍尔订单信息begin -->
+	<bean id="pushFisherOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushFisherOrderInfoJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="pushFisherOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushFisherOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushFisherOrder.cron']}]]></value>
+		</property>
+	</bean>
+	<!-- 推送费舍尔订单信息end -->
+
+	<!-- 定义jumeiQuery触发时间 -->
+	<!-- 聚美商户订单查询 -->
+	<bean id="queryJuMeiOrderJob" class="com.meitun.scheduler.salesorder.JuMeiQueryOrderJob" />
+	<bean id="jumeiQueryOrderStatusTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryJuMeiOrderJob" />
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="jumeiQueryStatus" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jumeiQueryOrderStatusTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.salesorder.jumeiQueryOrder.cron']}]]></value>
+		</property>
+	</bean>
+	<!-- 定义jumeiQueryEsp触发时间 -->
+	
+	<!-- 聚美商户订单查询 -->
+	<bean id="queryJuMeiEspOrderJob" class="com.meitun.scheduler.salesorder.JuMeiEspQueryOrderJob" />
+	<bean id="jumeiEspQueryOrderStatusTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryJuMeiEspOrderJob" />
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="jumeiQueryEspStatus" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jumeiEspQueryOrderStatusTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.salesorder.jumeiQueryOrder.esp.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 退货申请提交后7天未上传寄回单号，短信提醒 -->
+	<bean id="orderJerjectRemindJob" class="com.meitun.scheduler.salesorder.OrderJerjectRemindJob" />
+	<bean id="orderJerjectRemindTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="orderJerjectRemindJob" />
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="orderJerjectRemindJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="orderJerjectRemindTask" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['quartz.salesorder.orderRejectRemind.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 考拉订单发货 -->
+	<bean id="kaolaOrderDeliveryJob" class="com.meitun.scheduler.salesorder.KaolaOrderDeliveryJob" />
+	<bean id="kaolaOrderDeliveryJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="kaolaOrderDeliveryJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="kaolaOrderDeliveryJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="kaolaOrderDeliveryJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['kaolaOrderDeliveryJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 考拉订单推送 -->
+	<bean id="kaolaOrderPushJob" class="com.meitun.scheduler.salesorder.KaolaOrderPushJob" />
+	<bean id="kaolaOrderPushJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="kaolaOrderPushJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="kaolaOrderPushJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="kaolaOrderPushJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['kaolaOrderPushJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 外部订单取消补偿 -->
+	<bean id="outOrderCancelCompensate" class="com.meitun.scheduler.salesorder.OutOrderCancelCompensate" />
+	<bean id="outOrderCancelJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="outOrderCancelCompensate" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="outOrderCancelJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="outOrderCancelJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['outOrderCancelCompensateJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 外部订单发货补偿 -->
+	<bean id="outOrderDeliveryCompensate" class="com.meitun.scheduler.salesorder.OutOrderDeliveryCompensate" />
+	<bean id="outOrderDeliveryJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="outOrderDeliveryCompensate" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="outOrderDeliveryJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="outOrderDeliveryJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['outOrderDeliveryCompensateJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<!-- 外部订单发货补偿 -->
+	<bean id="outOrderSplitCompensate" class="com.meitun.scheduler.salesorder.OutOrderSplitCompensate" />
+	<bean id="outOrderSplitJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="outOrderSplitCompensate" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="outOrderSplitJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="outOrderSplitJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['outOrderSplitCompensateJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="orderPointPushSendJob" class="com.meitun.scheduler.salesorder.OrderPointPushSendJob" />
+	<bean id="orderPointPushSendJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderPointPushSendJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="orderPointPushSendJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="orderPointPushSendJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['orderPointPushSendJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdOrderJob" class="com.meitun.scheduler.salesorder.PushWwdOrderJob" />
+	<bean id="pushWwdOrderJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushWwdOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdOrderJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushWwdOrderJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushWwdOrderJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdOrderCompensateJob" class="com.meitun.scheduler.salesorder.PushWwdOrderCompensateJob" />
+	<bean id="pushWwdOrderCompensateFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushWwdOrderCompensateJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdOrderCompensateJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushWwdOrderCompensateFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushWwdOrderCompensateJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdRejectInfoCompensateJob" class="com.meitun.scheduler.salesorder.PushWwdRejectInfoCompensateJob" />
+	<bean id="pushWwdRejectInfoCompensateFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushWwdRejectInfoCompensateJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="pushWwdRejectInfoCompensateJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushWwdRejectInfoCompensateFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['pushWwdRejectInfoCompensateJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+	<bean id="userPointSendCacheJob" class="com.meitun.scheduler.salesorder.UserPointSendCacheJob" />
+	<bean id="userPointSendCacheJobFactory" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="userPointSendCacheJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="userPointSendCacheJobTimes" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="userPointSendCacheJobFactory" />
+		</property>
+		<property name="cronExpression">
+			<value><![CDATA[#{config['userPointSendCacheJob.cron']}]]></value>
+		</property>
+	</bean>
+	
+
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cancelOrderJobTimes" />
+				<ref bean="cancelTrialOrderJobTimes" />
+				<ref bean="pushExpressToKuaidi100JobTimes" />
+				<ref bean="mobileMessageRemindJobTimes" />
+				<ref bean="receivedGoodsJobTimes" />
+				<ref bean="seaWashesDeliveryJobTimes" />
+				<ref bean="putPayedUnPutSubOrderJobTimes" />
+				<!-- <ref bean="orderItemSettleJobTimes" /> -->
+				<ref bean="orderPaymentJobTimes" />
+				<ref bean="paymentMQBugJobTimes" />
+				<ref bean="deliveryGoodRemindJobTimes" />
+				<ref bean="pushJumeiOrderJobTimes" />
+				<ref bean="pushJumeiEspOrderJobTimes" />
+				<!-- <ref bean="deliveryJumeiOrderJobTimes" /> -->
+				<ref bean="pushFisherOrderJobTimes" />
+				<ref bean="jumeiQueryStatus" />
+				<ref bean="jumeiQueryEspStatus" />
+				<ref bean="auditOrderJobTimes" />
+				<ref bean="orderJerjectRemindJobTimes" />
+				<ref bean="kaolaOrderDeliveryJobTimes" />
+				<ref bean="kaolaOrderPushJobTimes" />
+				
+				<ref bean="outOrderCancelJobTimes" />
+				<ref bean="outOrderDeliveryJobTimes" />
+				<ref bean="outOrderSplitJobTimes" />
+				<ref bean="orderPointPushSendJobTimes"/>
+				<ref bean="pushWwdOrderJobTimes"/>
+				<ref bean="pushWwdOrderCompensateJobTimes"/>
+				<ref bean="pushWwdRejectInfoCompensateJobTimes"/>
+				<ref bean="userPointSendCacheJobTimes"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

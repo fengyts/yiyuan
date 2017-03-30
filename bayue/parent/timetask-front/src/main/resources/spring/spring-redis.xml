@@ -28,6 +28,26 @@
 	
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	
+	<bean id="cache_jedis_shard_info_0" class="redis.clients.jedis.JedisShardInfo"
+		scope="singleton">
+		<constructor-arg name="host" value="#{config['redis.cache.01.host']}" /><!-- IP -->
+		<constructor-arg name="port" value="#{config['redis.cache.01.port']}" type="int" /><!-- 端口 -->
+		<constructor-arg name="timeout" value="#{config['redis.cache.01.timeout']}" type="int" /><!-- 超时时间设置 默认2000 -->
+		<constructor-arg name="weight" value="#{config['redis.cache.01.weight']}" type="int" /><!-- 权重 默认为1-->
+	</bean>
+	<bean id="cacheShardJedisPool" class="ng.bayue.redis.CacheShardedJedisPool"
+		destroy-method="destroy">
+		<constructor-arg name="poolConfig" ref="cache_pool_config"></constructor-arg>
+		<constructor-arg name="shards">
+			<list>
+				<ref bean="cache_jedis_shard_info_0" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- JedisCacheUtil bean 配置,如果一个应用中有多个业务，使用的缓存是不同的系统，可以配置多个此类，但  spring bean id 一定不能重复 -->
+	<bean id="redisCacheService2" class="ng.bayue.service.impl.RedisCacheServiceImpl2" scope="singleton">
+		<property name="cacheShardJedisPool" ref="cacheShardJedisPool"></property>
+	</bean>
 	
 
 </beans>
