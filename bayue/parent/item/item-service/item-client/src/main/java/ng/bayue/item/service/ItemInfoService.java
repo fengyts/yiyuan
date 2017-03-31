@@ -4,7 +4,7 @@ import java.util.List;
 
 import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.dto.ItemInfoDTO;
+import ng.bayue.item.dto.ItemInfoDTO;
 import ng.bayue.item.exception.ServiceException;
  /**
  * 商品基础信息 Service

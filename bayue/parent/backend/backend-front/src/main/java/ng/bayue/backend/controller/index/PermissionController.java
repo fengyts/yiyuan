@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import ng.bayue.backend.ao.index.SysMenuAO;
 import ng.bayue.backend.controller.common.AbstractBaseController;
 import ng.bayue.backend.domain.SysMenuDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.enums.SysMenuTypeEnum;
 
 import org.apache.shiro.SecurityUtils;

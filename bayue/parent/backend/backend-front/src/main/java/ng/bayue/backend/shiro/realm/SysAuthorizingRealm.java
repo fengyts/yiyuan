@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysUserDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.util.UserHandler;
 
 public class SysAuthorizingRealm extends AuthorizingRealm {

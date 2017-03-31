@@ -3,7 +3,7 @@ package ng.bayue.backend.persist.dao;
 import java.util.List;
 
 import ng.bayue.backend.domain.SysUserDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.persist.exception.DAOException;
 
 

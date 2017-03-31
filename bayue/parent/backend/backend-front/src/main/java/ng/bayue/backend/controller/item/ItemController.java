@@ -10,8 +10,8 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.enums.DictionaryEnums;
 import ng.bayue.common.Page;
-import ng.bayue.item.domain.dto.ItemDTO;
-import ng.bayue.item.domain.dto.ItemDetailDTO;
+import ng.bayue.item.dto.ItemDTO;
+import ng.bayue.item.dto.ItemDetailDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

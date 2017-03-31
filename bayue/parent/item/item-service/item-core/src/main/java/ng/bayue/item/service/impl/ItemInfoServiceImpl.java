@@ -19,7 +19,7 @@ import ng.bayue.base.service.DictionaryService;
 import ng.bayue.common.Page;
 import ng.bayue.item.constant.CodeConstant;
 import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.dto.ItemInfoDTO;
+import ng.bayue.item.dto.ItemInfoDTO;
 import ng.bayue.item.exception.DAOException;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemInfoDAO;

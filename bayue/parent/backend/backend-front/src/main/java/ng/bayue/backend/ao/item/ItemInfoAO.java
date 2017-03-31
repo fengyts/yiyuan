@@ -19,7 +19,7 @@ import ng.bayue.base.service.DictionaryService;
 import ng.bayue.common.Page;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.dto.ItemInfoDTO;
+import ng.bayue.item.dto.ItemInfoDTO;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
 

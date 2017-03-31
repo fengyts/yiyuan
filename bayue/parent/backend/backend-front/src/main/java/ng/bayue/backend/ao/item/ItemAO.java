@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.item.domain.DetailSpecDO;
-import ng.bayue.item.domain.dto.DetailSpecDTO;
+import ng.bayue.item.dto.DetailSpecDTO;
 import ng.bayue.item.service.DetailSpecService;
 
 @Service

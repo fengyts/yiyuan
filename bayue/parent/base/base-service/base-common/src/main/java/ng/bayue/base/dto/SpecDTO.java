@@ -1,4 +1,4 @@
-package ng.bayue.base.domain.dto;
+package ng.bayue.base.dto;
 
 import java.io.Serializable;
 import java.util.Date;

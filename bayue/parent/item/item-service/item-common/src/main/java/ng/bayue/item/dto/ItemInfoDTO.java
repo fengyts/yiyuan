@@ -1,4 +1,4 @@
-package ng.bayue.item.domain.dto;
+package ng.bayue.item.dto;
 
 import ng.bayue.item.domain.ItemInfoDO;
 

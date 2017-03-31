@@ -10,7 +10,7 @@ import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.dto.ItemDetailDTO;
+import ng.bayue.item.dto.ItemDetailDTO;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.service.CodeService;
 import ng.bayue.item.service.DetailSpecService;

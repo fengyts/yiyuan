@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ng.bayue.backend.domain.SysUserDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.persist.common.MybatisBaseDAO;
 import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.persist.exception.DAOException;

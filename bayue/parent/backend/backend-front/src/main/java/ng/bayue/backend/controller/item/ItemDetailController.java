@@ -11,8 +11,8 @@ import ng.bayue.backend.controller.common.BaseController;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecGroupDO;
 import ng.bayue.common.Page;
-import ng.bayue.item.domain.dto.ItemDTO;
-import ng.bayue.item.domain.dto.ItemDetailDTO;
+import ng.bayue.item.dto.ItemDTO;
+import ng.bayue.item.dto.ItemDetailDTO;
 import ng.bayue.item.enums.ItemStatusEnum;
 import ng.bayue.item.enums.ItemTypeEnum;
 

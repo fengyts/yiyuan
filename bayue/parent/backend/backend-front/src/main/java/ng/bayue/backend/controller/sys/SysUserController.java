@@ -21,7 +21,7 @@ import ng.bayue.backend.ao.sys.SysUserAO;
 import ng.bayue.backend.domain.SysRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.backend.domain.SysUserRoleDO;
-import ng.bayue.backend.domain.dto.SysUserDTO;
+import ng.bayue.backend.dto.SysUserDTO;
 import ng.bayue.backend.util.Messages;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.common.Page;

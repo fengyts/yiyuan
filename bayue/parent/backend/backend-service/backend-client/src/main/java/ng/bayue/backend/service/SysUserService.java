@@ -3,7 +3,7 @@ package ng.bayue.backend.service;
 import java.util.List;
 
 import ng.bayue.backend.domain.SysUserDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.exception.ServiceException;
 import ng.bayue.common.Page;
  /**

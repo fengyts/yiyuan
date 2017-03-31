@@ -1,4 +1,4 @@
-package ng.bayue.backend.domain.dto;
+package ng.bayue.backend.dto;
 
 import java.util.List;
 

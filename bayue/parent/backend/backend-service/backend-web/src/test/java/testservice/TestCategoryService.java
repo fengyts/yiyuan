@@ -4,7 +4,7 @@ import ng.bayue.backend.domain.SysMenuDO;
 import ng.bayue.backend.domain.SysMenuRoleDO;
 import ng.bayue.backend.domain.SysUserDO;
 import ng.bayue.backend.domain.SysUserRoleDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 import ng.bayue.backend.persist.dao.SysUserDAO;
 import ng.bayue.backend.service.SysMenuRoleService;
 import ng.bayue.backend.service.SysMenuService;

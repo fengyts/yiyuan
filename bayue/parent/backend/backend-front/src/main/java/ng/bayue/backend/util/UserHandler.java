@@ -12,7 +12,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
 import ng.bayue.backend.domain.SysUserDO;
-import ng.bayue.backend.domain.dto.SysUserVO;
+import ng.bayue.backend.dto.SysUserVO;
 
 @Component
 public class UserHandler {
