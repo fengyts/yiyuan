@@ -20,6 +20,9 @@
         <mapper resource="sqlmap/spec-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/specGroup-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/specGroupLink-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/frontCategory-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/frontCategoryLink-mybatis-sqlmap.xml"/>
+        
 
     </mappers>  
     
