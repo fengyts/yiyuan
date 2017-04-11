@@ -1,6 +1,7 @@
 package ng.bayue.util.net;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -31,9 +32,9 @@ import org.slf4j.LoggerFactory;
 import ng.bayue.constant.CharsetConstant;
 
 @SuppressWarnings({ "deprecation" })
-public class RequestUtil {
+public class RequestUtils {
 
-	private static final Logger logger = LoggerFactory.getLogger(RequestUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(RequestUtils.class);
 	
 	public static String doRequestReturnStr(String url, List<NameValuePair> parameters, String charset) {
 		StringBuilder resultData = new StringBuilder();
@@ -46,7 +47,7 @@ public class RequestUtil {
 			charset = ccharset;
 		}
 		try {
-			final Reader reader = new InputStreamReader(cis, charset);
+			final Reader reader = new InputStreamReader(cis.getIs(), charset);
 			final char[] cbuf = new char[1024];
 			int len = 0;
 			while (-1 != (len = reader.read(cbuf))) {
@@ -84,7 +85,7 @@ public class RequestUtil {
 				// charset = CharsetConstant.UTF8;
 				cs = Charset.forName(charset);
 			}
-			httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
+//			httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
 
 			HttpResponse response = httpClient.execute(httpPost);
 			HttpEntity entity = response.getEntity();
@@ -97,9 +98,11 @@ public class RequestUtil {
 			} catch (UnsupportedCharsetException e) {
 				throw new UnsupportedEncodingException(e.getMessage());
 			}
-			// InputStream is = entity.getContent();
-			CharsetInputStream cis = (CharsetInputStream) entity.getContent();
+			InputStream is = entity.getContent();
+			 
+			CharsetInputStream cis = new CharsetInputStream();
 			cis.setCharset(charset);
+			cis.setIs(is);
 			return cis;
 
 		} catch (IOException e) {

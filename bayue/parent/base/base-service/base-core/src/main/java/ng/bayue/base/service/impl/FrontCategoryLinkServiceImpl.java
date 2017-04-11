@@ -2,6 +2,7 @@ package ng.bayue.base.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -143,6 +144,21 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 			return this.queryPageListDynamic(frontCategoryLinkDO);
 		}
 		return new Page<FrontCategoryLinkDO>();
+	}
+
+	@Override
+	public int insertBatch(List<FrontCategoryLinkDO> list) {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		for(FrontCategoryLinkDO fcl : list){
+			try {
+				insert(fcl);
+			} catch (ServiceException e) {
+				logger.error("", e);
+			}
+		}
+		return -1;
 	}
 	
 	

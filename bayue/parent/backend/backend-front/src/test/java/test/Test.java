@@ -12,7 +12,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.dto.ItemDTO;
+import ng.bayue.item.dto.ItemDTO;
 import ng.bayue.util.SecurityUtil;
 
 

@@ -45,7 +45,7 @@
 		</constructor-arg>
 	</bean>
 	<!-- JedisCacheUtil bean 配置,如果一个应用中有多个业务，使用的缓存是不同的系统，可以配置多个此类，但  spring bean id 一定不能重复 -->
-	<bean id="redisCacheService2" class="ng.bayue.service.impl.RedisCacheServiceImpl2" scope="singleton">
+	<bean id="redisCacheService1" class="ng.bayue.service.impl.RedisCacheServiceImpl1" scope="singleton">
 		<property name="cacheShardJedisPool" ref="cacheShardJedisPool"></property>
 	</bean>
 	

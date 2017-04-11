@@ -122,7 +122,8 @@ public class FileUtils {
 	public static String getEncoding(File file) throws IOException {
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		int p = (bis.read() << 8) + bis.read();
-		String code = null;
+		System.out.println(Integer.toHexString(p));
+		String code = "get encoding failure !";
 		bis.close();
 		switch (p) {
 		case 0xefbb:

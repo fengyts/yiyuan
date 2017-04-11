@@ -7,6 +7,7 @@ import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.core.PriorityOrdered;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisShardInfo;
@@ -18,7 +19,7 @@ import redis.clients.util.Pool;
  * @author fengyts
  *
  */
-public class CacheShardedJedisPool extends Pool<ShardedJedis>  {
+public class CacheShardedJedisPool extends Pool<ShardedJedis> implements PriorityOrdered {
 
 	private volatile List<JedisShardInfo> jedisShardInfos;
 
@@ -166,10 +167,10 @@ public class CacheShardedJedisPool extends Pool<ShardedJedis>  {
 		}
 	}
 
-//	@Override
-//	public int getOrder() {
-//		return LOWEST_PRECEDENCE - 10;
-//	}
+	@Override
+	public int getOrder() {
+		return LOWEST_PRECEDENCE - 10;
+	}
 
 }
 

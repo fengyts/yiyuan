@@ -1,17 +1,49 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.promotion.domain.TopicDO;
 
 public class TestJava {
+	
+	
+	@Test
+	public void fileTest(){
+		File file = new File("E:/wanmei/elements.data");
+		try {
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+			int p = (bis.read() << 8) + bis.read();
+			String str = Integer.toHexString(p);
+			System.out.println(str);
+			byte[] bytes = new byte[1024];
+			int len = 0;
+			len = bis.read(bytes);
+//			String res1 = new String(bytes,0,len);
+			String res1 = Integer.toBinaryString(len);
+			System.out.println(res1);
+//			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "iso-8859-1");
+//			char[] cbuf = new char[1024];
+//			int len = 0;
+//			String res = "";
+//			while(-1 != (len = isr.read(cbuf))){
+//				res += new String(cbuf,0,len);
+//				System.out.println(res);
+//			}
+		} catch (IOException e) {
+			
+		}
+	}
 
 	@Test
 	public void test() {

@@ -7,7 +7,7 @@ import java.util.List;
  * @author fengyts
  *
  */
-public class IndexFrontCategoryDTO implements Serializable {
+public class FrontCategoryDTO implements Serializable {
 
 	private static final long serialVersionUID = 2732014096395170115L;
 
@@ -24,7 +24,7 @@ public class IndexFrontCategoryDTO implements Serializable {
 	private String logoUrl;
 
 	/** 子分类 **/
-	private List<IndexFrontCategoryDTO> childs;
+	private List<FrontCategoryDTO> childs;
 
 	/** 是否是固定链接跳转 **/
 	private Boolean isUrlLink;
@@ -69,11 +69,11 @@ public class IndexFrontCategoryDTO implements Serializable {
 		this.level = level;
 	}
 
-	public List<IndexFrontCategoryDTO> getChilds() {
+	public List<FrontCategoryDTO> getChilds() {
 		return childs;
 	}
 
-	public void setChilds(List<IndexFrontCategoryDTO> childs) {
+	public void setChilds(List<FrontCategoryDTO> childs) {
 		this.childs = childs;
 	}
 

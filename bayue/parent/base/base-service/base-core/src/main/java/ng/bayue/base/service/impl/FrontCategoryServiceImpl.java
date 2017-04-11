@@ -2,6 +2,7 @@ package ng.bayue.base.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,6 +144,22 @@ public class FrontCategoryServiceImpl  implements FrontCategoryService{
 			return this.queryPageListDynamic(frontCategoryDO);
 		}
 		return new Page<FrontCategoryDO>();
+	}
+
+	@Override
+	public int insertBatch(List<FrontCategoryDO> list) {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+//		return frontCategoryDAO.insertBatch(list);
+		for(FrontCategoryDO fc : list){
+			try {
+				insert(fc);
+			} catch (ServiceException e) {
+				logger.error("", e);
+			}
+		}
+		return -1;
 	}
 	
 	

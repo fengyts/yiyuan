@@ -33,15 +33,14 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	
 	private JedisPool jedisPool = null;
 	
-
 	public JedisPool getJedisPool() {
-		return this.jedisPool;
+		return jedisPool;
 	}
-	
+
 	public void setJedisPool(JedisPool jedisPool) {
 		this.jedisPool = jedisPool;
 	}
-	
+
 	private static void validKeyAndValue(String key, byte[] values) throws Exception {
 		if (MAX_KEY < key.getBytes().length) { // key最大50k
 			logger.info("redis key is to long:{}", key);

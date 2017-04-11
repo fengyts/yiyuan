@@ -1,8 +1,9 @@
 package ng.bayue.item.service.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -28,7 +29,9 @@ public class CarouselServiceImpl  implements CarouselService{
 
 	@Autowired
 	private CarouselDAO carouselDAO;
-	@Autowired
+//	@Autowired
+//	@Resource(type=RedisCacheServiceImpl.class)
+	@Resource(name="redisCacheService")
 	private RedisCacheService cacheService;
 	
 	@Override

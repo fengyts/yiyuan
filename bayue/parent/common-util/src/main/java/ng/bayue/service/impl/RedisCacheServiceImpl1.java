@@ -5,15 +5,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ng.bayue.redis.CacheShardedJedisPool;
 import ng.bayue.service.RedisCacheService;
 import ng.bayue.util.SerializeUtil;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPipeline;
-import redis.clients.jedis.ShardedJedisPool;
 
-public class RedisCacheServiceImpl2 implements RedisCacheService{
+public class RedisCacheServiceImpl1 implements RedisCacheService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(RedisCacheServiceImpl2.class);
+	private static final Logger logger = LoggerFactory.getLogger(RedisCacheServiceImpl1.class);
 	
 	/** redis 的key最大值：50k */
 	private final static int MAX_KEY = 1024 * 50;
@@ -26,16 +26,26 @@ public class RedisCacheServiceImpl2 implements RedisCacheService{
 	/** redis缓存操作的返回值 */
 	private final static String SET_CACHE_RESULT = "OK";
 	
-	private ShardedJedisPool shardedJedisPool = null;
-
-	public ShardedJedisPool getShardedJedisPool(){
-		return this.shardedJedisPool;
-	}
+//	private ShardedJedisPool shardedJedisPool = null;
+//	
+//	public ShardedJedisPool getShardedJedisPool(){
+//		return this.shardedJedisPool;
+//	}
+//	
+//	public void setShardedJedisPool(ShardedJedisPool shardedJedisPool){
+//		this.shardedJedisPool = shardedJedisPool;
+//	}
 	
-	public void setShardedJedisPool(ShardedJedisPool shardedJedisPool){
+	private CacheShardedJedisPool shardedJedisPool = null;
+	
+	public CacheShardedJedisPool getShardedJedisPool() {
+		return shardedJedisPool;
+	}
+
+	public void setShardedJedisPool(CacheShardedJedisPool shardedJedisPool) {
 		this.shardedJedisPool = shardedJedisPool;
 	}
-	
+
 	private static void validKeyAndValue(String key, byte[] values) throws Exception {
 		if (MAX_KEY < key.getBytes().length) { // key最大50k
 			logger.info("redis key is to long:{}", key);

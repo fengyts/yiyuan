@@ -39,7 +39,7 @@ public class FrontCategoryDO extends BaseDO {
 	private Long parentId;
 
 	/** 顺序 */
-	private Boolean sort;
+	private Integer sort;
 
 	/** 是否发布:0-发布，1-否 */
 	private Boolean isPublish;
@@ -133,7 +133,7 @@ public class FrontCategoryDO extends BaseDO {
 	 * 
 	 * @param sort
 	 */
-	public void setSort(Boolean sort) {
+	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
 
@@ -259,7 +259,7 @@ public class FrontCategoryDO extends BaseDO {
 	 * 
 	 * @return sort
 	 */
-	public Boolean getSort() {
+	public Integer getSort() {
 		return sort;
 	}
 

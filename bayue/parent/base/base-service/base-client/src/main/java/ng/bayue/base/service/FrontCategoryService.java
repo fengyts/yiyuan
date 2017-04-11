@@ -1,6 +1,9 @@
 package ng.bayue.base.service;
 
 import ng.bayue.service.common.GeneralService;
+
+import java.util.List;
+
 import ng.bayue.base.domain.FrontCategoryDO;
 
  /**
@@ -9,5 +12,7 @@ import ng.bayue.base.domain.FrontCategoryDO;
  */
 public interface FrontCategoryService extends GeneralService<FrontCategoryDO, FrontCategoryDO> {
 
-
+	int insertBatch(List<FrontCategoryDO> list);
+	
+	
 }

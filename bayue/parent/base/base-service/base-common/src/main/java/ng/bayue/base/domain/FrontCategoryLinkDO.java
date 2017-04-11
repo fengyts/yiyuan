@@ -21,7 +21,7 @@ public class FrontCategoryLinkDO extends BaseDO {
 	private Long categoryId;
 
 	/** 跳转方式:1-后台分类,2-固定页面,3-商品,4-品牌,5-搜索词 */
-	private Boolean linkType;
+	private Integer linkType;
 
 	/**  */
 	private String linkContent;
@@ -79,7 +79,7 @@ public class FrontCategoryLinkDO extends BaseDO {
 	 * 
 	 * @param linkType
 	 */
-	public void setLinkType(Boolean linkType) {
+	public void setLinkType(Integer linkType) {
 		this.linkType = linkType;
 	}
 
@@ -205,7 +205,7 @@ public class FrontCategoryLinkDO extends BaseDO {
 	 * 
 	 * @return linkType
 	 */
-	public Boolean getLinkType() {
+	public Integer getLinkType() {
 		return linkType;
 	}
 
