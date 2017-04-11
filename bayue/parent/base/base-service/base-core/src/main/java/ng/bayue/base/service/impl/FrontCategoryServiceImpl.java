@@ -151,15 +151,7 @@ public class FrontCategoryServiceImpl  implements FrontCategoryService{
 		if(CollectionUtils.isEmpty(list)){
 			return -1;
 		}
-//		return frontCategoryDAO.insertBatch(list);
-		for(FrontCategoryDO fc : list){
-			try {
-				insert(fc);
-			} catch (ServiceException e) {
-				logger.error("", e);
-			}
-		}
-		return -1;
+		return frontCategoryDAO.insertBatch(list);
 	}
 	
 	

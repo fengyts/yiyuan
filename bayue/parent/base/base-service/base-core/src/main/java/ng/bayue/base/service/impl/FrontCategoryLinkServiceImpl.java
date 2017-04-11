@@ -151,14 +151,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 		if(CollectionUtils.isEmpty(list)){
 			return -1;
 		}
-		for(FrontCategoryLinkDO fcl : list){
-			try {
-				insert(fcl);
-			} catch (ServiceException e) {
-				logger.error("", e);
-			}
-		}
-		return -1;
+		return frontCategoryLinkDAO.insertBatch(list);
 	}
 	
 	

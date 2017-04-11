@@ -1,4 +1,4 @@
-<#macro backend title="一元购后台管理系统" 
+<#macro snatch title="一元购pc前端页面" 
 	js=[] 
 	css=[] 
 	>

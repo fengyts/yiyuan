@@ -153,5 +153,43 @@
 	 	ORDER BY base_front_category.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+	
+ 	<insert id="MybatisFrontCategoryDAO_insertBatch" parameterType="list" useGeneratedKeys="true">
+ 		<selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_front_category(
+				id,
+				name,
+				code,
+				level,
+				status,
+				is_highlight,
+				logo_url,
+				parent_id,
+				sort,
+				is_publish,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time
+		)values
+			<foreach collection="list" index="index" item="item" open="(" separator="),(" close=")">
+				#{item.id},
+				#{item.name},
+				#{item.code},
+				#{item.level},
+				#{item.status},
+				#{item.isHighlight},
+				#{item.logoUrl},
+				#{item.parentId},
+				#{item.sort},
+				#{item.isPublish},
+				#{item.createUserId},
+				#{item.createTime},
+				#{item.modifyUserId},
+				#{item.modifyTime}
+			</foreach>
+ 	</insert>
 
 </mapper>

@@ -50,6 +50,16 @@
 		<property name="service" ref="specGroupLinkService" />
 		<property name="serviceInterface" value="ng.bayue.base.service.SpecGroupLinkService" />
 	</bean>
+	<bean name="/frontCategoryService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="frontCategoryService" />
+		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryService" />
+	</bean>
+	<bean name="/frontCategoryLinkService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="frontCategoryLinkService" />
+		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryLinkService" />
+	</bean>
 	
 
 </beans>

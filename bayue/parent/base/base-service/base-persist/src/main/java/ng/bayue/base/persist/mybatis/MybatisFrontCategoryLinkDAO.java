@@ -12,8 +12,12 @@ public class MybatisFrontCategoryLinkDAO extends MybatisBaseDAO implements Front
 	
 	private static final String NAMESPACE = "ng.bayue.base.domain.FrontCategoryLinkMapper.MybatisFrontCategoryLinkDAO_";
 	
+	private static String getStatement (String operation){
+		return NAMESPACE + operation;
+	}
+	
 	public Long insert(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		int i = getSqlSession().insert(NAMESPACE + "insert", frontCategoryLinkDO);
+		int i = getSqlSession().insert(getStatement("insert"), frontCategoryLinkDO);
 		if (i > 0) {
 			return Long.valueOf(frontCategoryLinkDO.getId());
 		}
@@ -22,37 +26,42 @@ public class MybatisFrontCategoryLinkDAO extends MybatisBaseDAO implements Front
 
 	@Override
 	public Integer update(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		return getSqlSession().update(NAMESPACE + "updateById", frontCategoryLinkDO);
+		return getSqlSession().update(getStatement("updateById"), frontCategoryLinkDO);
 	}
 
 	@Override
 	public Integer deleteById(Long id) throws DAOException {
-		return getSqlSession().delete(NAMESPACE + "deleteById", id);
+		return getSqlSession().delete(getStatement("deleteById"), id);
 	}
 
 	@Override
 	public Integer updateDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		return getSqlSession().update(NAMESPACE + "update_dynamic", frontCategoryLinkDO);
+		return getSqlSession().update(getStatement("update_dynamic"), frontCategoryLinkDO);
 	}
 
 	@Override
 	public FrontCategoryLinkDO selectById(Long id) throws DAOException {
-		return getSqlSession().selectOne(NAMESPACE + "selectById", id);
+		return getSqlSession().selectOne(getStatement("selectById"), id);
 	}
 
 	@Override
 	public Long selectCountDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		return getSqlSession().selectOne(NAMESPACE + "select_dynamic_count", frontCategoryLinkDO);
+		return getSqlSession().selectOne(getStatement("select_dynamic_count"), frontCategoryLinkDO);
 	}
 
 	@Override
 	public List<FrontCategoryLinkDO> selectDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		return getSqlSession().selectList(NAMESPACE + "select_dynamic", frontCategoryLinkDO);
+		return getSqlSession().selectList(getStatement("select_dynamic"), frontCategoryLinkDO);
 	}
 
 	@Override
 	public List<FrontCategoryLinkDO> selectDynamicPageQuery(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
-		return getSqlSession().selectList(NAMESPACE + "select_dynamic_page_query", frontCategoryLinkDO);
+		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), frontCategoryLinkDO);
+	}
+
+	@Override
+	public int insertBatch(List<FrontCategoryLinkDO> list) {
+		return getSqlSession().insert(getStatement("insertBatch"), list);
 	}
 
 }

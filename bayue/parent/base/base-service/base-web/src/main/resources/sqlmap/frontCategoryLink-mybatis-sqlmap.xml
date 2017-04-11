@@ -19,7 +19,7 @@
         <result column="modify_user_id" property="modifyUserId"/>
         <result column="modify_time" property="modifyTime"/>
 	</resultMap>
-
+	
 	<sql id="MybatisFrontCategoryLinkDAO_all_column_fields">
 	      id,category_id,link_type,link_content,large_category_ids,small_category_ids,link_url_pc,link_url_app,link_url_wap,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
@@ -153,5 +153,45 @@
 	 	ORDER BY base_front_category_link.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
-
+ 	
+	<insert id="MybatisFrontCategoryLinkDAO_insertBatch" parameterType="list" useGeneratedKeys="true">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_front_category_link(
+				id,
+				category_id,
+				link_type,
+				link_content,
+				large_category_ids,
+				small_category_ids,
+				link_url_pc,
+				link_url_app,
+				link_url_wap,
+				status,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time
+		)values
+			<foreach collection="list" index="index" item="item" separator=",">
+			  (
+				#{item.id},
+				#{item.categoryId},
+				#{item.linkType},
+				#{item.linkContent},
+				#{item.largeCategoryIds},
+				#{item.smallCategoryIds},
+				#{item.linkUrlPc},
+				#{item.linkUrlApp},
+				#{item.linkUrlWap},
+				#{item.status},
+				#{item.createUserId},
+				#{item.createTime},
+				#{item.modifyUserId},
+				#{item.modifyTime}
+			  )
+			</foreach>
+	</insert>
+		
 </mapper>

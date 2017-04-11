@@ -1,5 +1,5 @@
 // var TIMER_TIME = "";
-//var meitun_domain_http = "${domain}";
+//var snatch_domain_http = "${domain}";
 $(function(){
 
 	//按回车搜索
@@ -45,7 +45,7 @@ $(function(){
 	//取头部图片广告位
 	//得到用户信息
 	 $.ajax({
-	   	 url:meitun_domain_http+"/headAd?callback=?",
+	   	 url:snatch_domain_http+"/headAd?callback=?",
 	   	 data:null,
 	   	 type:'post',
 	   	 dataType:'json',
@@ -136,7 +136,7 @@ $(function(){
 				ajaxflag = false;
 				//得到购物信息
 				 $.ajax({
-			    	 url:meitun_domain_http+"/getShoppingline?callback=?",
+			    	 url:snatch_domain_http+"/getShoppingline?callback=?",
 			    	 data:null,
 			    	 type:'post',
 			    	 dataType:'json',
@@ -174,7 +174,7 @@ $(function(){
 	  if(arr=document.cookie.match(reg)){
 				//得到中国分区
 			 $.ajax({
-		    	 url:meitun_domain_http+"/addrMessage?callback=?",
+		    	 url:snatch_domain_http+"/addrMessage?callback=?",
 		    	 data:null,
 		    	 type:'post',
 		    	 dataType:'json',
@@ -200,7 +200,7 @@ $(function(){
 		}else{
 			var url=document.referrer;
 			 $.ajax({
-		    	 url:meitun_domain_http+"/addrMessage?callback=?",
+		    	 url:snatch_domain_http+"/addrMessage?callback=?",
 		    	 data:null,
 		    	 type:'post',
 		    	 dataType:'json',
@@ -355,7 +355,7 @@ var frontCategory = function(){
 		},b = {
 			loadData:function(){
 				$.ajax({
-			    	 url:meitun_domain_http+"/loadfc?callback=?",
+			    	 url:snatch_domain_http+"/loadfc?callback=?",
 			    	 data:null,
 			    	 type:'post',
 			    	 dataType:'json',
@@ -438,7 +438,7 @@ function  loadUserAndShopoing(){
 	
 	//得到用户信息
 		 $.ajax({
-	    	 url:meitun_domain_http+"/userInfo?callback=?",
+	    	 url:snatch_domain_http+"/userInfo?callback=?",
 	    	 data:null,
 	    	 type:'post',
 	    	 dataType:'json',
@@ -460,7 +460,7 @@ function  loadUserAndShopoing(){
 		
 		//得到购物信息
 		 $.ajax({
-	    	 url:meitun_domain_http+"/getShoppingCount?callback=?",
+	    	 url:snatch_domain_http+"/getShoppingCount?callback=?",
 	    	 data:null,
 	    	 type:'post',
 	    	 dataType:'json',
@@ -485,7 +485,7 @@ function  loadUserAndShopoing(){
 function loadAsideShopping(){
 	//得到购物信息
 	 $.ajax({
-   	 url:meitun_domain_http+"/getShoppingCount?callback=?",
+   	 url:snatch_domain_http+"/getShoppingCount?callback=?",
    	 data:null,
    	 type:'post',
    	 dataType:'json',
@@ -545,7 +545,7 @@ function del(skuCode,topicId,promotionId,promotionType,redisCartLineKey){
 	}
 	 var data = "skuCode="+skuCode+"&topicId="+topicId+"&promotionId="+promotionId+"&promotionType="+promotionType+"&redisCartLineKey="+redisCartLineKey;
 	 $.ajax({
-    	 url:meitun_domain_http+"/deleShoppingline?callback=?",
+    	 url:snatch_domain_http+"/deleShoppingline?callback=?",
     	 data:data,
     	 type:'post',
     	 dataType:'json',
@@ -593,7 +593,7 @@ function del(skuCode,topicId,promotionId,promotionType,redisCartLineKey){
 function addcookies(name, value, maxage,domain){
 	var data = "name="+name+"&value="+value+"&maxage="+maxage+"&domain="+domain;
 	$.ajax({
-		 url:meitun_domain_http + "/setcook?callback=?",
+		 url:snatch_domain_http + "/setcook?callback=?",
 		 data:data,
 		 type:'post',
 		 dataType:'json',
@@ -612,8 +612,8 @@ var windowname = 1;
 function connectcustomer(){
 //   		var w = window.open('', 'newwindow'+ ++windowname, 'width=100%,height=100%, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
 //   		w.location="http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=459883&configID=124406&jid=1737204076"; 
-//   		w.location = meitun_domain_http+"/customs";
-   		//window.open(meitun_domain_http+"/customs","_blank");
+//   		w.location = snatch_domain_http+"/customs";
+   		//window.open(snatch_domain_http+"/customs","_blank");
 	try{
 		NTKF.im_openInPageChat();
 	}catch(exception) {
@@ -665,7 +665,7 @@ function receiveCoupon(couponID){
 	
 	//得到用户信息
 	 $.ajax({
-    	 url:meitun_domain_http+"/userInfo?callback=?",
+    	 url:snatch_domain_http+"/userInfo?callback=?",
     	 data:null,
     	 type:'post',
     	 dataType:'json',
@@ -707,7 +707,7 @@ function receiveCoupon(couponID){
 function receiveCouponOper(couponID){
 		//得到用户信息
 	 $.ajax({
-    	 url:meitun_domain_http+"/receiveCoupon/"+couponID+"?callback=?",
+    	 url:snatch_domain_http+"/receiveCoupon/"+couponID+"?callback=?",
     	 data:null,
     	 type:'post',
     	 dataType:'json',
