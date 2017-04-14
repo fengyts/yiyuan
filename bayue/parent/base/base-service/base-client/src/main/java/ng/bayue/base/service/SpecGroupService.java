@@ -106,7 +106,7 @@ public interface SpecGroupService {
 	
 	/**
 	 * <pre>
-	 * 插入规格组信息，同时插入规格组个规格关联信息
+	 * 插入规格组信息，同时插入规格组和规格关联信息
 	 * </pre>
 	 *
 	 * @param specGroupDO

@@ -113,7 +113,7 @@ public class CategoryAO {
 		return obj;*/
 		
 //		return parseJsonData(categoryDO);
-		
+		// 注意：parentId的值必须要加上双引号才行(即必须是字符串形式),否则expanded 会无效,比如格式必须这样："parentId":"1",而不能这样："parentId":1
 		String str = "{\"parentId\":\"" + categoryDO.getParentId() + "\"}";
 		JSONObject obj = JSONObject.parseObject(str);
 		obj.put("id", categoryDO.getId());
@@ -165,6 +165,11 @@ public class CategoryAO {
 		//校验同级下是否已经存在类别
 		if(checkDuplicationName(categoryDO)){
 			return new ResultMessage(ResultMessage.Failure, Messages.IsExist);
+		}
+		
+		//如果是添加非一级类目，则必选父级
+		if(CategoryConstant.LEVEL.LARGE != categoryDO.getLevel().intValue() && null == categoryDO.getParentId()){
+			return new ResultMessage(ResultMessage.Failure, "添加子类必须选择其父类");
 		}
 		
 		String code = selectMaxCode(categoryDO);
@@ -220,16 +225,18 @@ public class CategoryAO {
 			CategoryDO cate = new CategoryDO();
 			cate.setParentId(categoryDO.getId());
 			List<CategoryDO> listChilds = selectList(cate);
-			for(CategoryDO cateTmp : listChilds){
-				cateTmp.setStatus(false);
+			if(CollectionUtils.isNotEmpty(listChilds)){
+				for(CategoryDO cateTmp : listChilds){
+					cateTmp.setStatus(false);
+				}
+				updateCategoryBatch(listChilds);
 			}
-			updateCategoryBatch(listChilds);
 		}
 		
 		categoryDO.setModifyTime(new Date());
 		categoryDO.setModifyUserId(UserHandler.getUser().getId());
 		
-		int res = categoryService.update(categoryDO, false);
+		categoryService.update(categoryDO, false);
 		
 		return new ResultMessage();
 	}
@@ -270,6 +277,7 @@ public class CategoryAO {
 	public List<CategoryDO> listFirst(){
 		CategoryDO categoryDO = new CategoryDO();
 		categoryDO.setLevel(CategoryConstant.LEVEL.LARGE);
+		categoryDO.setStatus(CategoryConstant.STATUS.TRUE);
 		categoryDO.setParentId(0L);
 		List<CategoryDO> listFir = selectList(categoryDO);
 		return listFir;

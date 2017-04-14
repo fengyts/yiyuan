@@ -7,18 +7,18 @@ import java.util.Date;
 /**
  * 前台类目跳转链接
  * 
- * @author fengyts Sat Apr 01 16:32:53 CST 2017
+ * @author fengyts Wed Apr 12 11:03:06 CST 2017
  */
 
 public class FrontCategoryLinkDO extends BaseDO {
 
-	private static final long serialVersionUID = 6206682393937104009L;
+	private static final long serialVersionUID = -4882199157351575562L;
 
 	/** 主键 */
 	private Long id;
 
-	/** 类目id */
-	private Long categoryId;
+	/** 前台类目id */
+	private Long frontCategoryId;
 
 	/** 跳转方式:1-后台分类,2-固定页面,3-商品,4-品牌,5-搜索词 */
 	private Integer linkType;
@@ -66,12 +66,12 @@ public class FrontCategoryLinkDO extends BaseDO {
 	}
 
 	/**
-	 * 设置 类目id
+	 * 设置 前台类目id
 	 * 
-	 * @param categoryId
+	 * @param frontCategoryId
 	 */
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setFrontCategoryId(Long frontCategoryId) {
+		this.frontCategoryId = frontCategoryId;
 	}
 
 	/**
@@ -192,12 +192,12 @@ public class FrontCategoryLinkDO extends BaseDO {
 	}
 
 	/**
-	 * 获取 类目id
+	 * 获取 前台类目id
 	 * 
-	 * @return categoryId
+	 * @return frontCategoryId
 	 */
-	public Long getCategoryId() {
-		return categoryId;
+	public Long getFrontCategoryId() {
+		return frontCategoryId;
 	}
 
 	/**

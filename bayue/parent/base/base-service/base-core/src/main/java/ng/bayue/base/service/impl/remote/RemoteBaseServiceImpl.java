@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ng.bayue.base.domain.FrontCategoryDO;
-import ng.bayue.base.dto.FrontCategoryDTO;
+import ng.bayue.base.dto.FrontCategoryViewDTO;
 import ng.bayue.base.service.remote.RemoteBaseService;
 import ng.bayue.constant.RedisCacheTimeConstant;
 import ng.bayue.service.RedisCacheService;
@@ -27,13 +27,13 @@ public class RemoteBaseServiceImpl implements RemoteBaseService {
 	private RedisCacheService redisCacheService;
 
 	@Override
-	public List<FrontCategoryDTO> getFrontCategoryList() {
+	public List<FrontCategoryViewDTO> getFrontCategoryList() {
 		Object object = redisCacheService.getRedisCache("frontCategory_pc");
 
 		if (object != null)
-			return (List<FrontCategoryDTO>) object;
+			return (List<FrontCategoryViewDTO>) object;
 
-		List<FrontCategoryDTO> list = new ArrayList<FrontCategoryDTO>();
+		List<FrontCategoryViewDTO> list = new ArrayList<FrontCategoryViewDTO>();
 		// 查询所有分类
 		List<FrontCategoryDO> all = getAllFrontCategory();
 		if (all == null || all.size() <= 0) {
@@ -43,17 +43,17 @@ public class RemoteBaseServiceImpl implements RemoteBaseService {
 
 		// 查询固定url链接
 		Map<Long, Map<String, String>> urlMap = getUrlLinksMap();
-		Map<Long, List<FrontCategoryDTO>> map = getAllFrontCategoryMap(list, all, urlMap, "pc", 10);
+		Map<Long, List<FrontCategoryViewDTO>> map = getAllFrontCategoryMap(list, all, urlMap, "pc", 10);
 
 		// 设置childs
-		for (FrontCategoryDTO dto : list) {
-			List<FrontCategoryDTO> childs = map.get(dto.getId());
+		for (FrontCategoryViewDTO dto : list) {
+			List<FrontCategoryViewDTO> childs = map.get(dto.getId());
 			if (CollectionUtils.isEmpty(childs)) {
 				continue;
 			}
-			List<FrontCategoryDTO> allThirdList = new ArrayList<FrontCategoryDTO>();
-			for (FrontCategoryDTO child : childs) {
-				List<FrontCategoryDTO> thirdList = map.get(child.getId());
+			List<FrontCategoryViewDTO> allThirdList = new ArrayList<FrontCategoryViewDTO>();
+			for (FrontCategoryViewDTO child : childs) {
+				List<FrontCategoryViewDTO> thirdList = map.get(child.getId());
 				if (CollectionUtils.isNotEmpty(thirdList)) {
 					allThirdList.addAll(thirdList);
 				}
@@ -78,7 +78,7 @@ public class RemoteBaseServiceImpl implements RemoteBaseService {
 		return null;
 	}
 
-	private Map<Long, List<FrontCategoryDTO>> getAllFrontCategoryMap(List<FrontCategoryDTO> list,
+	private Map<Long, List<FrontCategoryViewDTO>> getAllFrontCategoryMap(List<FrontCategoryViewDTO> list,
 			List<FrontCategoryDO> all, Map<Long, Map<String, String>> urlMap, String pc, int screen) {
 		return null;
 	}

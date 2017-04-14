@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
-import ng.bayue.base.dto.FrontCategoryDTO;
+import ng.bayue.base.dto.FrontCategoryViewDTO;
 import ng.bayue.snatch.ao.IndexAO;
 import ng.bayue.snatch.dto.ReturnData;
 
@@ -30,7 +30,7 @@ public class IndexController {
 	@RequestMapping(value = "loadfc")
 	@ResponseBody
 	public JSONPObject frontCategory(HttpServletRequest request, @RequestParam String callback) {
-		List<FrontCategoryDTO> list = indexAO.loadFrontCategory();
+		List<FrontCategoryViewDTO> list = indexAO.loadFrontCategory();
 
 		ReturnData returnDate = null;
 		if (list != null && list.size() > 0) {

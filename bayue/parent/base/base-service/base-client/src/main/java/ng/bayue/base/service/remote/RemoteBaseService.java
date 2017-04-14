@@ -2,7 +2,7 @@ package ng.bayue.base.service.remote;
 
 import java.util.List;
 
-import ng.bayue.base.dto.FrontCategoryDTO;
+import ng.bayue.base.dto.FrontCategoryViewDTO;
 
 /**
  * <pre>
@@ -22,6 +22,6 @@ public interface RemoteBaseService {
 	 *
 	 * @return
 	 */
-	List<FrontCategoryDTO> getFrontCategoryList();
+	List<FrontCategoryViewDTO> getFrontCategoryList();
 
 }

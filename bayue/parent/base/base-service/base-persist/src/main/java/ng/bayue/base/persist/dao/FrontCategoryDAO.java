@@ -22,4 +22,14 @@ public interface FrontCategoryDAO extends GeneralDAO<FrontCategoryDO> {
 	 */
 	int insertBatch(List<FrontCategoryDO> list);
 	
+	/**
+	 * <pre>
+	 * 根据level和parentId获取该类别下最大code
+	 * </pre>
+	 *
+	 * @param fc
+	 * @return
+	 */
+	String selectMaxCodeDynamic(FrontCategoryDO fc);
+	
 }

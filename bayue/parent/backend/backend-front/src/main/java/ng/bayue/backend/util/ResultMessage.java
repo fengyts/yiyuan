@@ -85,7 +85,7 @@ public class ResultMessage implements Serializable{
 	
 	/**
 	 * <pre>
-	 * 校验入参存在时返回值
+	 * 校验数据已经存在时返回值
 	 * </pre>
 	 *
 	 * @return

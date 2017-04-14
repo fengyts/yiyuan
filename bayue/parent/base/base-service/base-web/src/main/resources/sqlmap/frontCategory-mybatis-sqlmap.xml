@@ -153,6 +153,14 @@
 	 	ORDER BY base_front_category.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisFrontCategoryDAO_select_dynamic_code" resultType="string" parameterType="categoryDO">
+        SELECT MAX(code) AS code FROM base_front_category
+        <where>
+			<if test="level != null"> AND level=#{level} </if>
+			<if test="parentId != null"> AND parent_id=#{parentId}</if>
+	    </where>		
+	</select>
 	
  	<insert id="MybatisFrontCategoryDAO_insertBatch" parameterType="list" useGeneratedKeys="true">
  		<selectKey resultType="long" keyProperty="id" order="AFTER">
@@ -191,5 +199,6 @@
 				#{item.modifyTime}
 			</foreach>
  	</insert>
+ 	
 
 </mapper>

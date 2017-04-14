@@ -24,7 +24,7 @@ public class FrontCategoryDO extends BaseDO {
 	private String code;
 
 	/** 类目级别:1-一级类目,2-二级类目,3-三级类目 */
-	private Boolean level;
+	private Integer level;
 
 	/** 状态:0-有效，1-无效 */
 	private Boolean status;
@@ -88,7 +88,7 @@ public class FrontCategoryDO extends BaseDO {
 	 * 
 	 * @param level
 	 */
-	public void setLevel(Boolean level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
@@ -214,7 +214,7 @@ public class FrontCategoryDO extends BaseDO {
 	 * 
 	 * @return level
 	 */
-	public Boolean getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 

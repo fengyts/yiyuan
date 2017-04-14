@@ -62,7 +62,7 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	 * @return key is null or blank, return true, else return false;
 	 */
 	private boolean keyIsBlank(String key){
-		if(null == null || "".equals(key.trim())){
+		if(null == key || "".equals(key.trim())){
 			logger.info("operated redis exception: the redis key is not allowed null or blank !");
 			return true;
 		}

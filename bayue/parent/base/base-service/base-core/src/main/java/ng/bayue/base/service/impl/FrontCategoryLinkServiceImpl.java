@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ng.bayue.base.domain.FrontCategoryLinkDO;
+import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.FrontCategoryLinkDAO;
 import ng.bayue.base.service.FrontCategoryLinkService;
 import ng.bayue.exception.DAOException;
-import ng.bayue.exception.ServiceException;
 import ng.bayue.common.Page;
 
 @Service(value="frontCategoryLinkService")

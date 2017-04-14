@@ -6,44 +6,7 @@ $(function(){
 		window.parent.layer.close(parent.pageii);
 	});
 	
-	/*
-	var jsonData={
-		"rows":[
-			{
-			    "id": "1",
-			    "name": "家居","code":"01","remark":"","status":"true",
-			    "level":"1", "parentId":"0", "isLeaf":false, "expanded":false
-			},
-			{
-			    "id": "2",
-			    "name": "沙发","code":"0101","remark":"","status":"true",
-			    "level":"2", "parentId":"1", "isLeaf":true, "expanded":false
-			},
-			{
-			    "id": "3",
-			    "name": "厨卫","code":"0102","remark":"","status":"true",
-			    level:"2", parentId:"1", isLeaf:true, expanded:false
-			},
-			{
-			    "id": "4",
-			    "name": "电子数码","code":"02","remark":"","status":"true",
-			    level:"1", parentId:"0", isLeaf:false, expanded:false
-			},
-			{
-			    "id": "5",
-			    "name": "平板","code":"0201","remark":"","status":"true",
-			    level:"2", parentId:"4", isLeaf:true, expanded:false
-			},
-			{
-			    "id": "6",
-			    "name": "相机","code":"0202","remark":"","status":"true",
-			    level:"2", parentId:"4", isLeaf:true, expanded:false
-			}
-		 ]
-	};
-	*/
-	
-	var colNames = ['ID','父级ID','名称', '编码', '级别','状态','备注','操作'];
+	var colNames = ['ID','父级ID','名称', '编码', '排序', '级别','状态','logo地址','操作'];
 	var colModel = [
 	   	         {name:'id',index:'id', width:20, hidden:true},
 	   	         {name:'parentId',index:'parentId', width:20, hidden:true},
@@ -53,6 +16,7 @@ $(function(){
 	   	        	 }
 		         },
 		         {name:'code',index:'code', width:50, align:"center", sortable:false},
+		         {name:'sort',index:'sort', width:50, align:"center", sortable:false},
 		         {name:'level',index:'level', width:80, align:"center", sortable:false, 
 		        	 formatter:function(cellValue,options,rowObject){
 			        	 if(1 == cellValue){
@@ -71,10 +35,10 @@ $(function(){
 			        	  }
 		        	 }
 		         },
-		         {name:'remark',index:'remark', width:80, align:"center", sortable:false},
+		         {name:'logUrl',index:'logUrl', width:80, align:"center", sortable:false},
 		         {name:'操作', index:'操作', width:100, align:"center",
 		        	 formatter:function(cellValue,options,rowObject){
-		        		 var editOption = "<a href='javascript:void(0);' onclick='categoryEdit(" + rowObject.id + ");'><font color='blue'>编辑</font></a> &nbsp";
+		        		 var editOption = "<a href='javascript:void(0);' onclick='frontCategoryEdit(" + rowObject.id + ");'><font color='blue'>编辑</font></a> &nbsp";
 		        		 var logOption = "<a href='javascript:void(0);'><font color='blue'>日志</font></a>";
 		        		 return editOption + logOption;
 		        	 }
@@ -91,7 +55,7 @@ $(function(){
 //	    datastr:jsonData,
 //	    datatype: "jsonstring",
 	    
-		url:"categoryJsonData",
+		url:"fcJsonData",
 		datatype: "json",
 	    
 		loadonce:true,
@@ -135,49 +99,64 @@ $(function(){
 	
 	
 	//新增类别
-	$("#categoryAddBtn").on('click',function(){
-		pageii = $.layer({
+	$("#frontCategoryAddBtn").on('click',function(){
+		pageii = layer.open({
 			type : 2,
-			title : '类别管理-->新增',
+			title : '前台类别管理-->新增',
 			border: [3, 0.3, '#000'],
 			shadeClose : true,
 			shade: [0.3, '#000'],
 			maxmin : true,
 			fix : false,
-			area: ['400px', 300],
-			iframe : {
-				src : domain + '/basedata/category/add.htm'
-			}
+			area: ['700px', '600px'],
+			content : domain + '/basedata/frontCategory/add.htm'
 		});
 	});
 	
 	//保存新增
-	$("#categorySaveBtn").on('click',function(){
-		addCategory();
+	$("#frontCategorySaveBtn").on('click',function(){
+		addFrontCategory();
+	});
+	
+	$("#fcImportBtn").on('click', function(){
+		pageii = layer.open({
+			type : 2,
+			title : '前台类目导入',
+			offset: '5%',
+			// shadeClose : true,
+			shade : 0.3,
+			maxmin : true,
+			fixed : false,
+			scrollbar : false,
+			area : [ '700px', '500px' ],
+			content : domain + '/basedata/frontCategory/importFCate.htm',
+		});
+	});
+	
+	$("#uploadFC").on("click", function(){
+		layer.alert('亲，功能还未上线!', {icon: 1});
 	});
 	
 	
 });
 
-function categoryEdit(id){
-	pageii=$.layer({
+function frontCategoryEdit(id){
+	pageii = layer.open({
 		type : 2,
-		title : '类别管理-->编辑',
+		title : '前台类别管理-->编辑',
 		shadeClose : true,
 		maxmin : true,
 		fix : false,
-		area: ['400px', 300],
-		iframe : {
-			src : domain + '/basedata/category/edit.htm?id='+id
-		}
+		area: ['700px', '600px'],
+		content : domain + '/basedata/frontCategory/edit.htm?id='+id
 	});
 }
 
-function updateCategory(){
+function updateFrontCategory(){
 	$.ajax({
 		url : 'update',
 		dataType : 'text',
-		data : $('#categoryEditForm').serialize(),
+		data : $('#frontCategoryEditForm').serialize(),
 		type : "post",
 		cache : false,
 		error : function(request){
@@ -199,11 +178,11 @@ function updateCategory(){
 	
 }
 
-function addCategory(){
+function addFrontCategory(){
 	$.ajax({
 		url : 'save',
 		dataType : 'text',
-		data : $('#categoryAddForm').serialize(),
+		data : $('#frontCategoryAddForm').serialize(),
 		type : "post",
 		cache : false,
 		error : function(request){

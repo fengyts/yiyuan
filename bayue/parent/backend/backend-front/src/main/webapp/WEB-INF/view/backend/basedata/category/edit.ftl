@@ -14,8 +14,8 @@ css=[
 
 <div id="forms" class="mt10">
     <div class="box">
+        <span>${ansName}</span> 
 	    <div class="box_border"> 
-	       <span>${ansName}</span> 
 		   <form class="jqtransform" method="post" id="categoryEditForm">
 		   
 		     <table class="form_table" border="0" cellpadding="0" cellspacing="0">

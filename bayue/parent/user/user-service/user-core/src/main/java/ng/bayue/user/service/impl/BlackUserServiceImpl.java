@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ng.bayue.user.domain.BlackUserDO;
+import ng.bayue.user.exception.ServiceException;
 import ng.bayue.user.persist.dao.BlackUserDAO;
 import ng.bayue.user.service.BlackUserService;
 import ng.bayue.exception.DAOException;
-import ng.bayue.exception.ServiceException;
 import ng.bayue.common.Page;
 
 @Service(value="blackUserService")

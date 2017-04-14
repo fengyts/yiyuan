@@ -154,7 +154,7 @@
  	</select>
  	
  	<select id="MybatisCategoryDAO_select_dynamic_code" resultType="string" parameterType="categoryDO">
-	        SELECT   MAX(code) AS code FROM base_category 
+	        SELECT MAX(code) AS code FROM base_category 
 	        <where>
 			    <if test="level != null"> AND level=#{level} </if>
 				<if test="parentId != null"> AND parent_id=#{parentId}</if>

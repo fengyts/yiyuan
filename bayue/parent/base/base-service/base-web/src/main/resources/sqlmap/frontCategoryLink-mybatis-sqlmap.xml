@@ -5,7 +5,7 @@
 
 	<resultMap type="ng.bayue.base.domain.FrontCategoryLinkDO" id="FrontCategoryLinkDOResultMap">
 		<id column="id" property="id" />
-        <result column="category_id" property="categoryId"/>
+        <result column="front_category_id" property="frontCategoryId"/>
         <result column="link_type" property="linkType"/>
         <result column="link_content" property="linkContent"/>
         <result column="large_category_ids" property="largeCategoryIds"/>
@@ -19,14 +19,14 @@
         <result column="modify_user_id" property="modifyUserId"/>
         <result column="modify_time" property="modifyTime"/>
 	</resultMap>
-	
+
 	<sql id="MybatisFrontCategoryLinkDAO_all_column_fields">
-	      id,category_id,link_type,link_content,large_category_ids,small_category_ids,link_url_pc,link_url_app,link_url_wap,status,create_user_id,create_time,modify_user_id,modify_time
+	      id,front_category_id,link_type,link_content,large_category_ids,small_category_ids,link_url_pc,link_url_app,link_url_wap,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisFrontCategoryLinkDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
-			<if test="categoryId != null "> AND category_id=#{categoryId} </if>
+			<if test="frontCategoryId != null "> AND front_category_id=#{frontCategoryId} </if>
 			<if test="linkType != null "> AND link_type=#{linkType} </if>
 			<if test="linkContent != null  and linkContent != '' "> AND link_content=#{linkContent} </if>
 			<if test="largeCategoryIds != null  and largeCategoryIds != '' "> AND large_category_ids=#{largeCategoryIds} </if>
@@ -55,7 +55,7 @@
         </selectKey>
         INSERT INTO base_front_category_link(
 				id,
-				category_id,
+				front_category_id,
 				link_type,
 				link_content,
 				large_category_ids,
@@ -70,7 +70,7 @@
 				modify_time
 		)values(
 				#{id},
-				#{categoryId},
+				#{frontCategoryId},
 				#{linkType},
 				#{linkContent},
 				#{largeCategoryIds},
@@ -89,7 +89,7 @@
 	<update id="MybatisFrontCategoryLinkDAO_updateById" parameterType="ng.bayue.base.domain.FrontCategoryLinkDO">
 		UPDATE base_front_category_link
 		SET
-					category_id = #{categoryId},
+					front_category_id = #{frontCategoryId},
 					link_type = #{linkType},
 					link_content = #{linkContent},
 					large_category_ids = #{largeCategoryIds},
@@ -112,7 +112,7 @@
 	<update id="MybatisFrontCategoryLinkDAO_update_dynamic" parameterType="ng.bayue.base.domain.FrontCategoryLinkDO">
 		UPDATE base_front_category_link
 		<set>
-					<if test="categoryId != null ">category_id=#{categoryId},</if>
+					<if test="frontCategoryId != null ">front_category_id=#{frontCategoryId},</if>
 					<if test="linkType != null ">link_type=#{linkType},</if>
 					<if test="linkContent != null  and linkContent != '' ">link_content=#{linkContent},</if>
 					<if test="largeCategoryIds != null  and largeCategoryIds != '' ">large_category_ids=#{largeCategoryIds},</if>
@@ -160,7 +160,7 @@
         </selectKey>
         INSERT INTO base_front_category_link(
 				id,
-				category_id,
+				front_category_id,
 				link_type,
 				link_content,
 				large_category_ids,
@@ -177,7 +177,7 @@
 			<foreach collection="list" index="index" item="item" separator=",">
 			  (
 				#{item.id},
-				#{item.categoryId},
+				#{item.frontCategoryId},
 				#{item.linkType},
 				#{item.linkContent},
 				#{item.largeCategoryIds},

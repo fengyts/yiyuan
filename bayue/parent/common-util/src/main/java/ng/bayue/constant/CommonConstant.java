@@ -25,7 +25,7 @@ public interface CommonConstant {
 	 * @author fengyts
 	 * @version $Id: CommonConstant.java, v 0.1 2016年7月23日 上午10:23:03 fengyts Exp $
 	 */
-	public interface isSuccess{
+	public interface IsSuccess{
 		/** 成功 */
 		int SUCCESS = 1;
 		boolean SUCCESS_BOOL = Boolean.TRUE;
@@ -42,7 +42,7 @@ public interface CommonConstant {
 	 * @author fengyts
 	 * @version $Id: CommonConstant.java, v 0.1 2016年7月23日 上午10:23:37 fengyts Exp $
 	 */
-	public interface resultStatusCode{
+	public interface ResultStatusCode{
 		int FAILURE = -1;
 		boolean FAILURE_BOOL = Boolean.FALSE;
 	}

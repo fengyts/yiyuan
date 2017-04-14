@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import ng.bayue.common.Page;
 import ng.bayue.exception.DAOException;
-import ng.bayue.exception.ServiceException;
 import ng.bayue.user.domain.ConsigneeAddressDO;
+import ng.bayue.user.exception.ServiceException;
 import ng.bayue.user.persist.dao.ConsigneeAddressDAO;
 import ng.bayue.user.service.ConsigneeAddressService;
 

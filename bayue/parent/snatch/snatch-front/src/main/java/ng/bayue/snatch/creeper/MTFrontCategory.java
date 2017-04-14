@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import ng.bayue.base.domain.FrontCategoryDO;
 import ng.bayue.base.domain.FrontCategoryLinkDO;
-import ng.bayue.base.dto.FrontCategoryDTO;
+import ng.bayue.base.dto.FrontCategoryViewDTO;
 import ng.bayue.base.service.FrontCategoryLinkService;
 import ng.bayue.base.service.FrontCategoryService;
 import ng.bayue.util.net.RequestUtils;
@@ -71,14 +71,13 @@ public class MTFrontCategory {
 				fc.setIsPublish(true);
 				listData.add(fc);
 				countfc++;
-				List<FrontCategoryDTO> childs = fc1.getChilds();
-				for (FrontCategoryDTO fcdto : childs) {
+				List<FrontCategoryViewDTO> childs = fc1.getChilds();
+				for (FrontCategoryViewDTO fcdto : childs) {
 					FrontCategoryDO fcc = new FrontCategoryDO();
 					BeanUtils.copyProperties(fcc, fcdto);
 					fcc.setParentId(id);
 					fcc.setSort(fcdto.getSeq());
 					fcc.setCode(id.toString());
-					fcc.setParentId(0L);
 					fcc.setStatus(true);
 					fcc.setIsPublish(true);
 					fcc.setCreateTime(date);
@@ -90,7 +89,7 @@ public class MTFrontCategory {
 					//跳转链接
 					FrontCategoryLinkDO fcl = new FrontCategoryLinkDO();
 //					BeanUtils.copyProperties(fcl, fcdto);
-					fcl.setCategoryId(fcdto.getId());
+					fcl.setFrontCategoryId(fcdto.getId());
 					String appUrlLink = fcdto.getAppUrlLink();
 					fcl.setLinkUrlApp(appUrlLink == null ? "" : appUrlLink);
 					String pcUrlLink = fcdto.getPcUrlLink();
@@ -116,14 +115,14 @@ public class MTFrontCategory {
 			}
 		}
 		
-//		frontCategoryService.insertBatch(listData);
+		frontCategoryService.insertBatch(listData);
 //		frontCategoryLinkService.insertBatch(linkData);
 
 	}
 
 }
 
-class FrontCategory1 extends FrontCategoryDTO {
+class FrontCategory1 extends FrontCategoryViewDTO {
 
 	private static final long serialVersionUID = 5875715204156889060L;
 

@@ -45,7 +45,7 @@ public class DfsAO {
 	public int deleteFile(String fileId) {
 		if (StringUtils.isEmpty(fileId)) {
 			logger.info("file is not exists - {}", fileId);
-			return CommonConstant.resultStatusCode.FAILURE;
+			return CommonConstant.ResultStatusCode.FAILURE;
 		}
 		int res = dfsService.deleteFile1(fileId);
 		return res;

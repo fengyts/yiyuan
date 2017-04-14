@@ -64,4 +64,9 @@ public class MybatisFrontCategoryDAO extends MybatisBaseDAO implements FrontCate
 		return getSqlSession().insert(getStatement("insertBatch"), list);
 	}
 
+	@Override
+	public String selectMaxCodeDynamic(FrontCategoryDO fc) {
+		return getSqlSession().selectOne(getStatement("select_dynamic_code"), fc);
+	}
+
 }
