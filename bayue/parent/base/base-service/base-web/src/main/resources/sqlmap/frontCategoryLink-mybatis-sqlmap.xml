@@ -89,18 +89,18 @@
 	<update id="MybatisFrontCategoryLinkDAO_updateById" parameterType="ng.bayue.base.domain.FrontCategoryLinkDO">
 		UPDATE base_front_category_link
 		SET
-					front_category_id = #{frontCategoryId},
-					link_type = #{linkType},
-					link_content = #{linkContent},
-					large_category_ids = #{largeCategoryIds},
-					small_category_ids = #{smallCategoryIds},
-					link_url_pc = #{linkUrlPc},
-					link_url_app = #{linkUrlApp},
-					link_url_wap = #{linkUrlWap},
-					status = #{status},
-					create_user_id = #{createUserId},
-					modify_user_id = #{modifyUserId},
-					modify_time = #{modifyTime}
+				front_category_id = #{frontCategoryId},
+				link_type = #{linkType},
+				link_content = #{linkContent},
+				large_category_ids = #{largeCategoryIds},
+				small_category_ids = #{smallCategoryIds},
+				link_url_pc = #{linkUrlPc},
+				link_url_app = #{linkUrlApp},
+				link_url_wap = #{linkUrlWap},
+				status = #{status},
+				create_user_id = #{createUserId},
+				modify_user_id = #{modifyUserId},
+				modify_time = #{modifyTime}
 		WHERE
 			id = #{id}
 	</update>
@@ -112,20 +112,38 @@
 	<update id="MybatisFrontCategoryLinkDAO_update_dynamic" parameterType="ng.bayue.base.domain.FrontCategoryLinkDO">
 		UPDATE base_front_category_link
 		<set>
-					<if test="frontCategoryId != null ">front_category_id=#{frontCategoryId},</if>
-					<if test="linkType != null ">link_type=#{linkType},</if>
-					<if test="linkContent != null  and linkContent != '' ">link_content=#{linkContent},</if>
-					<if test="largeCategoryIds != null  and largeCategoryIds != '' ">large_category_ids=#{largeCategoryIds},</if>
-					<if test="smallCategoryIds != null  and smallCategoryIds != '' ">small_category_ids=#{smallCategoryIds},</if>
-					<if test="linkUrlPc != null  and linkUrlPc != '' ">link_url_pc=#{linkUrlPc},</if>
-					<if test="linkUrlApp != null  and linkUrlApp != '' ">link_url_app=#{linkUrlApp},</if>
-					<if test="linkUrlWap != null  and linkUrlWap != '' ">link_url_wap=#{linkUrlWap},</if>
-					<if test="status != null ">status=#{status},</if>
-					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
-					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
-					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+				<if test="frontCategoryId != null ">front_category_id=#{frontCategoryId},</if>
+				<if test="linkType != null ">link_type=#{linkType},</if>
+				<if test="linkContent != null  and linkContent != '' ">link_content=#{linkContent},</if>
+				<if test="largeCategoryIds != null  and largeCategoryIds != '' ">large_category_ids=#{largeCategoryIds},</if>
+				<if test="smallCategoryIds != null  and smallCategoryIds != '' ">small_category_ids=#{smallCategoryIds},</if>
+				<if test="linkUrlPc != null  and linkUrlPc != '' ">link_url_pc=#{linkUrlPc},</if>
+				<if test="linkUrlApp != null  and linkUrlApp != '' ">link_url_app=#{linkUrlApp},</if>
+				<if test="linkUrlWap != null  and linkUrlWap != '' ">link_url_wap=#{linkUrlWap},</if>
+				<if test="status != null ">status=#{status},</if>
+				<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+				<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+				<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
 		</set>
 		WHERE id = #{id}
+	</update>
+	
+	<update id="MybatisFrontCategoryLinkDAO_updateByFrontCateId_dynamic">
+		UPDATE base_front_category_link
+		<set>
+				<if test="linkType != null ">link_type=#{linkType},</if>
+				<if test="linkContent != null  and linkContent != '' ">link_content=#{linkContent},</if>
+				<if test="largeCategoryIds != null  and largeCategoryIds != '' ">large_category_ids=#{largeCategoryIds},</if>
+				<if test="smallCategoryIds != null  and smallCategoryIds != '' ">small_category_ids=#{smallCategoryIds},</if>
+				<if test="linkUrlPc != null  and linkUrlPc != '' ">link_url_pc=#{linkUrlPc},</if>
+				<if test="linkUrlApp != null  and linkUrlApp != '' ">link_url_app=#{linkUrlApp},</if>
+				<if test="linkUrlWap != null  and linkUrlWap != '' ">link_url_wap=#{linkUrlWap},</if>
+				<if test="status != null ">status=#{status},</if>
+				<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+				<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+				<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE front_category_id = #{frontCategoryId}
 	</update>
 
  	<select id="MybatisFrontCategoryLinkDAO_select_dynamic" resultMap="FrontCategoryLinkDOResultMap" parameterType="ng.bayue.base.domain.FrontCategoryLinkDO">

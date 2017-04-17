@@ -203,8 +203,10 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			fcLink.setId(null);
 			fcLink.setModifyTime(date);
 			fcLink.setModifyUserId(userId);
-			frontCategoryLinkDAO.updateDynamic(fcLink);
-
+			frontCategoryLinkDAO.updateByFrontCateId(fcLink);
+			
+			redisCacheService.deleteRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL);
+			
 			return 1;
 		} catch (Exception e) {
 			logger.info("更新前台类目失败: {}", e);

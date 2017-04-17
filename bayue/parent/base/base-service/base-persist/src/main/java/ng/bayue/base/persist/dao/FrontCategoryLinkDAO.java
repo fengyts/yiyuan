@@ -22,4 +22,14 @@ public interface FrontCategoryLinkDAO extends GeneralDAO<FrontCategoryLinkDO> {
 	 */
 	int insertBatch(List<FrontCategoryLinkDO> list);
 	
+	/**
+	 * <pre>
+	 * 根据前台分类id更新链接信息
+	 * </pre>
+	 *
+	 * @param fcLinkDO
+	 * @return
+	 */
+	int updateByFrontCateId(FrontCategoryLinkDO fcLinkDO) ;
+	
 }

@@ -38,6 +38,11 @@ public class MybatisFrontCategoryLinkDAO extends MybatisBaseDAO implements Front
 	public Integer updateDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws DAOException {
 		return getSqlSession().update(getStatement("update_dynamic"), frontCategoryLinkDO);
 	}
+	
+	@Override
+	public int updateByFrontCateId(FrontCategoryLinkDO fcLinkDO) {
+		return getSqlSession().update(getStatement("updateByFrontCateId_dynamic"), fcLinkDO);
+	}
 
 	@Override
 	public FrontCategoryLinkDO selectById(Long id) throws DAOException {
