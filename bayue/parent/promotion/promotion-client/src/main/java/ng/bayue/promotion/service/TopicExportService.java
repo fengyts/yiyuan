@@ -1,5 +1,7 @@
 package ng.bayue.promotion.service;
 
+import java.util.List;
+
 import ng.bayue.common.Page;
 import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.dto.TopicItemDTO;
@@ -28,7 +30,7 @@ public interface TopicExportService {
 
 	/**
 	 * <pre>
-	 * 获取某一个专题下面的所有商品
+	 * 分页获取某一个专题下面的所有商品
 	 * </pre>
 	 *
 	 * @param topicId
@@ -37,5 +39,25 @@ public interface TopicExportService {
 	 * @return
 	 */
 	Page<TopicItemDTO> queryTopicItemByTopicId(Long topicId, Integer pageNo, Integer pageSize);
+
+	/**
+	 * <pre>
+	 * 获取热销商品列表
+	 * </pre>
+	 *
+	 * @param pageSize
+	 * @return
+	 */
+	List<TopicItemDTO> listItemHot(Integer pageNo, Integer pageSize);
+
+	/**
+	 * <pre>
+	 * 分页获取热销商品
+	 * </pre>
+	 *
+	 * @param pageSize
+	 * @return
+	 */
+	Page<TopicItemDTO> queryPageListItemHot(Integer pageNo, Integer pageSize);
 
 }

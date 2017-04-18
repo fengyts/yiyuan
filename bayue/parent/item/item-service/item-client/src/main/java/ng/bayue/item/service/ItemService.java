@@ -2,8 +2,10 @@ package ng.bayue.item.service;
 
 import java.util.List;
 
+import ng.bayue.common.Page;
 import ng.bayue.item.domain.CarouselDO;
 import ng.bayue.item.domain.ItemDescDO;
+import ng.bayue.item.dto.ItemDetailDTO;
 
 /**
  * <pre>
@@ -26,6 +28,7 @@ public interface ItemService {
 	 * @return
 	 */
 	@Deprecated
-	List<CarouselDO> listCarousel();
+	List<CarouselDO> getAllCarousel();
+	
 
 }
