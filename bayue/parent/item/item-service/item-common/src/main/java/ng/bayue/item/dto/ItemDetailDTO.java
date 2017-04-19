@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import ng.bayue.item.domain.DetailSpecDO;
+import ng.bayue.item.domain.ItemPicturesDO;
 
 public class ItemDetailDTO implements Serializable {
 
@@ -118,6 +119,12 @@ public class ItemDetailDTO implements Serializable {
 	
 	/** 关联图片id列表 */
 	private String pictureIds;
+	
+	/** 关联图片地址,多个以逗号分隔 */
+	private String picUrls;
+	
+	/**  关联图片列表 */
+	private List<ItemPicturesDO> listPicUrls;
 	
 	/** 商品详情描述信息 */
 	@NotBlank(message = "商品描述信息不能为空")
@@ -406,6 +413,22 @@ public class ItemDetailDTO implements Serializable {
 
 	public void setListSpecGroups(List<DetailSpecDO> listSpecGroups) {
 		this.listSpecGroups = listSpecGroups;
+	}
+
+	public String getPicUrls() {
+		return picUrls;
+	}
+
+	public void setPicUrls(String picUrls) {
+		this.picUrls = picUrls;
+	}
+
+	public List<ItemPicturesDO> getListPicUrls() {
+		return listPicUrls;
+	}
+
+	public void setListPicUrls(List<ItemPicturesDO> listPicUrls) {
+		this.listPicUrls = listPicUrls;
 	}
 
 }

@@ -10,6 +10,18 @@
 	        	<div id="dndArea">
 	        		<div id="filePicker"></div>
 	        	</div>
+	        	<#-- 编辑图片时图片回显 -->
+	        	<#if picUrlList?default([])?size!=0>
+	        		<ul class="filelist">
+	        		<#list picUrlList as picUrl>
+	        			<li>
+	        				<p class="imgWrap">
+	        					<img src="${picUrl.picture}" />
+	        				</p>
+	        			</li>
+	        		</#list>
+	        		</ul>
+	        	</#if>
 	        	<#--
 	            <div id="dndArea" class="placeholder">
 	                <div id="filePicker"></div>
@@ -31,6 +43,7 @@
 	    </div>
 	    <!-- 上传成功后文件url路径 -->
 	    <div id="imgReturnUrls" style="display:none;">
+	    	<input type="hidden" name="picUrls" id="picUrlsInput">
 	    </div>
 	    
 	</div>

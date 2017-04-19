@@ -579,9 +579,14 @@
 			}
 //			$('#' + file.id).find('.progress').fadeOut(); // 隐藏上传进度条
 			var res = JSON.parse(response);
+			/*
 			var pics = $("#imgReturnUrls").text();
 			pics += res.path + ",";
 			$("#imgReturnUrls").text(pics);
+			*/
+			var picUrls = $("#picUrlsInput").val();
+			picUrls += res.path + ",";
+			$("#picUrlsInput").val(picUrls);
 		});
 
         $upload.on('click', function() {

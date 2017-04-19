@@ -9,6 +9,7 @@ import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.persist.dao.ItemPicturesDAO;
 import ng.bayue.item.service.ItemPicturesService;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,6 +139,32 @@ public class ItemPicturesServiceImpl  implements ItemPicturesService{
 			return this.queryPageListByItemPicturesDO(itemPicturesDO);
 		}
 		return new Page<ItemPicturesDO>();
+	}
+
+	@Override
+	public int insertBatch(List<ItemPicturesDO> listPics) {
+		if(CollectionUtils.isEmpty(listPics)){
+			return -1;
+		}
+		try {
+			return itemPicturesDAO.insertBatch(listPics);
+		} catch (Exception e) {
+			logger.info("批量插入商品图片异常:{}", e);
+		}
+		return -1;
+	}
+
+	@Override
+	public List<ItemPicturesDO> selectByDetailIds(List<Long> detailIds) {
+		if(CollectionUtils.isEmpty(detailIds)){
+			return null;
+		}
+		try {
+			return itemPicturesDAO.selectByDetailIds(detailIds);
+		} catch (Exception e) {
+			logger.info("根据detailId列表获取商品图片异常:{}", e);
+		}
+		return null;
 	}
 
 }

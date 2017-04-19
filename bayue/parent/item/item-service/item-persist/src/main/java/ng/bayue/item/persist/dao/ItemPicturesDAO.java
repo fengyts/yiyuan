@@ -1,6 +1,7 @@
 package ng.bayue.item.persist.dao;
 
 import java.util.List;
+
 import ng.bayue.item.domain.ItemPicturesDO;
 import ng.bayue.item.exception.DAOException;
 
@@ -91,4 +92,25 @@ public interface ItemPicturesDAO {
 	 * @author longhaisheng 2016-07-13 13:17:51
 	 */
 	List<ItemPicturesDO> selectDynamicPageQuery(ItemPicturesDO itemPicturesDO) throws DAOException;
+
+	/**
+	 * <pre>
+	 * 批量插入图片信息
+	 * </pre>
+	 *
+	 * @param listPics
+	 * @return
+	 */
+	int insertBatch(List<ItemPicturesDO> listPics);
+
+	/**
+	 * <pre>
+	 * 根据detailId列表获取商品图片信息
+	 * </pre>
+	 *
+	 * @param detailIds
+	 * @return
+	 */
+	List<ItemPicturesDO> selectByDetailIds(List<Long> detailIds);
+	
 }

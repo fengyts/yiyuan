@@ -12,16 +12,19 @@ import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
 import ng.bayue.common.Page;
+import ng.bayue.fastdfs.ImageUrlUtil;
 import ng.bayue.item.constant.ItemDetailConstant;
 import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
+import ng.bayue.item.domain.ItemPicturesDO;
 import ng.bayue.item.dto.ItemDTO;
 import ng.bayue.item.dto.ItemDetailDTO;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
 import ng.bayue.item.service.ItemManagerService;
+import ng.bayue.item.service.ItemPicturesService;
 import ng.bayue.item.service.ItemService;
 import ng.bayue.promotion.service.TopicItemService;
 
@@ -40,13 +43,17 @@ import com.alibaba.fastjson.JSONObject;
 public class ItemDetailAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(ItemDetailAO.class);
-
+	
+	@Autowired
+	private ImageUrlUtil imageUrlUtil;
 	@Autowired
 	private ItemDetailService itemDetailService;
 	@Autowired
 	private ItemInfoService itemInfoService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ItemPicturesService picturesService;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
@@ -80,14 +87,18 @@ public class ItemDetailAO {
 		List<Long> smallIds = new ArrayList<Long>();
 		List<Long> largeIds = new ArrayList<Long>();
 		List<Long> unitIds = new ArrayList<Long>();
+//		List<Long> detailIds = new ArrayList<Long>(); // 根据detialIds获取图片列表
 		for (ItemDetailDO detailDOTemp : list) {
 			largeIds.add(detailDOTemp.getLargeId());
 			smallIds.add(detailDOTemp.getSmallId());
 			unitIds.add(detailDOTemp.getUnitId());
+//			detailIds.add(detailDOTemp.getId());
 		}
 		List<CategoryDO> listCate = categoryService.selectByIds(largeIds);
 		List<CategoryDO> listCateSmall = categoryService.selectByIds(smallIds);
 		List<DictionaryDO> listUnit = dictionaryService.selectByIds(unitIds);
+		// 获取图片列表
+//		List<ItemPicturesDO> listPics = picturesService.selectByDetailIds(detailIds);
 
 		for (ItemDetailDO detail : list) {
 			ItemDTO dto = new ItemDTO();
@@ -130,7 +141,7 @@ public class ItemDetailAO {
 					}
 				}
 			}
-
+			
 			try {
 				BeanUtils.copyProperties(dto, detail);
 				listRes.add(dto);
@@ -260,6 +271,13 @@ public class ItemDetailAO {
 				detailDto.setUnitId(unitId);
 				detailDto.setUnitName(dicDO.getName());
 			}
+			ItemPicturesDO picDO = new ItemPicturesDO();
+			picDO.setDetailId(detailId);
+			List<ItemPicturesDO> listPics = picturesService.selectDynamic(picDO);
+			for(ItemPicturesDO picDOTemp : listPics){
+				picDOTemp.setPicture(imageUrlUtil.getFileFullUrl(picDOTemp.getPicture()));
+			}
+			detailDto.setListPicUrls(listPics);
 			return detailDto;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);

@@ -104,4 +104,24 @@ public interface ItemPicturesService {
 	 */
 	Page<ItemPicturesDO> queryPageListByItemPicturesDOAndStartPageSize(ItemPicturesDO itemPicturesDO,int startPage,int pageSize);
 
+	/**
+	 * <pre>
+	 * 批量插入图片信息
+	 * </pre>
+	 *
+	 * @param listPics
+	 * @return
+	 */
+	int insertBatch(List<ItemPicturesDO> listPics);
+
+	/**
+	 * <pre>
+	 * 根据detialId列表获取图片信息
+	 * </pre>
+	 *
+	 * @param detailIds
+	 * @return
+	 */
+	List<ItemPicturesDO> selectByDetailIds(List<Long> detailIds);
+
 }

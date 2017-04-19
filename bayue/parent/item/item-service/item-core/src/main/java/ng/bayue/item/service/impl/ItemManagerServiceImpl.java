@@ -10,6 +10,7 @@ import ng.bayue.item.domain.DetailSpecDO;
 import ng.bayue.item.domain.ItemDescDO;
 import ng.bayue.item.domain.ItemDetailDO;
 import ng.bayue.item.domain.ItemInfoDO;
+import ng.bayue.item.domain.ItemPicturesDO;
 import ng.bayue.item.dto.ItemDetailDTO;
 import ng.bayue.item.exception.ServiceException;
 import ng.bayue.item.service.CodeService;
@@ -18,6 +19,7 @@ import ng.bayue.item.service.ItemDescService;
 import ng.bayue.item.service.ItemDetailService;
 import ng.bayue.item.service.ItemInfoService;
 import ng.bayue.item.service.ItemManagerService;
+import ng.bayue.item.service.ItemPicturesService;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -55,6 +57,8 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 	private ItemDescService itemDescService;
 	@Autowired
 	private DetailSpecService detailSpecService;
+	@Autowired
+	private ItemPicturesService picturesService;
 	
 	@Override
 	@Deprecated
@@ -119,8 +123,8 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 			String prdid = codeService.getUniqueCode(spu, CodeConstant.CodeType.PRDID_CODE);
 			BeanUtils.copyProperties(detailDO, detailDto);
 			detailDO.setPrdid(prdid);
-			Long id = itemDetailService.insert(detailDO);
-			if(id < 1){
+			Long detailId = itemDetailService.insert(detailDO);
+			if(detailId < 1){
 				throw new ServiceException("保存商品详情出错");
 			}
 			
@@ -128,7 +132,7 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 			Long userId = detailDto.getCreateUserId();
 			//保存详情描述信息
 			ItemDescDO descDO = new ItemDescDO();
-			descDO.setDetailId(id);
+			descDO.setDetailId(detailId);
 			descDO.setDescription(description);
 			descDO.setItemId(detailDto.getItemId());
 			descDO.setCreateTime(date);
@@ -145,7 +149,7 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 				for(DetailSpecDO specDO : listSpecGroups){
 					specDO.setCreateTime(date);
 					specDO.setModifyTime(date);
-					specDO.setDetailId(id);
+					specDO.setDetailId(detailId);
 				}
 				int res = detailSpecService.insertBatch(listSpecGroups);
 				if(res < 1){
@@ -153,7 +157,28 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 				}
 			}
 			//保存图片信息
-			return id;
+			String picUrls = detailDto.getPicUrls();
+			if(StringUtils.isNotBlank(picUrls)){
+				List<ItemPicturesDO> listPics = new ArrayList<ItemPicturesDO>();
+				String[] urls = picUrls.split(",");
+				int count = 0;
+				for(String url : urls){
+					ItemPicturesDO picDO = new ItemPicturesDO();
+					picDO.setPicture(url);
+					picDO.setDetailId(detailId);
+					picDO.setItemId(detailDto.getItemId());
+					picDO.setCreateTime(date);
+					if(count > 0){
+						picDO.setIsMaster(false);
+					} else {
+						picDO.setIsMaster(true); //第一张设置为主图
+					}
+					count ++;
+					listPics.add(picDO);
+				}
+				picturesService.insertBatch(listPics);
+			}
+			return detailId;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);
 		}
@@ -212,8 +237,8 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 				}
 			}else{
 				List<DetailSpecDO> listNewAdd = new ArrayList<DetailSpecDO>();
-				List<DetailSpecDO> listUpdate = new ArrayList<DetailSpecDO>();
-				List<DetailSpecDO> listDelete = new ArrayList<DetailSpecDO>();
+//				List<DetailSpecDO> listUpdate = new ArrayList<DetailSpecDO>();
+//				List<DetailSpecDO> listDelete = new ArrayList<DetailSpecDO>();
 				
 				Date modifyTime = detailDto.getModifyTime();
 				for(DetailSpecDO specDO : listFront){

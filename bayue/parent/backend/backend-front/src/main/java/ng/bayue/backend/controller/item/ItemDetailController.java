@@ -96,6 +96,8 @@ public class ItemDetailController extends BaseController {
 		model.addAttribute("itemStatus", ItemStatusEnum.values());
 		model.addAttribute("itemType", ItemTypeEnum.values());
 		
+		model.addAttribute("picUrlList", detailDto.getListPicUrls());
+		
 		model.addAttribute("detailSpecGroups",itemAO.listSpecGroups(detailId));
 		return BASE_VIEW + "edit";
 	}

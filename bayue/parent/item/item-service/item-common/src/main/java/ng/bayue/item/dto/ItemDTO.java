@@ -2,6 +2,9 @@ package ng.bayue.item.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import ng.bayue.item.domain.ItemPicturesDO;
 
 
 public class ItemDTO implements Serializable {
@@ -100,6 +103,11 @@ public class ItemDTO implements Serializable {
 	
 	/** 关联图片id列表 */
 	private String pictureIds;
+	
+	/** 关联图片地址,多个以逗号分隔 */
+	private String picUrls;
+	/**  关联图片列表 */
+	private List<ItemPicturesDO> listPicUrls;
 	
 	/** 商品详情描述信息 */
 	private String description;
@@ -370,6 +378,22 @@ public class ItemDTO implements Serializable {
 
 	public void setPictureIds(String pictureIds) {
 		this.pictureIds = pictureIds;
+	}
+	
+	public String getPicUrls() {
+		return picUrls;
+	}
+
+	public void setPicUrls(String picUrls) {
+		this.picUrls = picUrls;
+	}
+
+	public List<ItemPicturesDO> getListPicUrls() {
+		return listPicUrls;
+	}
+
+	public void setListPicUrls(List<ItemPicturesDO> listPicUrls) {
+		this.listPicUrls = listPicUrls;
 	}
 
 	public String getDescription() {

@@ -52,4 +52,14 @@ public class MybatisItemPicturesDAO extends MybatisBaseDAO implements ItemPictur
 		return getSqlSession().selectList("ng.bayue.item.domain.ItemPicturesMapper.MybatisItemPicturesDAO_select_dynamic_page_query", itemPicturesDO);
 	}
 
+	@Override
+	public int insertBatch(List<ItemPicturesDO> listPics) {
+		return getSqlSession().insert("ng.bayue.item.domain.ItemPicturesMapper.MybatisItemPicturesDAO_insert_batch", listPics);
+	}
+
+	@Override
+	public List<ItemPicturesDO> selectByDetailIds(List<Long> detailIds) {
+		return getSqlSession().selectList("ng.bayue.item.domain.ItemPicturesMapper.MybatisItemPicturesDAO_select_by_detailIds", detailIds);
+	}
+
 }
