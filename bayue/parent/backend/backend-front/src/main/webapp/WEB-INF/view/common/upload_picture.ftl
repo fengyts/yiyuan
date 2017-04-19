@@ -4,8 +4,8 @@
 <div id="wrapper">
 	<div id="container">
 	    <!--头部，相册选择和格式选择-->
-	
 	    <div id="uploader">
+	    	
 	        <div class="queueList">
 	        	<div id="dndArea">
 	        		<div id="filePicker"></div>
@@ -18,7 +18,7 @@
 	        	-->
 	        </div>
 	        <div class="statusBar" style="display:none;">
-	            <div class="progress">
+	            <div class="progress" >
 	                <span class="text">0%</span>
 	                <span class="percentage"></span>
 	            </div>
@@ -27,7 +27,12 @@
 	                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
 	            </div>
 	        </div>
+				        
 	    </div>
+	    <!-- 上传成功后文件url路径 -->
+	    <div id="imgReturnUrls" style="display:none;">
+	    </div>
+	    
 	</div>
 </div>
 <#--

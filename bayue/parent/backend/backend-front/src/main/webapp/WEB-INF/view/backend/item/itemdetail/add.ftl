@@ -172,7 +172,7 @@ css=[
 	
 	<#-- 商品上传图片 -->
 	<div class="form-group">
-			<#include "/common/upload_picture.ftl"/>
+		<#include "/common/upload_picture.ftl"/>
 		<div class="col-md-12">
 		</div>
 	</div>

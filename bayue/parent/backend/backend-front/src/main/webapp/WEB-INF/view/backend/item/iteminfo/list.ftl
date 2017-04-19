@@ -2,7 +2,6 @@
 
 <@backend title="商品spu管理"
 js=[
-'/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/plugin/select2/js/select2.js',
 '/statics/plugin/select2/js/select2Util.js',
 '/statics/backend/item/iteminfo.js'

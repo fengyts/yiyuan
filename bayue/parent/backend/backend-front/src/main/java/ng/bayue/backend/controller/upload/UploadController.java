@@ -66,6 +66,7 @@ public class UploadController {
 			fileName = mf.getOriginalFilename();
 			int size = (int) mf.getSize();
 			if(size > itemPictureMaxSize){
+				obj.put("success", 0);
 				obj.put("code", "F_EXCEED_SIZE_LIMIT");
 				obj.put("msg", "文件大小超过限制！");
 				logger.error("文件大小超过限制！");
@@ -87,9 +88,9 @@ public class UploadController {
 			}
 			try {
 				mf.transferTo(file);
-				//dfsPath =  dfsAO.uploadFile(file);
+				dfsPath =  dfsAO.uploadFile(file);
 			} catch (IllegalStateException | IOException e1) {
-//				fileName = null;
+				fileName = null;
 				logger.info("文件上传时保存出错:{}",e1);
 			}finally{
 				FileUtils.deleteQuietly(file);
@@ -97,17 +98,22 @@ public class UploadController {
 			
 		}
 		
-		if(StringUtils.isBlank(fileName)){
+		if(StringUtils.isBlank(dfsPath)){
 			obj.put("type", "error");
 			obj.put("errorCode", "uploadError");
+			obj.put("success", 0);
+			obj.put("code", "SERVER_INNER_ERROR");
+			obj.put("msg", "服务器错误,上传失败!");
+			logger.error("服务器错误,上传失败!");
 		}else{
 //			String wholePath = "http://"+host.substring(0, host.indexOf(":"))+"/"+dfsPath;
-			String wholePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg";
-			obj.put("path", wholePath);
-//			obj.put("path", dfsPath);
+//			String wholePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg";
+//			obj.put("path", wholePath);
+			obj.put("path", dfsPath);
 //			obj.put("path", imageUrlUtil.getFileFullUrl(dfsPath));
 			obj.put("key",dfsPath);
 			obj.put("type", "success");
+			obj.put("success", 1);
 		}
 		return obj.toJSONString();
 		

@@ -51,7 +51,7 @@ public class SpecAO {
 			return new ResultMessage(ResultMessage.Failure, Messages.ServerInnerError);
 		}
 		
-		String code = specDO.getCode().trim();
+		/*String code = specDO.getCode().trim();
 		Integer sort = specDO.getSort();
 		
 		SpecDO specDO1 = new SpecDO();
@@ -62,7 +62,7 @@ public class SpecAO {
 		if(null == sort){
 			specDO1.setSort(res.intValue());
 		}
-		specService.update(specDO1, false);
+		specService.update(specDO1, false);*/
 		return new ResultMessage();
 	}
 

@@ -13,12 +13,14 @@
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	-->
-
+	
 	<script type="text/javascript" src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<#--
 	<script type="text/javascript" src="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${domain}/statics/plugin/other/colResizable-1.3.min.js"></script>
 	-->
+	
+	<script type="text/javascript" src="${domain}/statics/plugin/layui-v1.0.2/layui/layui.js"></script>
 	
 	<script type="text/javascript" src="${domain}/statics/common/common-js/jquery.custom.extends.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>

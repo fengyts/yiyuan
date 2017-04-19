@@ -1,8 +1,6 @@
 <#include "/common/common.ftl" />
 
 <@backend title="商品管理" js=[
-'/statics/plugin/layer/layer.min.js',
-'/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/common/common-js/tab.js',
 '/statics/backend/item/itemDetail.js'
 ] 

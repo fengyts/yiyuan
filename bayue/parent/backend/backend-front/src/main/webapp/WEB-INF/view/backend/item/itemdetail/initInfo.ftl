@@ -2,7 +2,6 @@
 
 <@backend title="商品spu列表"
 js=[
-'/statics/plugin/layui-v1.0.2/layui/layui.js',
 '/statics/backend/item/itemDetail.js'
 ]
 css=[

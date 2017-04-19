@@ -13,6 +13,9 @@ $(function(){
 	//商品描述信息kindeditor placeholder信息
 	$("#description").attr("placeholder","请输入商品描述信息");
 	
+	/**
+	 * 商品新增详情
+	 */
 	$("#addItemDetail").on('click',function(){
 		addTab("item_detail_add","商品新增","/item/itemDetail/add.htm?iframeName=" + window.name);
 	});

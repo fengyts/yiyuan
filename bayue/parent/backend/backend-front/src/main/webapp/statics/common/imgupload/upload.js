@@ -1,8 +1,9 @@
 (function( $ ){
     // 当domReady的时候开始初始化
     $(function() {
+    	var $_fileSingleSize = 2000 * 1024, //200KB
+    		$_fileNums = 5;//最多5张图片
         var $wrap = $('#uploader'),
-
             // 图片容器
             $queue = $( '<ul class="filelist"></ul>' )
                 .appendTo( $wrap.find( '.queueList' ) ),
@@ -143,7 +144,7 @@
             swf: '../../dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-			server:domain+'/upload/img/item.htm',
+			server:domain+'/img/item.htm',
             // runtimeOrder: 'flash',
 
              accept: {
@@ -154,9 +155,9 @@
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
-            fileNumLimit: 300,
             fileSizeLimit: 5 * 1024 * 1024,    // 5 M
             fileSingleSizeLimit: 1 * 1024 * 1024    // 1 M
+            
         });
 
         // 拖拽时不接受 js, txt 文件。
@@ -199,11 +200,12 @@
         });
 
         // 当有文件添加进来时执行，负责view的创建
+        //==============================
         function addFile( file ) {
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
-                    '<p class="progress"><span></span></p>' +
+                    //'<p class="progress"><span></span></p>' +
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
@@ -304,14 +306,11 @@
             });
             
             $btns.on( 'click', 'span', function() {
-                var index = $(this).index(),
-                    deg;
-
+                var index = $(this).index(), deg;
                 switch ( index ) {
                     case 0:
                         uploader.removeFile( file );
                         return;
-
                     case 1:
                         file.rotation += 90;
                         break;
@@ -353,30 +352,30 @@
 
             $li.appendTo( $queue );
         }
+      // view 创建结束
+      //==============================
+        
 
         // 负责view的销毁
         function removeFile( file ) {
             var $li = $('#'+file.id);
-
             delete percentages[ file.id ];
             updateTotalProgress();
             $li.off().find('.file-panel').off().end().remove();
         }
-
+        
+        // 更新进度条
         function updateTotalProgress() {
             var loaded = 0,
                 total = 0,
                 spans = $progress.children(),
                 percent;
-
+            
             $.each( percentages, function( k, v ) {
                 total += v[ 0 ];
                 loaded += v[ 0 ] * v[ 1 ];
             } );
-
             percent = total ? loaded / total : 0;
-
-
             spans.eq( 0 ).text( Math.round( percent * 100 ) + '%' );
             spans.eq( 1 ).css( 'width', Math.round( percent * 100 ) + '%' );
             updateStatus();
@@ -394,7 +393,6 @@
                     text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
                         stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
                 }
-
             } else {
                 stats = uploader.getStats();
                 text = '共' + fileCount + '张（' +
@@ -427,7 +425,6 @@
                     $statusBar.addClass( 'element-invisible' );
                     uploader.refresh();
                     break;
-
                 case 'ready':
                     $placeHolder.addClass( 'element-invisible' );
                     $( '#filePicker2' ).removeClass( 'element-invisible');
@@ -435,18 +432,15 @@
                     $statusBar.removeClass('element-invisible');
                     uploader.refresh();
                     break;
-
                 case 'uploading':
                     $( '#filePicker2' ).addClass( 'element-invisible' );
                     $progress.show();
                     $upload.text( '暂停上传' );
                     break;
-
                 case 'paused':
                     $progress.show();
                     $upload.text( '继续上传' );
                     break;
-
                 case 'confirm':
                     $progress.hide();
                     $( '#filePicker2' ).removeClass( 'element-invisible' );
@@ -481,11 +475,29 @@
             percentages[ file.id ][ 1 ] = percentage;
             updateTotalProgress();
         };
-
+        
+        /**
+         * 文件加入队列之前
+         */
+        uploader.on( 'beforeFileQueued', function(file){
+			var _size = file.size;
+			if(_size > $_fileSingleSize){
+				alert("单张图片大小不得超过200kb");
+				return false;
+			}
+			var _fileNums = this.getFiles().length + 1 - this.getFiles('cancelled').length;
+			if(_fileNums > $_fileNums){
+				alert("最多5张图片");
+				return false;
+			}
+		});
+        
+        /**
+         * 文件加入队列时
+         */
         uploader.onFileQueued = function( file ) {
             fileCount++;
             fileSize += file.size;
-
             if ( fileCount === 1 ) {
                 $placeHolder.addClass( 'element-invisible' );
                 $statusBar.show();
@@ -495,7 +507,11 @@
             setState( 'ready' );
             updateTotalProgress();
         };
-
+        
+        
+        /**
+         * 文件被移除队列
+         */
         uploader.onFileDequeued = function( file ) {
             fileCount--;
             fileSize -= file.size;
@@ -526,6 +542,16 @@
 
             }
         });
+        
+        //当某个文件上传到服务端响应后，会派送此事件来询问服务端响应是否有效。如果此事件handler返回值为false, 则此文件将派送server类型的uploadError事件。
+        //及判断是否上传成功
+        uploader.on("uploadAccept", function( file, data){ 
+        	var res = JSON.parse(data);
+        	if(res.success == 0){
+        		return false;
+        	}
+        	return true;
+        });
 
         uploader.onError = function( code ) {
         	switch(code) {
@@ -541,6 +567,22 @@
         	}
         	alert( 'Error: ' + text );
         };
+        
+        uploader.on('uploadSuccess', function( file, response ) {
+			var _queue = uploader._widgets[4];
+			if( response.code && response.code === 'F_EXCEED_SIZE_LIMIT' ){
+				var  text = '文件大小超出,最大200KB';
+//				 uploader.removeFile( file, true );
+				_queue.removeFile(file, true);
+				alert( 'Error: ' + text );
+				return false;
+			}
+//			$('#' + file.id).find('.progress').fadeOut(); // 隐藏上传进度条
+			var res = JSON.parse(response);
+			var pics = $("#imgReturnUrls").text();
+			pics += res.path + ",";
+			$("#imgReturnUrls").text(pics);
+		});
 
         $upload.on('click', function() {
             if ( $(this).hasClass( 'disabled' ) ) {
@@ -561,7 +603,13 @@
         } );
 
         $info.on( 'click', '.ignore', function() {
-            alert( 'todo' );
+//            alert( 'todo' );
+        	$(".filelist").find(".state-error").each(function(i){
+        		var files = uploader.getFiles("error");
+        		$.each(files,function(i,n){
+        			removeFile(n);
+        		});
+        	});
         } );
 
         $upload.addClass( 'state-' + state );
