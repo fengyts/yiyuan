@@ -76,7 +76,9 @@
 				  <#if listSpec?default([])?size!=0>
 				  	 <#list listSpec as spec>
 				  	 	<tr class="specTr">
-				  	 		<td class="td_center">${spec.id}</td>
+				  	 		<td class="td_center">${spec.id}
+				  	 			<input type="hidden" name="specIds" value="${spec.id}">
+				  	 		</td>
 				  	 		<td class="td_center">${spec.spec}</td>
 				  	 		<td class="td_center"><input type="text" class="input-text" size="10" value="${spec.sort}"/></td>
 				  	 		<td class="td_center">${(spec.status=='true')?string("有效","无效")}</td>

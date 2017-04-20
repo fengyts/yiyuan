@@ -91,9 +91,9 @@ $(document).ready(function(){
 	
 	$("#specGroupUpdateBtn").on('click',function(){
 		
-		var specData = getSpecData();
-		console.log(specData);
-		return ;
+//		var specData = getSpecData();
+//		console.log(specData);
+//		return ;
 		
 		$.ajax({
 			url : 'update',

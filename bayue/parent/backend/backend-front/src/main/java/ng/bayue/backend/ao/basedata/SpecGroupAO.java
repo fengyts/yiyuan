@@ -117,7 +117,10 @@ public class SpecGroupAO {
 	}
 	
 	public ResultMessage updateSpecGroup(SpecGroupDO specGroupDO){
-		
+		int res = specGroupService.update(specGroupDO, false);
+		if(res < 0){
+			return ResultMessage.serverInnerError();
+		}
 		return new ResultMessage();
 	}
 	

@@ -59,8 +59,7 @@ public class SpecGroupController {
 	@RequestMapping({"/update"})
 	@ResponseBody
 	public ResultMessage update(SpecGroupDO specGroupDO){
-		ResultMessage msg = new ResultMessage();
-		return msg;
+		return specGroupAO.updateSpecGroup(specGroupDO);
 	}
 	
 	@RequestMapping({"/listSpec"})
