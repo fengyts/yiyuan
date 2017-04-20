@@ -51,7 +51,7 @@ $(function(){
 			langType: "zh_CN",
 			filterMode: false,
 //			uploadJson : domain + '/item/uploadItemEditor.htm?sid='+sessionId,
-			uploadJson : domain + '/upload/uploadItemEditor.htm',
+			uploadJson : domain + '/uploadImg/uploadItemEditor.htm',
 			imageSizeLimit : "300KB",
 			allowFileManager: false,
 			afterChange: function() {

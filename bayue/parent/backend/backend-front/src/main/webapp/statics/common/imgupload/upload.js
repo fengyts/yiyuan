@@ -144,7 +144,7 @@
             swf: '../../dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-			server:domain+'/img/item.htm',
+			server:domain+'/uploadImg/img/item.htm',
             // runtimeOrder: 'flash',
 
              accept: {

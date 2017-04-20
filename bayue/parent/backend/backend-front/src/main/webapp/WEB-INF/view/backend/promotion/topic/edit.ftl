@@ -1,4 +1,4 @@
-<#include "/common/common.ftl" />
+<#include "/common/common1.ftl" />
 
 <@backend title="编辑新增" 
 js=[
@@ -33,8 +33,8 @@ css=[
 		<label class="col-md-2 control-label">是否测试专场<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="isTest" name="isTest">
-				<option value='0'>否</option>
-				<option value='1'>是</option>
+				<option value='0' <#if topicDO.isTest != 'true'>selected</#if>>否</option>
+				<option value='1' <#if topicDO.isTest == 'true'>selected</#if>>是</option>
 			</select>
 		</div>
 	</div>
@@ -43,15 +43,15 @@ css=[
 		<div class="col-md-4">
 			<select class="form-control" id="type" name="type">
 				<#list topicType as type>
-					<option value='${type.code}'>${type.desc}</option>
+					<option value='${type.code}' <#if type.code == topicDO.type>selected</#if>>${type.desc}</option>
 				</#list>
 			</select>
 		</div>
 		<label class="col-md-2 control-label">专题状态<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="status" name="status">
-				<option value='1'>有效</option>
-				<option value='0'>无效</option>
+				<option value='1' <#if topicDO.status == '1'>selected</#if>>有效</option>
+				<option value='0' <#if topicDO.status == '0'>selected</#if>>无效</option>
 			</select>
 		</div>
 	</div>
@@ -59,15 +59,15 @@ css=[
 		<label class="col-md-2 control-label">是否长期有效<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="durationType" name="durationType">
-				<option value='1'>长期有效</option>
-				<option value='0'>固定期限</option>
+				<option value='1' <#if topicDO.durationType == 'true'>selected</#if>>长期有效</option>
+				<option value='0' <#if topicDO.durationType != 'true'>selected</#if>>固定期限</option>
 			</select>
 		</div>
 		<label class="col-md-2 control-label">专题进度<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="progress" name="progress">
 				<#list topicProgress as progress>
-					<option value='${progress.code}'>${progress.desc}</option>
+					<option value='${progress.code}' <#if progress.code == topicDO.progress>selected</#if>>${progress.desc}</option>
 				</#list>
 			</select>
 		</div>
@@ -80,7 +80,7 @@ css=[
 		</div>
 		<label class="col-md-2 control-label">专题结束时间<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="endTime" name="endTime" value="${(topicDO.endTime?string('yyyy-MM-dd'))!}" 
+			<input type="text" class="form-control Wdate" disabled="disabled" id="endTime" name="endTime" value="${(topicDO.endTime?string('yyyy-MM-dd'))!}" 
     			onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
 		</div>
 	</div>
@@ -93,8 +93,8 @@ css=[
 		<label class="col-md-2 control-label">是否锁定排序位置<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="sortLock" name="sortLock">
-				<option value='0'>未锁定</option>
-				<option value='1'>锁定</option>
+				<option value='0' <#if topicDO.sortLock != 'true'>selected</#if>>未锁定</option>
+				<option value='1' <#if topicDO.sortLock == 'true'>selected</#if>>锁定</option>
 			</select>
 		</div>
 	</div>
@@ -111,13 +111,13 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">专题描述</label>
 		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="description" name="description" value="${topicDO.description}"></textarea>
+			<textarea class="form-control" rows="2" id="description" name="description">${topicDO.description}</textarea>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-md-2 control-label">备注</label>
 		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="remark" name="remark" value="${topicDO.remark}"></textarea>
+			<textarea class="form-control" rows="2" id="remark" name="remark">${topicDO.remark}</textarea>
 		</div>
 	</div>
 	
@@ -127,7 +127,7 @@ css=[
 		<input type="hidden" id="imgChanged" name="imgChanged" value="0">
 		<div class="col-md-4">
 			<input type="file" value="浏览" id="image" name="image">
-			<div id="preview"><img width="100px" heigth="100px" src="${topicDO.image}"></div>
+			<div id="preview"><img width="200px" heigth="100px" style="border:1px solid #e5f2ff;" src="${topicDO.image}"></div>
 		</div>
 	</div>
 	

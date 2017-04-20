@@ -1,4 +1,4 @@
-<#include "/common/common.ftl" />
+<#include "/common/common1.ftl" />
 
 <@backend title="专题新增" 
 js=[
@@ -80,7 +80,7 @@ css=[
 		</div>
 		<label class="col-md-2 control-label">专题结束时间<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="endTime" name="endTime" value="${topicDO.endTime}" 
+			<input type="text" class="form-control Wdate" disabled="disabled" id="endTime" name="endTime" value="${topicDO.endTime}" 
     			onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
 		</div>
 	</div>

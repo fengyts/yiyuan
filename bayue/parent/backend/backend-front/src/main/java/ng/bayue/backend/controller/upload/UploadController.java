@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
-//@RequestMapping({"/upload"}) // 这里使用requestmapping 会出现405错误
+@RequestMapping(value = {"/uploadImg"})
 public class UploadController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
@@ -46,7 +46,7 @@ public class UploadController {
 	@Autowired
 	private ImageUrlUtil imageUrlUtil;
 	
-	@RequestMapping({"/img/item"})
+	@RequestMapping(value = {"/img/item"}, method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public String itemImgUpload(HttpServletRequest request){
 		String savePath = request.getSession().getServletContext().getRealPath(uploadTempPath);
@@ -83,7 +83,6 @@ public class UploadController {
 				Boolean b = file.mkdirs();
 				if(!b) {
 					logger.error("创建文件失败"+fileName);
-					System.out.println("创建文件失败"+fileName);
 				}
 			}
 			try {
@@ -92,7 +91,7 @@ public class UploadController {
 			} catch (IllegalStateException | IOException e1) {
 				fileName = null;
 				logger.info("文件上传时保存出错:{}",e1);
-			}finally{
+			} finally {
 				FileUtils.deleteQuietly(file);
 			}
 			

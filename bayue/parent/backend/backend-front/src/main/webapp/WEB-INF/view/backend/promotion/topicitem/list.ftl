@@ -69,7 +69,7 @@ css=[]
 				    <a href="javascript:void(0);">
 				    	<input class="btn btn82 btn_search" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
 				    </a>
-				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addTopic" />
+				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addTopicItem" />
 				    <input class="ext_btn ext_btn_submit" type ="button" value="批量修改" id="batchUpdateTopicItem" />
 				</div>
 			</div>

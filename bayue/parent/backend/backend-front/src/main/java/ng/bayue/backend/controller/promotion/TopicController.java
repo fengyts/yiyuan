@@ -27,7 +27,6 @@ import ng.bayue.common.Page;
 import ng.bayue.item.dto.ItemDTO;
 import ng.bayue.item.dto.ItemDetailDTO;
 import ng.bayue.promotion.domain.TopicDO;
-import ng.bayue.promotion.domain.TopicItemDO;
 import ng.bayue.promotion.dto.TopicDTO;
 import ng.bayue.promotion.dto.TopicItemDTO;
 import ng.bayue.promotion.enums.TopicProgressEnum;

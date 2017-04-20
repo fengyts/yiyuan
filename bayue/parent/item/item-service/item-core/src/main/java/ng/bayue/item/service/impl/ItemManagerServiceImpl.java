@@ -158,31 +158,35 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 			}
 			//保存图片信息
 			String picUrls = detailDto.getPicUrls();
-			if(StringUtils.isNotBlank(picUrls)){
-				List<ItemPicturesDO> listPics = new ArrayList<ItemPicturesDO>();
-				String[] urls = picUrls.split(",");
-				int count = 0;
-				for(String url : urls){
-					ItemPicturesDO picDO = new ItemPicturesDO();
-					picDO.setPicture(url);
-					picDO.setDetailId(detailId);
-					picDO.setItemId(detailDto.getItemId());
-					picDO.setCreateTime(date);
-					if(count > 0){
-						picDO.setIsMaster(false);
-					} else {
-						picDO.setIsMaster(true); //第一张设置为主图
-					}
-					count ++;
-					listPics.add(picDO);
-				}
-				picturesService.insertBatch(listPics);
-			}
+			saveImagePictures(detailDto, detailId, date, picUrls);
 			return detailId;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);
 		}
 		return null;
+	}
+
+	private void saveImagePictures(ItemDetailDTO detailDto, Long detailId, Date date, String picUrls) {
+		if(StringUtils.isNotBlank(picUrls)){
+			List<ItemPicturesDO> listPics = new ArrayList<ItemPicturesDO>();
+			String[] urls = picUrls.split(",");
+			int count = 0;
+			for(String url : urls){
+				ItemPicturesDO picDO = new ItemPicturesDO();
+				picDO.setPicture(url);
+				picDO.setDetailId(detailId);
+				picDO.setItemId(detailDto.getItemId());
+				picDO.setCreateTime(date);
+				if(count > 0){
+					picDO.setIsMaster(false);
+				} else {
+					picDO.setIsMaster(true); //第一张设置为主图
+				}
+				count ++;
+				listPics.add(picDO);
+			}
+			picturesService.insertBatch(listPics);
+		}
 	}
 
 	@Override
@@ -304,7 +308,8 @@ public class ItemManagerServiceImpl implements ItemManagerService {
 			
 			
 			//更新商品图片信息
-			
+			String picUrls = detailDto.getPicUrls();
+			saveImagePictures(detailDto, detailId, detailDto.getModifyTime(), picUrls);
 			return 1L;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);

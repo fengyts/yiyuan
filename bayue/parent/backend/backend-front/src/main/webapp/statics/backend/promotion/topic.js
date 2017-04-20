@@ -27,12 +27,21 @@ $(function(){
         imgview(file);
     });
 	
-	//查看关联商品
+	// 查看关联商品
 	$(".associateItemBtn").on('click', function(){
 		var topicId = $(this).attr("param"), 
 		    name = $(this).attr("param1");
 		addTab("topic_associateItem", "专题关联商品" , "/topic/topicItemList?topicId=" + topicId 
 				+ "&name=" + name + "&iframeName=" + window.name);
+	});
+	
+	// 固定期限时,放开专题结束时间可编辑
+	$("#durationType").change(this, function(v){
+		if(this.value == 0){
+			$("#endTime").attr('disabled', false);
+		}else {
+			$("#endTime").attr('disabled', true);
+		}
 	});
 	
 	

@@ -5,7 +5,8 @@ $(function() {
 //		var _url = domain + "/topic/topicItemList?topicId=" + $("#topicId").val();
 //		$("#topicItemListForm").attr('action', _url).submit();
 //	});
-
+	
+	// 专题关联商品
 	$("#associateTopicItem").on('click', function() {
 		var _topicId = $("#topicId").val();
 		pageii = layer.open({
@@ -20,6 +21,11 @@ $(function() {
 			content : domain + '/topic/initItemDetailList.htm?topicId=' + _topicId,
 		});
 
+	});
+	
+	// 专题商品列表页面新增按钮点击事件
+	$("#addTopicItem").on('click', function(){
+		layer.alert("亲，功能尚未上线,请从专题管理里面关联商品", {icon:1});
 	});
 
 	$("#cancelTabBtn,#cancelAssociateTopicItemBtn").on('click', function() {
