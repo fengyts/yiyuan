@@ -9,12 +9,12 @@ import ng.bayue.base.domain.SpecGroupLinkDO;
 import ng.bayue.base.exception.DAOException;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.SpecGroupDAO;
+import ng.bayue.base.persist.dao.SpecGroupLinkDAO;
 import ng.bayue.base.service.SpecGroupLinkService;
 import ng.bayue.base.service.SpecGroupService;
 import ng.bayue.common.Page;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class SpecGroupServiceImpl  implements SpecGroupService{
 
 	@Autowired
 	private SpecGroupDAO specGroupDAO;
-	
 	@Autowired
 	private SpecGroupLinkService specGroupLinkService;
 
@@ -194,6 +193,63 @@ public class SpecGroupServiceImpl  implements SpecGroupService{
 			return null;
 		}
 		return specGroupDAO.selectByIds(groupIds);
+	}
+
+	@Override
+	@Transactional
+	public int updateSpecGroupAndLink(SpecGroupDO specGroupDO, List<SpecGroupLinkDO> specs) throws ServiceException {
+		if(CollectionUtils.isEmpty(specs)){
+			return -1;
+		}
+		int res1 = update(specGroupDO, false);
+		
+		SpecGroupLinkDO specGroupLinkDO = new SpecGroupLinkDO();
+		specGroupLinkDO.setGroupId(specGroupDO.getId());
+		List<SpecGroupLinkDO> specLinkDb = specGroupLinkService.selectDynamic(specGroupLinkDO);
+		//List<SpecGroupLinkDO> deleteList = new ArrayList<SpecGroupLinkDO>();
+		List<SpecGroupLinkDO> modifyList = new ArrayList<SpecGroupLinkDO>();
+		for(SpecGroupLinkDO link : specLinkDb){
+			long specId = link.getSpecId();
+			int sort = link.getSort();
+			boolean isDel = true, hasModified = false;
+			for(SpecGroupLinkDO link1 : specs){
+				long specId1 = link1.getSpecId();
+				int sort1 = link1.getSort();
+				if(specId == specId1){
+					isDel = false;
+					if(sort != sort1){
+						hasModified = true;
+						modifyList.add(link1);
+						//specGroupLinkService.update(link1, false);
+					}
+				}
+			}
+			if(isDel){
+				//deleteList.add(link);
+				specGroupLinkService.deleteById(link.getId());
+			}
+		}
+		
+		specGroupLinkService.updateBatch(modifyList);
+		
+		List<SpecGroupLinkDO> newAddList = new ArrayList<SpecGroupLinkDO>();
+		for(SpecGroupLinkDO link1 : specs){
+			long specId1 = link1.getSpecId();
+			boolean isNewAdd = true;
+			for(SpecGroupLinkDO link : specLinkDb){
+				long specId = link.getSpecId();
+				if(specId1 == specId){
+					isNewAdd = false;
+					continue;
+				}
+			}
+			if(isNewAdd){
+				newAddList.add(link1);
+			}
+		}
+		specGroupLinkService.insertBatch(newAddList);
+		
+		return 1;
 	}
 
 }

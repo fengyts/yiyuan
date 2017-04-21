@@ -57,4 +57,9 @@ public class MybatisSpecGroupLinkDAO extends MybatisBaseDAO implements SpecGroup
 		getSqlSession().insert("ng.bayue.base.domain.SpecGroupLinkMapper.MybatisSpecGroupLinkDAO_insert_batch", list);
 	}
 
+	@Override
+	public int updateBatch(List<SpecGroupLinkDO> list) throws DAOException {
+		return getSqlSession().update("ng.bayue.base.domain.SpecGroupLinkMapper.MybatisSpecGroupLinkDAO_update_batch", list);
+	}
+
 }

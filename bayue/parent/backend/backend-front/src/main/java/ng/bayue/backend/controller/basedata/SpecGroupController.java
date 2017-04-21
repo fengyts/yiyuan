@@ -7,14 +7,18 @@ import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.backend.util.ResultMessage;
 import ng.bayue.base.domain.SpecDO;
 import ng.bayue.base.domain.SpecGroupDO;
+import ng.bayue.base.domain.SpecGroupLinkDO;
 import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONArray;
 
 @Controller
 @RequestMapping({"/basedata/specGroup"})
@@ -56,10 +60,11 @@ public class SpecGroupController {
 		return "/backend/basedata/spec/specGroup/edit";
 	}
 	
-	@RequestMapping({"/update"})
+	@RequestMapping(value = {"/update"})
 	@ResponseBody
-	public ResultMessage update(SpecGroupDO specGroupDO){
-		return specGroupAO.updateSpecGroup(specGroupDO);
+	public ResultMessage update(SpecGroupDO specGroupDO, String specs){
+		List<SpecGroupLinkDO> specsList = JSONArray.parseArray(specs, SpecGroupLinkDO.class);
+		return specGroupAO.updateSpecGroup(specGroupDO, specsList);
 	}
 	
 	@RequestMapping({"/listSpec"})

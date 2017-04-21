@@ -13,7 +13,7 @@ $(function() {
 			}
 			
 			var _hasSelected = false, _parentView = "";
-			var _parentSelected = window.parent.$("#specList").find("input[name='specIds']");
+			var _parentSelected = window.parent.$("#specList").find("input[name='specId']");
 			$.each(_checkedTd, function(i, v) {
 				var _id, _spec, _sort, _status;
 				var _tds = $(this).parent().parent().children();
@@ -37,10 +37,10 @@ $(function() {
 					return;
 				}
 				
-				var _parentTr = "<tr>" + "<td class='td_center'>" + _id
-						+ "<input type='hidden' name='specIds' value='" + _id + "'/>"
+				var _parentTr = "<tr  class='specTr'>" + "<td class='td_center'>" + _id
+						+ "<input type='hidden' name='specId' value='" + _id + "'/>"
 						+ "</td>" + "<td class='td_center'>" + _spec
-						+ "</td>" + "<td class='td_center'>" + _sort
+						+ "</td>" + "<td class='td_center'><input type='text' class='input-text' size='10' value='" + _sort + "'/>"
 						+ "</td>" + "<td class='td_center'>" + _status
 						+ "</td>" + "<td class='td_center'><a href='javascript:void(0);' class='unboundSpec'>删除</a>"
 						+ "</td>" + "</tr>";

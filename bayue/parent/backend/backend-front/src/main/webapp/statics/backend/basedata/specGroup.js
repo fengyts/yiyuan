@@ -9,13 +9,13 @@ $(document).ready(function(){
 	$("#specGroupAddbtn").on('click',function(){
 		pageii = $.layer({
 			type : 2,
-			title : '规格管理-->新增',
+			title : '规格组管理-->新增',
 			border: [3, 0.3, '#000'],
 			shade: [0.3, '#000'],
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
-			area: ['800px', 600],
+			area :['800px', '600px'],
 			iframe : {
 				src : domain + '/basedata/specGroup/add.htm'
 			}
@@ -26,13 +26,13 @@ $(document).ready(function(){
 		var id = $(this).attr("param"); 
 		pageii = $.layer({
 			type : 2,
-			title : '规格管理-->编辑',
+			title : '规格组管理-->编辑',
 			border: [3, 0.3, '#000'],
 			shade: [0.3, '#000'],
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
-			area :['600px', 500],
+			area :['800px', '600px'],
 			iframe: {
 				src : domain + '/basedata/specGroup/edit.htm?id=' + id
 			}
@@ -48,7 +48,7 @@ $(document).ready(function(){
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
-			area : ['550px',450],
+			area : ['550px','450px'],
 			iframe : {
 				src : domain + '/basedata/specGroup/listSpec.htm'
 			}
@@ -60,7 +60,7 @@ $(document).ready(function(){
 	});
 	
 	$("#specGroupSaveBtn").on('click',function(){
-		var _specIds = $("input[name='specIds']");
+		var _specIds = $("input[name='specId']");
 		if(_specIds.length < 1){
 			alert("必须选中规格");
 			return;
@@ -90,15 +90,16 @@ $(document).ready(function(){
 	});
 	
 	$("#specGroupUpdateBtn").on('click',function(){
-		
-//		var specData = getSpecData();
-//		console.log(specData);
-//		return ;
+		var specGroupId = $("#specGroupId").val();
+		var specData = getSpecData(specGroupId);
+		var specGroupData = $('#specGroupEditForm').serialize();
+		specGroupData += "&specs="+specData;
 		
 		$.ajax({
 			url : 'update',
 			dataType : 'text',
-			data : $('#specGroupEditForm').serialize(),
+			data : specGroupData,
+			//contentType : 'application/json;charset=utf-8',
 			type : "post",
 			cache : false,
 			error : function(request){
@@ -120,13 +121,19 @@ $(document).ready(function(){
 	
 });
 
-function getSpecData(){
+function getSpecData(groupId){
 	var _trs = $(".specTr");
 	if(_trs && _trs.length < 1){
 		return;
 	}
 	var json = {};
+	var arr = new Array();
 	$.each(_trs,function(i,v){
-		console.log($(v).children().eq(1).text());
+		var _tds = $(v).children();
+		var _specId = _tds.eq(0).text(), _sort = _tds.eq(2).find(":input").val();
+		var _spec = {"groupId":groupId,"specId":_specId,"sort":_sort};
+		arr.push(_spec);
 	});
+	return JSON.stringify(arr);
+	
 }

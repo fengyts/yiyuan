@@ -156,4 +156,17 @@ public class SpecGroupLinkServiceImpl  implements SpecGroupLinkService{
 		
 	}
 
+	@Override
+	public int updateBatch(List<SpecGroupLinkDO> list) throws ServiceException {
+		if(CollectionUtils.isEmpty(list)){
+			return -1;
+		}
+		try {
+			return specGroupLinkDAO.updateBatch(list);
+		} catch (Exception e) {
+			logger.info("批量更新规格关联信息异常:{}", e);
+		}
+		return -1;
+	}
+
 }

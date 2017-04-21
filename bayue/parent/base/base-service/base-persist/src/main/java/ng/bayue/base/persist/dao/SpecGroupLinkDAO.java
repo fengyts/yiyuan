@@ -84,4 +84,6 @@ public interface SpecGroupLinkDAO {
 	List<SpecGroupLinkDO> selectDynamicPageQuery(SpecGroupLinkDO specGroupLinkDO) throws DAOException;
 	
 	void insertBatch(List<SpecGroupLinkDO> list) throws DAOException;
+	
+	int updateBatch(List<SpecGroupLinkDO> list) throws DAOException;
 }

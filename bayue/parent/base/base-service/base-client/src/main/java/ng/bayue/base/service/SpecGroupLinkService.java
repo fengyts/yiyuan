@@ -105,5 +105,16 @@ public interface SpecGroupLinkService {
 	Page<SpecGroupLinkDO> queryPageListBySpecGroupLinkDOAndStartPageSize(SpecGroupLinkDO specGroupLinkDO,int startPage,int pageSize);
 	
 	void insertBatch(List<SpecGroupLinkDO> list);
+	
+	/**
+	 * <pre>
+	 * 根据groupId和specId批量更新规格关联信息
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateBatch(List<SpecGroupLinkDO> list) throws ServiceException;
 
 }

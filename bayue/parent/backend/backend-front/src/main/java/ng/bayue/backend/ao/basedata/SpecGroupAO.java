@@ -70,6 +70,14 @@ public class SpecGroupAO {
 			specIds.add(linkDO.getSpecId());
 		}
 		List<SpecDO> listSpec = specService.selectByIds(specIds);
+		for(SpecDO specDO : listSpec){
+			for(SpecGroupLinkDO linkDO : listLinks){
+				if(specDO.getId().longValue() == linkDO.getSpecId().longValue()){
+					specDO.setSort(linkDO.getSort());
+					continue;
+				}
+			}
+		}
 		return listSpec;
 	}
 	
@@ -116,8 +124,9 @@ public class SpecGroupAO {
 		return new ResultMessage();
 	}
 	
-	public ResultMessage updateSpecGroup(SpecGroupDO specGroupDO){
-		int res = specGroupService.update(specGroupDO, false);
+	public ResultMessage updateSpecGroup(SpecGroupDO specGroupDO, List<SpecGroupLinkDO> specs){
+//		int res = specGroupService.update(specGroupDO, false);
+		int res = specGroupService.updateSpecGroupAndLink(specGroupDO, specs);
 		if(res < 0){
 			return ResultMessage.serverInnerError();
 		}

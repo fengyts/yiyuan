@@ -6,6 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.alibaba.fastjson.JSONArray;
+
+import ng.bayue.base.domain.SpecGroupLinkDO;
+
 public class ParseJson {
 	
 	@SuppressWarnings("unused")
@@ -46,6 +50,11 @@ public class ParseJson {
 			System.out.println(key);
 			System.out.println(value);
 		}
+	}
+	
+	public static void test(){
+		String jsonData = "[{\"groupId\""+":"+"1"+","+"specId"+":"+"1"+","+"sort"+":"+"2"+"}]";
+		List<SpecGroupLinkDO> list = JSONArray.parseArray(jsonData, SpecGroupLinkDO.class);
 	}
 	
 	

@@ -3,6 +3,7 @@ package ng.bayue.base.service;
 import java.util.List;
 
 import ng.bayue.base.domain.SpecGroupDO;
+import ng.bayue.base.domain.SpecGroupLinkDO;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.common.Page;
  /**
@@ -117,5 +118,16 @@ public interface SpecGroupService {
 	int insertSpecGroupAndLink(SpecGroupDO specGroupDO, List<Long> specIds) throws ServiceException;
 	
 	List<SpecGroupDO> selectByIds(List<Long> groupIds);
+	
+	/**
+	 * <pre>
+	 * 更新规格组同时更新规格关联信息
+	 * </pre>
+	 *
+	 * @param specs
+	 * @return
+	 * @throws ServiceException
+	 */
+	int updateSpecGroupAndLink(SpecGroupDO specGroupDO, List<SpecGroupLinkDO> specs) throws ServiceException;
 
 }

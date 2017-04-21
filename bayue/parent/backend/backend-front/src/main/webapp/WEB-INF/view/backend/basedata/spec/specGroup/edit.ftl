@@ -13,7 +13,7 @@
 	          <table class="form_table" border="0" cellpadding="0" cellspacing="0">
 	          		<tr style="display:none;">
 	          			<td>
-	          				<input type="hidden" name="id" value="${specGroupDO.id}" />
+	          				<input type="hidden" id="specGroupId" name="id" value="${specGroupDO.id}" />
 	          				<input type="hidden" name="oldspecGroup" value="${specGroupDO.name}" />
 	          			</td>
 	          		</tr>
@@ -54,18 +54,18 @@
 			  </table>
 			  
 			  <#-- 水平分割线 -->
-		  	  <#--
-			  	  <div>
-				  	  <hr style="color:#d3dbde"/>
-				  </div>
+			  <div>
+			  	  <hr style="color:#FFF0F5"/>
+			  	  <input type="button" class="ext_btn ext_btn_submit m10" id="selectSpec" value="添加规格" />
+			  </div>
+			  <#--
+		  	  <tr>
+				  <td colspan="4" style="text-align:left;">
+					  <input type="button" class="ext_btn ext_btn_submit m10" id="selectSpec" value="添加规格" />
+				  </td>
+			  </tr>
 			  -->
-			  
 			  <table id="specList" width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
-			  	  <tr>
-					  <td colspan="4" style="text-align:left;">
-						  <input type="button" class="ext_btn ext_btn_submit m10" id="selectSpec" value="添加规格" />
-					  </td>
-				  </tr>
 				  <tr>
 					  <th width="30">ID</th>
 					  <th width="50">spec</th>
@@ -76,9 +76,7 @@
 				  <#if listSpec?default([])?size!=0>
 				  	 <#list listSpec as spec>
 				  	 	<tr class="specTr">
-				  	 		<td class="td_center">${spec.id}
-				  	 			<input type="hidden" name="specIds" value="${spec.id}">
-				  	 		</td>
+				  	 		<td class="td_center">${spec.id}<input type="hidden" name="specId" value="${spec.id}"></td>
 				  	 		<td class="td_center">${spec.spec}</td>
 				  	 		<td class="td_center"><input type="text" class="input-text" size="10" value="${spec.sort}"/></td>
 				  	 		<td class="td_center">${(spec.status=='true')?string("有效","无效")}</td>

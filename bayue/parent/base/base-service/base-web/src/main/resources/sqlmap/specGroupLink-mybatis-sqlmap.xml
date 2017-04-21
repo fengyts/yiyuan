@@ -126,5 +126,16 @@
 		 </foreach>
  	
  	</insert>
+ 	
+ 	<update id="MybatisSpecGroupLinkDAO_update_batch" parameterType="list">
+ 		<foreach collection="list" item="item" index="index" separator=";">
+               update base_spec_group_link
+                <set>
+                	sort = #{item.sort}
+                </set>
+                where spec_id = #{item.specId} and group_id=#{item.groupId}
+        </foreach> 
+
+ 	</update>
 
 </mapper>
