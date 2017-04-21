@@ -69,7 +69,7 @@
                 <a target="_blank" href="${meitun_domain}/help/aftersale/help-policy#tkfs"  data-track="homepage_footer_help_methods" rel="nofollow">退款方式及时效</a>
 			</li>
             <li class="qrcode">
-                <img src="http://192.168.58.129/group1/M00/00/00/wKg6gVjcalOABbOQAABHFmCkTyM819.jpg" />
+                <img src="http://192.168.58.129/group1/M00/00/00/wKg6gVj5tPCAA6a0AABHFmCkTyM078.jpg" />
                 <a>八月炸官方微信</a>
             </li>
         </ul>
@@ -149,7 +149,7 @@
         <li class="qrcode">
             <a href="javascript:void(0);" rel="nofollow"><i class="iconfont icon-erweima"></i></a>
             <span class="panel">
-                <img src="http://192.168.58.129/group1/M00/00/00/wKg6gVjcalOABbOQAABHFmCkTyM819.jpg">关注手机美囤
+                <img src="http://192.168.58.129/group1/M00/00/00/wKg6gVj5tPCAA6a0AABHFmCkTyM078.jpg">关注手机美囤
                 <i class="iconfont icon-triangle-right"></i>
             </span>
         </li>

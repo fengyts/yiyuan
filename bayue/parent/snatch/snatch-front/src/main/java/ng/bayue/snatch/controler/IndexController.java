@@ -30,15 +30,16 @@ public class IndexController {
 	@RequestMapping(value = "loadfc")
 	@ResponseBody
 	public JSONPObject frontCategory(HttpServletRequest request, @RequestParam String callback) {
-		List<FrontCategoryViewDTO> list = indexAO.loadFrontCategory();
-
-		ReturnData returnDate = null;
-		if (list != null && list.size() > 0) {
-			returnDate = new ReturnData(1, list);
-		} else {
-			returnDate = new ReturnData(0, null);
-		}
-		return new JSONPObject(callback, returnDate);
+		return null;
+//		List<FrontCategoryViewDTO> list = indexAO.loadFrontCategory();
+//
+//		ReturnData returnDate = null;
+//		if (list != null && list.size() > 0) {
+//			returnDate = new ReturnData(1, list);
+//		} else {
+//			returnDate = new ReturnData(0, null);
+//		}
+//		return new JSONPObject(callback, returnDate);
 	}
 
 }

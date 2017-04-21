@@ -45,7 +45,7 @@ $(function(){
 	//取头部图片广告位
 	//得到用户信息
 	 $.ajax({
-//	   	 url:snatch_domain_http+"/headAd?callback=?",
+	   	 url:snatch_domain_http+"/headAd?callback=?",
 	   	 data:null,
 	   	 type:'post',
 	   	 dataType:'json',
@@ -136,7 +136,7 @@ $(function(){
 				ajaxflag = false;
 				//得到购物信息
 				 $.ajax({
-//			    	 url:snatch_domain_http+"/getShoppingline?callback=?",
+			    	 url:snatch_domain_http+"/getShoppingline?callback=?",
 			    	 data:null,
 			    	 type:'post',
 			    	 dataType:'json',
@@ -174,7 +174,7 @@ $(function(){
 	  if(arr=document.cookie.match(reg)){
 				//得到中国分区
 			 $.ajax({
-//		    	 url:snatch_domain_http+"/addrMessage?callback=?",
+		    	 url:snatch_domain_http+"/addrMessage?callback=?",
 		    	 data:null,
 		    	 type:'post',
 		    	 dataType:'json',
@@ -200,7 +200,7 @@ $(function(){
 		}else{
 			var url=document.referrer;
 			 $.ajax({
-//		    	 url:snatch_domain_http+"/addrMessage?callback=?",
+		    	 url:snatch_domain_http+"/addrMessage?callback=?",
 		    	 data:null,
 		    	 type:'post',
 		    	 dataType:'json',
@@ -355,7 +355,7 @@ var frontCategory = function(){
 		},b = {
 			loadData:function(){
 				$.ajax({
-//			    	 url:snatch_domain_http+"/loadfc?callback=?",
+			    	 url:snatch_domain_http+"/loadfc?callback=?",
 			    	 data:null,
 			    	 type:'post',
 			    	 dataType:'json',
@@ -438,7 +438,7 @@ function  loadUserAndShopoing(){
 	
 	//得到用户信息
 		 $.ajax({
-//	    	 url:snatch_domain_http+"/userInfo?callback=?",
+	    	 url:snatch_domain_http+"/userInfo?callback=?",
 	    	 data:null,
 	    	 type:'post',
 	    	 dataType:'json',
@@ -460,7 +460,7 @@ function  loadUserAndShopoing(){
 		
 		//得到购物信息
 		 $.ajax({
-//	    	 url:snatch_domain_http+"/getShoppingCount?callback=?",
+	    	 url:snatch_domain_http+"/getShoppingCount?callback=?",
 	    	 data:null,
 	    	 type:'post',
 	    	 dataType:'json',
@@ -485,7 +485,7 @@ function  loadUserAndShopoing(){
 function loadAsideShopping(){
 	//得到购物信息
 	 $.ajax({
-//   	 url:snatch_domain_http+"/getShoppingCount?callback=?",
+   	 url:snatch_domain_http+"/getShoppingCount?callback=?",
    	 data:null,
    	 type:'post',
    	 dataType:'json',
@@ -545,7 +545,7 @@ function del(skuCode,topicId,promotionId,promotionType,redisCartLineKey){
 	}
 	 var data = "skuCode="+skuCode+"&topicId="+topicId+"&promotionId="+promotionId+"&promotionType="+promotionType+"&redisCartLineKey="+redisCartLineKey;
 	 $.ajax({
-//    	 url:snatch_domain_http+"/deleShoppingline?callback=?",
+    	 url:snatch_domain_http+"/deleShoppingline?callback=?",
     	 data:data,
     	 type:'post',
     	 dataType:'json',
@@ -593,7 +593,7 @@ function del(skuCode,topicId,promotionId,promotionType,redisCartLineKey){
 function addcookies(name, value, maxage,domain){
 	var data = "name="+name+"&value="+value+"&maxage="+maxage+"&domain="+domain;
 	$.ajax({
-//		 url:snatch_domain_http + "/setcook?callback=?",
+		 url:snatch_domain_http + "/setcook?callback=?",
 		 data:data,
 		 type:'post',
 		 dataType:'json',
@@ -665,7 +665,7 @@ function receiveCoupon(couponID){
 	
 	//得到用户信息
 	 $.ajax({
-//    	 url:snatch_domain_http+"/userInfo?callback=?",
+    	 url:snatch_domain_http+"/userInfo?callback=?",
     	 data:null,
     	 type:'post',
     	 dataType:'json',
@@ -707,7 +707,7 @@ function receiveCoupon(couponID){
 function receiveCouponOper(couponID){
 		//得到用户信息
 	 $.ajax({
-//    	 url:snatch_domain_http+"/receiveCoupon/"+couponID+"?callback=?",
+    	 url:snatch_domain_http+"/receiveCoupon/"+couponID+"?callback=?",
     	 data:null,
     	 type:'post',
     	 dataType:'json',
