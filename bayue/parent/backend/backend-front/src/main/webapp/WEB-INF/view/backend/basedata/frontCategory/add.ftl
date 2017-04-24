@@ -23,7 +23,7 @@ css=[]
 				 <tr>
 					<td>级别:</td>
 					<td>
-						<select name="level" class="select">
+						<select name="level" class="select" id="level">
 							<#--<option value=''>--请选择--</option>-->
 							<option value='1' selected='selected'>一级</option>
 							<option value='2'>二级</option>
@@ -33,7 +33,7 @@ css=[]
 				 <tr>
 					<td>父级:</td>
 					<td>
-						<select name="parentId" class="select">
+						<select name="parentId" class="select" disabled="disabled" id="parentId">
 							<option value='0'>--请选择--</option> <#-- 默认一级 -->
 							<#if listFirst?default([])?size != 0>
 								<#list listFirst as fir>
@@ -73,7 +73,7 @@ css=[]
 				 </tr>
 				 <tr>
 					<td>logo地址:</td>
-					<td><input type="text" name="logoUrl" class="input-text lh25" size="60" maxlength="50" /></td>
+					<td><input type="text" name="logoUrl" class="input-text lh25" size="60" maxlength="100" /></td>
 				 </tr>
 				 <tr>
 					<td>顺序:</td>
@@ -100,11 +100,11 @@ css=[]
 				 </tr>
 				 <tr>
 					<td>跳转链接地址:</td>
-					<td><input type="text" name="linkUrlPc" class="input-text lh25" size="60" maxlength="50" /></td>
+					<td><input type="text" name="linkUrlPc" class="input-text lh25" size="60" maxlength="100" /></td>
 				 </tr>
 				 <tr>
 					<td>跳转链接内容:</td>
-					<td><input type="text" name="linkContent" class="input-text lh25" size="60" maxlength="50" value="" /></td>
+					<td><input type="text" name="linkContent" class="input-text lh25" size="60" maxlength="100" value="" /></td>
 				 </tr>
 				 
 				 <tr>

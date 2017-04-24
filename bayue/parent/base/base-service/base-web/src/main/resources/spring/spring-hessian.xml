@@ -60,6 +60,11 @@
 		<property name="service" ref="frontCategoryLinkService" />
 		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryLinkService" />
 	</bean>
+	<bean name="/remoteBaseService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="remoteBaseService" />
+		<property name="serviceInterface" value="ng.bayue.base.service.remote.RemoteBaseService" />
+	</bean>
 	
 
 </beans>

@@ -55,7 +55,7 @@ css=[
 				 </tr>
 				 <tr>
 					<td>logo地址:</td>
-					<td><input type="text" name="logoUrl" class="input-text lh25" size="60" maxlength="50" value="${fcate.logoUrl}" /></td>
+					<td><input type="text" name="logoUrl" class="input-text lh25" size="60" maxlength="100" value="${fcate.logoUrl}" /></td>
 				 </tr>
 				 <tr>
 					<td>顺序:</td>
@@ -82,11 +82,11 @@ css=[
 				 </tr>
 				 <tr>
 					<td>跳转链接地址:</td>
-					<td><input type="text" name="linkUrlPc" class="input-text lh25" size="60" maxlength="50" value="${fcate.linkUrlPc}" /></td>
+					<td><input type="text" name="linkUrlPc" class="input-text lh25" size="60" maxlength="100" value="${fcate.linkUrlPc}" /></td>
 				 </tr>
 				 <tr>
 					<td>跳转链接内容:</td>
-					<td><input type="text" name="linkContent" class="input-text lh25" size="60" maxlength="50" value="${fcate.linkContent}" /></td>
+					<td><input type="text" name="linkContent" class="input-text lh25" size="60" maxlength="100" value="${fcate.linkContent}" /></td>
 				 </tr>
 				 
 				 

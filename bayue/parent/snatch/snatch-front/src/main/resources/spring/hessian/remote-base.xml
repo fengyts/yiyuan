@@ -69,5 +69,11 @@
 		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryLinkService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
+	<bean id="remoteBaseService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/remoteBaseService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.remote.RemoteBaseService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
 
 </beans>

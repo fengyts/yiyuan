@@ -355,7 +355,7 @@ var frontCategory = function(){
 		},b = {
 			loadData:function(){
 				$.ajax({
-//			    	 url:snatch_domain_http+"/loadfc?callback=?",
+			    	 url:snatch_domain_http+"/loadfc?callback=?",
 			    	 data:null,
 			    	 type:'post',
 			    	 dataType:'json',

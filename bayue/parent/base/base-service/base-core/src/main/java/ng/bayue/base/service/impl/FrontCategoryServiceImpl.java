@@ -168,17 +168,20 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			String code = selectMaxCodeDynamic(fcDO);
 			fcDO.setCode(code);
 			Long frontCateId = insert(fcDO);
-
-			FrontCategoryLinkDO fcLinkDO = new FrontCategoryLinkDO();
-			BeanUtils.copyProperties(fcLinkDO, fcDto);
-			fcLinkDO.setFrontCategoryId(frontCateId);
-			fcLinkDO.setCreateUserId(userId);
-			fcLinkDO.setCreateTime(date);
-			fcLinkDO.setModifyUserId(userId);
-			fcLinkDO.setModifyTime(date);
-			frontCategoryLinkDAO.insert(fcLinkDO);
+			
+			if(fcDO.getLevel() != 1){
+				FrontCategoryLinkDO fcLinkDO = new FrontCategoryLinkDO();
+				BeanUtils.copyProperties(fcLinkDO, fcDto);
+				fcLinkDO.setFrontCategoryId(frontCateId);
+				fcLinkDO.setCreateUserId(userId);
+				fcLinkDO.setCreateTime(date);
+				fcLinkDO.setModifyUserId(userId);
+				fcLinkDO.setModifyTime(date);
+				frontCategoryLinkDAO.insert(fcLinkDO);
+			}
 
 			redisCacheService.deleteRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL);
+			redisCacheService.deleteRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL_F);
 
 			return 1;
 		} catch (Exception e) {
@@ -206,6 +209,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			frontCategoryLinkDAO.updateByFrontCateId(fcLink);
 			
 			redisCacheService.deleteRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL);
+			redisCacheService.deleteRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL_F);
 			
 			return 1;
 		} catch (Exception e) {
@@ -274,7 +278,9 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 						fcId);
 				throw new ServiceException("select frontCategoryLink exception: there find two records here");
 			}
-			BeanUtils.copyProperties(dto, fcLink.get(0));
+			if(fcate.getLevel() == 2){
+				BeanUtils.copyProperties(dto, fcLink.get(0));
+			}
 			BeanUtils.copyProperties(dto, fcate);
 			return dto;
 		} catch (DAOException | IllegalAccessException | InvocationTargetException e) {

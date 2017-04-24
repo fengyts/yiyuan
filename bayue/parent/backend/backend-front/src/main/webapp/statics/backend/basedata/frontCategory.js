@@ -137,6 +137,17 @@ $(function(){
 		layer.alert('亲，功能还未上线!', {icon: 1});
 	});
 	
+	// 选择一级时禁止选择父类
+	$("#level").change(this, function(){
+		var val = this.value;
+		console.log(val);
+		if(2 == val){
+			$("#parentId").attr("disabled", false);
+		} else {
+			$("#parentId").attr("disabled", true);
+		}
+	});
+	
 	
 });
 
