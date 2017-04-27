@@ -22,7 +22,7 @@
 	
 	<import resource="classpath*:spring/spring-dao.xml" />
 	<import resource="classpath*:spring/hessian/spring-hessian.xml" />
-	<import resource="classpath*:spring/hessian/remote-base.xml"/>
+	<import resource="classpath*:spring/hessian/remote-*.xml"/>
 	
 
 	<bean id="httpRequestHandlerAdapter"

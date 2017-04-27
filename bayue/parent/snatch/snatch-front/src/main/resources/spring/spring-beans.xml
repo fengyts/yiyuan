@@ -20,5 +20,6 @@
 	<mvc:annotation-driven />
 
 	<import resource="classpath*:spring/hessian/remote-*.xml" />
+	<import resource="classpath*:spring/spring-dfs.xml" />
 	
 </beans>

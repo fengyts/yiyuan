@@ -27,7 +27,7 @@ public interface ItemService {
 	 *
 	 * @return
 	 */
-	@Deprecated
+	//@Deprecated
 	List<CarouselDO> getAllCarousel();
 	
 

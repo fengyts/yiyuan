@@ -130,12 +130,12 @@
 		</foreach>	
  	</insert>
  	
- 	<select id="MybatisItemPicturesDAO_select_by_detailIds" parameterType="list" resultType="list">
+ 	<select id="MybatisItemPicturesDAO_select_by_detailIds" parameterType="list" resultMap="ItemPicturesDOResultMap">
  		SELECT
 			<include refid="MybatisItemPicturesDAO_all_column_fields" />
 		FROM
 			item_pictures
-		WHERE id  IN
+		WHERE detail_id IN
 		<foreach collection="list" item="id" open="(" separator="," close=")">
 			#{id}
 		</foreach>

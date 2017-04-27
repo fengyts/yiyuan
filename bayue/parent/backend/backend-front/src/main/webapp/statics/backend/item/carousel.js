@@ -4,7 +4,7 @@ $(function(){
 	$("#carouselAddbtn").on('click',function(){
 		pageii = layer.open({
 			type : 2,
-			title : '商品spu添加',
+			title : '轮播图添加',
 			offset: '5%',
 			// shadeClose : true,
 			shade : 0.3,
@@ -20,7 +20,7 @@ $(function(){
 		var id = $(this).attr('param');
 		pageii = layer.open({
 			type : 2,
-			title : '商品spu编辑',
+			title : '轮播图编辑',
 			offset: '5%',
 			// shadeClose : true,
 			shade : 0.3,
@@ -34,17 +34,22 @@ $(function(){
 	
 	
 	$("#saveBtn").on('click', function(){
-		$.ajax({
-			url : 'save',
-			dataType : 'text',
-			data : $('#carouselAddForm').serialize(),
+		var _o = $.formDataJson("#carouselAddForm",true);
+		$.ajaxFileUpload({
+			url : 'save.htm',
+			dataType : 'json',
+			secureuri: false,
+			fileElementId: 'picture',
+			//data : $('#carouselAddForm').serialize(),
+			data : {"data": _o},
 			type : "post",
 			cache : false,
 			error : function(request){
 				alert("Server Connection Failure...");
 			},
 			success : function(res) {
-				var data = JSON.parse(res);
+//				var data = JSON.parse(res);
+				var data = res;
 				if (1 == data.result) {// 成功
 					layer.alert(data.message, 1, function() {
 						parent.window.location.reload();
@@ -58,10 +63,16 @@ $(function(){
 	});
 	
 	$("#updateBtn").on('click',function(){
-		$.ajax({
+		var _o = $.formDataJson("#carouselEditForm");
+		var _imgChanged = $("#imgChanged").val();  // 是否修改了图片
+		
+		$.ajaxFileUpload({
 			url : 'update',
 			dataType : 'text',
-			data : $('#carouselEditForm').serialize(),
+			secureuri: false,
+			fileElementId: 'picture',
+//			data : $('#carouselEditForm').serialize(),
+			data: { "data" : _o , "imgChanged" : _imgChanged },
 			type : "post",
 			cache : false,
 			error : function(request){
@@ -82,10 +93,32 @@ $(function(){
 	});
 	
 	
-	
+	// 选择图片时生成缩略图预览
+	$("#picture").change(function(e) {
+		$("#imgChanged").val('1');
+        var file = e.target.files[0];
+        imgview(file);
+    });
 	
 });
 
 function cancel(){
 	window.parent.layer.close(parent.pageii);
+}
+
+/**
+ * 上传图片预览
+ * @param file
+ */
+function imgview(file) {
+	if(typeof FileReader == 'undefined'){
+		$('#preview').append('不能预览');
+		return false;
+	}
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var $img = $('<img width="100px" heigth="100px">').attr("src", e.target.result);
+        $('#preview').empty().append($img);
+    }
+    reader.readAsDataURL(file);
 }

@@ -46,7 +46,7 @@ $(function(){
 	
 	
 	$("#saveBtn").on('click',function(){
-		var _data = $("#topicAddForm").serializeArray();
+		//var _data = $("#topicAddForm").serializeArray();
 		var _o = $.formDataJson("#topicAddForm");
 		
 		$.ajaxFileUpload({
@@ -78,7 +78,7 @@ $(function(){
 	
 	
 	$("#updateTopicBtn").on('click', function(){
-		var _data = $("#topicEditForm").serializeArray();
+		//var _data = $("#topicEditForm").serializeArray();
 		var _o = $.formDataJson("#topicEditForm");
 		var _imgChanged = $("#imgChanged").val();  // 是否修改了图片
 		
@@ -135,4 +135,3 @@ function imgview(file) {
     reader.readAsDataURL(file);
 }
 
-function getFormData(){}

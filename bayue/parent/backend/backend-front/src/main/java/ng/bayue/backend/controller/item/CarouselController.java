@@ -1,11 +1,19 @@
 package ng.bayue.backend.controller.item;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.alibaba.fastjson.JSONObject;
 
 import ng.bayue.backend.ao.item.CarouselAO;
 import ng.bayue.backend.util.ResultMessage;
@@ -37,8 +45,11 @@ public class CarouselController {
 
 	@RequestMapping("save")
 	@ResponseBody
-	public ResultMessage save(CarouselDO carouselDO) {
-		return carouselAO.save(carouselDO);
+	public ResultMessage save(String data, HttpServletRequest request) {
+		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+		Map<String, MultipartFile> map = multiRequest.getFileMap();
+		CarouselDO carouselDO = JSONObject.parseObject(data, CarouselDO.class);
+		return carouselAO.save(carouselDO, map);
 	}
 
 	@RequestMapping("edit")
@@ -50,8 +61,15 @@ public class CarouselController {
 
 	@RequestMapping("update")
 	@ResponseBody
-	public ResultMessage update(CarouselDO carouselDO) {
-		return carouselAO.update(carouselDO);
+	public ResultMessage update(String data, boolean imgChanged, HttpServletRequest request) {
+		Map<String, MultipartFile> map = null;
+//		boolean flag = imgChanged != null && (1 == imgChanged) ? true : false; 
+		if(imgChanged){ // 图片是否有改动
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			map = multiRequest.getFileMap();
+		}
+		CarouselDO carouselDO = JSONObject.parseObject(data, CarouselDO.class);
+		return carouselAO.update(carouselDO, map);
 	}
 
 }

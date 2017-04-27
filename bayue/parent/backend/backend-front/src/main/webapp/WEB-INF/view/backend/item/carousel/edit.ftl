@@ -12,7 +12,7 @@ css=[
 
 
 <div class="panel-body box_border">
-<form id="carouselEditForm" action="" class="form-horizontal dr-form-bordered">
+<form id="carouselEditForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	
 	<div class="input-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -25,7 +25,12 @@ css=[
 	<div class="form-group">
 		<label class="control-label text-center col-xs-3">图片地址<span class="dr-asterisk">*</span></label>
 		<div class="col-xs-8">
+			<#--
 			<input type="text" class="form-control" id="picture" name="picture" value="${carouselDO.picture}"/>
+			-->
+			<input type="hidden" id="imgChanged" name="imgChanged" value="0">
+			<input type="file" id="picture" name="picture">
+			<div id="preview"><img width="200px" heigth="100px" style="border:1px solid #e5f2ff;" src="${carouselDO.picture}"></div>
 		</div>
 	</div>
 	<div class="form-group">

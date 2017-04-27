@@ -115,4 +115,6 @@ public interface ItemDetailService {
 	 */
 	int updateBatch(List<ItemDetailDO> list) throws ServiceException;
 	
+	List<ItemDetailDO> selectByIds(List<Long> ids);
+	
 }

@@ -1,3 +1,29 @@
+<#--导航栏固定在顶端-->
+<script type="text/javascript">
+	$(function(){
+		var nav=$(".nav"); //得到导航对象
+		var win=$(window); //得到窗口对象
+		var sc=$(document);//得到document文档对象。
+		win.scroll(function(){
+			if(sc.scrollTop()>=100){
+				nav.addClass("fixednav"); 
+				$(".navTmp").fadeIn(); 
+			}else{
+				nav.removeClass("fixednav");
+				$(".navTmp").fadeOut();
+			}
+		})  
+	})
+</script>
+<style type="text/css">
+.fixednav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 1;
+}
+</style>
 <div class="sitetop">
 	<div class="topbar">
 		<div class="wrap">

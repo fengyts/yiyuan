@@ -265,4 +265,15 @@
 		
 	</update>
 	
+	<select id="MybatisItemDetailDAO_select_byIds" parameterType="list" resultMap="ItemDetailDOResultMap">
+		SELECT
+	     	<include refid="MybatisItemDetailDAO_all_column_fields" />
+		 FROM
+		 	item_detail
+		 WHERE id IN
+		 <foreach collection="list" item="item" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+	</select>
+	
 </mapper>

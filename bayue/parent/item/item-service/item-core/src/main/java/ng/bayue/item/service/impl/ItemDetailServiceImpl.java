@@ -134,4 +134,12 @@ public class ItemDetailServiceImpl implements ItemDetailService {
 		return res < 1 ? -1 : res;
 	}
 
+	@Override
+	public List<ItemDetailDO> selectByIds(List<Long> ids) {
+		if(CollectionUtils.isEmpty(ids)){
+			return null;
+		}
+		return itemDetailDAO.selectByIds(ids);
+	}
+
 }

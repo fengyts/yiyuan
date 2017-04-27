@@ -1,11 +1,13 @@
 package ng.bayue.snatch.controler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +25,14 @@ public class IndexController {
 	private IndexAO indexAO;
 
 	@RequestMapping(value = { "/", "/index" })
-	public String index(HttpServletRequest request) {
+	public String index(HttpServletRequest request, Model model) {
+		/*List<String> carousels = new ArrayList<String>();
+		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/04.jpg");
+		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/05.jpg");
+		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/06.jpg");
+		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/07.jpg");*/
+		request.setAttribute("carousels", indexAO.getAllCarousel());
+		model.addAttribute("hotItems", indexAO.getHostItems());
 		return "/index";
 	}
 
@@ -39,6 +48,11 @@ public class IndexController {
 			returnDate = new ReturnData(0, null);
 		}
 		return new JSONPObject(callback, returnDate);
+	}
+	
+	@RequestMapping(value = "loadHotItem")
+	public String loadHotItem(){
+		return "/test";
 	}
 
 }

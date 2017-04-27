@@ -1,6 +1,5 @@
 package ng.bayue.snatch.ao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,42 +7,29 @@ import org.springframework.stereotype.Service;
 
 import ng.bayue.base.dto.FrontCategoryViewDTO;
 import ng.bayue.base.service.remote.RemoteBaseService;
+import ng.bayue.fastdfs.ImageUrlUtil;
+import ng.bayue.item.domain.CarouselDO;
+import ng.bayue.item.service.ItemService;
+import ng.bayue.promotion.dto.TopicItemDTO;
+import ng.bayue.promotion.service.TopicExportService;
 
 @Service
 public class IndexAO {
 	
 	@Autowired
+	private ImageUrlUtil imageUrlUtil;
+	
+	@Autowired
 	private RemoteBaseService remoteBaseService;
+	@Autowired
+	private ItemService itemService;
+	@Autowired
+	private TopicExportService topicExportService;
 	
 	public List<FrontCategoryViewDTO> loadFrontCategory(){
 		
 		List<FrontCategoryViewDTO> list = remoteBaseService.getFrontCategoryList();
 		return list;
-		
-		/*List<FrontCategoryViewDTO> list = new ArrayList<FrontCategoryViewDTO>();
-		FrontCategoryViewDTO view = new FrontCategoryViewDTO();
-		view.setId(1L);
-		view.setLevel(1);
-		view.setIsHighlight(true);
-		view.setIsUrlLink(false);
-		view.setName("分类1");
-		view.setLogoUrl("");
-		view.setSeq(1);
-		FrontCategoryViewDTO viewC = new FrontCategoryViewDTO();
-		viewC.setId(2L);
-		viewC.setIsHighlight(true);
-		viewC.setIsUrlLink(true);
-		viewC.setLogoUrl("http://img04.meituncdn.com/group1/M00/1D/FA/wKgyOldFGzKALQkoAABBth0Pvy8309.jpg");
-		viewC.setSeq(1);
-		viewC.setName("其他");
-		viewC.setLevel(2);
-		viewC.setPcUrlLink("http://img01.meituncdn.com/group1/M00/F7/88/wKgyOlg4SDeAV0p5AAAnxReR6Yc013.jpg");
-		List<FrontCategoryViewDTO> childs = new ArrayList<FrontCategoryViewDTO>();
-		childs.add(viewC);
-		view.setChilds(childs);
-		list.add(view);
-		
-		return list;*/
 		
 		/*String url = "http://www.meitun.com/loadfc?callback=";
 		String dataStr = RequestUtils.doRequestReturnStr(url, null, "UTF-8");
@@ -53,6 +39,20 @@ public class IndexAO {
 		String arrData = object.getString("data");
 		List<FrontCategoryViewDTO> list = JSONArray.parseArray(arrData, FrontCategoryViewDTO.class);
 		return list;*/
+	}
+	
+	public List<CarouselDO> getAllCarousel(){
+		List<CarouselDO> result = itemService.getAllCarousel();
+		for(CarouselDO carousel : result){
+			carousel.setPicture(imageUrlUtil.getFileFullUrl(carousel.getPicture()));
+		}
+		
+		return result;
+	}
+	
+	public List<TopicItemDTO> getHostItems(){
+		List<TopicItemDTO> list = topicExportService.listItemHot(1, 10);
+		return list;
 	}
 
 }

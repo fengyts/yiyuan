@@ -23,3 +23,4 @@
 <#assign salesorder_domain_http  = "//salesorder.snatch.com">
 -->
 <#assign user_domain_http   = "${domain}">
+<#assign img_domain   = "http://192.168.58.129">

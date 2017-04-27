@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns="http://www.springframework.org/schema/beans"
+	 xmlns:p="http://www.springframework.org/schema/p"
+	 xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	 xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 此处bean里的配置 请填写在properties的配置文件中 -->
+	<!-- 图片下载路径生成 -->
+	<bean id="imageUrlUtil" class="ng.bayue.fastdfs.ImageUrlUtil">
+		<property name="domainMap">
+			<map>
+				<entry key="${dfs.group1.name}" value="${dfs.group1.host}"></entry>
+			</map>
+		</property>
+		<property name="startGroups">
+			<list>
+				<value>${dfs.group1.name}</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="poolFactory" class="ng.bayue.factory.TrackerServerFactory">
+		<constructor-arg>
+			<array>
+				<value>${dfs.group1.host}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+
+	<bean id="poolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="maxTotal" value="${dfs.maxTotal}"></property>
+		<property name="minIdle" value="${dfs.minIdle}"></property>
+	</bean>
+
+	<bean id="dfsPool" class="ng.bayue.factory.TrackerServerPool">
+		<constructor-arg index="0" ref="poolFactory" />
+		<constructor-arg index="1" ref="poolConfig" />
+	</bean>
+
+	<bean id="dfsService" class="ng.bayue.service.impl.DfsServiceImpl">
+		<constructor-arg name="trackerServerPool" ref="dfsPool"/>
+		<!-- <constructor-arg index="0" ref="dfsPool" /> -->
+	</bean>
+
+</beans>

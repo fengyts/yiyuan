@@ -2,6 +2,8 @@
 
 <@backend title="首页轮播图新增" 
 js=[
+'/statics/common/common-js/ajaxfileupload.js',
+'/statics/plugin/other/jquery.form.js',
 '/statics/backend/item/carousel.js'
 ]
 css=[
@@ -12,7 +14,7 @@ css=[
 
 
 <div class="panel-body box_border">
-<form id="carouselAddForm" action="" class="form-horizontal dr-form-bordered">
+<form id="carouselAddForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	
 	<div class="input-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -20,8 +22,14 @@ css=[
 	<hr/>
 	<div class="form-group">
 		<label class="control-label text-center col-xs-3">图片地址<span class="dr-asterisk">*</span></label>
+		<#--
 		<div class="col-xs-8">
 			<input type="text" class="form-control" id="picture" name="picture" value="${carouselDO.picture}"/>
+		</div>
+		-->
+		<div class="col-xs-8">
+			<input type="file" id="picture" name="picture">
+			<div id="preview"></div>
 		</div>
 	</div>
 	<div class="form-group">

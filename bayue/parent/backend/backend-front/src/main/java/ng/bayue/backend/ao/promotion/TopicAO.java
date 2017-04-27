@@ -64,7 +64,7 @@ public class TopicAO {
 		
 		// 上传图片
 		if (null != map && !map.isEmpty()) {
-			String image = uploadTopicImage(map);
+			String image = uploaImage(map);
 			if (StringUtils.isEmpty(image)) {
 				return new ResultMessage(ResultMessage.Failure, "上传图片失败");
 			}
@@ -83,7 +83,7 @@ public class TopicAO {
 		topicDO.setModifyUserId(UserHandler.getUser().getId());
 
 		if (null != map && !map.isEmpty()) {
-			String image = uploadTopicImage(map);
+			String image = uploaImage(map);
 			if (StringUtils.isEmpty(image)) {
 				return new ResultMessage(ResultMessage.Failure, "上传图片失败");
 			}
@@ -97,7 +97,7 @@ public class TopicAO {
 		return new ResultMessage();
 	}
 
-	private String uploadTopicImage(Map<String, MultipartFile> map) {
+	private String uploaImage(Map<String, MultipartFile> map) {
 		String savePath = uploadTempPath;
 		if(StringUtils.isEmpty(savePath)){
 			logger.info("图片临时上传到本地时获取路径错误!");

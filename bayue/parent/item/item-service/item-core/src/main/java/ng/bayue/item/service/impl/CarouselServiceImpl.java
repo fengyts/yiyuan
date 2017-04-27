@@ -26,13 +26,13 @@ import ng.bayue.service.RedisCacheService;
 public class CarouselServiceImpl  implements CarouselService{
 
 	private Log logger = LogFactory.getLog(this.getClass());
-
-	@Autowired
-	private CarouselDAO carouselDAO;
-//	@Autowired
+	
 //	@Resource(type=RedisCacheServiceImpl.class)
 	@Resource(name="redisCacheService")
 	private RedisCacheService cacheService;
+	
+	@Autowired
+	private CarouselDAO carouselDAO;
 	
 	@Override
 	public Long insert(CarouselDO carouselDO) throws ServiceException {
@@ -177,5 +177,6 @@ public class CarouselServiceImpl  implements CarouselService{
 		}
 		return Collections.emptyList();
 	}
+	
 
 }

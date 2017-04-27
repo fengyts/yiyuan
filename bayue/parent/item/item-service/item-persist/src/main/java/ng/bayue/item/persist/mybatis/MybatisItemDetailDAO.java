@@ -58,4 +58,9 @@ public class MybatisItemDetailDAO extends MybatisBaseDAO implements ItemDetailDA
 		return getSqlSession().update("ng.bayue.item.domain.ItemDetailMapper.MybatisItemDetailDAO_updateBatch", list);
 	}
 
+	@Override
+	public List<ItemDetailDO> selectByIds(List<Long> ids) {
+		return getSqlSession().selectList("ng.bayue.item.domain.ItemDetailMapper.MybatisItemDetailDAO_select_byIds", ids);
+	}
+
 }
