@@ -2322,7 +2322,7 @@ select[size], select[multiple], select[size][multiple] {
 }
 
 .header .nav>ul .ctgy .ctgy-layer .layer-right {
-	min-height: 610px;
+	min-height: 340px; /* 设置导航栏最小高度 */
 	line-height: 35px;
 	background-color: #FFF;
 	overflow: hidden;

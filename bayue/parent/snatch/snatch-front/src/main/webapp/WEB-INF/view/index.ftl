@@ -32,6 +32,8 @@
 	<#include "/subs/hotItem.ftl" />
 	<#-- 专场特卖 -->
 	<#include "/subs/topicSpecially.ftl" />
+	<#-- 即将上线 -->
+	<#include "/subs/prepareOnLine.ftl" />
 		
 </div>
 

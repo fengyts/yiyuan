@@ -29,12 +29,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     float: right;
     position: relative;
 }
-/** 和base.css 样式重复
-.wrap {
-    width: 1180px;
-    margin: 0 auto;
-}
-**/
+
 .section { margin-bottom:22px;}
 .s-hd { height:38px; line-height:38px; border-bottom:2px solid #ed5565; margin-bottom:20px;}
 .s-hd h3 { float:left; width:230px; text-align:center; font-size:16px; font-weight:bold; background-color:#ed5565; color:#fff; margin-right:13px; }
@@ -47,7 +42,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .win-list { _height:756px; padding:1px 0 0 0;}
 .win-list li { float:left; width:214px; height:378px; padding:9px 11px 0 10px; border:1px solid #e3e3e3; margin:-1px -1px 0 0;}
-.win-list li:hover{ border: 1px solid #e54048 !important; position:relative; z-index: 3;/**#f60**/
+.win-list li:hover{ border: 1px solid #e54048 !important; position:relative; z-index: 1;/**#f60**/
     -moz-box-shadow:3px 3px 3px #d8d8d8;
     -webkit-box-shadow:3px 3px 3px #d8d8d8;
     box-shadow:3px 3px 3px #d8d8d8;

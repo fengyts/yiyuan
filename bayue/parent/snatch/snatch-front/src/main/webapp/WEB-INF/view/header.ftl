@@ -15,15 +15,17 @@
 		})  
 	})
 </script>
+
 <style type="text/css">
-.fixednav {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    z-index: 1;
-}
+	.fixednav {
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    width: 100%;
+	    z-index: 3;
+	}
 </style>
+
 <div class="sitetop">
 	<div class="topbar">
 		<div class="wrap">
@@ -53,11 +55,11 @@
 			<div class="lcon"> 
 				<a href="http://www.meitun.com/" data-track="homepage_header_middle_logo">
 					<H1>
-					<img src="${domain}/statics/images/jubaopen1.jpg" alt="美囤妈妈，最懂育儿" width="300" height="65">
-					<img src="${domain}/statics/images/jubaopen.png" alt="美囤妈妈，最懂育儿" width="300" height="65">
+					<img src="${domain}/statics/images/jubaopen1.jpg" alt="" width="300" height="65">
+					<img src="${domain}/statics/images/jubaopen.png" alt="" width="300" height="65">
 					</H1>
 				</a>
-			</div><!-- http://192.168.58.129/group1/M00/00/00/wKg6gVjU2a2ADs8MAAA-5HtDiBc314.jpg //static.meitun.com/img/logo.png -->
+			</div>
 		</div>
 		<div class="activity">
 			<ul>
