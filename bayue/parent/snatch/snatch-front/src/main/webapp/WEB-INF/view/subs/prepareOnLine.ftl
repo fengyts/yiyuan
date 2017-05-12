@@ -11,6 +11,7 @@
 	            	<a class="pic v scrollLoadingDiv" title="${item.itemTitle}" href="./item/261-20.html" target="_blank"><img alt="${item.itemTitle}" src="${img_domain}/${item.picture}"></a> 
 	            	<a class="title" title="${item.itemTitle}" href="./item/261-20.html" target="_blank">${item.itemTitle}</a>
 		            <p class="num">总需：${item.snatchNumber} 人次</p>
+		            <#--
 		            <div class="progressBar">
         				<p class="progressBar-wrap">
             				<span style="width:${item.ratio!0}"></span>
@@ -26,6 +27,7 @@
 				            </div>
 				        </div>
 			    	</div>
+			    	-->
 	            </li>
 				</#list>
 	            

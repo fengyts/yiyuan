@@ -26,11 +26,6 @@ public class IndexController {
 
 	@RequestMapping(value = { "/", "/index" })
 	public String index(HttpServletRequest request, Model model) {
-		/*List<String> carousels = new ArrayList<String>();
-		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/04.jpg");
-		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/05.jpg");
-		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/06.jpg");
-		carousels.add("http://localhost:8090/snatch-front/statics/images/testImages/landscape/07.jpg");*/
 		request.setAttribute("carousels", indexAO.getAllCarousel());
 		model.addAttribute("hotItems", indexAO.getHostItems());
 		return "/index";
@@ -49,10 +44,10 @@ public class IndexController {
 		}
 		return new JSONPObject(callback, returnDate);
 	}
-	
-	@RequestMapping(value = "loadHotItem")
-	public String loadHotItem(){
-		return "/test";
+
+	@RequestMapping("topicSpecially")
+	public String hd(HttpServletRequest rquest) {
+		return "";
 	}
 
 }

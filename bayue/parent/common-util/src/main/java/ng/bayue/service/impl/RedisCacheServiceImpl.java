@@ -10,7 +10,7 @@ import redis.clients.jedis.JedisPool;
 
 /**
  * <pre>
- * 请使用RedisCacheServiceImpl2,该接口实现使用JedisPool,而RedisCacheServiceImpl2使用的是ShardedJedisPool
+ * 请使用RedisCacheServiceImpl1,该接口实现使用JedisPool,而RedisCacheServiceImpl1使用的是ShardedJedisPool
  * </pre>
  *
  * @author lenovopc

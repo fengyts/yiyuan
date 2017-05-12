@@ -50,6 +50,7 @@ public class RedisCacheUtil {
 		boolean isSuccess = true;
 		try {
 			jedis = jedisPool.getResource();
+			jedis.select(1);
 			String result = jedis.get(key);
 			return result;
 		} catch (Exception e) {
@@ -149,6 +150,7 @@ public class RedisCacheUtil {
 			validKeyAndValue(key, values);
 			 
 			jedis = jedisPool.getResource();
+			jedis.select(1);
 			String res = "";
 			if(o instanceof String){
 				jedis.set(key, (String) o);
@@ -156,12 +158,12 @@ public class RedisCacheUtil {
 				res = jedis.set(bytesKey, values);
 			}
 			if (SET_CACHE_RESULT.equalsIgnoreCase(res)) {
-				logger.info("key:{} redis cache is success!", key);
+				logger.info("key:{}, redis cache is success!", key);
 				isSuccess = true;
 			}
 			if (null != expires) {
 				Long time = jedis.expire(bytesKey, expires);
-				logger.info("key:{} redis cache time is {}", key, time);
+				logger.info("key:{}, redis cache time is {} second", key, expires);
 				isSuccess = true;
 			}
 //			return isSuccess;
@@ -211,7 +213,7 @@ public class RedisCacheUtil {
 	}
 	
 	public static void testRedis() throws UnsupportedEncodingException{
-		RedisCacheUtil.setRedisCache("test", "haha", 500);
+		RedisCacheUtil.setRedisCache("test", "haha", 30);
 		String str = RedisCacheUtil.getRedisCacheString("test");
 		System.out.println(str);
 		Thread thread = new Thread();
