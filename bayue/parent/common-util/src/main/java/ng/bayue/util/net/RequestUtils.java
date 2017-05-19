@@ -35,7 +35,7 @@ import ng.bayue.constant.CharsetConstant;
 public class RequestUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(RequestUtils.class);
-	
+
 	public static String doRequestReturnStr(String url, List<NameValuePair> parameters, String charset) {
 		StringBuilder resultData = new StringBuilder();
 		if (StringUtils.isBlank(charset)) {
@@ -70,22 +70,16 @@ public class RequestUtils {
 			HttpClient httpClient = builder.build();
 			HttpPost httpPost = new HttpPost(url);
 
-			// RequestConfig.Builder rb = RequestConfig.custom();
-			// rb.setSocketTimeout(10000);
-			// rb.setConnectTimeout(5000);
-			// rb.setConnectionRequestTimeout(5000);
-			// rb.setExpectContinueEnabled(false);
-
 			RequestConfig config = RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(5000)
 					.setConnectionRequestTimeout(5000).setExpectContinueEnabled(false).build();
 			httpPost.setConfig(config);
 
 			Charset cs = null;
 			if (StringUtils.isBlank(charset)) {
-				// charset = CharsetConstant.UTF8;
-				cs = Charset.forName(charset);
+				charset = CharsetConstant.UTF8;
+				// cs = Charset.forName(charset);
 			}
-//			httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
+			httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
 
 			HttpResponse response = httpClient.execute(httpPost);
 			HttpEntity entity = response.getEntity();
@@ -99,7 +93,7 @@ public class RequestUtils {
 				throw new UnsupportedEncodingException(e.getMessage());
 			}
 			InputStream is = entity.getContent();
-			 
+
 			CharsetInputStream cis = new CharsetInputStream();
 			cis.setCharset(charset);
 			cis.setIs(is);
