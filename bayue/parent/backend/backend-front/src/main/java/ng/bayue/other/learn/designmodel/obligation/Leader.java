@@ -11,7 +11,7 @@ package ng.bayue.other.learn.designmodel.obligation;
 public abstract class Leader {
 
 	/** 姓名 */
-	private String name;
+	protected String name;
 
 	/** 后续领导 */
 	protected Leader successor;

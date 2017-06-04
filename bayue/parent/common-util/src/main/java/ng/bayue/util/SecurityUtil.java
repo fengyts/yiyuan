@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <pre>
- * 安全类，包含MD5加密、hash多次散列等
+ * 安全类，包含MD5加密、SHA1、hash多次散列等
  * </pre>
  *
  * @author lenovopc
@@ -22,8 +22,6 @@ public final class SecurityUtil {
 	public static final Logger logger = LoggerFactory.getLogger(SecurityUtil.class);
 
 	private static final String MD5 = "MD5";
-
-	private static final String SHA = "SHA";
 
 	private static final String SHA1 = "SHA1";
 

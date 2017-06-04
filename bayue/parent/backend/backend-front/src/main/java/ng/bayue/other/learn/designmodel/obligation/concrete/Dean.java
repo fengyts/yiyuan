@@ -20,7 +20,7 @@ public class Dean extends Leader {
 	@Override
 	public void handleRequest(LeaveNode leaveNode) {
 		if (leaveNode.getDays() > 7 && leaveNode.getDays() <= 10) {
-			System.out.println("请假天数小于10天,院长批准了" + leaveNode.getPerson() + "假期");
+			System.out.println("请假天数小于10天,院长:" + name + "批准了" + leaveNode.getPerson() + "假期");
 		} else {
 			if (this.successor != null) {
 				this.successor.handleRequest(leaveNode);

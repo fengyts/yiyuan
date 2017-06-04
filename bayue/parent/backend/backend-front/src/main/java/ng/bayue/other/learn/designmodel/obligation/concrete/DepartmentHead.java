@@ -20,7 +20,7 @@ public class DepartmentHead extends Leader {
 	@Override
 	public void handleRequest(LeaveNode leaveNode) {
 		if (leaveNode.getDays() > 3 && leaveNode.getDays() <= 7) {
-			System.out.println("请假天数小于7天,系主任批准了" + leaveNode.getPerson() + "假期");
+			System.out.println("请假天数小于7天,系主任:" + name + "批准了" + leaveNode.getPerson() + "假期");
 		} else {
 			if (this.successor != null) {
 				this.successor.handleRequest(leaveNode);

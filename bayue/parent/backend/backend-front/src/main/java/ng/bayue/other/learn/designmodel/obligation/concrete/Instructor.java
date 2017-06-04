@@ -20,7 +20,7 @@ public class Instructor extends Leader {
 	@Override
 	public void handleRequest(LeaveNode leaveNode) {
 		if (leaveNode.getDays() <= 3) {
-			System.out.println("请假天数小于3天,辅导员批准了" + leaveNode.getPerson() + "假期");
+			System.out.println("请假天数小于3天,辅导员:" + name + "批准了 " + leaveNode.getPerson() + " 的假期");
 		} else {
 			if (this.successor != null) {
 				this.successor.handleRequest(leaveNode);
