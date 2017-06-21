@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 
-	<display-name>timetask-web</display-name>
+	<display-name>timetask-front</display-name>
 	
 	
 	<context-param>
