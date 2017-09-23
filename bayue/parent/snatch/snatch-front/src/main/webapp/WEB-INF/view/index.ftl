@@ -16,6 +16,7 @@
    <script>
       //var domain = "${domain}";
       //var snatch_domain_http = "${domain}";
+      var snatch_domain_http = "${domain}";
       //var search_domain = "${domain}";
   </script>
   

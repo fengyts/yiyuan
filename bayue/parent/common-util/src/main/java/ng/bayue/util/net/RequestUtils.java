@@ -10,8 +10,10 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.Consts;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -24,6 +26,7 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -79,7 +82,11 @@ public class RequestUtils {
 				charset = CharsetConstant.UTF8;
 				// cs = Charset.forName(charset);
 			}
-			httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
+			if(CollectionUtils.isNotEmpty(parameters)){
+				httpPost.setEntity(new UrlEncodedFormEntity(parameters, cs));
+			}
+			Header header = new BasicHeader("Content-Type", "text/html;charset=UTF-8");
+			httpPost.setHeader(header);
 
 			HttpResponse response = httpClient.execute(httpPost);
 			HttpEntity entity = response.getEntity();

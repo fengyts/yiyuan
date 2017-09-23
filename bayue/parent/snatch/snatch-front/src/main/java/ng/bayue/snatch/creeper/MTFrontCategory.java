@@ -116,7 +116,7 @@ public class MTFrontCategory {
 		}
 		
 		frontCategoryService.insertBatch(listData);
-//		frontCategoryLinkService.insertBatch(linkData);
+		frontCategoryLinkService.insertBatch(linkData);
 
 	}
 

@@ -167,6 +167,9 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			fcDO.setModifyTime(date);
 			String code = selectMaxCodeDynamic(fcDO);
 			fcDO.setCode(code);
+			if(fcDto.getLevel() == 1){
+				fcDO.setParentId(0L);
+			}
 			Long frontCateId = insert(fcDO);
 			
 			if(fcDO.getLevel() != 1){
