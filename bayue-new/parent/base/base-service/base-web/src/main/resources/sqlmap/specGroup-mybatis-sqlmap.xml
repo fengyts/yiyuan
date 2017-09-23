@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.base.domain.SpecGroupMapper">
+
+	<resultMap type="ng.bayue.base.domain.SpecGroupDO" id="SpecGroupDOResultMap">
+		<id column="id" property="id" />
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="alias" property="alias"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisSpecGroupDAO_all_column_fields">
+	      id,code,name,alias,sort,status,remark,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSpecGroupDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="code != null "> AND code=#{code} </if>
+			<if test="name != null  and name != '' "> AND name=#{name} </if>
+			<if test="alias != null  and alias != '' "> AND alias=#{alias} </if>
+			<if test="sort != null "> AND sort=#{sort} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSpecGroupDAO_selectById" parameterType="long" resultMap="SpecGroupDOResultMap">
+	SELECT
+		<include refid="MybatisSpecGroupDAO_all_column_fields" />
+	FROM
+		base_spec_group
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSpecGroupDAO_insert" parameterType="ng.bayue.base.domain.SpecGroupDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_spec_group(
+				id,
+				code,
+				name,
+				alias,
+				sort,
+				status,
+				remark,
+				create_time,
+				modify_time
+		)values(
+				#{id},
+				#{code},
+				#{name},
+				#{alias},
+				#{sort},
+				#{status},
+				#{remark},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisSpecGroupDAO_updateById" parameterType="ng.bayue.base.domain.SpecGroupDO">
+		UPDATE base_spec_group
+		SET
+					code = #{code},
+					name = #{name},
+					alias = #{alias},
+					sort = #{sort},
+					status = #{status},
+					remark = #{remark},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSpecGroupDAO_deleteById" parameterType="long">
+		DELETE FROM base_spec_group WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSpecGroupDAO_update_dynamic" parameterType="ng.bayue.base.domain.SpecGroupDO">
+		UPDATE base_spec_group
+		<set>
+					<if test="code != null ">code=#{code},</if>
+					<if test="name != null  and name != '' ">name=#{name},</if>
+					<if test="alias != null  and alias != '' ">alias=#{alias},</if>
+					<if test="sort != null ">sort=#{sort},</if>
+					<if test="status != null ">status=#{status},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSpecGroupDAO_select_dynamic" resultMap="SpecGroupDOResultMap" parameterType="ng.bayue.base.domain.SpecGroupDO">
+	     SELECT
+	     	<include refid="MybatisSpecGroupDAO_all_column_fields" />
+		 FROM
+		 	base_spec_group
+			<include refid="MybatisSpecGroupDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSpecGroupDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.base.domain.SpecGroupDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_spec_group
+	 	<include refid="MybatisSpecGroupDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSpecGroupDAO_select_dynamic_page_query" resultMap="SpecGroupDOResultMap" parameterType="ng.bayue.base.domain.SpecGroupDO">
+	     SELECT
+	     	<include refid="MybatisSpecGroupDAO_all_column_fields" />
+		 FROM
+		 	base_spec_group
+	 	<include refid="MybatisSpecGroupDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisSpecGroupDAO_select_by_ids" parameterType="list" resultMap="SpecGroupDOResultMap">
+ 		SELECT 
+ 			<include refid="MybatisSpecGroupDAO_all_column_fields" />
+ 		FROM
+		 	base_spec_group
+		 WHERE id IN
+		 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+ 	</select>
+
+</mapper>

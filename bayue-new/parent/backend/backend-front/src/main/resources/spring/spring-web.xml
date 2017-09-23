@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+       
+	<!-- 启用spring mvc 注解 -->
+	<!-- 
+	<mvc:annotation-driven/>
+	<context:annotation-config /> 
+	-->
+	
+	<context:property-placeholder location="classpath:config/metainfo.properties" order="2000000"/>
+	<util:properties id="meta" location="classpath:config/metainfo.properties"/>
+
+	<context:component-scan base-package="ng.bayue.backend.*">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	
+	<bean id="imageDownload" class="ng.bayue.service.impl.ImageDownload"/>
+	
+	<!-- <bean id="jsonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" /> -->
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+		
+	<bean id="jsonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 线程安全的访问session -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="synchronizeOnSession" value="true" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonHttpMessageConverter" />
+				<ref bean="stringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- jsp视图解析(*.jsp) -->
+	<bean id="internalResourceViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- FreeMarkerViewResolver: freemarker视图解析 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="suffix" value=".ftl" />
+		<property name="order" value="0" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="requestContextAttribute" value="requestContextPath" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<!-- 支持@SessionAttributes -->
+		<property name="allowSessionOverride" value="true" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="attributesMap">
+			<map>
+				<entry key="staticDomain" value="${static.domain}" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- FreeMarkerConfigurer: freemarker配置 -->
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+	
+	<bean id="freeMarkerConfigurer" class="ng.bayue.backend.shiro.freemarker.ShiroTagFreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/view/" />
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+				<entry key="imageDownload" value-ref="imageDownload" />
+			</map>
+		</property>
+		
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="number_format">0.##########</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="classic_compatible">true</prop>
+				<prop key="template_exception_handler">ignore</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<bean id="jsonResolver"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+	<!-- 静态资源路径 -->
+	<mvc:resources mapping="/statics/**" location="/statics/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
+
+
+	<!-- 登录验证码 -->
+	<!-- <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">yes</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<prop key="kaptcha.image.width">125</prop>
+						<prop key="kaptcha.image.height">35</prop>
+						<prop key="kaptcha.textproducer.font.size">35</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop>
+					</props>
+				</constructor-arg> -->
+				
+				<!-- kaptcha.border.color 边框颜色 默认为Color.BLACK -->
+				<!-- kaptcha.border.thickness 边框粗细度 默认为1 -->
+				<!-- kaptcha.producer.impl 验证码生成器 默认为DefaultKaptcha -->
+				<!-- kaptcha.textproducer.impl 验证码文本生成器 默认为DefaultTextCreator -->
+				<!-- kaptcha.textproducer.char.string 验证码文本字符内容范围 默认为abcde2345678gfynmnpwx -->
+				<!-- kaptcha.textproducer.char.length 验证码文本字符长度 默认为5 -->
+				<!-- kaptcha.textproducer.font.names 验证码文本字体样式 默认为new Font("Arial", 1, 
+					fontSize), new Font("Courier", 1, fontSize) -->
+				<!-- kaptcha.textproducer.font.size 验证码文本字符大小 默认为40 -->
+				<!-- kaptcha.textproducer.font.color 验证码文本字符颜色 默认为Color.BLACK -->
+				<!-- kaptcha.textproducer.char.space 验证码文本字符间距 默认为2 -->
+				<!-- kaptcha.noise.impl 验证码噪点生成对象 默认为DefaultNoise -->
+				<!-- kaptcha.noise.color 验证码噪点颜色 默认为Color.BLACK -->
+				<!-- kaptcha.obscurificator.impl 验证码样式引擎 默认为WaterRipple -->
+				<!-- kaptcha.word.impl 验证码文本字符渲染 默认为DefaultWordRenderer -->
+				<!-- kaptcha.background.impl 验证码背景生成器 默认为DefaultBackground -->
+				<!-- kaptcha.background.clear.from 验证码背景颜色渐进 默认为Color.LIGHT_GRAY -->
+				<!-- kaptcha.background.clear.to 验证码背景颜色渐进 默认为Color.WHITE -->
+				<!-- kaptcha.image.width 验证码图片宽度 默认为200 -->
+				<!-- kaptcha.image.height 验证码图片高度 默认为50 -->
+				
+		<!-- 	</bean>
+		</property>
+	</bean> -->
+
+</beans>

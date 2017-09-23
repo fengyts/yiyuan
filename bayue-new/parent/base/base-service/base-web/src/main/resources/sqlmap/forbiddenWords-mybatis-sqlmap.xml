@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.base.domain.ForbiddenWordsMapper">
+
+	<resultMap type="ng.bayue.base.domain.ForbiddenWordsDO" id="ForbiddenWordsDOResultMap">
+		<id column="id" property="id" />
+        <result column="code" property="code"/>
+        <result column="type" property="type"/>
+        <result column="words" property="words"/>
+        <result column="status" property="status"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="remark" property="remark"/>
+	</resultMap>
+
+	<sql id="MybatisForbiddenWordsDAO_all_column_fields">
+	      id,code,type,words,status,created_time,modify_time,remark
+ 	</sql>
+
+	<sql id="MybatisForbiddenWordsDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="code != null  and code != '' "> AND code=#{code} </if>
+			<if test="type != null  "> AND type=#{type} </if>
+			<if test="words != null  and words != '' "> AND words=#{words} </if>
+			<if test="status != null  "> AND status=#{status} </if>
+			<if test="remark != null "> AND remark=#{remark} </if>
+		</where>
+ 	</sql>
+ 	
+ 	
+	<sql id="MybatisForbiddenWordsDAO_like_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="code != null  and code != '' "> AND code=#{code} </if>
+			<if test="type != null  "> AND type=#{type} </if>
+			<if test="words != null  and words != '' "> AND words like "%"#{words}"%" </if>
+			<if test="status != null  "> AND status=#{status} </if>
+			<if test="remark != null "> AND remark=#{remark} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisForbiddenWordsDAO_selectById" parameterType="long" resultMap="ForbiddenWordsDOResultMap">
+	SELECT
+		<include refid="MybatisForbiddenWordsDAO_all_column_fields" />
+	FROM
+		base_forbidden_words
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisForbiddenWordsDAO_insert" parameterType="ng.bayue.base.domain.ForbiddenWordsDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_forbidden_words(
+				id,
+				code,
+				type,
+				words,
+				status,
+				created_time,
+				modify_time,
+				remark
+		)values(
+				#{id},
+				#{code},
+				#{type},
+				#{words},
+				#{status},
+				#{createdTime},
+				#{modifyTime},
+				#{remark}
+		)
+    </insert>
+
+	<update id="MybatisForbiddenWordsDAO_updateById" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+		UPDATE base_forbidden_words
+		SET
+					code = #{code},
+					type = #{type},
+					words = #{words},
+					status = #{status},
+					modify_time = #{modifyTime},
+					remark = #{remark}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisForbiddenWordsDAO_deleteById" parameterType="long">
+		DELETE FROM base_forbidden_words WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisForbiddenWordsDAO_update_dynamic" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+		UPDATE base_forbidden_words
+		<set>
+			<if test="code != null  and code != '' ">code=#{code},</if>
+			<if test="type != null   ">type=#{type},</if>
+			<if test="words != null  and words != '' ">words=#{words},</if>
+			<if test="status != null  ">status=#{status},</if>
+			<if test="modifyTime != null  and modifyTime != '' ">modify_time=#{modifyTime},</if>
+			<if test="remark != null ">remark=#{remark},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisForbiddenWordsDAO_select_dynamic" resultMap="ForbiddenWordsDOResultMap" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+	     SELECT
+	     	<include refid="MybatisForbiddenWordsDAO_all_column_fields" />
+		 FROM
+		 	base_forbidden_words
+			<include refid="MybatisForbiddenWordsDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisForbiddenWordsDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_forbidden_words
+	 	<include refid="MybatisForbiddenWordsDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisForbiddenWordsDAO_select_dynamic_page_query" resultMap="ForbiddenWordsDOResultMap" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+	     SELECT
+	     	<include refid="MybatisForbiddenWordsDAO_all_column_fields" />
+		 FROM
+		 	base_forbidden_words
+	 	<include refid="MybatisForbiddenWordsDAO_dynamic_where_fields" />
+	 	ORDER BY created_time DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+    
+    <select id="MybatisForbiddenWordsDAO_select_ForbiddenWords_list_query" resultMap="ForbiddenWordsDOResultMap">
+		SELECT
+		<include refid="MybatisForbiddenWordsDAO_all_column_fields" />
+		FROM
+		base_forbidden_words
+		WHERE id in
+		<foreach item="id" index="index" collection="list" open="("
+			separator="," close=")">
+			#{id}
+	   </foreach>
+	</select>
+
+
+<select id="MybatisForbiddenWordsDAO_select_by_likeof_forbiddenWords_count" resultType="long" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_forbidden_words
+	 	 <include refid="MybatisForbiddenWordsDAO_like_where_fields"/>
+ 	</select>
+ 	
+ 	
+ 	<select id="MybatisForbiddenWordsDAO_select_list_by_forbiddenWords_like_pagequery" resultMap="ForbiddenWordsDOResultMap" parameterType="ng.bayue.base.domain.ForbiddenWordsDO">
+	     SELECT
+	     	<include refid="MybatisForbiddenWordsDAO_all_column_fields" />
+		 FROM
+		 	base_forbidden_words
+	   	<include refid="MybatisForbiddenWordsDAO_like_where_fields"/>
+	   	order by modify_time desc,id asc
+	   		Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

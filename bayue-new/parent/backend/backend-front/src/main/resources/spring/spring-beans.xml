@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 
+		<util:properties id="meta" location="classpath:config/metainfo.properties"></util:properties> 
+	-->
+	<!-- 
+		@Value("${test.value}")
+		private String testValue;
+		@Value("#{meta['test.value']}")
+		private String testValue1; 
+	-->
+	
+	<context:property-placeholder location="classpath:config/metainfo.properties" order="2000000"/>
+	<util:properties id="meta" location="classpath:config/metainfo.properties"/>
+	
+	<context:component-scan base-package="ng.bayue.*">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	
+	<!-- <aop:aspectj-autoproxy />-->
+	
+	<import resource="classpath*:spring/shiro/spring-context-shiro.xml"/>
+	<import resource="classpath*:spring/shiro/spring-config-shiro.xml"/>
+	
+	<import resource="classpath*:spring/spring-kaptcha.xml"/>
+	
+	<import resource="classpath*:spring/hessian/remote-*.xml" />
+	<import resource="classpath*:spring/spring-dfs.xml"/>
+	<import resource="classpath*:spring/spring-redis.xml"/>
+	
+	<import resource="classpath*:spring/spring-mail.xml"/>
+	
+	
+</beans>

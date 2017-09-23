@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sysMenuService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysMenuService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="sysUserService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysUserService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysUserService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="sysRoleService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysRoleService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysRoleService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="sysMenuRoleService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysMenuRoleService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuRoleService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="sysUserRoleService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${backend.hessian}/sysUserRoleService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysUserRoleService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+
+</beans>

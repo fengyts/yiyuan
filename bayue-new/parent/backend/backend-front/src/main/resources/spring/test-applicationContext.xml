@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+		<bean id="work" class="ng.bayue.other.learn.Work" />
+		<bean id="workClock" class="ng.bayue.other.learn.WorkerClock"/>
+		
+		<!-- aop使用方式1 -->
+		<!-- <bean id="pointCut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" >
+			<property name="pattern" value=".*work"/>
+		</bean>
+		<bean id="workAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+			<property name="pointcut" ref="pointCut"/>
+			<property name="advice" ref="workClock"/>
+		</bean>
+		<bean id="workProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+			<property name="target" ref="work"/>
+			<property name="interceptorNames" value="workAdvisor"/>
+			<property name="proxyInterfaces" value="ng.bayue.other.learn.Workable"/>
+		</bean> -->
+		
+		
+		<!-- aop使用方式2 -->
+		<bean id="workAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+			<property name="advice" ref="workClock"/>
+			<property name="pattern" value=".*work"/>
+		</bean>
+		
+		<bean id="workProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	
+</beans>

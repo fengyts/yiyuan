@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.base.domain.SpecGroupLinkMapper">
+
+	<resultMap type="ng.bayue.base.domain.SpecGroupLinkDO" id="SpecGroupLinkDOResultMap">
+		<id column="id" property="id" />
+        <result column="group_id" property="groupId"/>
+        <result column="spec_id" property="specId"/>
+        <result column="sort" property="sort"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisSpecGroupLinkDAO_all_column_fields">
+	      id,group_id,spec_id,sort,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSpecGroupLinkDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="groupId != null "> AND group_id=#{groupId} </if>
+			<if test="specId != null "> AND spec_id=#{specId} </if>
+			<if test="sort != null "> AND sort=#{sort} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSpecGroupLinkDAO_selectById" parameterType="long" resultMap="SpecGroupLinkDOResultMap">
+	SELECT
+		<include refid="MybatisSpecGroupLinkDAO_all_column_fields" />
+	FROM
+		base_spec_group_link
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSpecGroupLinkDAO_insert" parameterType="ng.bayue.base.domain.SpecGroupLinkDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_spec_group_link(
+				id,
+				group_id,
+				spec_id,
+				sort,
+				create_time,
+				modify_time
+		)values(
+				#{id},
+				#{groupId},
+				#{specId},
+				#{sort},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisSpecGroupLinkDAO_updateById" parameterType="ng.bayue.base.domain.SpecGroupLinkDO">
+		UPDATE base_spec_group_link
+		SET
+					group_id = #{groupId},
+					spec_id = #{specId},
+					sort = #{sort},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSpecGroupLinkDAO_deleteById" parameterType="long">
+		DELETE FROM base_spec_group_link WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSpecGroupLinkDAO_update_dynamic" parameterType="ng.bayue.base.domain.SpecGroupLinkDO">
+		UPDATE base_spec_group_link
+		<set>
+					<if test="groupId != null ">group_id=#{groupId},</if>
+					<if test="specId != null ">spec_id=#{specId},</if>
+					<if test="sort != null ">sort=#{sort},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSpecGroupLinkDAO_select_dynamic" resultMap="SpecGroupLinkDOResultMap" parameterType="ng.bayue.base.domain.SpecGroupLinkDO">
+	     SELECT
+	     	<include refid="MybatisSpecGroupLinkDAO_all_column_fields" />
+		 FROM
+		 	base_spec_group_link
+			<include refid="MybatisSpecGroupLinkDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSpecGroupLinkDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.base.domain.SpecGroupLinkDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_spec_group_link
+	 	<include refid="MybatisSpecGroupLinkDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSpecGroupLinkDAO_select_dynamic_page_query" resultMap="SpecGroupLinkDOResultMap" parameterType="ng.bayue.base.domain.SpecGroupLinkDO">
+	     SELECT
+	     	<include refid="MybatisSpecGroupLinkDAO_all_column_fields" />
+		 FROM
+		 	base_spec_group_link
+	 	<include refid="MybatisSpecGroupLinkDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<insert id="MybatisSpecGroupLinkDAO_insert_batch" parameterType="list">
+ 		INSERT INTO base_spec_group_link
+		 	(
+				group_id,
+				spec_id,
+				sort,
+				create_time,
+				modify_time
+		 	)
+		 VALUES
+		 <foreach collection="list" index="index" item="item" separator=",">
+			 (
+			 	#{item.groupId},
+			 	#{item.specId},
+			 	#{item.sort},
+			 	#{item.createTime},
+			 	#{item.modifyTime}
+			 )
+		 </foreach>
+ 	
+ 	</insert>
+ 	
+ 	<update id="MybatisSpecGroupLinkDAO_update_batch" parameterType="list">
+ 		<foreach collection="list" item="item" index="index" separator=";">
+               update base_spec_group_link
+                <set>
+                	sort = #{item.sort}
+                </set>
+                where spec_id = #{item.specId} and group_id=#{item.groupId}
+        </foreach> 
+
+ 	</update>
+
+</mapper>

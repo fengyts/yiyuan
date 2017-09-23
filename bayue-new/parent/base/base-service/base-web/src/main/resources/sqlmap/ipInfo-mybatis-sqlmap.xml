@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.base.domain.IpInfoMapper">
+
+	<resultMap type="ng.bayue.base.domain.IpInfoDO" id="IpInfoDOResultMap">
+		<id column="id" property="id" />
+        <result column="ipstart" property="ipstart"/>
+        <result column="ipend" property="ipend"/>
+        <result column="ipstart_int" property="ipstartInt"/>
+        <result column="ipend_int" property="ipendInt"/>
+        <result column="country_id" property="countryId"/>
+        <result column="country" property="country"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="province" property="province"/>
+        <result column="city_id" property="cityId"/>
+        <result column="city" property="city"/>
+        <result column="district" property="district"/>
+	</resultMap>
+
+	<sql id="MybatisIpInfoDAO_all_column_fields">
+	      id,ipstart,ipend,ipstart_int,ipend_int,country_id,country,province_id,province,city_id,city,district
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisIpInfoDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="ipstart != null  and ipstart != '' "> AND ipstart=#{ipstart} </if>
+			<if test="ipend != null  and ipend != '' "> AND ipend=#{ipend} </if>
+			<if test="ipstartInt != null "> AND ipstart_int=#{ipstartInt} </if>
+			<if test="ipendInt != null "> AND ipend_int=#{ipendInt} </if>
+			<if test="countryId != null "> AND country_id=#{countryId} </if>
+			<if test="country != null  and country != '' "> AND country=#{country} </if>
+			<if test="provinceId != null "> AND province_id=#{provinceId} </if>
+			<if test="province != null  and province != '' "> AND province=#{province} </if>
+			<if test="cityId != null "> AND city_id=#{cityId} </if>
+			<if test="city != null  and city != '' "> AND city=#{city} </if>
+			<if test="district != null  and district != '' "> AND district=#{district} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisIpInfoDAO_selectById" parameterType="long" resultMap="IpInfoDOResultMap">
+	SELECT
+		<include refid="MybatisIpInfoDAO_all_column_fields" />
+	FROM
+		base_ip_info
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisIpInfoDAO_insert" parameterType="ng.bayue.base.domain.IpInfoDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_ip_info(
+				id,
+				ipstart,
+				ipend,
+				ipstart_int,
+				ipend_int,
+				country_id,
+				country,
+				province_id,
+				province,
+				city_id,
+				city,
+				district
+		)values(
+				#{id},
+				#{ipstart},
+				#{ipend},
+				#{ipstartInt},
+				#{ipendInt},
+				#{countryId},
+				#{country},
+				#{provinceId},
+				#{province},
+				#{cityId},
+				#{city},
+				#{district}
+		)
+    </insert>
+
+	<update id="MybatisIpInfoDAO_updateById" parameterType="ng.bayue.base.domain.IpInfoDO">
+		UPDATE base_ip_info
+		SET
+					ipstart = #{ipstart},
+					ipend = #{ipend},
+					ipstart_int = #{ipstartInt},
+					ipend_int = #{ipendInt},
+					country_id = #{countryId},
+					country = #{country},
+					province_id = #{provinceId},
+					province = #{province},
+					city_id = #{cityId},
+					city = #{city},
+					district = #{district}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisIpInfoDAO_deleteById" parameterType="long">
+		DELETE FROM base_ip_info WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisIpInfoDAO_update_dynamic" parameterType="ng.bayue.base.domain.IpInfoDO">
+		UPDATE base_ip_info
+		<set>
+					<if test="ipstart != null  and ipstart != '' ">ipstart=#{ipstart},</if>
+					<if test="ipend != null  and ipend != '' ">ipend=#{ipend},</if>
+					<if test="ipstartInt != null ">ipstart_int=#{ipstartInt},</if>
+					<if test="ipendInt != null ">ipend_int=#{ipendInt},</if>
+					<if test="countryId != null ">country_id=#{countryId},</if>
+					<if test="country != null  and country != '' ">country=#{country},</if>
+					<if test="provinceId != null ">province_id=#{provinceId},</if>
+					<if test="province != null  and province != '' ">province=#{province},</if>
+					<if test="cityId != null ">city_id=#{cityId},</if>
+					<if test="city != null  and city != '' ">city=#{city},</if>
+					<if test="district != null  and district != '' ">district=#{district},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisIpInfoDAO_select_dynamic" resultMap="IpInfoDOResultMap" parameterType="ng.bayue.base.domain.IpInfoDO">
+	     SELECT
+	     	<include refid="MybatisIpInfoDAO_all_column_fields" />
+		 FROM
+		 	base_ip_info
+			<include refid="MybatisIpInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisIpInfoDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.base.domain.IpInfoDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_ip_info
+	 	<include refid="MybatisIpInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisIpInfoDAO_select_dynamic_page_query" resultMap="IpInfoDOResultMap" parameterType="ng.bayue.base.domain.IpInfoDO">
+	     SELECT
+	     	<include refid="MybatisIpInfoDAO_all_column_fields" />
+		 FROM
+		 	base_ip_info
+	 	<include refid="MybatisIpInfoDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisIpInfoDAO_select_by_ipint" parameterType="java.lang.Long" resultMap="IpInfoDOResultMap">
+ 		SELECT
+ 			<include refid="MybatisIpInfoDAO_all_column_fields"></include>
+ 		FROM
+ 			base_ip_info
+ 		WHERE #{ip} BETWEEN ipstart_int AND ipend_int
+ 	</select>
+
+</mapper>

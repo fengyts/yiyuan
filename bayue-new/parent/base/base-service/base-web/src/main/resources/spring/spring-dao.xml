@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-autowire="byName">
+
+	<!-- <context:component-scan base-package="ng.bayue.base.persist.mybatis ng.bayue.base.service.impl" /> -->
+	<context:component-scan base-package="ng.bayue.base.*">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+	<context:annotation-config />
+
+	<!--创建jdbc数据源 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
+		<!-- <property name="driverClassName" value="${dataSource.driverClassName}" />
+		<property name="url" value="${dataSource.url}" />
+		<property name="username" value="${dataSource.username}" />
+		<property name="password" value="${dataSource.password}" /> -->
+	<!-- <bean id="dataSource" class="ng.bayue.mchange.v2.c3p0.MtComboPooledDataSource" destroy-method="close">
+		
+		<property name="driverClass" value="#{meta['dataSource.driverClassName']}"></property>
+		<property name="jdbcUrl" value="#{meta['dataSource.url']}"></property>
+		<property name="user" value="#{meta['dataSource.username']}"></property>
+		<property name="password">
+			<value><![CDATA[#{meta['dataSource.password']}]]></value>
+		</property>
+		连接池中保留的最大连接数。默认值: 15
+		<property name="maxPoolSize" value="#{meta['dataSource.maxPoolSize']}" />
+		连接池中保留的最小连接数，默认为：3
+		<property name="minPoolSize" value="#{meta['dataSource.minPoolSize']}" />
+		初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3
+		<property name="initialPoolSize" value="#{meta['dataSource.initialPoolSize']}" />
+		最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0
+		<property name="maxIdleTime" value="#{meta['dataSource.maxIdleTime']}" />
+		当连接池连接耗尽时，客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException，如设为0则无限期等待。单位毫秒。默认: 0
+		<property name="checkoutTimeout" value="#{meta['dataSource.checkoutTimeout']}" />
+		当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3
+		<property name="acquireIncrement" value="#{meta['dataSource.acquireIncrement']}" />
+		定义在从数据库获取新连接失败后重复尝试的次数。默认值: 30 ；小于等于0表示无限次
+		<property name="acquireRetryAttempts" value="#{meta['dataSource.acquireRetryAttempts']}" />
+		重新尝试的时间间隔，默认为：1000毫秒
+		<property name="acquireRetryDelay" value="#{meta['dataSource.acquireRetryDelay']}" />
+		关闭连接时，是否提交未提交的事务，默认为false，即关闭连接，回滚未提交的事务
+		<property name="autoCommitOnClose" value="#{meta['dataSource.autoCommitOnClose']}" />
+		c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数那么属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试使用。默认值: null
+		<property name="automaticTestTable" value="#{meta['dataSource.automaticTestTable']}" />
+		如果为false，则获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常，但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试获取连接失败后该数据源将申明已断开并永久关闭。默认: false
+		<property name="breakAfterAcquireFailure" value="#{meta['dataSource.breakAfterAcquireFailure']}" />
+		每60秒检查所有连接池中的空闲连接。默认值: 0，不检查
+		<property name="idleConnectionTestPeriod" value="#{meta['dataSource.idleConnectionTestPeriod']}" />
+		c3p0全局的PreparedStatements缓存的大小。如果maxStatements与maxStatementsPerConnection均为0，则缓存不生效，只要有一个不为0，则语句的缓存就能生效。如果默认值: 0
+		<property name="maxStatements" value="#{meta['dataSource.maxStatements']}" />
+		maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。默认值: 0
+		<property name="maxStatementsPerConnection" value="#{meta['dataSource.maxStatementsPerConnection']}"/>
+		
+	</bean> -->
+	
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">  
+            <property name="driverClassName" value="${dataSource.driverClassName}"></property>  
+            <property name="url" value="${dataSource.url}"></property>  
+            <property name="username" value="${dataSource.username}"></property>  
+            <property name="password" value="${dataSource.password}"></property>  
+            <!-- <property name="connectionProperties" value="config.decrypt=true"/>  
+            <property name="filters" value="config" /> -->  
+            <!-- 配置初始化大小、最小、最大 -->  
+            <property name="initialSize" value="1" />  
+            <property name="minIdle" value="1" />   
+            <property name="maxActive" value="8" />  
+            <!-- 配置获取连接等待超时的时间 -->  
+            <property name="maxWait" value="60000" />  
+  
+            <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
+            <property name="timeBetweenEvictionRunsMillis" value="60000" />  
+            <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->  
+            <property name="minEvictableIdleTimeMillis" value="300000" />  
+      
+            <property name="testWhileIdle" value="true" />  
+            <property name="testOnBorrow" value="false" />  
+            <property name="testOnReturn" value="false" />  
+            <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->  
+            <property name="poolPreparedStatements" value="true" />  
+            <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+            <!-- 配置druid web监控 -->  
+            <property name="filters" value="stat,log4j,wall" />
+    </bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 可通过注解控制事务 -->
+	<!-- <tx:annotation-driven /> -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> <property 
+		name="basePackage" value="com.geloin.spring.mapper" /> </bean> -->
+
+	<!-- mybatis 创建SqlSessionFactory，同时指定数据源 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+		scope="prototype">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+
+
+</beans>

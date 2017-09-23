@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 					 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="/sysMenuService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysMenuService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuService" />
+	</bean>
+	<bean name="/sysUserService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysUserService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysUserService" />
+	</bean>
+	<bean name="/sysRoleService.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysRoleService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysRoleService" />
+	</bean>
+	<bean name="/sysMenuRoleService.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysMenuRoleService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysMenuRoleService" />
+	</bean>
+	<bean name="/sysUserRoleService.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysUserRoleService" />
+		<property name="serviceInterface" value="ng.bayue.backend.service.SysUserRoleService" />
+	</bean>
+
+
+</beans>

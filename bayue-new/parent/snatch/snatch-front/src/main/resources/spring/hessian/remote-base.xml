@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="categoryService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/categoryService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.CategoryService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="forbiddenWordsService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/forbiddenWordsService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.ForbiddenWordsService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="strategyService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/strategyService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.StrategyService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="districtInfoService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/districtInfoService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.DistrictInfoService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="ipInfoService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/ipInfoService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.IpInfoService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="dictionaryService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/dictionaryService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.DictionaryService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="specService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/specService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.SpecService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="specGroupService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/specGroupService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.SpecGroupService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="specGroupLinkService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/specGroupLinkService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.SpecGroupLinkService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="frontCategoryService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/frontCategoryService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="frontCategoryLinkService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/frontCategoryLinkService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.FrontCategoryLinkService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+	<bean id="remoteBaseService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${base.hessian}/remoteBaseService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.base.service.remote.RemoteBaseService" />
+		<property name="overloadEnabled" value="false" />
+	</bean>
+
+</beans>

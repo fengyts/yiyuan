@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.base.domain.StrategyMapper">
+
+	<resultMap type="ng.bayue.base.domain.StrategyDO" id="StrategyDOResultMap">
+		<id column="id" property="id" />
+        <result column="module" property="module"/>
+        <result column="level" property="level"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+	</resultMap>
+
+	<sql id="MybatisStrategyDAO_all_column_fields">
+	      id,module,level,title,content,parent_id,status,remark,create_time,modify_time,create_user_id,modify_user_id
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisStrategyDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="module != null  and module != '' "> AND module=#{module} </if>
+			<if test="level != null "> AND level=#{level} </if>
+			<if test="title != null  and title != '' "> AND title=#{title} </if>
+			<if test="content != null  and content != '' "> AND content=#{content} </if>
+			<if test="parentId != null "> AND parent_id=#{parentId} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisStrategyDAO_selectById" parameterType="long" resultMap="StrategyDOResultMap">
+	SELECT
+		<include refid="MybatisStrategyDAO_all_column_fields" />
+	FROM
+		base_strategy
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisStrategyDAO_insert" parameterType="ng.bayue.base.domain.StrategyDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO base_strategy(
+				id,
+				module,
+				level,
+				title,
+				content,
+				parent_id,
+				status,
+				remark,
+				create_time,
+				modify_time,
+				create_user_id,
+				modify_user_id
+		)values(
+				#{id},
+				#{module},
+				#{level},
+				#{title},
+				#{content},
+				#{parentId},
+				#{status},
+				#{remark},
+				#{createTime},
+				#{modifyTime},
+				#{createUserId},
+				#{modifyUserId}
+		)
+    </insert>
+
+	<update id="MybatisStrategyDAO_updateById" parameterType="ng.bayue.base.domain.StrategyDO">
+		UPDATE base_strategy
+		SET
+					module = #{module},
+					level = #{level},
+					title = #{title},
+					content = #{content},
+					parent_id = #{parentId},
+					status = #{status},
+					remark = #{remark},
+					modify_time = #{modifyTime},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisStrategyDAO_deleteById" parameterType="long">
+		DELETE FROM base_strategy WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisStrategyDAO_update_dynamic" parameterType="ng.bayue.base.domain.StrategyDO">
+		UPDATE base_strategy
+		<set>
+					<if test="module != null  and module != '' ">module=#{module},</if>
+					<if test="level != null ">level=#{level},</if>
+					<if test="title != null  and title != '' ">title=#{title},</if>
+					<if test="content != null  and content != '' ">content=#{content},</if>
+					<if test="parentId != null ">parent_id=#{parentId},</if>
+					<if test="status != null ">status=#{status},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisStrategyDAO_select_dynamic" resultMap="StrategyDOResultMap" parameterType="ng.bayue.base.domain.StrategyDO">
+	     SELECT
+	     	<include refid="MybatisStrategyDAO_all_column_fields" />
+		 FROM
+		 	base_strategy
+			<include refid="MybatisStrategyDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisStrategyDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.base.domain.StrategyDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	base_strategy
+	 	<include refid="MybatisStrategyDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisStrategyDAO_select_dynamic_page_query" resultMap="StrategyDOResultMap" parameterType="ng.bayue.base.domain.StrategyDO">
+	     SELECT
+	     	<include refid="MybatisStrategyDAO_all_column_fields" />
+		 FROM
+		 	base_strategy
+	 	<include refid="MybatisStrategyDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>
