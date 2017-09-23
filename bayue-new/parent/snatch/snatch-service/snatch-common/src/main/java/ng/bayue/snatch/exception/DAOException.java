@@ -1,7 +1,9 @@
-package ng.bayue.exception;
+package ng.bayue.snatch.exception;
 
-public class DAOException extends Exception {
+import ng.bayue.exception.CommonDAOException;
 
+public class DAOException extends CommonDAOException {
+	
 	private static final long serialVersionUID = 5122280185969230388L;
 
 	public DAOException() {
@@ -19,5 +21,5 @@ public class DAOException extends Exception {
 	public DAOException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
-
+	
 }

@@ -4,7 +4,20 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration>  
     <!-- 增加sqlmapper文件 -->
-    <mappers>  
+    <mappers>
+		<!--  商品sql  -->
+    	<mapper resource="sqlmap/item/itemDetail-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/itemInfo-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/itemPictures-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/detailSpec-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/code-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/itemDesc-mybatis-sqlmap.xml"/>
+        <mapper resource="sqlmap/item/carousel-mybatis-sqlmap.xml"/>
+        
+        <!--  promotion sql  -->
+        <mapper resource="sqlmap/promotion/topic-mybatis-sqlmap.xml"/>
+		<mapper resource="sqlmap/promotion/topicItem-mybatis-sqlmap.xml"/>
+		<mapper resource="sqlmap/promotion/topicItemProgress-mybatis-sqlmap.xml"/>
 
     </mappers>  
     

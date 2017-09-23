@@ -12,7 +12,7 @@ import ng.bayue.base.domain.FrontCategoryLinkDO;
 import ng.bayue.base.exception.ServiceException;
 import ng.bayue.base.persist.dao.FrontCategoryLinkDAO;
 import ng.bayue.base.service.FrontCategoryLinkService;
-import ng.bayue.exception.DAOException;
+import ng.bayue.exception.CommonDAOException;
 import ng.bayue.common.Page;
 
 @Service(value="frontCategoryLinkService")
@@ -27,7 +27,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	public Long insert(FrontCategoryLinkDO frontCategoryLinkDO) throws ServiceException {
 		try {
 			return frontCategoryLinkDAO.insert(frontCategoryLinkDO);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -51,7 +51,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 			}else{
 				return (Integer) frontCategoryLinkDAO.updateDynamic(frontCategoryLinkDO);
 			}
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -61,7 +61,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	public int deleteById(Long id) throws ServiceException {
 		try {
 			return (Integer) frontCategoryLinkDAO.deleteById(id);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -81,7 +81,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	public FrontCategoryLinkDO selectById(Long id) throws ServiceException {
 		try {
 			return frontCategoryLinkDAO.selectById(id);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -91,7 +91,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	public Long selectCountDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws ServiceException {
 		try {
 			return frontCategoryLinkDAO.selectCountDynamic(frontCategoryLinkDO);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -101,7 +101,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	public List<FrontCategoryLinkDO> selectDynamic(FrontCategoryLinkDO frontCategoryLinkDO) throws ServiceException {
 		try {
 			return frontCategoryLinkDAO.selectDynamic(frontCategoryLinkDO);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}
@@ -111,7 +111,7 @@ public class FrontCategoryLinkServiceImpl  implements FrontCategoryLinkService{
 	private List<FrontCategoryLinkDO> selectDynamicPageQuery(FrontCategoryLinkDO frontCategoryLinkDO) throws ServiceException {
 		try {
 			return frontCategoryLinkDAO.selectDynamicPageQuery(frontCategoryLinkDO);
-		}catch(DAOException e){
+		}catch(CommonDAOException e){
 			logger.error(e);
             throw new ServiceException(e);
 		}

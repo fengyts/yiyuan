@@ -27,7 +27,7 @@ import ng.bayue.base.persist.dao.FrontCategoryLinkDAO;
 import ng.bayue.base.service.FrontCategoryService;
 import ng.bayue.common.Page;
 import ng.bayue.constant.RedisCacheTimeConstant;
-import ng.bayue.exception.DAOException;
+import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.RedisCacheService;
 
 @Service(value = "frontCategoryService")
@@ -46,7 +46,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	public Long insert(FrontCategoryDO frontCategoryDO) throws ServiceException {
 		try {
 			return frontCategoryDAO.insert(frontCategoryDO);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -60,7 +60,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			} else {
 				return (Integer) frontCategoryDAO.updateDynamic(frontCategoryDO);
 			}
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -70,7 +70,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	public int deleteById(Long id) throws ServiceException {
 		try {
 			return (Integer) frontCategoryDAO.deleteById(id);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -80,7 +80,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	public FrontCategoryDO selectById(Long id) throws ServiceException {
 		try {
 			return frontCategoryDAO.selectById(id);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -90,7 +90,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	public Long selectCountDynamic(FrontCategoryDO frontCategoryDO) throws ServiceException {
 		try {
 			return frontCategoryDAO.selectCountDynamic(frontCategoryDO);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -100,7 +100,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	public List<FrontCategoryDO> selectDynamic(FrontCategoryDO frontCategoryDO) throws ServiceException {
 		try {
 			return frontCategoryDAO.selectDynamic(frontCategoryDO);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -109,7 +109,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 	private List<FrontCategoryDO> selectDynamicPageQuery(FrontCategoryDO frontCategoryDO) throws ServiceException {
 		try {
 			return frontCategoryDAO.selectDynamicPageQuery(frontCategoryDO);
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("", e);
 			throw new ServiceException(e);
 		}
@@ -254,7 +254,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			redisCacheService.setRedisCache(BaseRedisKeyConstant.BASE_FRONT_CATEGORY_ALL, resultList,
 					RedisCacheTimeConstant.WEEK);
 			return resultList;
-		} catch (DAOException | IllegalAccessException | InvocationTargetException e) {
+		} catch (CommonDAOException | IllegalAccessException | InvocationTargetException e) {
 			logger.error("", e);
 		}
 
@@ -286,7 +286,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 			}
 			BeanUtils.copyProperties(dto, fcate);
 			return dto;
-		} catch (DAOException | IllegalAccessException | InvocationTargetException e) {
+		} catch (CommonDAOException | IllegalAccessException | InvocationTargetException e) {
 			logger.info("select frontCategoryLink exception: {}", e);
 		}
 		return dto;
@@ -324,7 +324,7 @@ public class FrontCategoryServiceImpl implements FrontCategoryService {
 					return codeInt < 10 ? buffer.append("0" + codeInt).toString() : buffer.append(codeInt).toString();
 				}
 			}
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.info("获取前台分类code异常：{}", e);
 		}
 		return null;

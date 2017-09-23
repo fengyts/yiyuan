@@ -25,7 +25,7 @@ import ng.bayue.base.persist.dao.FrontCategoryLinkDAO;
 import ng.bayue.base.service.remote.RemoteBaseService;
 import ng.bayue.constant.CommonConstant;
 import ng.bayue.constant.RedisCacheTimeConstant;
-import ng.bayue.exception.DAOException;
+import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.RedisCacheService;
 
 @Service(value = "remoteBaseService")
@@ -100,7 +100,7 @@ public class RemoteBaseServiceImpl implements RemoteBaseService {
 			}
 			return result;
 			
-		} catch (DAOException e) {
+		} catch (CommonDAOException e) {
 			logger.error("", e);
 		} 
 		return result;

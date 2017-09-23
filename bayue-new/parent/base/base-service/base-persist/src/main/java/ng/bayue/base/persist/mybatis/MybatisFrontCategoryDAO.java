@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import ng.bayue.base.domain.FrontCategoryDO;
 import ng.bayue.base.persist.dao.FrontCategoryDAO;
-import ng.bayue.exception.DAOException;
+import ng.bayue.exception.CommonDAOException;
 
 @Component(value = "frontCategoryDAO")
 public class MybatisFrontCategoryDAO extends MybatisBaseDAO implements FrontCategoryDAO {
@@ -16,7 +16,7 @@ public class MybatisFrontCategoryDAO extends MybatisBaseDAO implements FrontCate
 		return NAMESPACE + operation;
 	}
 
-	public Long insert(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public Long insert(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		int i = getSqlSession().insert(getStatement("insert"), frontCategoryDO);
 		if (i > 0) {
 			return Long.valueOf(frontCategoryDO.getId());
@@ -25,37 +25,37 @@ public class MybatisFrontCategoryDAO extends MybatisBaseDAO implements FrontCate
 	}
 
 	@Override
-	public Integer update(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public Integer update(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		return getSqlSession().update(getStatement("updateById"), frontCategoryDO);
 	}
 
 	@Override
-	public Integer deleteById(Long id) throws DAOException {
+	public Integer deleteById(Long id) throws CommonDAOException {
 		return getSqlSession().delete(getStatement("deleteById"), id);
 	}
 
 	@Override
-	public Integer updateDynamic(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public Integer updateDynamic(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		return getSqlSession().update(getStatement("update_dynamic"), frontCategoryDO);
 	}
 
 	@Override
-	public FrontCategoryDO selectById(Long id) throws DAOException {
+	public FrontCategoryDO selectById(Long id) throws CommonDAOException {
 		return getSqlSession().selectOne(getStatement("selectById"), id);
 	}
 
 	@Override
-	public Long selectCountDynamic(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public Long selectCountDynamic(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		return getSqlSession().selectOne(getStatement("select_dynamic_count"), frontCategoryDO);
 	}
 
 	@Override
-	public List<FrontCategoryDO> selectDynamic(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public List<FrontCategoryDO> selectDynamic(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic"), frontCategoryDO);
 	}
 
 	@Override
-	public List<FrontCategoryDO> selectDynamicPageQuery(FrontCategoryDO frontCategoryDO) throws DAOException {
+	public List<FrontCategoryDO> selectDynamicPageQuery(FrontCategoryDO frontCategoryDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), frontCategoryDO);
 	}
 

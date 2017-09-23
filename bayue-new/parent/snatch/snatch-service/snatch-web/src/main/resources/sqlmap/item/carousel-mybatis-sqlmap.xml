@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.item.domain.CarouselMapper">
+
+	<resultMap type="ng.bayue.item.domain.CarouselDO" id="CarouselDOResultMap">
+		<id column="id" property="id" />
+        <result column="picture" property="picture"/>
+        <result column="sort" property="sort"/>
+        <result column="link_url" property="linkUrl"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisCarouselDAO_all_column_fields">
+	      id,picture,sort,link_url,status,remark,create_user_id,create_time,modify_user_id,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisCarouselDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="picture != null  and picture != '' "> AND picture=#{picture} </if>
+			<if test="sort != null "> AND sort=#{sort} </if>
+			<if test="linkUrl != null  and linkUrl != '' "> AND link_url=#{linkUrl} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisCarouselDAO_selectById" parameterType="long" resultMap="CarouselDOResultMap">
+	SELECT
+		<include refid="MybatisCarouselDAO_all_column_fields" />
+	FROM
+		item_carousel
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisCarouselDAO_insert" parameterType="ng.bayue.item.domain.CarouselDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO item_carousel(
+				id,
+				picture,
+				sort,
+				link_url,
+				status,
+				remark,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time
+		)values(
+				#{id},
+				#{picture},
+				#{sort},
+				#{linkUrl},
+				#{status},
+				#{remark},
+				#{createUserId},
+				#{createTime},
+				#{modifyUserId},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisCarouselDAO_updateById" parameterType="ng.bayue.item.domain.CarouselDO">
+		UPDATE item_carousel
+		SET
+					picture = #{picture},
+					sort = #{sort},
+					link_url = #{linkUrl},
+					status = #{status},
+					remark = #{remark},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisCarouselDAO_deleteById" parameterType="long">
+		DELETE FROM item_carousel WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisCarouselDAO_update_dynamic" parameterType="ng.bayue.item.domain.CarouselDO">
+		UPDATE item_carousel
+		<set>
+					<if test="picture != null  and picture != '' ">picture=#{picture},</if>
+					<if test="sort != null ">sort=#{sort},</if>
+					<if test="linkUrl != null  and linkUrl != '' ">link_url=#{linkUrl},</if>
+					<if test="status != null ">status=#{status},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisCarouselDAO_select_dynamic" resultMap="CarouselDOResultMap" parameterType="ng.bayue.item.domain.CarouselDO">
+	     SELECT
+	     	<include refid="MybatisCarouselDAO_all_column_fields" />
+		 FROM
+		 	item_carousel
+			<include refid="MybatisCarouselDAO_dynamic_where_fields" />
+		 ORDER BY sort
+ 	</select>
+
+ 	<select id="MybatisCarouselDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.CarouselDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	item_carousel
+	 	<include refid="MybatisCarouselDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCarouselDAO_select_dynamic_page_query" resultMap="CarouselDOResultMap" parameterType="ng.bayue.item.domain.CarouselDO">
+	     SELECT
+	     	<include refid="MybatisCarouselDAO_all_column_fields" />
+		 FROM
+		 	item_carousel
+	 	<include refid="MybatisCarouselDAO_dynamic_where_fields" />
+	 	ORDER BY item_carousel.id DESC,item_carousel.status DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

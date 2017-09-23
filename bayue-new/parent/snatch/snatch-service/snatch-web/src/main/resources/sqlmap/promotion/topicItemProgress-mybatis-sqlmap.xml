@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ng.bayue.promotion.domain.TopicItemProgressMapper">
+
+	<resultMap type="ng.bayue.promotion.domain.TopicItemProgressDO" id="TopicItemProgressDOResultMap">
+		<id column="id" property="id" />
+        <result column="topic_item_id" property="topicItemId"/>
+        <result column="current_participant" property="currentParticipant"/>
+        <result column="previous_end_time" property="previousEndTime"/>
+        <result column="current_start_time" property="currentStartTime"/>
+	</resultMap>
+
+	<sql id="MybatisTopicItemProgressDAO_all_column_fields">
+	      id,topic_item_id,current_participant,previous_end_time,current_start_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisTopicItemProgressDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="topicItemId != null "> AND topic_item_id=#{topicItemId} </if>
+			<if test="currentParticipant != null "> AND current_participant=#{currentParticipant} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisTopicItemProgressDAO_selectById" parameterType="long" resultMap="TopicItemProgressDOResultMap">
+	SELECT
+		<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
+	FROM
+		pr_topic_item_progress
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisTopicItemProgressDAO_insert" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO pr_topic_item_progress(
+				id,
+				topic_item_id,
+				current_participant,
+				previous_end_time,
+				current_start_time
+		)values(
+				#{id},
+				#{topicItemId},
+				#{currentParticipant},
+				#{previousEndTime},
+				#{currentStartTime}
+		)
+    </insert>
+
+	<update id="MybatisTopicItemProgressDAO_updateById" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+		UPDATE pr_topic_item_progress
+		SET
+					topic_item_id = #{topicItemId},
+					current_participant = #{currentParticipant},
+					previous_end_time = #{previousEndTime},
+					current_start_time = #{currentStartTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisTopicItemProgressDAO_deleteById" parameterType="long">
+		DELETE FROM pr_topic_item_progress WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisTopicItemProgressDAO_update_dynamic" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+		UPDATE pr_topic_item_progress
+		<set>
+					<if test="topicItemId != null ">topic_item_id=#{topicItemId},</if>
+					<if test="currentParticipant != null ">current_participant=#{currentParticipant},</if>
+					<if test="previousEndTime != null ">previous_end_time=#{previousEndTime},</if>
+					<if test="currentStartTime != null ">current_start_time=#{currentStartTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	     SELECT
+	     	<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
+		 FROM
+		 	pr_topic_item_progress
+			<include refid="MybatisTopicItemProgressDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	pr_topic_item_progress
+	 	<include refid="MybatisTopicItemProgressDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic_page_query" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	     SELECT
+	     	<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
+		 FROM
+		 	pr_topic_item_progress
+	 	<include refid="MybatisTopicItemProgressDAO_dynamic_where_fields" />
+	 	ORDER BY pr_topic_item_progress.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<update id="MybatisTopicItemProgressDAO_update_by_topic_item_id" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	 	UPDATE pr_topic_item_progress
+			<set>
+						<if test="currentParticipant != null ">current_participant=#{currentParticipant},</if>
+						<if test="previousEndTime != null ">previous_end_time=#{previousEndTime},</if>
+						<if test="currentStartTime != null ">current_start_time=#{currentStartTime},</if>
+			</set>
+		WHERE topic_item_id = #{topicItemId}
+ 	</update>
+ 	
+ 	<select id="MybatisTopicItemProgressDAO_select_byIds" parameterType="list" resultMap="TopicItemProgressDOResultMap">
+ 		 SELECT
+	     	<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
+		 FROM
+		 	pr_topic_item_progress
+		 WHERE topic_item_id IN
+		 <foreach collection="list" item="item" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+ 	</select>
+
+</mapper>
