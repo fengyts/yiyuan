@@ -21,5 +21,5 @@
 //var salesorder_domain_http  = "//salesorder.snatch.com";
 //var search_domain      = "//search.snatch.com";
 
-var snatch_domain_http = "//localhost:8080/snatch-front";
-var search_domain = "//localhost:8080/snatch-front";
+var snatch_domain_http = "//localhost:8081/snatch-front";
+var search_domain = "//localhost:8081/snatch-front";
