@@ -27,7 +27,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ng.bayue</groupId>
-			<artifactId>snatch-web</artifactId>
+			<artifactId>snatch-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

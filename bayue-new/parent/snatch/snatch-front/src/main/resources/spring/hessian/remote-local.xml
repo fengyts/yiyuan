@@ -55,15 +55,11 @@
 	</bean>
 	
 	<!-- hessian promotion -->
-	<bean id="topicService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-		<property name="serviceUrl" value="${snatch.hessian}/topicService.hessian" />
-		<property name="serviceInterface" value="ng.bayue.snatch.service.promotion.TopicService" />
+	<bean id="topicExportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${snatch.hessian}/topicExportService.hessian" />
+		<property name="serviceInterface" value="ng.bayue.snatch.service.promotion.TopicExportService" />
 		<property name="overloadEnabled" value="false" />
 	</bean>
-	<bean id="topicItemService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-		<property name="serviceUrl" value="${snatch.hessian}/topicItemService.hessian" />
-		<property name="serviceInterface" value="ng.bayue.snatch.service.promotion.TopicItemService" />
-		<property name="overloadEnabled" value="false" />
-	</bean>
+	
 
 </beans>
