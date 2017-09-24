@@ -10,8 +10,8 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.enums.DictionaryEnums;
 import ng.bayue.common.Page;
-import ng.bayue.item.dto.ItemDTO;
-import ng.bayue.item.dto.ItemDetailDTO;
+import ng.bayue.snatch.dto.item.ItemDTO;
+import ng.bayue.snatch.dto.item.ItemDetailDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +47,7 @@ public class ItemController {
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
 		
 		Page<ItemDTO> page = detailAO.queryPageList(detailDTO,pageNo,pageSize);
+		model.addAttribute("page", page);
 		return "/backend/item/list";
 	}
 	

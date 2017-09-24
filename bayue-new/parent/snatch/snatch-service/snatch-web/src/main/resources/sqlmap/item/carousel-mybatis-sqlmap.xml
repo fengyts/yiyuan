@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.item.domain.CarouselMapper">
 
-	<resultMap type="ng.bayue.item.domain.CarouselDO" id="CarouselDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.item.CarouselDO" id="CarouselDOResultMap">
 		<id column="id" property="id" />
         <result column="picture" property="picture"/>
         <result column="sort" property="sort"/>
@@ -41,7 +41,7 @@
 		 id = #{id}
 	</select>
 
-    <insert id="MybatisCarouselDAO_insert" parameterType="ng.bayue.item.domain.CarouselDO" useGeneratedKeys="true">
+    <insert id="MybatisCarouselDAO_insert" parameterType="ng.bayue.snatch.domain.item.CarouselDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -70,7 +70,7 @@
 		)
     </insert>
 
-	<update id="MybatisCarouselDAO_updateById" parameterType="ng.bayue.item.domain.CarouselDO">
+	<update id="MybatisCarouselDAO_updateById" parameterType="ng.bayue.snatch.domain.item.CarouselDO">
 		UPDATE item_carousel
 		SET
 					picture = #{picture},
@@ -89,7 +89,7 @@
 		DELETE FROM item_carousel WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisCarouselDAO_update_dynamic" parameterType="ng.bayue.item.domain.CarouselDO">
+	<update id="MybatisCarouselDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.item.CarouselDO">
 		UPDATE item_carousel
 		<set>
 					<if test="picture != null  and picture != '' ">picture=#{picture},</if>
@@ -104,7 +104,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisCarouselDAO_select_dynamic" resultMap="CarouselDOResultMap" parameterType="ng.bayue.item.domain.CarouselDO">
+ 	<select id="MybatisCarouselDAO_select_dynamic" resultMap="CarouselDOResultMap" parameterType="ng.bayue.snatch.domain.item.CarouselDO">
 	     SELECT
 	     	<include refid="MybatisCarouselDAO_all_column_fields" />
 		 FROM
@@ -113,7 +113,7 @@
 		 ORDER BY sort
  	</select>
 
- 	<select id="MybatisCarouselDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.CarouselDO">
+ 	<select id="MybatisCarouselDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.item.CarouselDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -121,7 +121,7 @@
 	 	<include refid="MybatisCarouselDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisCarouselDAO_select_dynamic_page_query" resultMap="CarouselDOResultMap" parameterType="ng.bayue.item.domain.CarouselDO">
+ 	<select id="MybatisCarouselDAO_select_dynamic_page_query" resultMap="CarouselDOResultMap" parameterType="ng.bayue.snatch.domain.item.CarouselDO">
 	     SELECT
 	     	<include refid="MybatisCarouselDAO_all_column_fields" />
 		 FROM

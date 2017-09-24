@@ -19,7 +19,10 @@
 	<context:property-placeholder location="classpath:config/metainfo.properties"
 		order="2000000" />
 	
+	<import resource="classpath*:spring/hessian/remote-*.xml" />
+	
 	<import resource="classpath*:spring/spring-dao.xml" />
+	<import resource="classpath*:spring/spring-redis.xml"/>
 	<import resource="classpath*:spring/spring-hessian.xml" />
 	
 

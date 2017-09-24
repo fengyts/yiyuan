@@ -4,6 +4,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ng.bayue.backend.ao.item.CarouselAO;
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.common.Page;
+import ng.bayue.snatch.domain.item.CarouselDO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
-
-import ng.bayue.backend.ao.item.CarouselAO;
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.common.Page;
-import ng.bayue.item.domain.CarouselDO;
 
 @Controller
 @RequestMapping({ "/item/carousel/" })

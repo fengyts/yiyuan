@@ -1,19 +1,8 @@
 package test;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.shiro.crypto.hash.SimpleHash;
-
-import ng.bayue.item.domain.ItemDetailDO;
-import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.dto.ItemDTO;
 import ng.bayue.util.SecurityUtil;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
 
 
 public class Test {

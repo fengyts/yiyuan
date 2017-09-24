@@ -10,5 +10,88 @@
 			value="ng.bayue.snatch.service.CommonService" />
 	</bean>
 	
+	<!-- hessian item -->
+	<bean name="/carouselService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="carouselService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.CarouselService" />
+	</bean>
+	<bean name="/codeService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="codeService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.CodeService" />
+	</bean>
+	<bean name="/detailSpecService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="detailSpecService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.DetailSpecService" />
+	</bean>
+	<bean name="/itemDescService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemDescService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemDescService" />
+	</bean>
+	<bean name="/itemDetailService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemDetailService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemDetailService" />
+	</bean>
+	<bean name="/itemInfoService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemInfoService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemInfoService" />
+	</bean>
+	<bean name="/itemManagerService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemManagerService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemManagerService" />
+	</bean>
+	<bean name="/itemPicturesService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemPicturesService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemPicturesService" />
+	</bean>
+	<bean name="/itemService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="itemService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.item.ItemService" />
+	</bean>
+	
+	<!-- hessian promotion -->
+	<bean name="/topicExportService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="topicExportService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.promotion.TopicExportService" />
+	</bean>
+	<bean name="/topicItemProgressService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="topicItemProgressService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.promotion.TopicItemProgressService" />
+	</bean>
+	<bean name="/topicItemService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="topicItemService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.promotion.TopicItemService" />
+	</bean>
+	<bean name="/topicService.hessian"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="topicService" />
+		<property name="serviceInterface"
+			value="ng.bayue.snatch.service.promotion.TopicService" />
+	</bean>
+	
+	
 
 </beans>

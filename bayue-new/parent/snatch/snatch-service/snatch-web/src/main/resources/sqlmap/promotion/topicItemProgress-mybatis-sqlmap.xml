@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.promotion.domain.TopicItemProgressMapper">
 
-	<resultMap type="ng.bayue.promotion.domain.TopicItemProgressDO" id="TopicItemProgressDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.promotion.TopicItemProgressDO" id="TopicItemProgressDOResultMap">
 		<id column="id" property="id" />
         <result column="topic_item_id" property="topicItemId"/>
         <result column="current_participant" property="currentParticipant"/>
@@ -31,7 +31,7 @@
 		 id = #{id}
 	</select>
 
-    <insert id="MybatisTopicItemProgressDAO_insert" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO" useGeneratedKeys="true">
+    <insert id="MybatisTopicItemProgressDAO_insert" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -50,7 +50,7 @@
 		)
     </insert>
 
-	<update id="MybatisTopicItemProgressDAO_updateById" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	<update id="MybatisTopicItemProgressDAO_updateById" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 		UPDATE pr_topic_item_progress
 		SET
 					topic_item_id = #{topicItemId},
@@ -65,7 +65,7 @@
 		DELETE FROM pr_topic_item_progress WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisTopicItemProgressDAO_update_dynamic" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+	<update id="MybatisTopicItemProgressDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 		UPDATE pr_topic_item_progress
 		<set>
 					<if test="topicItemId != null ">topic_item_id=#{topicItemId},</if>
@@ -76,7 +76,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisTopicItemProgressDAO_select_dynamic" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 	     SELECT
 	     	<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
 		 FROM
@@ -84,7 +84,7 @@
 			<include refid="MybatisTopicItemProgressDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisTopicItemProgressDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -92,7 +92,7 @@
 	 	<include refid="MybatisTopicItemProgressDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisTopicItemProgressDAO_select_dynamic_page_query" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+ 	<select id="MybatisTopicItemProgressDAO_select_dynamic_page_query" resultMap="TopicItemProgressDOResultMap" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 	     SELECT
 	     	<include refid="MybatisTopicItemProgressDAO_all_column_fields" />
 		 FROM
@@ -102,7 +102,7 @@
 	 	Limit #{start},#{pageSize}
  	</select>
  	
- 	<update id="MybatisTopicItemProgressDAO_update_by_topic_item_id" parameterType="ng.bayue.promotion.domain.TopicItemProgressDO">
+ 	<update id="MybatisTopicItemProgressDAO_update_by_topic_item_id" parameterType="ng.bayue.snatch.domain.promotion.TopicItemProgressDO">
 	 	UPDATE pr_topic_item_progress
 			<set>
 						<if test="currentParticipant != null ">current_participant=#{currentParticipant},</if>

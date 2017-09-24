@@ -4,17 +4,12 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import ng.bayue.snatch.domain.promotion.TopicDO;
 
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
-
-import ng.bayue.promotion.domain.TopicDO;
 
 public class TestJava {
 	

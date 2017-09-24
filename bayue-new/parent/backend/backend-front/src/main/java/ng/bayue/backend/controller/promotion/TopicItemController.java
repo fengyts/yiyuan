@@ -2,6 +2,13 @@ package ng.bayue.backend.controller.promotion;
 
 import java.util.List;
 
+import ng.bayue.backend.ao.promotion.TopicItemAO;
+import ng.bayue.backend.controller.common.BaseController;
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.common.Page;
+import ng.bayue.snatch.domain.promotion.TopicItemDO;
+import ng.bayue.snatch.dto.promotion.TopicItemDTO;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-
-import ng.bayue.backend.ao.promotion.TopicItemAO;
-import ng.bayue.backend.controller.common.BaseController;
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.common.Page;
-import ng.bayue.promotion.domain.TopicItemDO;
-import ng.bayue.promotion.dto.TopicItemDTO;
 
 @Controller
 @RequestMapping("/topicItem/")

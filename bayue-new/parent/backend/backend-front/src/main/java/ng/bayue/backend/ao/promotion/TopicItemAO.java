@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
+import ng.bayue.snatch.domain.promotion.TopicItemDO;
+import ng.bayue.snatch.dto.promotion.TopicItemDTO;
+import ng.bayue.snatch.service.promotion.TopicItemService;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.backend.util.UserHandler;
-import ng.bayue.common.Page;
-import ng.bayue.promotion.domain.TopicItemDO;
-import ng.bayue.promotion.dto.TopicItemDTO;
-import ng.bayue.promotion.service.TopicItemService;
 
 @Service
 public class TopicItemAO {

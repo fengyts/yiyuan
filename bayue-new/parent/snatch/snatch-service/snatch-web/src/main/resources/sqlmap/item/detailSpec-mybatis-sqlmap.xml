@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.item.domain.DetailSpecMapper">
 
-	<resultMap type="ng.bayue.item.domain.DetailSpecDO" id="DetailSpecDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.item.DetailSpecDO" id="DetailSpecDOResultMap">
 		<id column="id" property="id" />
         <result column="detail_id" property="detailId"/>
         <result column="spec_group_id" property="specGroupId"/>
@@ -33,7 +33,7 @@
 		 id = #{id}
 	</select>
 
-    <insert id="MybatisDetailSpecDAO_insert" parameterType="ng.bayue.item.domain.DetailSpecDO" useGeneratedKeys="true">
+    <insert id="MybatisDetailSpecDAO_insert" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -54,7 +54,7 @@
 		)
     </insert>
 
-	<update id="MybatisDetailSpecDAO_updateById" parameterType="ng.bayue.item.domain.DetailSpecDO">
+	<update id="MybatisDetailSpecDAO_updateById" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO">
 		UPDATE item_detail_spec
 		SET
 					detail_id = #{detailId},
@@ -69,7 +69,7 @@
 		DELETE FROM item_detail_spec WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisDetailSpecDAO_update_dynamic" parameterType="ng.bayue.item.domain.DetailSpecDO">
+	<update id="MybatisDetailSpecDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO">
 		UPDATE item_detail_spec
 		<set>
 					<if test="detailId != null ">detail_id=#{detailId},</if>
@@ -80,7 +80,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisDetailSpecDAO_select_dynamic" resultMap="DetailSpecDOResultMap" parameterType="ng.bayue.item.domain.DetailSpecDO">
+ 	<select id="MybatisDetailSpecDAO_select_dynamic" resultMap="DetailSpecDOResultMap" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO">
 	     SELECT
 	     	<include refid="MybatisDetailSpecDAO_all_column_fields" />
 		 FROM
@@ -88,7 +88,7 @@
 			<include refid="MybatisDetailSpecDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisDetailSpecDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.DetailSpecDO">
+ 	<select id="MybatisDetailSpecDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -96,7 +96,7 @@
 	 	<include refid="MybatisDetailSpecDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisDetailSpecDAO_select_dynamic_page_query" resultMap="DetailSpecDOResultMap" parameterType="ng.bayue.item.domain.DetailSpecDO">
+ 	<select id="MybatisDetailSpecDAO_select_dynamic_page_query" resultMap="DetailSpecDOResultMap" parameterType="ng.bayue.snatch.domain.item.DetailSpecDO">
 	     SELECT
 	     	<include refid="MybatisDetailSpecDAO_all_column_fields" />
 		 FROM

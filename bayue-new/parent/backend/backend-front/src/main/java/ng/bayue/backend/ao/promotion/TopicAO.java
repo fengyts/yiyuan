@@ -4,6 +4,15 @@ import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
+import ng.bayue.fastdfs.ImageUrlUtil;
+import ng.bayue.service.DfsService;
+import ng.bayue.snatch.domain.promotion.TopicDO;
+import ng.bayue.snatch.dto.promotion.TopicDTO;
+import ng.bayue.snatch.service.promotion.TopicService;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,16 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.backend.util.UserHandler;
-import ng.bayue.common.Page;
-import ng.bayue.fastdfs.DfsUtils;
-import ng.bayue.fastdfs.ImageUrlUtil;
-import ng.bayue.promotion.domain.TopicDO;
-import ng.bayue.promotion.dto.TopicDTO;
-import ng.bayue.promotion.service.TopicService;
-import ng.bayue.service.DfsService;
 
 @Service
 public class TopicAO {

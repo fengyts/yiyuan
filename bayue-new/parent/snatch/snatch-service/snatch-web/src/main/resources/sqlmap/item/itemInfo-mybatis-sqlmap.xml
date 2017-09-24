@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.item.domain.ItemInfoMapper">
 
-	<resultMap type="ng.bayue.item.domain.ItemInfoDO" id="ItemInfoDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.item.ItemInfoDO" id="ItemInfoDOResultMap">
 		<id column="id" property="id" />
         <result column="spu" property="spu"/>
         <result column="main_title" property="mainTitle"/>
@@ -43,7 +43,7 @@
 		 id = #{id}
 	</select>
 
-    <insert id="MybatisItemInfoDAO_insert" parameterType="ng.bayue.item.domain.ItemInfoDO" useGeneratedKeys="true">
+    <insert id="MybatisItemInfoDAO_insert" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -74,7 +74,7 @@
 		)
     </insert>
 
-	<update id="MybatisItemInfoDAO_updateById" parameterType="ng.bayue.item.domain.ItemInfoDO">
+	<update id="MybatisItemInfoDAO_updateById" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO">
 		UPDATE item_info
 		SET
 					spu = #{spu},
@@ -94,7 +94,7 @@
 		DELETE FROM item_info WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisItemInfoDAO_update_dynamic" parameterType="ng.bayue.item.domain.ItemInfoDO">
+	<update id="MybatisItemInfoDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO">
 		UPDATE item_info
 		<set>
 					<if test="spu != null  and spu != '' ">spu=#{spu},</if>
@@ -110,7 +110,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisItemInfoDAO_select_dynamic" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.item.domain.ItemInfoDO">
+ 	<select id="MybatisItemInfoDAO_select_dynamic" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO">
 	     SELECT
 	     	<include refid="MybatisItemInfoDAO_all_column_fields" />
 		 FROM
@@ -118,7 +118,7 @@
 			<include refid="MybatisItemInfoDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisItemInfoDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.ItemInfoDO">
+ 	<select id="MybatisItemInfoDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -126,7 +126,7 @@
 	 	<include refid="MybatisItemInfoDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisItemInfoDAO_select_dynamic_page_query" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.item.domain.ItemInfoDO">
+ 	<select id="MybatisItemInfoDAO_select_dynamic_page_query" resultMap="ItemInfoDOResultMap" parameterType="ng.bayue.snatch.domain.item.ItemInfoDO">
 	     SELECT
 	     	<include refid="MybatisItemInfoDAO_all_column_fields" />
 		 FROM

@@ -3,15 +3,15 @@ package ng.bayue.backend.ao.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import ng.bayue.backend.ao.basedata.SpecGroupAO;
+import ng.bayue.base.domain.SpecGroupDO;
+import ng.bayue.snatch.domain.item.DetailSpecDO;
+import ng.bayue.snatch.dto.item.DetailSpecDTO;
+import ng.bayue.snatch.service.item.DetailSpecService;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ng.bayue.backend.ao.basedata.SpecGroupAO;
-import ng.bayue.base.domain.SpecGroupDO;
-import ng.bayue.item.domain.DetailSpecDO;
-import ng.bayue.item.dto.DetailSpecDTO;
-import ng.bayue.item.service.DetailSpecService;
 
 @Service
 public class ItemAO {

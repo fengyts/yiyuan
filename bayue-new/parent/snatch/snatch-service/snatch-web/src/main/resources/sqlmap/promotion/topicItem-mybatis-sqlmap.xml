@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.promotion.domain.TopicItemMapper">
 
-	<resultMap type="ng.bayue.promotion.domain.TopicItemDO" id="TopicItemDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.promotion.TopicItemDO" id="TopicItemDOResultMap">
 		<id column="id" property="id" />
         <result column="topic_id" property="topicId"/>
         <result column="item_id" property="itemId"/>
@@ -28,7 +28,7 @@
         <result column="modify_user_id" property="modifyUserId"/>
 	</resultMap>
 	
-	<resultMap type="ng.bayue.promotion.dto.TopicItemDTO" id="TopicItemDTOResultMap" extends="TopicItemDOResultMap">
+	<resultMap type="ng.bayue.snatch.dto.promotion.TopicItemDTO" id="TopicItemDTOResultMap" extends="TopicItemDOResultMap">
 		<result column="name" property="name"/>
 	</resultMap>
 
@@ -70,7 +70,7 @@
 		 ti.id = #{id}
 	</select>
 
-    <insert id="MybatisTopicItemDAO_insert" parameterType="ng.bayue.promotion.domain.TopicItemDO" useGeneratedKeys="true">
+    <insert id="MybatisTopicItemDAO_insert" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -123,7 +123,7 @@
 		)
     </insert>
 
-	<update id="MybatisTopicItemDAO_updateById" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+	<update id="MybatisTopicItemDAO_updateById" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO">
 		UPDATE pr_topic_item
 		SET
 					topic_id = #{topicId},
@@ -154,7 +154,7 @@
 		DELETE FROM pr_topic_item WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisTopicItemDAO_update_dynamic" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+	<update id="MybatisTopicItemDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO">
 		UPDATE pr_topic_item
 		<set>
 					<if test="topicId != null ">topic_id=#{topicId},</if>
@@ -181,7 +181,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisTopicItemDAO_select_dynamic" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+ 	<select id="MybatisTopicItemDAO_select_dynamic" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO">
 	     SELECT
 	     	<include refid="MybatisTopicItemDAO_all_column_fields" />,
 	     	(SELECT t.name from pr_topic t WHERE t.id = ti.topic_id) name
@@ -190,7 +190,7 @@
 			<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisTopicItemDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+ 	<select id="MybatisTopicItemDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -198,7 +198,7 @@
 	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisTopicItemDAO_select_dynamic_page_query" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.promotion.domain.TopicItemDO">
+ 	<select id="MybatisTopicItemDAO_select_dynamic_page_query" resultMap="TopicItemDTOResultMap" parameterType="ng.bayue.snatch.domain.promotion.TopicItemDO">
 	     SELECT
 	     	<include refid="MybatisTopicItemDAO_all_column_fields" />,
 	     	(SELECT t.name from pr_topic t WHERE t.id = ti.topic_id) name

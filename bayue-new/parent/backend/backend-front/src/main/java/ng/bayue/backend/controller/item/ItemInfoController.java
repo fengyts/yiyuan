@@ -2,14 +2,6 @@ package ng.bayue.backend.controller.item;
 
 import java.util.List;
 
-import org.apache.shiro.util.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import ng.bayue.backend.ao.basedata.CategoryAO;
 import ng.bayue.backend.ao.basedata.DictionaryAO;
 import ng.bayue.backend.ao.item.ItemInfoAO;
@@ -18,8 +10,16 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.DictionaryDO;
 import ng.bayue.base.enums.DictionaryEnums;
 import ng.bayue.common.Page;
-import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.dto.ItemInfoDTO;
+import ng.bayue.snatch.domain.item.ItemInfoDO;
+import ng.bayue.snatch.dto.item.ItemInfoDTO;
+
+import org.apache.shiro.util.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping({ "/item/itemInfo/" })

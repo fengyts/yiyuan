@@ -3,25 +3,21 @@ package ng.bayue.backend.ao.item;
 import java.util.Date;
 import java.util.List;
 
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
+import ng.bayue.snatch.domain.item.ItemDetailDO;
+import ng.bayue.snatch.domain.item.ItemInfoDO;
+import ng.bayue.snatch.dto.item.ItemInfoDTO;
+import ng.bayue.snatch.service.item.ItemDetailService;
+import ng.bayue.snatch.service.item.ItemInfoService;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.backend.util.UserHandler;
-import ng.bayue.base.domain.CategoryDO;
-import ng.bayue.base.service.CategoryService;
-import ng.bayue.base.service.DictionaryService;
-import ng.bayue.common.Page;
-import ng.bayue.item.domain.ItemDetailDO;
-import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.dto.ItemInfoDTO;
-import ng.bayue.item.service.ItemDetailService;
-import ng.bayue.item.service.ItemInfoService;
 
 @Service
 public class ItemInfoAO {

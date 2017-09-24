@@ -3,9 +3,10 @@
     "-//mybatis.org//DTD Config 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration>  
+	
     <!-- 增加sqlmapper文件 -->
     <mappers>
-		<!--  商品sql  -->
+		<!--  item sql  -->
     	<mapper resource="sqlmap/item/itemDetail-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/item/itemInfo-mybatis-sqlmap.xml"/>
         <mapper resource="sqlmap/item/itemPictures-mybatis-sqlmap.xml"/>

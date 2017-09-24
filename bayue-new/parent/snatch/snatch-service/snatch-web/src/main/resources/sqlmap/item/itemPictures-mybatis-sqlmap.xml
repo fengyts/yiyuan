@@ -3,7 +3,7 @@
 
 <mapper namespace="ng.bayue.item.domain.ItemPicturesMapper">
 
-	<resultMap type="ng.bayue.item.domain.ItemPicturesDO" id="ItemPicturesDOResultMap">
+	<resultMap type="ng.bayue.snatch.domain.item.ItemPicturesDO" id="ItemPicturesDOResultMap">
 		<id column="id" property="id" />
         <result column="item_id" property="itemId"/>
         <result column="detail_id" property="detailId"/>
@@ -34,7 +34,7 @@
 			 id = #{id}
 	</select>
 
-    <insert id="MybatisItemPicturesDAO_insert" parameterType="ng.bayue.item.domain.ItemPicturesDO" useGeneratedKeys="true">
+    <insert id="MybatisItemPicturesDAO_insert" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -55,7 +55,7 @@
 		)
     </insert>
 
-	<update id="MybatisItemPicturesDAO_updateById" parameterType="ng.bayue.item.domain.ItemPicturesDO">
+	<update id="MybatisItemPicturesDAO_updateById" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO">
 		UPDATE item_pictures
 		SET
 					item_id = #{itemId},
@@ -70,7 +70,7 @@
 		DELETE FROM item_pictures WHERE id = #{id}
 	</delete>
 
-	<update id="MybatisItemPicturesDAO_update_dynamic" parameterType="ng.bayue.item.domain.ItemPicturesDO">
+	<update id="MybatisItemPicturesDAO_update_dynamic" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO">
 		UPDATE item_pictures
 		<set>
 					<if test="itemId != null ">item_id=#{itemId},</if>
@@ -81,7 +81,7 @@
 		WHERE id = #{id}
 	</update>
 
- 	<select id="MybatisItemPicturesDAO_select_dynamic" resultMap="ItemPicturesDOResultMap" parameterType="ng.bayue.item.domain.ItemPicturesDO">
+ 	<select id="MybatisItemPicturesDAO_select_dynamic" resultMap="ItemPicturesDOResultMap" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO">
 	     SELECT
 	     	<include refid="MybatisItemPicturesDAO_all_column_fields" />
 		 FROM
@@ -89,7 +89,7 @@
 			<include refid="MybatisItemPicturesDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisItemPicturesDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.item.domain.ItemPicturesDO">
+ 	<select id="MybatisItemPicturesDAO_select_dynamic_count" resultType="long" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO">
 	     SELECT
 	     	count(1)
 		 FROM
@@ -97,7 +97,7 @@
 	 	<include refid="MybatisItemPicturesDAO_dynamic_where_fields" />
  	</select>
 
- 	<select id="MybatisItemPicturesDAO_select_dynamic_page_query" resultMap="ItemPicturesDOResultMap" parameterType="ng.bayue.item.domain.ItemPicturesDO">
+ 	<select id="MybatisItemPicturesDAO_select_dynamic_page_query" resultMap="ItemPicturesDOResultMap" parameterType="ng.bayue.snatch.domain.item.ItemPicturesDO">
 	     SELECT
 	     	<include refid="MybatisItemPicturesDAO_all_column_fields" />
 		 FROM

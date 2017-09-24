@@ -13,20 +13,21 @@ import ng.bayue.base.service.CategoryService;
 import ng.bayue.base.service.DictionaryService;
 import ng.bayue.common.Page;
 import ng.bayue.fastdfs.ImageUrlUtil;
-import ng.bayue.item.constant.ItemDetailConstant;
-import ng.bayue.item.domain.DetailSpecDO;
-import ng.bayue.item.domain.ItemDescDO;
-import ng.bayue.item.domain.ItemDetailDO;
-import ng.bayue.item.domain.ItemInfoDO;
-import ng.bayue.item.domain.ItemPicturesDO;
-import ng.bayue.item.dto.ItemDTO;
-import ng.bayue.item.dto.ItemDetailDTO;
-import ng.bayue.item.service.ItemDetailService;
-import ng.bayue.item.service.ItemInfoService;
-import ng.bayue.item.service.ItemManagerService;
-import ng.bayue.item.service.ItemPicturesService;
-import ng.bayue.item.service.ItemService;
-import ng.bayue.promotion.service.TopicItemService;
+import ng.bayue.snatch.constant.item.ItemDetailConstant;
+import ng.bayue.snatch.domain.item.DetailSpecDO;
+import ng.bayue.snatch.domain.item.ItemDescDO;
+import ng.bayue.snatch.domain.item.ItemDetailDO;
+import ng.bayue.snatch.domain.item.ItemInfoDO;
+import ng.bayue.snatch.domain.item.ItemPicturesDO;
+import ng.bayue.snatch.domain.promotion.TopicItemDO;
+import ng.bayue.snatch.dto.item.ItemDTO;
+import ng.bayue.snatch.dto.item.ItemDetailDTO;
+import ng.bayue.snatch.service.item.ItemDetailService;
+import ng.bayue.snatch.service.item.ItemInfoService;
+import ng.bayue.snatch.service.item.ItemManagerService;
+import ng.bayue.snatch.service.item.ItemPicturesService;
+import ng.bayue.snatch.service.item.ItemService;
+import ng.bayue.snatch.service.promotion.TopicItemService;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -37,7 +38,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 @Service
 public class ItemDetailAO {
@@ -323,7 +323,7 @@ public class ItemDetailAO {
 		// 校验商品是否在专题中为有效状态,若为有效状态则不能下架或者作废
 		if(status.intValue() == ItemDetailConstant.ItemStatus.OFF_SALES
 				|| status.intValue() == ItemDetailConstant.ItemStatus.CANCELLATION){
-			List<ng.bayue.promotion.domain.TopicItemDO> topicItems = topicItemService.validItemStatus(detailIds);
+			List<TopicItemDO> topicItems = topicItemService.validItemStatus(detailIds);
 			if (CollectionUtils.isNotEmpty(topicItems)) {
 				return new ResultMessage(ResultMessage.Failure, "商品在专题中是在线状态，不能下架或作废");
 			}

@@ -4,6 +4,22 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ng.bayue.backend.ao.item.ItemDetailAO;
+import ng.bayue.backend.ao.promotion.TopicAO;
+import ng.bayue.backend.ao.promotion.TopicItemAO;
+import ng.bayue.backend.controller.common.BaseController;
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.common.ErrorMessage;
+import ng.bayue.common.Page;
+import ng.bayue.snatch.domain.promotion.TopicDO;
+import ng.bayue.snatch.dto.item.ItemDTO;
+import ng.bayue.snatch.dto.item.ItemDetailDTO;
+import ng.bayue.snatch.dto.promotion.TopicDTO;
+import ng.bayue.snatch.dto.promotion.TopicItemDTO;
+import ng.bayue.snatch.enums.promotion.TopicProgressEnum;
+import ng.bayue.snatch.enums.promotion.TopicTypeEnum;
+import ng.bayue.validate.GenerateValidator;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,22 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
-
-import ng.bayue.backend.ao.item.ItemDetailAO;
-import ng.bayue.backend.ao.promotion.TopicAO;
-import ng.bayue.backend.ao.promotion.TopicItemAO;
-import ng.bayue.backend.controller.common.BaseController;
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.common.ErrorMessage;
-import ng.bayue.common.Page;
-import ng.bayue.item.dto.ItemDTO;
-import ng.bayue.item.dto.ItemDetailDTO;
-import ng.bayue.promotion.domain.TopicDO;
-import ng.bayue.promotion.dto.TopicDTO;
-import ng.bayue.promotion.dto.TopicItemDTO;
-import ng.bayue.promotion.enums.TopicProgressEnum;
-import ng.bayue.promotion.enums.TopicTypeEnum;
-import ng.bayue.validate.GenerateValidator;
 
 @Controller
 @RequestMapping({"/topic"})

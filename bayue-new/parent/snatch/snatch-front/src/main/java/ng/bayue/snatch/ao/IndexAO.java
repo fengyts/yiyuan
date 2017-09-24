@@ -2,16 +2,16 @@ package ng.bayue.snatch.ao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import ng.bayue.base.dto.FrontCategoryViewDTO;
 import ng.bayue.base.service.remote.RemoteBaseService;
 import ng.bayue.fastdfs.ImageUrlUtil;
-import ng.bayue.item.domain.CarouselDO;
-import ng.bayue.item.service.ItemService;
-import ng.bayue.promotion.dto.TopicItemDTO;
-import ng.bayue.promotion.service.TopicExportService;
+import ng.bayue.snatch.domain.item.CarouselDO;
+import ng.bayue.snatch.dto.promotion.TopicItemDTO;
+import ng.bayue.snatch.service.item.ItemService;
+import ng.bayue.snatch.service.promotion.TopicExportService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class IndexAO {

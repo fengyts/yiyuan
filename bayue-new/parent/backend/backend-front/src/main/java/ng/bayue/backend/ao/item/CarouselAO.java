@@ -4,6 +4,14 @@ import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
+import ng.bayue.backend.util.ResultMessage;
+import ng.bayue.backend.util.UserHandler;
+import ng.bayue.common.Page;
+import ng.bayue.fastdfs.ImageUrlUtil;
+import ng.bayue.service.DfsService;
+import ng.bayue.snatch.domain.item.CarouselDO;
+import ng.bayue.snatch.service.item.CarouselService;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,14 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import ng.bayue.backend.util.ResultMessage;
-import ng.bayue.backend.util.UserHandler;
-import ng.bayue.common.Page;
-import ng.bayue.fastdfs.ImageUrlUtil;
-import ng.bayue.item.domain.CarouselDO;
-import ng.bayue.item.service.CarouselService;
-import ng.bayue.service.DfsService;
 
 @Service
 public class CarouselAO {
