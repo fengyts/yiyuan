@@ -11,9 +11,11 @@ public interface CommonConstant {
 	public interface STATUS {
 		/** 有效 */
 		public int VALID = 1;
+		/** 有效 */
 		public boolean TRUE = Boolean.TRUE;
 		/** 无效 */
 		public int INVALID = 0;
+		/** 无效 */
 		public boolean FALSE = Boolean.FALSE;
 	}
 	

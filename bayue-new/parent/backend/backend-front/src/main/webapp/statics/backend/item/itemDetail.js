@@ -84,6 +84,7 @@ $(function(){
 		parent.window.$("#smallId").val(_smallId);
 		parent.window.$("#unitName").val(_unitName);
 		parent.window.$("#unitId").val(_unitId);
+		
 		parent.window.layer.close(parent.pageii);
 	});
 	

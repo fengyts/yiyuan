@@ -2,7 +2,15 @@ package ng.bayue.backend.controller.item;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ng.bayue.backend.ao.basedata.SpecGroupAO;
 import ng.bayue.backend.ao.item.ItemAO;
@@ -15,16 +23,6 @@ import ng.bayue.snatch.dto.item.ItemDTO;
 import ng.bayue.snatch.dto.item.ItemDetailDTO;
 import ng.bayue.snatch.enums.item.ItemStatusEnum;
 import ng.bayue.snatch.enums.item.ItemTypeEnum;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping({ "/item/itemDetail" })
@@ -70,13 +68,13 @@ public class ItemDetailController extends BaseController {
 	
 	@RequestMapping("/save")
 	@ResponseBody
-	public ResultMessage save(@Valid ItemDetailDTO itemDetialDTO, Errors error){
-		if(error.hasErrors()){
-			List<ObjectError> list = error.getAllErrors();
-			ObjectError oe = list.get(0);
-			String message = oe.getDefaultMessage();
-			return new ResultMessage(ResultMessage.Failure, message);
-		}
+	public ResultMessage save(/*@Valid*/ ItemDetailDTO itemDetialDTO, Errors error){
+//		if(error.hasErrors()){
+//			List<ObjectError> list = error.getAllErrors();
+//			ObjectError oe = list.get(0);
+//			String message = oe.getDefaultMessage();
+//			return new ResultMessage(ResultMessage.Failure, message);
+//		}
 		
 		return itemDetailAO.saveItemDetail(itemDetialDTO);
 	}
@@ -104,12 +102,12 @@ public class ItemDetailController extends BaseController {
 	
 	@RequestMapping({"/update"})
 	@ResponseBody
-	public ResultMessage update(@Valid ItemDetailDTO itemDetailDTO, Errors error){
-		if(error.hasErrors()){
-			List<ObjectError> list = error.getAllErrors();
-			ObjectError oe = list.get(0);
-			return new ResultMessage(ResultMessage.Failure, oe.getDefaultMessage());
-		}
+	public ResultMessage update(/*@Valid*/ ItemDetailDTO itemDetailDTO, Errors error){
+//		if(error.hasErrors()){
+//			List<ObjectError> list = error.getAllErrors();
+//			ObjectError oe = list.get(0);
+//			return new ResultMessage(ResultMessage.Failure, oe.getDefaultMessage());
+//		}
 		return itemDetailAO.update(itemDetailDTO);
 	}
 	

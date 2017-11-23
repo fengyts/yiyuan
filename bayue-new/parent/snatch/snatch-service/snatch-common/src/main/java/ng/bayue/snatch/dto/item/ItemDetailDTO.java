@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import ng.bayue.snatch.domain.item.DetailSpecDO;
 import ng.bayue.snatch.domain.item.ItemPicturesDO;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 public class ItemDetailDTO implements Serializable {
 
@@ -20,23 +16,23 @@ public class ItemDetailDTO implements Serializable {
 	/** ########## spu级别信息  ######### */
 	
 	/** 商品ID */
-	@NotNull(message = "商品不能为空")
+//	@NotNull(message = "商品不能为空")
 	private Long itemId;
 
 	/** 大类ID */
-	@NotNull(message = "大类不能为空")
+//	@NotNull(message = "大类不能为空")
 	private Long largeId;
 
 	/** 小类ID */
-	@NotNull(message = "小类不能为空")
+//	@NotNull(message = "小类不能为空")
 	private Long smallId;
 
 	/** 单位 */
-	@NotNull(message = "单位不能为空")
+//	@NotNull(message = "单位不能为空")
 	private Long unitId;
 
 	/** 小类编号+4位流水码 冗余字段 */
-	@NotBlank(message = "spu不能为空")
+//	@NotBlank(message = "spu不能为空")
 	private String spu;
 	
 	/** 大类名称  */
@@ -58,15 +54,15 @@ public class ItemDetailDTO implements Serializable {
 	private String prdid;
 
 	/** 商品名称 */
-	@NotBlank(message = "商品名称不能为空")
+//	@NotBlank(message = "商品名称不能为空")
 	private String itemTitle;
 
 	/** 产品前台展示名称 */
-	@NotBlank(message = "spu名称不能为空")
+//	@NotBlank(message = "spu名称不能为空")
 	private String mainTitle;
 
 	/** 副标题 */
-	@NotBlank(message = "商品副标题不能为空")
+//	@NotBlank(message = "商品副标题不能为空")
 	private String subTitle;
 
 	/** 条码(全局唯一) */
@@ -82,7 +78,7 @@ public class ItemDetailDTO implements Serializable {
 	private Integer status;
 	
 	/** 市场价 */
-	@NotNull(message = "市场价不能为空")
+//	@NotNull(message = "市场价不能为空")
 	private Double basicPrice;
 
 	/** 无理由退货期限 单位 天 */
@@ -127,7 +123,7 @@ public class ItemDetailDTO implements Serializable {
 	private List<ItemPicturesDO> listPicUrls;
 	
 	/** 商品详情描述信息 */
-	@NotBlank(message = "商品描述信息不能为空")
+//	@NotBlank(message = "商品描述信息不能为空")
 	private String description;
 	
 	private Long createUserId;
