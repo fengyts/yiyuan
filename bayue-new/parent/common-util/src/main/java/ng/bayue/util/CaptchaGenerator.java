@@ -17,7 +17,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author sk.chen
  * @version 2017-05-11
  */
-public class CaptchaHelpler {
+public class CaptchaGenerator {
 	private Random random = new Random();
 	private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 随机产生的字符串
 
