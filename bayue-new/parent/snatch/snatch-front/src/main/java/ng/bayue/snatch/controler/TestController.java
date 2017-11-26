@@ -1,7 +1,7 @@
 package ng.bayue.snatch.controler;
 
 import ng.bayue.common.ResultMessage;
-import ng.bayue.util.CaptchaHelpler;
+import ng.bayue.util.CaptchaGenerator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ public class TestController {
 
 	@RequestMapping(value = "captcha")
 	public String captcha(Model model) {
-		CaptchaHelpler ch = new CaptchaHelpler();
+		CaptchaGenerator ch = new CaptchaGenerator();
 		String generateCaptcha = ch.toImageBase64(ch.generateCaptcha());
 		model.addAttribute("captcha", generateCaptcha);
 		return "/captcha";
