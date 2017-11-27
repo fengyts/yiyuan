@@ -17,7 +17,8 @@ import org.csource.fastdfs.TrackerServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ng.bayue.common.ResultMessage;
+import ng.bayue.common.CommonMessages;
+import ng.bayue.common.CommonResultMessage;
 import ng.bayue.factory.TrackerServerPool;
 import ng.bayue.service.DfsService;
 import ng.bayue.util.FileUtils;
@@ -56,7 +57,6 @@ public class DfsServiceImpl implements DfsService {
 				trackerServerPool.returnObject(trackerServer);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.info("return trackerServer to pool failure:{}", e);
 		}
 	}
@@ -278,7 +278,7 @@ public class DfsServiceImpl implements DfsService {
 	}
 
 	@Override
-	public ResultMessage batchDeleteFiles(String... fileIds) {
+	public CommonResultMessage batchDeleteFiles(String... fileIds) {
 		if (null == fileIds) {
 			return null;
 		}
@@ -304,9 +304,9 @@ public class DfsServiceImpl implements DfsService {
 		map.put("success", listSuccess);
 		map.put("failure", listFailure);
 		if (isSuccess) {
-			return new ResultMessage(ResultMessage.Success, ResultMessage.operFailure, map);
+			return new CommonResultMessage(CommonResultMessage.Success, CommonMessages.HandleFailure, map);
 		}
-		return new ResultMessage();
+		return new CommonResultMessage();
 	}
 
 	@Override

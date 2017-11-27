@@ -54,7 +54,6 @@ public class CaptchaGenerator {
 	
 	/**
 	 * 生成验证码
-	 * @param liveTime 存活时间
 	 * @return
 	 */
 	public String generateCaptcha() {

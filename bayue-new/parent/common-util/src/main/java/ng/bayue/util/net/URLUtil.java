@@ -10,8 +10,8 @@ import java.net.URLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ng.bayue.constant.CharsetConstant;
-import ng.bayue.constant.RequestMethod;
+import ng.bayue.constants.CharsetConstant;
+import ng.bayue.constants.RequestMethod;
 
 public class URLUtil {
 

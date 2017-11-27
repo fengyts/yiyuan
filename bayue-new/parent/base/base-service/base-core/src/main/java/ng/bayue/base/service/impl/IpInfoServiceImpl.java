@@ -9,7 +9,7 @@ import ng.bayue.base.domain.DistrictInfoDO;
 import ng.bayue.base.domain.IpInfoDO;
 import ng.bayue.base.persist.dao.IpInfoDAO;
 import ng.bayue.base.service.IpInfoService;
-import ng.bayue.constant.RedisCacheTimeConstant;
+import ng.bayue.constants.RedisCacheTimeConstant;
 import ng.bayue.redis.RedisCacheUtil;
 
 import org.apache.commons.lang3.StringUtils;

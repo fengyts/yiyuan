@@ -21,7 +21,7 @@ import ng.bayue.base.domain.CategoryDO;
 import ng.bayue.base.domain.FrontCategoryDO;
 import ng.bayue.base.dto.FrontCategoryDTO;
 import ng.bayue.base.service.FrontCategoryService;
-import ng.bayue.constant.CommonConstant;
+import ng.bayue.constants.CommonConstant;
 
 @Service
 public class FrontCategoryAO {

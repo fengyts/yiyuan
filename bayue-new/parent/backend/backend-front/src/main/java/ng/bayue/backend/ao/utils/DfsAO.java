@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import ng.bayue.common.ResultMessage;
-import ng.bayue.constant.CommonConstant;
+import ng.bayue.common.CommonResultMessage;
+import ng.bayue.constants.CommonConstant;
 import ng.bayue.service.DfsService;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,8 +55,8 @@ public class DfsAO {
 		if (null == fileIds || 0 == fileIds.length) {
 			return false;
 		}
-		ResultMessage msg = dfsService.batchDeleteFiles(fileIds);
-		if (ResultMessage.Success != msg.getResult()) {
+		CommonResultMessage msg = dfsService.batchDeleteFiles(fileIds);
+		if (CommonResultMessage.Success != msg.getResult()) {
 			@SuppressWarnings("unchecked")
 			Map<String, List<String>> map = (Map<String, List<String>>) msg.getData();
 //			List<String> listSuccess = map.get("success");

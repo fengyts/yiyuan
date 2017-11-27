@@ -26,7 +26,7 @@ import ng.bayue.base.persist.dao.FrontCategoryDAO;
 import ng.bayue.base.persist.dao.FrontCategoryLinkDAO;
 import ng.bayue.base.service.FrontCategoryService;
 import ng.bayue.common.Page;
-import ng.bayue.constant.RedisCacheTimeConstant;
+import ng.bayue.constants.RedisCacheTimeConstant;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.RedisCacheService;
 

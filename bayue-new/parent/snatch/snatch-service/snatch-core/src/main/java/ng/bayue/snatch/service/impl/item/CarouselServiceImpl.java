@@ -6,8 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import ng.bayue.common.Page;
-import ng.bayue.constant.CommonConstant;
-import ng.bayue.constant.RedisCacheTimeConstant;
+import ng.bayue.constants.CommonConstant;
+import ng.bayue.constants.RedisCacheTimeConstant;
 import ng.bayue.service.RedisCacheService;
 import ng.bayue.snatch.constant.item.ItemCommonConstant.RedisCacheKeyConstant;
 import ng.bayue.snatch.domain.item.CarouselDO;

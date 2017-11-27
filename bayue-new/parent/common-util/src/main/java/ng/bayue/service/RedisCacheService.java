@@ -64,5 +64,7 @@ public interface RedisCacheService {
 	 * @return
 	 */
 	boolean keyExists(String key);
+	
+	boolean watchMethodCall(String key, int expireSeconds, int maxNum);
 
 }

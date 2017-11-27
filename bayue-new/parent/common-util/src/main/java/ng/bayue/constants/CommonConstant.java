@@ -1,4 +1,4 @@
-package ng.bayue.constant;
+package ng.bayue.constants;
 
 public interface CommonConstant {
 

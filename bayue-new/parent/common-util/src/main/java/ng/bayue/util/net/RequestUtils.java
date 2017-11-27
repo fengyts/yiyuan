@@ -32,7 +32,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ng.bayue.constant.CharsetConstant;
+import ng.bayue.constants.CharsetConstant;
 
 @SuppressWarnings({ "deprecation" })
 public class RequestUtils {

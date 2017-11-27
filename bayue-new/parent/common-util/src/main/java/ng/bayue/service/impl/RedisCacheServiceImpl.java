@@ -251,4 +251,9 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 		return false;
 	}
 
+	@Override
+	public boolean watchMethodCall(String key, int expireSeconds, int maxNum) {
+		return false;
+	}
+
 }

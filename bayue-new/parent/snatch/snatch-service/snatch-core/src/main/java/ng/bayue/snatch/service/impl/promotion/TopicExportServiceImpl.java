@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ng.bayue.common.Page;
-import ng.bayue.constant.CommonConstant;
+import ng.bayue.constants.CommonConstant;
 import ng.bayue.snatch.domain.item.ItemDetailDO;
 import ng.bayue.snatch.domain.item.ItemPicturesDO;
 import ng.bayue.snatch.domain.promotion.TopicDO;

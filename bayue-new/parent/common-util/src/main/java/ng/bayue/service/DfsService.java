@@ -5,7 +5,7 @@ import java.io.File;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.FileInfo;
 
-import ng.bayue.common.ResultMessage;
+import ng.bayue.common.CommonResultMessage;
 
 public interface DfsService {
 	
@@ -66,7 +66,7 @@ public interface DfsService {
 	 * @return
 	 * 		
 	 */
-	public abstract ResultMessage batchDeleteFiles(String... fileIds);
+	public abstract CommonResultMessage batchDeleteFiles(String... fileIds);
 	
 	public abstract byte[] downloadFile(String fileId);
 	

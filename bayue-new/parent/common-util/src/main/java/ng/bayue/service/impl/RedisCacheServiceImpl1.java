@@ -259,5 +259,82 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 	public boolean keyExists(String key) {
 		return false;
 	}
+	
+	/**
+	 * expireSeconds时间内，key自增的值超过maxNum将返回false,否则返回true
+	 *
+	 * @param key
+	 * @param expireSeconds
+	 * @param maxNum
+	 * @return
+	 */
+	public boolean watchMethodCall(String key, int expireSeconds, int maxNum) {
+		return this.incrWatchKeyNew(key, expireSeconds, maxNum);
+	}
+
+	private boolean incrWatchKey(String key, int expireSeconds, int maxNum) {
+		long count = 0;
+		ShardedJedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = shardedJedisPool.getResource();
+			long ttl = jedis.ttl(key);
+			if (ttl > 0 && ttl <= expireSeconds) {
+				String str = jedis.get(key);
+				if (null != str && Long.valueOf(str) < maxNum) {
+					count = jedis.incr(key);
+				}
+			} else {
+				ShardedJedisPipeline pipelined = jedis.pipelined();
+				pipelined.set(key, String.valueOf("0"));
+				pipelined.expire(key, expireSeconds);
+				pipelined.incr(key);
+				List<Object> syncAndReturnAll = pipelined.syncAndReturnAll();
+				if (!syncAndReturnAll.isEmpty() && null != syncAndReturnAll.get(2)) {
+					count = Long.valueOf(syncAndReturnAll.get(2).toString());
+				}
+			}
+		} catch (Exception ex) {
+			isSuccess = false;
+			logger.error(ex.getMessage(), ex);
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+		if (count != 0 && count <= maxNum) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean incrWatchKeyNew(String key, int expireSeconds, long maxNum) {
+		if (maxNum > 50000) {// 队列允许的最大数据条数
+			return false;
+		}
+		ShardedJedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = shardedJedisPool.getResource();
+			Long llen = jedis.llen(key);
+			if (llen >= maxNum) {
+				return false;
+			} else {
+				if (!jedis.exists(key)) {
+					ShardedJedisPipeline pipelined = jedis.pipelined();
+					pipelined.rpush(key, key);
+					pipelined.expire(key, expireSeconds);
+					pipelined.syncAndReturnAll();
+				} else {
+					jedis.rpushx(key, key);
+				}
+				return true;
+			}
+		} catch (Exception ex) {
+			isSuccess = false;
+			logger.error(ex.getMessage(), ex);
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+		return false;
+	}
 
 }
