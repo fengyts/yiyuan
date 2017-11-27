@@ -23,7 +23,7 @@ public class FrequencyServiceImpl implements FrequencyService {
 		try {
 			flag = redisCacheService1.watchMethodCall(key, model.getSeconds(), model.getTimes());
 		} catch (Exception e) {
-			logger.error("是否超载调用redis失败", e);
+			logger.info("是否超载调用redis失败", e);
 		}
 		return flag;
 	}

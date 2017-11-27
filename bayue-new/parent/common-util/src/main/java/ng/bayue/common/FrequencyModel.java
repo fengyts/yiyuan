@@ -4,6 +4,7 @@ public class FrequencyModel extends BaseRedisModel {
 
 	private static final long serialVersionUID = -1665785519361315597L;
 
+	/** redis key值,实际值为 (key + BinuessType) */
 	private String key;
 	/** 业务类型 */
 	private String BinuessType;

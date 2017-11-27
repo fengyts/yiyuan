@@ -14,6 +14,9 @@ public final class RedisCacheTimeConstant {
 	/** redis超时,60秒 */
 	public static final int TIME_OUT = 60;
 	
+	/** 1分钟 */
+	public static final int ONE_MINUTES = 60;
+	
 	/** 默认时间5分钟  */
 	public static final int DEFAULT_TIME = 60 * 5;
 

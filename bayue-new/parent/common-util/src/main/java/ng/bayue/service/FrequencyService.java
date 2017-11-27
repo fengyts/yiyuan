@@ -12,6 +12,11 @@ import ng.bayue.common.FrequencyModel;
  */
 public interface FrequencyService {
 	
+	/**
+	 *
+	 * @param model
+	 * @return true-频率未达上限,false-频率已经达到上限
+	 */
 	Boolean overLoad(FrequencyModel model);
 	
 }
