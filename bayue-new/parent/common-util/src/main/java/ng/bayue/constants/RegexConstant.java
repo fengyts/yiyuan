@@ -10,16 +10,18 @@ package ng.bayue.constants;
  */
 public interface RegexConstant {
 
+	/** 纯数字 */
+	public static final String NUMBER_ONLY = "^[0-9]*$";
 	/** 手机号码 */
-	public static final String MOBILE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+	public static final String MOBILE = "^[1][3,4,5,7,8][0-9]{9}$";
 	/** 手机号码1 */
-	public static final String MOBILE1 = "^[1][3,4,5,7,8][0-9]{9}$";
+	public static final String MOBILE1 = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
 	/** 固话 */
 	public static final String TEL_PHONE = "^(\\(\\d{3,4}-)|\\d{3.4}-)?\\d{7,8}$";
 	/** 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线) */
-	public static final String PWD = "^[a-zA-Z]\\w{5,17}$";
+	public static final String PASSWORD = "^[a-zA-Z]\\w{5,17}$";
 	/** 强密码 :必须包含大小写字母和数字的组合，不能使用特殊字符,6~18位 */
-	public static final String PWD_STRONG = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,18}$";
+	public static final String PASSWORD_STRONG = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,18}$";
 	/** email */
 	public static final String EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 	/** 份证号 */

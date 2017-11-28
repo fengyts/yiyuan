@@ -10,7 +10,7 @@ import ng.bayue.service.FrequencyService;
 import ng.bayue.service.RedisCacheService;
 
 public class FrequencyServiceImpl implements FrequencyService {
-	
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource(name = "redisCacheService1")
@@ -29,7 +29,7 @@ public class FrequencyServiceImpl implements FrequencyService {
 	}
 
 	private String generateKey(FrequencyModel model) {
-		return model.getKey() + model.getBinuessType();
+		return model.getBinuessType() + "_" + model.getKey();
 	}
 
 }
