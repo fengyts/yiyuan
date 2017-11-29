@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class CaptchaGenerator {
 	private Random random = new Random();
-	private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 随机产生的字符串
+	private String randomSrcStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // 允许字符串的范围
 
 	private int width = 120; // 图片宽
 	private int height = 34; // 图片高
@@ -57,9 +57,21 @@ public class CaptchaGenerator {
 	 * @return
 	 */
 	public String generateCaptcha() {
-		StringBuilder randomStr = new StringBuilder();
+		/*StringBuilder randomStr = new StringBuilder();
 		for (int i = 1; i <= stringNum; i++) {
-			randomStr.append(getRandomString(random.nextInt(randString.length())));
+			randomStr.append(getRandomString(random.nextInt(randomSrcStr.length())));
+		}
+		return randomStr.toString();*/
+		return generateCaptcha(stringNum);
+	}
+	
+	public String generateCaptcha(int length) {
+		if(length < 1){
+			length = stringNum;
+		}
+		StringBuilder randomStr = new StringBuilder();
+		for (int i = 1; i <= length; i++) {
+			randomStr.append(getRandomString(random.nextInt(randomSrcStr.length())));
 		}
 		return randomStr.toString();
 	}
@@ -130,6 +142,6 @@ public class CaptchaGenerator {
 	 * @return
 	 */
 	public String getRandomString(int num) {
-		return String.valueOf(randString.charAt(num));
+		return String.valueOf(randomSrcStr.charAt(num));
 	}
 }

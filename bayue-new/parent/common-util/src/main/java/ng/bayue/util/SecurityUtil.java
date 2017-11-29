@@ -172,6 +172,8 @@ public final class SecurityUtil {
 	 */
 	private static final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
 			'b', 'c', 'd', 'e', 'f' };
+	
+	private static final char[] CHARSET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	/**
 	 * <pre>
@@ -215,17 +217,26 @@ public final class SecurityUtil {
 
 		/**
 		 * <pre>
-		 * 生成随机盐
+		 * 生成随机盐32位
 		 * </pre>
 		 *
 		 * @return
 		 */
 		public static byte[] provideSalt() {
-			byte[] bytes = new byte[LENGTH32];
+			return provider(LENGTH16);
+		}
+		
+		public static byte[] provideSalt16 (){
+			return provider(LENGTH32);
+		}
+
+		private static byte[] provider(int len) {
+			byte[] bytes = new byte[len];
 			Random rd = new SecureRandom();
 			rd.nextBytes(bytes);
 			return bytes;
 		}
+		
 	}
 
 	public static void main(String[] args) {

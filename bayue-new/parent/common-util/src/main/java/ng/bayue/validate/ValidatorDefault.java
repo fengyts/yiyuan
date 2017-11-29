@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import ng.bayue.constants.RegexConstant;
 import ng.bayue.util.StringUtils;
 
+@Deprecated
 public class ValidatorDefault implements RegexConstant {
 
 	private String src;
