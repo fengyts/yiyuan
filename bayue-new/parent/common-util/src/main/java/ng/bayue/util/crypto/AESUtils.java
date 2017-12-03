@@ -28,7 +28,7 @@ public class AESUtils {
 	public static final String CHART_SET = "GB18030";
 	
 	public static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5Padding";
-	public static final String SECRET_KEY= "f5eXEMD8dhAX5pGJ";
+	public static final String SECRET_KEY= "f5e_E&D8$hAX5pG%";
 	public static final String IV = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 	
 	private String randomStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 随机产生的字符串
@@ -42,7 +42,6 @@ public class AESUtils {
 	public AESUtils() {
 		try {
 			cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-
 			secretKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES"); 
 			ivspec = new IvParameterSpec(IV.getBytes());
 		} catch (NoSuchAlgorithmException e) {
@@ -88,7 +87,6 @@ public class AESUtils {
 	public String decrypt(String cryptedBase64Str) {
 		// 输出buffer
 		ByteArrayOutputStream outbuf = new ByteArrayOutputStream();
-
 		try {
 			cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
 			// 转换得到字节流
@@ -110,7 +108,6 @@ public class AESUtils {
 		for (int i = 1; i <= len; i++) {
 			key.append(String.valueOf(randomStr.charAt(random.nextInt(randomStr.length()))));
 		}
-		
 		return key.toString();
 	}
 	
@@ -123,7 +120,6 @@ public class AESUtils {
 	 */
 	public String decrypt(String encryptedData, String key, String iv) {
 		Key secretKey = new SecretKeySpec(Base64.decodeBase64(key), "AES");
-
 		try {
 			cipher.init(Cipher.DECRYPT_MODE, secretKey, generateIV(Base64.decodeBase64(iv)));
 			byte[] result = cipher.doFinal(Base64.decodeBase64(encryptedData));

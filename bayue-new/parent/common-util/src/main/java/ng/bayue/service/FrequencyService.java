@@ -1,6 +1,7 @@
 package ng.bayue.service;
 
-import ng.bayue.common.FrequencyModel;
+import ng.bayue.common.model.FrequencyModel;
+
 
 /**
  * <pre>

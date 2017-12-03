@@ -1,4 +1,4 @@
-package ng.bayue.common;
+package ng.bayue.common.model;
 
 public class FrequencyModel extends BaseRedisModel {
 
