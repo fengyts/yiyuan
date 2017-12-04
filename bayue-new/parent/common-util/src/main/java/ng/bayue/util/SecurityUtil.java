@@ -177,7 +177,7 @@ public final class SecurityUtil {
 
 	/**
 	 * <pre>
-	 * 编码指定字节数组返回字符串
+	 * 编码指定字节数组返回字符串,编码长度增加data长度的一倍,即16位会返回32位长度的,32位会返回64位长度的
 	 * </pre>
 	 *
 	 * @param data
@@ -217,7 +217,7 @@ public final class SecurityUtil {
 
 		/**
 		 * <pre>
-		 * 生成随机盐32位
+		 * 生成随机盐16位
 		 * </pre>
 		 *
 		 * @return
@@ -226,7 +226,14 @@ public final class SecurityUtil {
 			return provider(LENGTH16);
 		}
 		
-		public static byte[] provideSalt16 (){
+		/**
+		 * <pre>
+		 * 生成随机盐32位
+		 * </pre>
+		 *
+		 * @return
+		 */
+		public static byte[] provideSalt32 (){
 			return provider(LENGTH32);
 		}
 
@@ -248,9 +255,12 @@ public final class SecurityUtil {
 		byte[] saltb = salt.getBytes();
 		byte[] hash = hash(bytes, saltb, 1);
 		String s = new String(encode(hash));
-		System.out.println("hash2:" + s);
-		System.out.println(encode(encrypt(bytes)));
-		System.out.println(encode(encrypt(encrypt(bytes))));
+		System.out.println("hash2:\n" + s);
+		
+		byte[] salt32 = Salt.provideSalt32();
+		System.out.println(salt32.length);
+		String es = encode(salt32);
+		System.out.println(es);
 	}
 
 }
