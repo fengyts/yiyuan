@@ -1,5 +1,8 @@
 package ng.bayue.service.impl;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -255,5 +258,84 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 	public boolean watchMethodCall(String key, int expireSeconds, int maxNum) {
 		return false;
 	}
+
+	@Override
+	public boolean updateExpire(String key, int expireSeconds) {
+		if(null == key || "".equals(key)){return false;}
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis =  jedisPool.getResource();
+			Long res = jedis.expire(key, expireSeconds);
+			isSuccess = 1 == res.intValue() ? true : false;
+			return true;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		}finally{
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	@Override
+	public Set<String> keys(String keyPattern) {
+		if (null == keyPattern || "".equals(keyPattern)) {
+			return Collections.emptySet();
+		}
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Set<String> keys = jedis.keys(keyPattern);
+			return keys;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	@Override
+	public void deleteKeys(String... keys) {
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Long res = jedis.del(keys);
+			isSuccess = 1 == res.intValue() ? true : false;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	@Override
+	public void deleteKeyPattern(String keyPattern) {
+		if (null == keyPattern || "".equals(keyPattern)) {
+			return;
+		}
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Set<String> keySet = jedis.keys(keyPattern);
+			String[] keys = keySet.toArray(new String[0]);
+			jedis.del(keys);
+			return;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+	
 
 }

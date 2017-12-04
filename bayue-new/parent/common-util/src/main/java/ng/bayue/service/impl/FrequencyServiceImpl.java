@@ -2,12 +2,12 @@ package ng.bayue.service.impl;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ng.bayue.common.FrequencyModel;
+import ng.bayue.common.model.FrequencyModel;
 import ng.bayue.service.FrequencyService;
 import ng.bayue.service.RedisCacheService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FrequencyServiceImpl implements FrequencyService {
 

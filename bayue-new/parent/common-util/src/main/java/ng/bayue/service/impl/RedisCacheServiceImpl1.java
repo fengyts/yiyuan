@@ -1,6 +1,8 @@
 package ng.bayue.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import ng.bayue.redis.CacheShardedJedisPool;
 import ng.bayue.service.RedisCacheService;
 import ng.bayue.util.SerializeUtil;
+import ng.bayue.util.StringUtils;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPipeline;
 
@@ -38,12 +43,22 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 	
 	private CacheShardedJedisPool shardedJedisPool = null;
 	
+	private JedisPool jedisPool = null;
+	
 	public CacheShardedJedisPool getShardedJedisPool() {
 		return shardedJedisPool;
 	}
 
 	public void setShardedJedisPool(CacheShardedJedisPool shardedJedisPool) {
 		this.shardedJedisPool = shardedJedisPool;
+	}
+	
+	public JedisPool getJedisPool() {
+		return jedisPool;
+	}
+
+	public void setJedisPool(JedisPool jedisPool) {
+		this.jedisPool = jedisPool;
 	}
 
 	private static void validKeyAndValue(String key, byte[] values) throws Exception {
@@ -79,6 +94,14 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 			shardedJedisPool.returnResource(jedis);
 		}else{
 			shardedJedisPool.returnBrokenResource(jedis);
+		}
+	}
+	
+	private void closeJedis(Jedis jedis, boolean isSuccess) {
+		if (null != jedis && isSuccess) {
+			jedisPool.returnResource(jedis);
+		} else {
+			jedisPool.returnBrokenResource(jedis);
 		}
 	}
 	
@@ -336,5 +359,87 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean updateExpire(String key, int expire){
+		if(StringUtils.isBlank(key)){
+			return false;
+		}
+		ShardedJedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = shardedJedisPool.getResource();
+			jedis.expire(key, expire);
+		} catch (Exception ex) {
+			isSuccess = false;
+			logger.error(ex.getMessage(), ex);
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+		return false;
+	}
+
+	@Override
+	public Set<String> keys(String keyPattern) {
+		if (null == keyPattern || "".equals(keyPattern)) {
+			return Collections.emptySet();
+		}
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Set<String> keys = jedis.keys(keyPattern);
+			return keys;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	@Override
+	public void deleteKeys(String... keys) {
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Long res = jedis.del(keys);
+			isSuccess = 1 == res.intValue() ? true : false;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+
+	@Override
+	public void deleteKeyPattern(String keyPattern) {
+		if (null == keyPattern || "".equals(keyPattern)) {
+			return;
+		}
+		Jedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = jedisPool.getResource();
+			Set<String> keySet = jedis.keys(keyPattern);
+			String[] keys = keySet.toArray(new String[0]);
+			jedis.del(keys);
+			return;
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.info("delete redis cache failure: {}", e);
+			throw e;
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
+	}
+	
+	
+
+	
 
 }
