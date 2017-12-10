@@ -1,7 +1,10 @@
 package ng.bayue.util;
 
+import java.util.Calendar;
+import java.util.Date;
 
-public class DateUtils {
+
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 	
 	/** 常用日期格式  */
 	private static final String[] parsePatterns = {
@@ -58,5 +61,67 @@ public class DateUtils {
 		static final String MMDD2 = "MM.dd";
 		
 	}
+	
+	/**
+     * 获取指定时间所在天的开始时间，0时0分0秒0毫秒
+     * @param cal
+     * @return
+     */
+	public static Date getDayBegin(Date date) {
+		if (null == date) {
+			return null;
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return getDayBegin(cal);
+	}
+	
+	/**
+     * 获取指定时间所在天的开始时间，0时0分0秒0毫秒
+     * @param cal
+     * @return
+     */
+	public static Date getDayBegin(Calendar cal) {
+		if (null == cal) {
+			return null;
+		}
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		return cal.getTime();
+	}
+	
+	/**
+     * 获取指定时间所在天的结束时间，23时59分59秒999毫秒
+     * @param cal
+     * @return
+     */
+	public static Date getDayEnd(Date date) {
+		if (null == date) {
+			return null;
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return getDayEnd(cal);
+	}
+	
+	/**
+     * 获取指定时间所在天的结束时间，23时59分59秒999毫秒
+     * @param cal
+     * @return
+     */
+	public static Date getDayEnd(Calendar cal) {
+		if (null == cal) {
+			return null;
+		}
+		cal.add(Calendar.DATE, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+
+		return cal.getTime();
+	}
+	
+	
 	
 }

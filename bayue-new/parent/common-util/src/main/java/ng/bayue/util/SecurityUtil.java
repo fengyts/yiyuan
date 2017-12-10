@@ -255,12 +255,14 @@ public final class SecurityUtil {
 		byte[] saltb = salt.getBytes();
 		byte[] hash = hash(bytes, saltb, 1);
 		String s = new String(encode(hash));
-		System.out.println("hash2:\n" + s);
+//		System.out.println("hash2:\n" + s);
 		
-		byte[] salt32 = Salt.provideSalt32();
-		System.out.println(salt32.length);
-		String es = encode(salt32);
-		System.out.println(es);
+		String pwd = "abc123A";
+//		String st = encode(SecurityUtil.Salt.provideSalt());
+		String st = "ee2373745ab6b214a5941b9cb281025f";
+		String enpwd = hashToStr(pwd, st, 2);
+		System.out.println(st);
+		System.out.println(enpwd);
 	}
 
 }
