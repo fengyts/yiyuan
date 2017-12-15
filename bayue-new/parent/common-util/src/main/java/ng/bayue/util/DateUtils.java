@@ -3,6 +3,8 @@ package ng.bayue.util;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 	
@@ -60,6 +62,29 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 		/** MM.dd */
 		static final String MMDD2 = "MM.dd";
 		
+	}
+	
+	/**
+	 * 得到日期字符串 默认格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
+	 */
+	public static String formatDate(Date date, Object... pattern) {
+		if (date == null) {
+			return StringUtils.EMPTY;
+		}
+		String formatDate = null;
+		if (pattern != null && pattern.length > 0) {
+			formatDate = DateFormatUtils.format(date, pattern[0].toString());
+		} else {
+			formatDate = DateFormatUtils.format(date, Format.YYYYMMDD);
+		}
+		return formatDate;
+	}
+	
+	/**
+	 * 得到日期时间字符串，转换格式（yyyy-MM-dd HH:mm:ss）
+	 */
+	public static String formatDateTime(Date date) {
+		return formatDate(date, DEFAULT_FORMAT);
 	}
 	
 	/**
