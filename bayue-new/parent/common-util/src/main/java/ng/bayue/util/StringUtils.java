@@ -58,7 +58,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @param mobile
 	 * @return
 	 */
-	public static String toSecurityMobile(String mobile) {
+	public static String securityMobile(String mobile) {
 		return replaceWithAsterisk(mobile, 3, 7);
 	}
 }

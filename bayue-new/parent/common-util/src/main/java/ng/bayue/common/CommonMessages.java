@@ -21,6 +21,10 @@ public class CommonMessages implements Serializable{
 	
 	public static final String IsUsed = "正在使用中";
 	
+	public static final String UNLOGIN = "尚未登陆";
+	
+	public static final String ReqException = "请求异常";
+	
 	/** 冒号 */
 	private static final String Colon = ":";
 
