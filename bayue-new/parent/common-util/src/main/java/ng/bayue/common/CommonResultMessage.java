@@ -15,11 +15,17 @@ public class CommonResultMessage implements Serializable {
 	/** 默认操作结果 */
 	public static final String Message = CommonMessages.HandleSuccess;
 
+	/** 状态码(成功或失败),错误码 */
 	protected int result = Success;
 
 	protected String message = Message;
 
+	/** 附带数据 */
 	protected Object data;
+	
+//	/** 错误码 */
+	// 使用result代替
+//	protected Integer errorCode;
 
 	public CommonResultMessage() {
 	}
@@ -48,6 +54,13 @@ public class CommonResultMessage implements Serializable {
 		this.message = message;
 		this.data = data;
 	}
+	
+//	public CommonResultMessage(int result, Integer errorCode, String message, Object data) {
+//		this.result = result;
+//		this.errorCode = errorCode;
+//		this.message = message;
+//		this.data = data;
+//	}
 
 	public int getResult() {
 		return result;
@@ -143,5 +156,5 @@ public class CommonResultMessage implements Serializable {
 	public static CommonResultMessage failure(String message){
 		return new CommonResultMessage(Failure, message);
 	}
-
+	
 }

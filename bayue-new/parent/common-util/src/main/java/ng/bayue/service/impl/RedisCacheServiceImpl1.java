@@ -82,7 +82,7 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 	 * @return key is null or blank, return true, else return false;
 	 */
 	private boolean keyIsBlank(String key){
-		if(null == null || "".equals(key.trim())){
+		if(null == key || "".equals(key.trim())){
 			logger.info("operated redis exception: the redis key is not allowed null or blank !");
 			return true;
 		}
@@ -240,8 +240,16 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 		}
 	}
 
+	/**
+	 * 取得有效时间内的锁
+	 *
+	 * @param key
+	 * @param expireSeconds
+	 *            有效时间 单位 秒
+	 * @return
+	 */
 	@Override
-	public boolean lock(String key, Integer expires) {
+	public boolean lock(String key, Integer expires) throws Exception {
 		if(keyIsBlank(key)){
 			return false;
 		}
@@ -268,18 +276,60 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 		return false;
 	}
 
-	@Override
-	public boolean lock(String key) {
-		return false;
+
+	/**
+	 * 获取锁,默认锁定五分钟
+	 *
+	 * @param key
+	 * @return
+	 */
+	public boolean lock(String key) throws Exception{
+		return this.lock(key, LOCK_EXPIRE_SECONDS);
 	}
 
-	@Override
+	/**
+	 * 释放锁
+	 *
+	 * @param key
+	 * @return
+	 */
 	public boolean unLock(String key) {
+		if(keyIsBlank(key)){
+			return false;
+		}
+		ShardedJedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = shardedJedisPool.getResource();
+			Long i = jedis.del(key);
+			if (i.intValue() == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.error(e.getMessage(), e);
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean keyExists(String key) {
+		if(keyIsBlank(key)){
+			return false;
+		}
+		ShardedJedis jedis = null;
+		boolean isSuccess = true;
+		try {
+			jedis = shardedJedisPool.getResource();
+			return jedis.exists(key);
+		} catch (Exception e) {
+			isSuccess = false;
+			logger.error(e.getMessage(), e);
+		} finally {
+			closeJedis(jedis, isSuccess);
+		}
 		return false;
 	}
 	

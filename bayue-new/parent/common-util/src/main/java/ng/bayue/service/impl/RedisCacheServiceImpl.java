@@ -241,7 +241,7 @@ public class RedisCacheServiceImpl implements RedisCacheService{
 
 	@Override
 	public boolean lock(String key) {
-		return false;
+		return this.lock(key, LOCK_EXPIRE_SECONDS);
 	}
 
 	@Override

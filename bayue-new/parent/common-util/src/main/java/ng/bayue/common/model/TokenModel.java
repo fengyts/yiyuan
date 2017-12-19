@@ -8,7 +8,7 @@ public class TokenModel extends BaseRedisModel {
 
 	private static final long serialVersionUID = -140506608775223161L;
 
-	private final int DEFAULT_LIVETIME = RedisCacheTimeConstant.HALF_HOUR;
+	private static final int DEFAULT_LIVETIME = RedisCacheTimeConstant.HALF_HOUR;
 
 	private String key;
 
@@ -19,12 +19,15 @@ public class TokenModel extends BaseRedisModel {
 	private Integer liveTime;
 
 	public TokenModel() {
-		// init(null, null);
 		this(null, null, null);
 	}
 
 	public TokenModel(String key) {
 		this(key, null, null);
+	}
+	
+	public TokenModel(String key, String tokenType) {
+		init(key, tokenType, null);
 	}
 
 	public TokenModel(String key, String tokenType, Integer liveTime) {
@@ -40,13 +43,17 @@ public class TokenModel extends BaseRedisModel {
 		}
 		String tokenTem = generateTk();
 		this.token = SecurityUtil.encryptMD5(tokenTem + key);
-		this.key = key;
 		this.tokenType = tokenType;
 		this.liveTime = liveTime;
+		this.key = initKey(key);
 	}
 
 	private String generateTk() {
 		return super.baseKey;
+	}
+	
+	private String initKey(String key){
+		return null == tokenType ? key : tokenType + "_" + key;
 	}
 
 	public String getKey() {

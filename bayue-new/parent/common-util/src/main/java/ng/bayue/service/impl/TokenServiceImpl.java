@@ -51,7 +51,8 @@ public class TokenServiceImpl implements TokenService {
 
 	@Override
 	public String generateKey(TokenModel model) {
-		return model.getTokenType() + UNDERLINE + model.getKey();
+//		return model.getTokenType() + UNDERLINE + model.getKey();
+		return model.getKey();
 	}
 
 }

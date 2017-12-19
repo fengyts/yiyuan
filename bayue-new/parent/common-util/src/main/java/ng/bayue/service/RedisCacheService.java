@@ -40,7 +40,7 @@ public interface RedisCacheService {
 	 *            有效时间 单位 秒
 	 * @return
 	 */
-	boolean lock(String key, Integer expires);
+	boolean lock(String key, Integer expires) throws Exception;
 
 	/**
 	 * 获取锁,默认锁定五分钟
@@ -48,7 +48,7 @@ public interface RedisCacheService {
 	 * @param key
 	 * @return
 	 */
-	boolean lock(String key);
+	boolean lock(String key) throws Exception;
 
 	/**
 	 * 释放锁
@@ -56,7 +56,7 @@ public interface RedisCacheService {
 	 * @param key
 	 * @return
 	 */
-	boolean unLock(String key);
+	boolean unLock(String key) throws Exception;
 
 	/**
 	 * <pre>
