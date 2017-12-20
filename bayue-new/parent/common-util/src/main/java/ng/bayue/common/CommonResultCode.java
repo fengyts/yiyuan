@@ -8,10 +8,10 @@ public class CommonResultCode {
 	        SYSTEM_ERROR(0, "系统内部错误"), 
 	        PARAM_ERROR(1, "入参错误"),
 	        MD5_ENCRYPT_ERROR(2,"MD5加密错误"),
-	        BUSINESS_PROCESS_ERROR(3,"业务处理失败"),
 	        SYSTEM_PARAM_NOT_NULL(100,"系统级别参数不可为空'"),
 	        PROCESS_SIZE_UNMATCH_LIMIT(101,"处理列表数量不符合限制"),
-	        ACCESS_OVERLOAD(102,"访问频率超过限制");
+	        ACCESS_OVERLOAD(102,"访问频率超过限制"),
+		 	UN_LOGIN(999, "尚未登录");
 	        
 	        public Integer code;
 	        public String desc;
@@ -62,9 +62,11 @@ public class CommonResultCode {
 	    }
 	    
 	    public enum BusinessError {
+	    	BUSINESS_PROCESS_ERROR(3,"业务处理失败"),
 	    	PROMOTION_HAS_END(2001, "活动已经结束"),
 	    	USEABLE_CURRENCY_NOT_ENOUGH(2002, "西币不足"),
-	    	ONCE_EVERY_TIME(2003, "请求太频繁了");
+	    	ONCE_EVERY_TIME(2003, "请求太频繁了"),
+	    	EXCHANGE_COUNT_NOT_ENOUGH(2004, "库存不足");
 	    	
 	    	public Integer code;
 	        public String desc;
