@@ -66,7 +66,8 @@ public class CommonResultCode {
 	    	PROMOTION_HAS_END(2001, "活动已经结束"),
 	    	USEABLE_CURRENCY_NOT_ENOUGH(2002, "西币不足"),
 	    	ONCE_EVERY_TIME(2003, "请求太频繁了"),
-	    	EXCHANGE_COUNT_NOT_ENOUGH(2004, "库存不足");
+	    	EXCHANGE_COUNT_NOT_ENOUGH(2004, "库存不足"),
+	    	HAS_EXCHANGED(2005, "已经兑换过了");
 	    	
 	    	public Integer code;
 	        public String desc;
