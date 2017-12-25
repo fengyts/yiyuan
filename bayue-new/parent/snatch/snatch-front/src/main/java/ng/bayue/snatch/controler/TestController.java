@@ -1,6 +1,5 @@
 package ng.bayue.snatch.controler;
 
-import ng.bayue.common.ResultMessage;
 import ng.bayue.util.CaptchaGenerator;
 
 import org.springframework.stereotype.Controller;
@@ -25,12 +24,5 @@ public class TestController {
 		System.out.println("dfd");
 	}
 
-	@RequestMapping(value = "weixin")
-	@ResponseBody
-	public ResultMessage testWeixin() {
-		ResultMessage msg = new ResultMessage();
-		msg.setData("hahahaha哈哈好的，欢迎来到盘蛇岛!");
-		return msg;
-	}
 
 }

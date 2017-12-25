@@ -5,7 +5,6 @@ import ng.bayue.common.BaseDO;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 
 /**
@@ -23,7 +22,7 @@ public class TopicDO extends BaseDO {
 	private Long id;
 
 	/** 专题名称 */
-	@NotBlank(message="专题名称不能为空")
+//	@NotBlank(message="专题名称不能为空")
 	@GenerValidate(message="专题名称不能为空")
 	private String name;
 
