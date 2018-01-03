@@ -283,8 +283,13 @@ public class RedisCacheServiceImpl1 implements RedisCacheService{
 	 * @param key
 	 * @return
 	 */
-	public boolean lock(String key) throws Exception{
-		return this.lock(key, LOCK_EXPIRE_SECONDS);
+	public boolean lock(String key){
+		try {
+			return this.lock(key, LOCK_EXPIRE_SECONDS);
+		} catch (Exception e) {
+			logger.error("", e);
+			return false;
+		}
 	}
 
 	/**

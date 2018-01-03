@@ -48,7 +48,7 @@ public interface RedisCacheService {
 	 * @param key
 	 * @return
 	 */
-	boolean lock(String key) throws Exception;
+	boolean lock(String key);
 
 	/**
 	 * 释放锁
@@ -56,7 +56,7 @@ public interface RedisCacheService {
 	 * @param key
 	 * @return
 	 */
-	boolean unLock(String key) throws Exception;
+	boolean unLock(String key);
 
 	/**
 	 * <pre>
