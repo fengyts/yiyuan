@@ -36,6 +36,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.csource</groupId>
+			<artifactId>fastdfs</artifactId>
+			<version>${fastdfs-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
@@ -89,19 +94,13 @@
 		    <artifactId>spring-data-redis</artifactId>
 		    <version>1.8.3.RELEASE</version>
 		</dependency>
-
+		<!-- 
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 			<version>0.4.8</version>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
-			<groupId>org.csource</groupId>
-			<artifactId>fastdfs</artifactId>
-			<version>${fastdfs-version}</version>
-		</dependency>
-		
 		<!-- java远程ssh2登陆linux -->
 		<dependency>
 			<groupId>com.jcraft</groupId>
@@ -143,17 +142,11 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.2</version>
 		</dependency>
-		
+		<!-- 
 		<dependency>
 		    <groupId>cn.edu.hfut.dmic.webcollector</groupId>
 		    <artifactId>WebCollector</artifactId>
 		    <version>2.32</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.belerweb</groupId>
-			<artifactId>pinyin4j</artifactId>
-			<version>2.5.0</version>
 		</dependency>
 		
 		<dependency>
@@ -161,17 +154,18 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.23</version>
 		</dependency>
 
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
@@ -243,15 +237,15 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.belerweb</groupId>
-			<artifactId>pinyin4j</artifactId>
-			<version>2.5.0</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>com.github.axet</groupId>
 			<artifactId>kaptcha</artifactId>
 			<version>0.0.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
 		</dependency>
 		
 		<dependency>
