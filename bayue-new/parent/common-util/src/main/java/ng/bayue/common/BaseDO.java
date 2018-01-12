@@ -32,7 +32,7 @@ public class BaseDO implements Serializable {
 	}
 
 	public Integer getStart() {
-		return startPage < 0 || pageSize < 0 ? 0 : (startPage - 1) * pageSize;
+		return startPage <= 0 || pageSize <= 0 ? 0 : (startPage - 1) * pageSize;
 	}
 
 }
