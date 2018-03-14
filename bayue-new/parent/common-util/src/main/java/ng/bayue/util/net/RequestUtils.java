@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +18,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -24,6 +26,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
@@ -110,6 +113,31 @@ public class RequestUtils {
 			logger.error("", e);
 		}
 		return null;
+	}
+	
+	public static String doRequest(String url, Map<String, Object> params) throws Exception {
+		CloseableHttpClient client = HttpClientBuilder.create().build();
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		if(null != params){
+			for(Map.Entry<String, Object> p : params.entrySet()){
+				String name = p.getKey();
+				String value = (String) p.getValue();
+				NameValuePair nvp = new BasicNameValuePair(name, value);
+				parameters.add(nvp);
+			}
+		}
+		HttpEntity entityParams = new UrlEncodedFormEntity(parameters, CharsetConstant.UTF8);
+		post.setEntity(entityParams);
+		post.setHeader("Content-Type", "text/html;charset=UTF-8");
+		HttpResponse response = client.execute(post);
+		HttpEntity resEntity = response.getEntity();
+		String result = EntityUtils.toString(resEntity, CharsetConstant.UTF8);
+		return result;
+	}
+	
+	public static String doReqeust(String url) throws Exception {
+		return doRequest(url, null);
 	}
 
 	private void test() {

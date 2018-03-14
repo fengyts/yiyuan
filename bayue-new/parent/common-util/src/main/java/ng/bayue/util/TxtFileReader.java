@@ -60,16 +60,16 @@ public class TxtFileReader {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		String filePath1 = "E:/test/龙王传说.txt";
+		String filePath1 = "E:/test/武炼巅峰.txt";
 		File file = new File(filePath1);
 //		String encoding = FileUtils.getEncoding(file);
 //		System.out.println(encoding);
 		
 //		TxtFileReader fr = new TxtFileReader(file);
-//		int lineNum = fr.getLineNumByTxt("第一千一百四十八章", UTF8);
+//		int lineNum = fr.getLineNumByTxt("第三千八百二十一章", UTF8);
 //		System.out.println(lineNum);
 		
-		String res = FileUtils.textFileReaderByLineNumber(file, 118980, 200, UTF8);
+		String res = FileUtils.textFileReaderByLineNumber(file, 555965, 200, UTF8);
 		System.out.println(res);
 	}
 

@@ -1,5 +1,6 @@
 package com.meitun.scheduler;
 
+import com.meitun.redis.util.JedisCacheUtil;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -10,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import ng.bayue.service.RedisCacheService;
 
 /**
  * 任务调度常量
@@ -28,7 +27,7 @@ public class JobConstant {
     private Properties properties;
 
     @Autowired
-    private RedisCacheService redisCacheService;
+    private JedisCacheUtil jedisCacheUtil;
 
     public JobConstant() {
         init();
@@ -126,7 +125,7 @@ public class JobConstant {
     public boolean isRunningSign(String preFixed) {
         final String key = "job:salesorder:" + preFixed;
         synchronized (key) {
-            if (redisCacheService.lock(key)) {
+            if (jedisCacheUtil.lock(key)) {
                 return Boolean.TRUE;
             }
         }
@@ -135,8 +134,8 @@ public class JobConstant {
 
     public void cleanSign(String preFixed) {
         synchronized (preFixed) {
-            if (redisCacheService.keyExists("job:salesorder:" + preFixed)) {
-            	redisCacheService.unLock("job:salesorder:" + preFixed);
+            if (jedisCacheUtil.keyExists("job:salesorder:" + preFixed)) {
+                jedisCacheUtil.unLock("job:salesorder:" + preFixed);
             }
         }
     }
