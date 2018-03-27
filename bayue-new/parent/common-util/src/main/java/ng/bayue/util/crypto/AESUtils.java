@@ -71,7 +71,7 @@ public class AESUtils {
 		ByteArrayOutputStream outbuf = new ByteArrayOutputStream();
 		try {
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
-			byte[] data = plaintext.getBytes(CHART_SET);
+			byte[] data = plaintext.getBytes(CHART_SET_UTF8);
 			byte[] encryptedBlock = cipher.doFinal(data);
 			// 追加结果到输出buffer中
 			outbuf.write(encryptedBlock);
@@ -96,7 +96,7 @@ public class AESUtils {
 			outbuf.write(decryptedBlock);
 			outbuf.flush();
 			outbuf.close();
-			return outbuf.toString(CHART_SET);//对解密后的数据指定输出编码格式GBK
+			return outbuf.toString(CHART_SET_UTF8);//对解密后的数据指定输出编码格式GBK
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
