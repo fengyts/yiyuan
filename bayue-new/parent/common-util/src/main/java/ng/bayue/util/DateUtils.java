@@ -28,39 +28,41 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 	 */
 	public static final class Format {
 		/** yyyy-MM-dd HH:mm:ss */
-		static final String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
+		public static final String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
 		/** yyyy/MM/dd HH:mm:ss */
-		static final String YYYYMMDDHHMMSS1 = "yyyy/MM/dd HH:mm:ss";
+		public static final String YYYYMMDDHHMMSS1 = "yyyy/MM/dd HH:mm:ss";
 		/** yyyy.MM.dd HH:mm:ss */
-		static final String YYYYMMDDHHMMSS2 = "yyyy.MM.dd HH:mm:ss";
+		public static final String YYYYMMDDHHMMSS2 = "yyyy.MM.dd HH:mm:ss";
 		
 		/** yyyy-MM-dd HH:mm */
-		static final String YYYYMMDHHMM = "yyyy-MM-dd HH:mm";
+		public static final String YYYYMMDHHMM = "yyyy-MM-dd HH:mm";
 		/** yyyy/MM/dd HH:mm */
-		static final String YYYYMMDHHMM1 = "yyyy/MM/dd HH:mm";
+		public static final String YYYYMMDHHMM1 = "yyyy/MM/dd HH:mm";
 		/** yyyy.MM.dd HH:mm */
-		static final String YYYYMMDHHMM2 = "yyyy.MM.dd HH:mm";
+		public static final String YYYYMMDHHMM2 = "yyyy.MM.dd HH:mm";
 		
 		/** yyyy-MM-dd */
-		static final String YYYYMMDD = "yyyy-MM-dd";
+		public static final String YYYYMMDD = "yyyy-MM-dd";
 		/** yyyy/MM/dd */
-		static final String YYYYMMDD1 = "yyyy/MM/dd";
+		public static final String YYYYMMDD1 = "yyyy/MM/dd";
 		/** yyyy.MM.dd */
-		static final String YYYYMMDD2 = "yyyy.MM.dd";
+		public static final String YYYYMMDD2 = "yyyy.MM.dd";
+		/** yy-MM-dd */
+		public static final String YYMMDD = "yy-MM-dd";
 		
 		/** yyyy-MM */
-		static final String YYYYMM = "yyyy-MM";
+		public static final String YYYYMM = "yyyy-MM";
 		/** yyyy/MM */
-		static final String YYYYMM1 = "yyyy/MM";
+		public static final String YYYYMM1 = "yyyy/MM";
 		/** yyyy.MM */
-		static final String YYYYMM2 = "yyyy.MM";
+		public static final String YYYYMM2 = "yyyy.MM";
 		
 		/** MM-dd */
-		static final String MMDD = "MM-dd";
+		public static final String MMDD = "MM-dd";
 		/** MM/dd */
-		static final String MMDD1 = "MM/dd";
+		public static final String MMDD1 = "MM/dd";
 		/** MM.dd */
-		static final String MMDD2 = "MM.dd";
+		public static final String MMDD2 = "MM.dd";
 		
 	}
 	
@@ -146,6 +148,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
 		return cal.getTime();
 	}
+	
 	
 	
 	

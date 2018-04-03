@@ -31,8 +31,9 @@ import com.mchange.v2.log.MLogger;
 public final class MtComboPooledDataSource extends AbstractPoolBackedDataSource implements PooledDataSource, Serializable, Referenceable
 {
     final static MLogger logger = MLog.getLogger( MtComboPooledDataSource.class );
-
-    final static Set TO_STRING_IGNORE_PROPS = new HashSet( Arrays.asList( new String[] { 
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	final static Set TO_STRING_IGNORE_PROPS = new HashSet( Arrays.asList( new String[] { 
                     "connection",
                     "lastAcquisitionFailureDefaultUser",
                     "lastCheckinFailureDefaultUser",

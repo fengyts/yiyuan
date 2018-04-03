@@ -13,21 +13,16 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.Consts;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
@@ -37,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import ng.bayue.constants.CharsetConstant;
 
-@SuppressWarnings({ "deprecation" })
 public class RequestUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(RequestUtils.class);
@@ -140,62 +134,6 @@ public class RequestUtils {
 		return doRequest(url, null);
 	}
 
-	private void test() {
-		DefaultHttpClient httpclient = new DefaultHttpClient();
-		try {
-			HttpGet httpget = new HttpGet("https://portal.sun.com/portal/dt");
-
-			HttpResponse response = httpclient.execute(httpget);
-			HttpEntity entity = response.getEntity();
-
-			System.out.println("Login form get: " + response.getStatusLine());
-			EntityUtils.consume(entity);
-
-			System.out.println("Initial set of cookies:");
-			List<Cookie> cookies = httpclient.getCookieStore().getCookies();
-			if (cookies.isEmpty()) {
-				System.out.println("None");
-			} else {
-				for (int i = 0; i < cookies.size(); i++) {
-					System.out.println("- " + cookies.get(i).toString());
-				}
-			}
-
-			HttpPost httpost = new HttpPost("https://portal.sun.com/amserver/UI/Login?" + "org=self_registered_users&"
-					+ "goto=/portal/dt&" + "gotoOnFail=/portal/dt?error=true");
-
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			nvps.add(new BasicNameValuePair("IDToken1", "username"));
-			nvps.add(new BasicNameValuePair("IDToken2", "password"));
-
-			httpost.setEntity(new UrlEncodedFormEntity(nvps, Consts.UTF_8));
-
-			response = httpclient.execute(httpost);
-			entity = response.getEntity();
-
-			System.out.println("Login form get: " + response.getStatusLine());
-			EntityUtils.consume(entity);
-
-			System.out.println("Post logon cookies:");
-			cookies = httpclient.getCookieStore().getCookies();
-			if (cookies.isEmpty()) {
-				System.out.println("None");
-			} else {
-				for (int i = 0; i < cookies.size(); i++) {
-					System.out.println("- " + cookies.get(i).toString());
-				}
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			// When HttpClient instance is no longer needed,
-			// shut down the connection manager to ensure
-			// immediate deallocation of all system resources
-			httpclient.getConnectionManager().shutdown();
-			httpclient.close();
-		}
-	}
 
 	public static void main(String[] args) {
 		String str1 = "https://www.kuaidi100.com/all/";
