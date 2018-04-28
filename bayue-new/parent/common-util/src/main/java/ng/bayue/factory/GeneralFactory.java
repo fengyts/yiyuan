@@ -27,9 +27,17 @@ public class GeneralFactory<T> extends AbstratFactory<T> {
 						+ " has not default constructor! The generalFactory instantaition failure!!!");
 				return null;
 			}
-			return classType.newInstance();
+			T t = classType.newInstance();
+			return t;
 		} catch (InstantiationException | IllegalAccessException e) {
-			logger.error("实例化对象异常:{}",classType, e);
+			try {
+				Constructor<T> c = classType.getDeclaredConstructor();
+				c.setAccessible(true);
+				return c.newInstance();
+			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+					| IllegalArgumentException | InvocationTargetException e1) {
+				logger.error("实例化对象异常:{}", classType, e);
+			}
 		}
 		return null;
 	}
@@ -43,26 +51,25 @@ public class GeneralFactory<T> extends AbstratFactory<T> {
 		}
 		@SuppressWarnings("rawtypes")
 		Class[] parameterTypes = list.toArray(new Class[0]);
-		/*int len = params.length;
-		Class[] parameterTypes = new Class[len];
-		for(int i=0;i<len;i++){
-			Class<?> c = params[i].getClass();
-			parameterTypes[i] = c;
-		}*/
-		
+		/*
+		 * int len = params.length; Class[] parameterTypes = new Class[len];
+		 * for(int i=0;i<len;i++){ Class<?> c = params[i].getClass();
+		 * parameterTypes[i] = c; }
+		 */
+
 		Constructor<T> constructor;
 		try {
-			constructor = classType.getConstructor(parameterTypes);
+			constructor = classType.getDeclaredConstructor(parameterTypes);
 			return constructor.newInstance(initargs);
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
-			logger.error("实例化对象异常:{}",classType, e);
+			logger.error("实例化对象异常:{}", classType, e);
 		}
 		return null;
 	}
 
 	public boolean hasDefaultConstructor() {
-		Constructor<?>[] constructors = classType.getConstructors();
+		Constructor<?>[] constructors = classType.getDeclaredConstructors();
 		for (Constructor<?> con : constructors) {
 			Type[] types = con.getGenericParameterTypes();
 			return 0 == types.length ? true : false;

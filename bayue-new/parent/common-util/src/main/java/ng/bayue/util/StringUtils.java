@@ -54,11 +54,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     
     /**
      * 获取受保护的手机号
-	 * 将手机号中间五位转为*
+	 * 将手机号中间四位转为*
 	 * @param mobile
 	 * @return
 	 */
 	public static String securityMobile(String mobile) {
-		return replaceWithAsterisk(mobile, 3, 7);
+		return replaceWithAsterisk(mobile, 3, 6);
 	}
+	
+	
 }
