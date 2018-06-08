@@ -84,35 +84,35 @@ public class ImageUrlUtil {
 		this.startGroups = startGroups;
 	}
 
-	public static void main(String[] args) {
-		ImageUrlUtil dfsDomainUtil = new ImageUrlUtil();
+//	public static void main(String[] args) {
+//		ImageUrlUtil dfsDomainUtil = new ImageUrlUtil();
+//
+//		Map<String, String> domainMap = getMap();
+//		List<String> startGroups = getList();
+//
+//		dfsDomainUtil.setDomainMap(domainMap);
+//		dfsDomainUtil.setStartGroups(startGroups);
+//		System.out.println(dfsDomainUtil
+//				.getFileFullUrl("group1/M00/00/0B/rBABm1S7nbqAMcK8AE6PY3fCE94253_640.jpg"));
+//		System.out.println(dfsDomainUtil
+//				.getFileFullUrl("group2/M00/00/01/rBABnFS8noOAEfdqAE6PY3fCE94632.jpg"));
+//
+//		System.out.println(dfsDomainUtil.getSnapshotUrl("group1/M00/00/a.jpg", 40));
+//	}
 
-		Map<String, String> domainMap = getMap();
-		List<String> startGroups = getList();
+//	static List<String> getList() {
+//		List<String> startGroups = new ArrayList<String>();
+//		startGroups.add("group1");
+//		startGroups.add("group2");
+//		return startGroups;
+//	}
 
-		dfsDomainUtil.setDomainMap(domainMap);
-		dfsDomainUtil.setStartGroups(startGroups);
-		System.out.println(dfsDomainUtil
-				.getFileFullUrl("group1/M00/00/0B/rBABm1S7nbqAMcK8AE6PY3fCE94253_640.jpg"));
-		System.out.println(dfsDomainUtil
-				.getFileFullUrl("group2/M00/00/01/rBABnFS8noOAEfdqAE6PY3fCE94632.jpg"));
-
-		System.out.println(dfsDomainUtil.getSnapshotUrl("group1/M00/00/a.jpg", 40));
-	}
-
-	static List<String> getList() {
-		List<String> startGroups = new ArrayList<String>();
-		startGroups.add("group1");
-		startGroups.add("group2");
-		return startGroups;
-	}
-
-	static Map<String, String> getMap() {
-		Map<String, String> domainMap = new HashMap<String,String>();
-		domainMap
-				.put("group1",
-						"http://img01.meitun.local/,http://img02.meitun.local/,http://img03.meitun.local/,http://img04.meitun.local/");
-		domainMap.put("group2", "http://img02.meitun.local/");
-		return domainMap;
-	}
+//	static Map<String, String> getMap() {
+//		Map<String, String> domainMap = new HashMap<String,String>();
+//		domainMap
+//				.put("group1",
+//						"http://img01.meitun.local/,http://img02.meitun.local/,http://img03.meitun.local/,http://img04.meitun.local/");
+//		domainMap.put("group2", "http://img02.meitun.local/");
+//		return domainMap;
+//	}
 }
